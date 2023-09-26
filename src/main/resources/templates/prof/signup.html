@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+
+  <th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+      //회원가입 실패시 에러 메시지 출력
+      var data = $('form').serialize();
+
+      $(document).ready(function(){
+        var errorMessage = [[${errorMessage}]];
+        if(errorMessage != null){
+          alert(errorMessage);
+        }
+      });
+
+
+    </script>
+
+
+  </th:block>
+
+</head>
+
+<div layout:fragment="content">
+  <div>hi this is content for professor signup</div>
+  <form action="/newprofessor" role="form" method="post" th:object="${memberFormDto}">
+    <div class="form-group py-2" style="width: 380px; margin:auto;">
+      <label th:for="email" style="text-align: center; margin:auto;">아이디</label>
+      <input type="text" th:field="*{userId}" class="textinput" placeholder="아이디를 입력해주세요" style="margin-left:25px;">
+      <p th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="fieldError">Incorrect data</p>
+    </div>
+    <div class="form-group py-2" style="width: 380px; margin:auto;">
+      <label th:for="password">비밀번호</label>
+      <input type="password" th:field="*{userPassword}" class="pwinput" placeholder="비밀번호 입력" style="margin-left:10px;">
+      <p th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}" class="fieldError">Incorrect data</p>
+    </div>
+    <div class="form-group py-2" style="width: 380px; margin:auto;">
+      <label th:for="phonenum">전화번호</label>
+      <input type="text" th:field="*{userPhoneNum}" class="textinput" placeholder="전화번호를 입력해주세요" style="margin-left:10px;">
+      <p th:if="${#fields.hasErrors('userPhoneNum')}" th:errors="*{userPhoneNum}" class="fieldError">Incorrect data</p>
+    </div>
+    <div class="form-group py-2" style="width: 380px; margin:auto;">
+      <label th:for="phonenum">이메일</label>
+      <input type="text" th:field="*{userEmail}" class="textinput" placeholder="전화번호를 입력해주세요" style="margin-left:10px;">
+      <p th:if="${#fields.hasErrors('userEmail')}" th:errors="*{userEmail}" class="fieldError">Incorrect data</p>
+    </div>
+
+    <!-- 교수 권한 부여 -->
+    <input type="hidden" th:field="${userRole}" class="textinput" th:text="${ROLE_TEACHER}">
+
+    <div th:each="type : ${userGender}" class="form-check form-check-inline">
+      <input type="radio" th:field="*{userGender}" th:value="${type.name()}"
+             class="form-check-input">
+      <label th:for="${#ids.prev('userGender')}" th:text="${type.description}"
+             class="form-check-label">
+        BOOK
+      </label>
+    </div>
+
+    <div style="text-align:center" class="py-3">
+      <button type="submit" class="btn btn-outline-dark">회원가입</button>
+      <button type="button" class="btn btn-outline-dark" onclick="history.back();">취소</button>
+    </div>
+
+    <form action="/newprofessor" role="form" method="post" th:object="${professorDto}">
+      <div class="form-group py-2" style="width: 380px; margin:auto;">
+        <label th:for="email" style="text-align: center; margin:auto;">교수정보1</label>
+        <input type="text" th:field="*{profBank}" class="textinput" placeholder="아이디를 입력해주세요" style="margin-left:25px;">
+        <p th:if="${#fields.hasErrors('profBank')}" th:errors="*{profBank}" class="fieldError">Incorrect data</p>
+      </div>
+
+    </form>
+
+
+  </form>
+</div>
+</html>
