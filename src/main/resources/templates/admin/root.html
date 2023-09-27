@@ -7,12 +7,11 @@
 </head>
 <body>
 
-<span>안녕하세요</span>
-<span sec:authentication="principal.username"></span>
-<span>님</span>
-<br>
-
-
+<!--UserId를 띄워줌-->
+<h1>안녕하세요! <span sec:authentication="principal.username"></span>님</h1>
+<hr>
+<!--UserName을 띄워줌(컨트롤러랑 연동되야함)-->
+<h1>환영합니다! <span th:text="${name}"></span>님</h1>
 
 
     hi this is only for admin
