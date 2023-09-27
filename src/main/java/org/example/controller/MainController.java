@@ -10,9 +10,7 @@ import java.security.Principal;
 public class MainController {
 
     @GetMapping(value="/")
-    public String main(Principal principal) {
-        System.out.println(principal.getName());
-
+    public String main() {
         return "main";
     }
 }
