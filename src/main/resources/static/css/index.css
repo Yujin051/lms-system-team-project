@@ -11,13 +11,13 @@
     color: #245396; font-weight: bold;
 }
 .index_body {
-    display: flex;
+    display: flex; font-family: 'SUIT-Regular';
 }
 .admin_body {
     width: 1908px;
 }
 .aside_main {
-    border: 0px solid black; width: 220px; height: 864px; font-family: 'SUIT-Regular';
+    border: 0px solid black; width: 220px; height: 864px;
     border-right: 1px solid #cccccc;
 }
 .aside_main > .menu_search {
