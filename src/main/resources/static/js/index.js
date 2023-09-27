@@ -74,7 +74,7 @@ classManagement.addEventListener('click', function () {
     classManagementText.classList.toggle('before_click_color');
     classManagementText.classList.toggle('after_click_color');
 });
-courseManagement.addEventListener('click', function () {
+courseManagementTap.addEventListener('click', function () {
     courseManagementText.classList.toggle('before_click_color');
     courseManagementText.classList.toggle('after_click_color');
 });
