@@ -59,7 +59,8 @@ public class ProfSecurityConfig {
     }
 
 
-    @Qualifier("ProfPasswordEncoder")
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
