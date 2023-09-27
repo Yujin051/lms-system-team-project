@@ -4,8 +4,20 @@
     font-weight: normal;
     font-style: normal;
 }
+.before_click_color{
+    color: #000;
+}
+.after_click_color{
+    color: #245396; font-weight: bold;
+}
+.index_body {
+    display: flex;
+}
+.admin_body {
+    width: 1908px;
+}
 .aside_main {
-    border: 0px solid black; width: 220px; height: 847px; font-family: 'SUIT-Regular';
+    border: 0px solid black; width: 220px; height: 864px; font-family: 'SUIT-Regular';
     border-right: 1px solid #cccccc;
 }
 .aside_main > .menu_search {
@@ -16,13 +28,13 @@
     border-bottom: 1px solid #cccccc;
 }
 .aside_main > .menu_search > .search_form > .search_input {
-    width: 160px; height: 23px; border-radius: 5px; text-decoration: none;
-    border: 1px solid #cccccc; margin-left: 10px; font-size: 0.7rem;
+    width: 160px; height: 30px; border-radius: 5px; text-decoration: none;
+    border: 1px solid #cccccc; margin-left: 10px; font-size: 0.8rem;
     text-indent: 5px; outline: none;
 }
 .aside_main > .menu_search > .search_form > .search_btn {
     margin-left: 5px; border: 1px solid #cccccc; border-radius: 5px;
-    width: 28px; height: 25px; display: flex; align-items: center;
+    width: 32px; height: 30px; display: flex; align-items: center;
     justify-content: center; cursor: pointer;
 }
 .aside_main > .aside {
@@ -30,6 +42,24 @@
 }
 .aside_main > .aside > .menu_box {
     border: 0px solid black; width: 220px; list-style-type: none;
+}
+.aside_main > .aside > .menu_box > .user_management_tap:hover span,
+.aside_main > .aside > .menu_box > .student_management:hover span,
+.aside_main > .aside > .menu_box > .teacher_management:hover span,
+.aside_main > .aside > .menu_box > .class_management_tap:hover span,
+.aside_main > .aside > .menu_box > .course_management:hover span,
+.aside_main > .aside > .menu_box > .course_registration_management:hover span,
+.aside_main > .aside > .menu_box > .online_course_status:hover span,
+.aside_main > .aside > .menu_box > .course_management_tap:hover span,
+.aside_main > .aside > .menu_box > .online_content_lectures:hover span,
+.aside_main > .aside > .menu_box > .online_lecture_info_management:hover span,
+.aside_main > .aside > .menu_box > .online_lecture_attendance_status:hover span,
+.aside_main > .aside > .menu_box > .grade_management:hover span,
+.aside_main > .aside > .menu_box > .overall_grade_management:hover span,
+.aside_main > .aside > .menu_box > .portal_management:hover span,
+.aside_main > .aside > .menu_box > .write_post:hover span,
+.aside_main > .aside > .menu_box > .post_info:hover span{
+    color: #245396; font-weight: bold; transition: 0.2s all;
 }
 .aside_main > .aside > .menu_box > div {
     border: 0px solid black; height: 35px; align-items: center;
