@@ -26,7 +26,7 @@
     justify-content: center; cursor: pointer;
 }
 .aside_main > .aside {
-    border: 0px solid black; width: 220px; height: 800px; font-size: 0.9rem;
+    border: 0px solid black; width: 220px; height: 100%; font-size: 0.9rem;
 }
 .aside_main > .aside > .menu_box {
     border: 0px solid black; width: 220px; list-style-type: none;
