@@ -65,7 +65,9 @@ public class SecurityConfig {
                 // 로그아웃
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 페이지
-                        .logoutSuccessUrl("/member/login")); // 로그아웃 성공 후 이동페이지
+                        .logoutSuccessUrl("/member/login")) // 로그아웃 성공 후 이동페이지
+
+                .exceptionHandling().accessDeniedPage("/denied");
 
 
         return http.build();

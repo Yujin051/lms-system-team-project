@@ -14,4 +14,9 @@ public class MainController {
 
         return "main";
     }
+
+    @GetMapping(value= "denied")
+    public String denied() {
+        return "denied";
+    }
 }
