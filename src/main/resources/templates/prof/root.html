@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<span>안녕하세요</span>
+<span sec:authentication="principal.username"></span>
+<span>님</span>
     this is for prof root
 </body>
 </html>
