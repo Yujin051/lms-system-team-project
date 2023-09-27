@@ -13,16 +13,13 @@ userManagement.addEventListener("click", function () {
 const classManagement = document.querySelector(".class_management_tap");
 const courseManagement = document.querySelector(".course_management");
 const courseRegistrationManagement = document.querySelector(".course_registration_management");
-const onlineCourseStatus = document.querySelector(".online_course_status");
 
 classManagement.addEventListener("click", function () {
     const isCourseManagement = courseManagement.style.display !== "none";
     const isCourseRegistrationManagement = courseRegistrationManagement.style.display !== "none";
-    const isOnlineCourseStatus = onlineCourseStatus.style.display !== "none";
 
     courseManagement.style.display = isCourseManagement ? "none" : "block";
     courseRegistrationManagement.style.display = isCourseRegistrationManagement ? "none" : "block";
-    onlineCourseStatus.style.display = isOnlineCourseStatus ? "none" : "block";
 });
 
 const courseManagementTap = document.querySelector(".course_management_tap");
