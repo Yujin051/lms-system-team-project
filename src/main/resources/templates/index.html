@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<script src="https://kit.fontawesome.com/61500d0ee2.js" crossorigin="anonymous"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="row border border-1 ml-3">
+    <div class="col">
+        <!-- 왼쪽 부분 -->
+        <h1 class="text-left w-10 h-10 p-2 rl-1">
+            <a href="#"><img src="/img/logo.jpg"></a>
+        </h1>
+    </div>
+
+    <div class="col  d-flex justify-content-end dropdown p-4" style="font-weight:bold">
+        <!-- 오른쪽 부분 -->
+
+        <a class=" nav-link dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            플랫폼 구축 업체용
+        </a>
+
+
+        <ul class="dropdown-menu dropdown-menu-right">
+            <li><a class="dropdown-item" href="#">사용자전환</a></li>
+            <li><a class="dropdown-item" href="#">로그아웃</a></li>
+        </ul>
+    </div>
+</div>
+<div class="aside_main d-flex flex-column">
+    <div class="menu_search">
+        <form method="post" class="search_form">
+            <input type="text" name="" class="search_input" placeholder="검색어를 입력하세요."/>
+            <div class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+        </form>
+    </div>
+    <div class="aside">
+        <div class="menu_box">
+            <div class="menu_box_first user_management_tap">
+                <i class="fa-solid fa-folder"></i><span>회원관리</span>
+            </div>
+            <div class="menu_box_second student_management" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>학생관리</span>
+            </div>
+            <div class="menu_box_third teacher_management" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>강사관리</span>
+            </div>
+        </div>
+        <div class="menu_box">
+            <div class="menu_box_first class_management_tap">
+                <i class="fa-solid fa-folder"></i><span>수업관리</span>
+            </div>
+            <div class="menu_box_second course_management" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>강좌관리</span>
+            </div>
+            <div class="menu_box_third course_registration_management" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>수강신청관리</span>
+            </div>
+            <div class="menu_box_third online_course_status" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>온라인수강현황</span>
+            </div>
+        </div>
+        <div class="menu_box">
+            <div class="menu_box_first course_management_tap">
+                <i class="fa-solid fa-folder"></i><span>강의관리</span>
+            </div>
+            <div class="menu_box_second online_content_lectures" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>온라인강의콘텐츠관리</span>
+            </div>
+            <div class="menu_box_third online_lecture_info_management" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>온라인강의정보관리</span>
+            </div>
+            <div class="menu_box_third online_lecture_attendance_status" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>온라인강의수강현황</span>
+            </div>
+        </div>
+        <div class="menu_box">
+            <div class="menu_box_first grade_management">
+                <i class="fa-solid fa-folder"></i><span>성적관리</span>
+            </div>
+            <div class="menu_box_second overall_grade_management" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>전체성적관리</span>
+            </div>
+        </div>
+        <div class="menu_box">
+            <div class="menu_box_first portal_management">
+                <i class="fa-solid fa-folder"></i><span>포털관리</span>
+            </div>
+            <div class="menu_box_second write_post" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>게시글 작성(담당용)</span>
+            </div>
+            <div class="menu_box_third post_info" style="display: none">
+                <i class="fa-solid fa-folder-open"></i><span>게시글 정보관리</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+<script src="/js/main.js"></script>
+</html>

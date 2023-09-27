@@ -33,10 +33,10 @@ public class ProfSecurityConfig {
                 .csrf().disable()
                 .authorizeRequests(requests -> requests
                         .requestMatchers(
-                                "/h2-console/**"    // H2 콘솔 허용
+                                "/h2-console/**", "/**"    // H2 콘솔 허용
                         ).permitAll()
-                        .requestMatchers("/notice/new/**","notice/modify/**", "notice/update/**", "notice/delete/**", "").hasRole(RoleType.ADMIN.toString())
-                        .requestMatchers("/my/**").hasAnyRole(RoleType.ADMIN.toString(), RoleType.USER.toString())
+//                        .requestMatchers("/notice/new/**","notice/modify/**", "notice/update/**", "notice/delete/**", "").hasRole(RoleType.ADMIN.toString())
+//                        .requestMatchers("/my/**").hasAnyRole(RoleType.ADMIN.toString(), RoleType.USER.toString())
                 )
                 .headers().addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN))
 

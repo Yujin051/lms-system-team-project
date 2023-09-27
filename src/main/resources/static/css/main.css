@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+.aside_main {
+    border: 0px solid black; width: 220px; height: 847px; font-family: 'SUIT-Regular';
+    border-right: 1px solid #cccccc;
+}
+.aside_main > .menu_search {
+    border: 0px solid black; width: 220px; height: 45px;
+}
+.aside_main > .menu_search > .search_form {
+    display: flex; align-items: center; width: 220px; height: 45px;
+    border-bottom: 1px solid #cccccc;
+}
+.aside_main > .menu_search > .search_form > .search_input {
+    width: 160px; height: 23px; border-radius: 5px; text-decoration: none;
+    border: 1px solid #cccccc; margin-left: 10px; font-size: 0.7rem;
+    text-indent: 5px; outline: none;
+}
+.aside_main > .menu_search > .search_form > .search_btn {
+    margin-left: 5px; border: 1px solid #cccccc; border-radius: 5px;
+    width: 28px; height: 25px; display: flex; align-items: center;
+    justify-content: center; cursor: pointer;
+}
+.aside_main > .aside {
+    border: 0px solid black; width: 220px; height: 800px; font-size: 0.9rem;
+}
+.aside_main > .aside > .menu_box {
+    border: 0px solid black; width: 220px; list-style-type: none;
+}
+.aside_main > .aside > .menu_box > div {
+    border: 0px solid black; height: 35px; align-items: center;
+    width: 219px; cursor: pointer; line-height: 35px;
+}
+.menu_box_first i{
+    margin-left: 15px; font-size: 1.2rem;
+}
+.menu_box_second i, .menu_box_third i, .menu_box_fourth i{
+    margin-left: 35px; font-size: 1.2rem;
+}
+.menu_box_first span, .menu_box_second span, .menu_box_third span, .menu_box_fourth span{
+    margin-left: 10px;
+}
+.menu_box_first:hover, .menu_box_second:hover, .menu_box_third:hover, .menu_box_fourth:hover {
+    background: #cccccc; transition: 0.2s all;
+}
