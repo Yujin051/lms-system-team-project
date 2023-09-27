@@ -9,7 +9,6 @@ import org.example.entity.Member;
 import org.example.entity.Professor;
 import org.example.service.MemberService;
 import org.example.service.ProfessorService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,8 +36,13 @@ public class MemberController {
         return RoleType.values();
     }
 
+    @GetMapping(value="member/signup")
+    public String signup() {
+        return "member/signup";
+    }
+
     @GetMapping(value = "/newprofessor")
-    public String ProfessorForm(Model model) {
+    public String professorForm(Model model) {
         model.addAttribute("memberFormDto", new MemberFormDto());
         model.addAttribute("professorDto", new ProfessorDto());
         return "prof/signup";
@@ -88,13 +92,15 @@ public class MemberController {
         return "student/signupSuccess";
     }
 
-    @GetMapping(value= "/student/login")
-    public String studentLogin() {
-        return "/student/login";
+    @GetMapping(value= "/member/login")
+    public String memberLogin() {
+        return "/member/login";
     }
 
-    @GetMapping(value= "/prof/login")
-    public String profLogin() {
-        return "/prof/login";
+    @GetMapping(value = "/member/login/error")
+    public String loginError(Model model) {
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해 주세요");
+        return "/member/login";
     }
+
 }

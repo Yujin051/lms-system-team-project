@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+
+
+<!-- 사용자 스크립트 추가 -->
+
+    <script>
+        //로그인 실패시 에러 메시지 출력
+        $(document).ready(function(){
+            var errorMessage = [[${errorMessage}]];
+            if(errorMessage != null){
+                alert(errorMessage);
+            }
+        });
+    </script>
+
+<body>
+
+    <article style="width:520px; height: 1000px; margin:auto; position: relative; top:150px;">
+        <div style=";width:504px; height:130px;">
+            <img style=";width:504px; height:130px; " src="/img/h1_logo.png"/>
+        </div>
+
+        <form role="form" method="post" action="/member/login">
+            <p style="font-size: 30px;">로그인</p>
+            <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}" style="font-size:18px; color: red; text-align: center; margin: auto;"></p>
+            <div class="form-group py-2" style="width: 380px; ">
+                <label style="font-size: 20px; " th:for="email">아이디</label><br>
+                <input type="text" name="userId" class="textinput" placeholder="이메일을 입력해주세요" style="border: 0px; font-size:18px; margin-top:10px; width: 504px; height: 50px;">
+            </div>
+            <br>
+            <div class="form-group py-2" style="width: 380px;">
+                <label style="font-size: 20px;" th:for="password">비밀번호</label><br>
+                <input type="password" name="password" class="textinput" placeholder="비밀번호 입력" style="border: 0px; font-size:18px; margin-top:10px; width: 504px; height: 50px;">
+            </div>
+
+            <div class="py-3">
+                <br>
+                <button type="submit"  style="border-radius: 5px; font-size: 32px; width:512px; height:50px; background-color: black; color: white;">로그인</button>
+                <div style="text-align: center; margin-top:10px;">
+                    <a href="" style="text-decoration: none; font-size: 16px; color:gray;">아이디 찾기</a>
+                    <a href="" style="text-decoration: none; font-size: 16px; color:gray; margin-left:100px;">비밀번호 찾기</a>
+                    <a href="/member/signup" style="text-decoration: none; font-size: 16px; color:gray; margin-left:100px;">회원가입</a>
+                </div>
+            </div>
+            <!--         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
+        </form>
+    </article>
+</body>
+</html>

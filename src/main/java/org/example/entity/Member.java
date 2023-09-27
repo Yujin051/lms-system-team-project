@@ -53,7 +53,7 @@ public class Member {
     private String userEmail;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "user_gender", nullable = false)
+    @Column(name = "user_gender")
     private Gender userGender;
 
     @Enumerated(EnumType.STRING)
