@@ -1,0 +1,202 @@
+/*그리드 폰트 변경*/
+.tui-grid-container{
+    font-family: 'SUIT-Regular';
+}
+/*화면 전체*/
+.mainFrame {
+    border: 1px solid black; width: 1686px; height: 1200px;
+}
+
+/*제목, 조회 신규 저장 삭제 버튼 부분*/
+.post_write_body {
+    border: 0px solid red; width: 1686px; height: 1200px;
+}
+.post_write_body > .post_write_btn_box {
+    border: 0px solid black; width: 100%; height: 60px; display: flex;
+    justify-content: center;
+}
+.post_write_body > .post_write_btn_box .title{
+    width: 800px; align-items: center; height: 60px; font-size: 1.3rem;
+    border: 0px solid black; display: flex; justify-content: start;
+}
+.post_write_body > .post_write_btn_box .title span{
+    width: 300px; border: 0px solid black;
+}
+.post_write_body > .post_write_btn_box > .post_write_box{
+    border: 0px solid black; width: 800px; display: flex; justify-content: end;
+    align-items: center;
+}
+.post_write_body > .post_write_btn_box > .post_write_box button{
+    background: #6b6b6b; color: white; border: none; width: 50px; height: 30px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 30px;
+}
+.post_write_body > .post_write_btn_box > .post_write_box button:hover{
+    opacity: 0.9;
+}
+
+/*검색조건 부분*/
+.post_search_body {
+    border: 0px solid black; width: 1686px; height: 100px;
+    display: flex; justify-content: center; align-items: center;
+}
+.post_search_body > .post_search_box {
+    border: 1px solid #cccccc; width: 1600px; height: 100px; display: flex;
+    border-radius: 10px;
+}
+.post_search_body > .post_search_box select{
+    width: 197px; height: 30px; outline: none; border: 1px solid #245396;
+    border-radius: 5px;
+}
+.post_search_body > .post_search_box > .post_board_box{
+    width: 33%; height: 100px; border: 0px solid black; display: flex;
+    justify-content: center; align-items: center;
+}
+.post_search_body > .post_search_box > .post_board_box span{
+    margin-right: 10px;
+}
+.post_search_body > .post_search_box > .post_search_requirement_box{
+    width: 34%; height: 100px; border: 0px solid black; display: flex;
+    justify-content: center; align-items: center;
+}
+.post_search_body > .post_search_box > .post_search_requirement_box span{
+    margin-right: 10px;
+}
+.post_search_body > .post_search_box > .post_date_box{
+    width: 33%; height: 100px; border: 0px solid black; display: flex;
+    justify-content: center; align-items: center;
+}
+.post_search_body > .post_search_box > .post_date_box input{
+    outline: none; border-radius: 5px; text-decoration: none;
+    border: 1px solid #245396;
+}
+.post_search_body > .post_search_box > .post_date_box span{
+    height: 30px; line-height: 30px; margin-left: 10px; width: 50px;
+}
+.post_search_body > .post_search_box > .post_date_box span i{
+    font-size: 1.3rem; line-height: 30px; cursor: pointer;
+}
+.post_search_body > .post_search_box > .post_date_box span i:hover{
+    color: #245396; transition: 0.2s all;
+}
+
+/*게시글 목록 텍스트*/
+.post_list_text_box {
+    border: 0px solid black; width: 1686px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+}
+.post_list_text_box > .post_list_text {
+    border: 0px solid black; width: 1600px; height: 40px; line-height: 40px;
+}
+
+/*게시글 목록(그리드)*/
+.post_list_box {
+    border: 0px solid black; width: 1686px; height: 300px; display: flex;
+    justify-content: center; align-items: center;
+}
+.post_list_box > .post_list {
+    border: 0px solid black; width: 1600px; height: 300px;
+}
+
+/*게시글 내용 텍스트*/
+.post_content_text_box {
+    border: 0px solid black; width: 1686px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+}
+.post_content_text_box > .post_content_text {
+    border: 0px solid black; width: 1600px; height: 40px; line-height: 40px;
+}
+
+/*게시글 내용*/
+.post_content_box {
+    border: 0px solid black; width: 1686px; height: 200px; display: flex;
+    justify-content: center; align-items: center;
+}
+.post_content_box > .post_content {
+    border: 1px solid #cccccc; width: 1600px; height: 200px;
+    border-radius: 5px;
+}
+
+/*게시글 내용 왼쪽 박스 부분*/
+.post_content_box > .post_content > .post_content_left_box{
+    border: 0px solid black; width: 50%; height: 200px; display: flex;
+    flex-wrap: wrap;
+}
+
+/*게시글 번호*/
+.post_content_box > .post_content > .post_content_left_box > .post_content_num_box {
+    border: 0px solid black; width: 100%; height: 50px; display: flex;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_num_box > .post_content_num_text_box {
+    border: 0px solid black; width: 50%; display: flex; align-items: center;
+    border-bottom: 1px solid #cccccc;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_num_box > .post_content_num_text_box span{
+    font-size: 1.1rem; margin-left: 10px;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_num_box > .post_content_num {
+    border: 1px solid #cccccc; width: 50%; display: flex; align-items: center;
+    border-top: none;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_num_box > .post_content_num input{
+    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; background: #cccccc; font-weight: bold;
+}
+
+/*게시글 제목*/
+.post_content_box > .post_content > .post_content_left_box > .post_content_title_box {
+    border: 0px solid black; width: 100%; height: 50px; display: flex;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_title_box > .post_content_title_text_box {
+    border: 0px solid black; width: 50%; display: flex; align-items: center;
+    border-bottom: 1px solid #cccccc;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_title_box > .post_content_title_text_box span{
+    font-size: 1.1rem; margin-left: 10px;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_title_box > .post_content_title {
+    border: 1px solid #cccccc; width: 50%; display: flex; align-items: center;
+    border-top: none;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_title_box > .post_content_title input{
+    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none;
+}
+/*게시글 작성자*/
+.post_content_box > .post_content > .post_content_left_box > .post_content_writer_box {
+    border: 0px solid black; width: 100%; height: 50px; display: flex;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_writer_box > .post_content_writer_text_box {
+    border: 0px solid black; width: 50%; display: flex; align-items: center;
+    border-bottom: 1px solid #cccccc;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_writer_box > .post_content_writer_text_box span{
+    font-size: 1.1rem; margin-left: 10px;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_writer_box > .post_content_writer {
+    border: 1px solid #cccccc; width: 50%; display: flex; align-items: center;
+    border-top: none;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_writer_box > .post_content_writer input{
+    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; background: #cccccc; font-weight: bold;
+}
+
+/*게시글 작성일자*/
+.post_content_box > .post_content > .post_content_left_box > .post_content_date_box {
+    border: 0px solid black; width: 100%; height: 50px; display: flex;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_date_box > .post_content_date_text_box {
+    border: 0px solid black; width: 50%; display: flex; align-items: center;
+    border-top: none;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_date_box > .post_content_date_text_box span{
+    font-size: 1.1rem; margin-left: 10px;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_date_box > .post_content_date {
+    border: 1px solid #cccccc; width: 50%; display: flex; align-items: center;
+    border-top: none; border-bottom: none;
+}
+.post_content_box > .post_content > .post_content_left_box > .post_content_date_box > .post_content_date input{
+    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; background: #cccccc; font-weight: bold;
+}

@@ -17,7 +17,7 @@
     width: 1908px;
 }
 .aside_main {
-    border: 0px solid black; width: 220px; height: 864px;
+    border: 0px solid black; width: 220px; height: 1200px;
     border-right: 1px solid #cccccc;
 }
 .aside_main > .menu_search {
