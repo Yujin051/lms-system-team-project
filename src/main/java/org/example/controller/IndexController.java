@@ -4,10 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class indexController {
+public class IndexController {
 
     @GetMapping("/manager/index")
     public String managerHome(){
-        return "index";
+        return "admin_default";
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return "admin_lecture_manage";
     }
 }

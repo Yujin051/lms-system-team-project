@@ -1,0 +1,124 @@
+/* 전체 섹션 */
+#mainFrame {
+    border: 0px solid black;
+    width: 1670px;
+    height: auto;
+}
+
+/* 검색 영역 */
+.searchFrame {
+    height: 200px;
+    border: 0px solid black;
+}
+
+/* 조회 신규 등 버튼 */
+.buttonGroup {
+    position: relative;
+    top: 10px;
+    left: 1360px;
+    width: 220px;
+    outline: 0px solid black;
+    height: 45px;
+}
+
+.buttonGroup > div{
+    margin-left: 10px;
+    float: left;
+    width: 45px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 3px;
+    line-height: 30px;
+    text-align: center;
+}
+
+/* 검색 박스 */
+.searchBox {
+    margin-left: 85px;
+    width: 1500px;
+    height: 140px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.searchBox > div {
+    position: relative;
+    float: left;
+    width: 498px;
+    height: 69px;
+    outline: 0px solid black;
+}
+
+.searchContainer {
+    margin-left: 100px;
+    line-height: 69px;
+}
+
+.searchContainer > select {
+    position: absolute;
+    top: 20px;
+    left: 230px;
+    width: 150px;
+    height: 30px;
+}
+
+.searchContainer > select:nth-child(3) {
+    position: absolute;
+    left: 390px;
+}
+
+/* 강좌명 검색 인풋 */
+.lName {
+    position: absolute;
+    top: 20px;
+    left: 230px;
+    width: 250px;
+    height: 30px;
+}
+
+/* 개설 강좌 목록 */
+.list {
+    margin-top: 20px;
+    margin-left: 85px;
+    margin-bottom: 20px;
+}
+#grid {
+    position: relative;
+    left: 85px;
+    width: 1500px;
+}
+
+/* 개설 강좌 정보 */
+.table {
+    position: relative;
+    left: 85px;
+    top: 30px;
+    width: 1500px;
+    border: 0px solid black;
+}
+
+.detail {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 1500px;
+    border-collapse : collapse;
+    border-bottom: 1px solid #cccccc;;
+}
+
+
+.detail th, td {
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    height: 40px;
+    text-align: center;
+}
+
+.detail th {
+    width: 250px;
+}
+
+.detail td {
+    width: 500px;
+    background: #f4f4f4;
+}
+
