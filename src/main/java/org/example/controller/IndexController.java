@@ -11,8 +11,4 @@ public class IndexController {
         return "admin_default";
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "admin_lecture_manage";
-    }
 }

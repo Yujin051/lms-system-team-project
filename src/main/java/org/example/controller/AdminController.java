@@ -19,4 +19,8 @@ public class AdminController {
         return "/admin/admin_lecture_manage";
     }
 
+    @GetMapping("/lectureApply")
+    public String adminApply() {
+        return "/admin/admin_lecture_apply";
+    }
 }
