@@ -7,26 +7,7 @@
     overflow-x: hidden;
 }
 
-/* 그리드 영역 */
-.list {
-    margin-top: 20px;
-    margin-left: 85px;
-    margin-bottom: 20px;
-}
-
-#grid {
-    position: relative;
-    left: 85px;
-    width: 1500px;
-    margin-bottom: 50px;
-}
-
-#grid2 {
-    position: relative;
-    left: 85px;
-    width: 1500px;
-}
-
+/* 조회 버튼 */
 .buttonGroup {
     position: relative;
     top: 10px;
@@ -51,7 +32,7 @@
 .searchBox {
     margin-left: 85px;
     width: 1500px;
-    height: 70px;
+    height: 140px;
     border: 2px solid black;
     border-radius: 5px;
 }
@@ -77,11 +58,6 @@
     height: 30px;
 }
 
-.searchContainer > select:nth-child(3) {
-    position: absolute;
-    left: 390px;
-}
-
 /* 강좌명 검색 인풋 */
 .lName {
     position: absolute;
@@ -91,15 +67,81 @@
     height: 30px;
 }
 
-/* 삭제버튼 */
-.deleteBtn {
+/* 그리드 영역 */
+.list {
+    margin-top: 20px;
+    margin-left: 85px;
+    margin-bottom: 20px;
+}
+
+.result {
     position: relative;
-    top: 50px;
-    left: 1540px;
-    width: 45px;
+    top: 52px;
+    left: 200px;
+    width: 300px;
     height: 30px;
+}
+
+/* 그리드 */
+#grid {
+    position: relative;
+    left: 85px;
+    width: 1500px;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+/* 상세정보 영역 */
+.table {
+    width: 1500px;
+    height: 600px;
+    margin-left: 85px;
+    display: flex;
+}
+
+.detail {
+    border-collapse: collapse;
+    width: 900px;
+    height: 900px;
     border: 1px solid black;
-    border-radius: 3px;
-    line-height: 30px;
+}
+
+.detail tr {
+    border-bottom: 0;
+}
+
+.detail tr > th {
+    padding-left: 50px;
+    height: 60px;
+    width: 250px;
+    background: #f4f4f4;
+    border: 0;
+}
+
+.detail tr > td > div{
+    margin-left: 30px;
+    margin-right: 50px;
+    width: 550px;
+    height: 35px;
+    outline: 2px solid black;
+    border-radius: 5px;
     text-align: center;
+    line-height: 35px;
+}
+
+/* 이미지 영역 */
+.imageContainer {
+    width: 600px;
+    height: 900px;
+    border: 1px solid black;
+    border-left: 0;
+}
+
+.img {
+    position: relative;
+    top: 120px;
+    left: 120px;
+    width: 360px;
+    height: 480px;
+    border: 1px solid black;
 }

@@ -23,4 +23,14 @@ public class AdminController {
     public String adminApply() {
         return "/admin/admin_lecture_apply";
     }
+
+    @GetMapping("/studentManage")
+    public String adminStudent() {
+        return "/admin/admin_student_manage";
+    }
+
+    @GetMapping("/profManage")
+    public String adminProf() {
+        return "/admin/admin_prof_manage";
+    }
 }

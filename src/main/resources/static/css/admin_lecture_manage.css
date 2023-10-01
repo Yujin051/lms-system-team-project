@@ -2,7 +2,7 @@
 #mainFrame {
     border: 0px solid black;
     width: 1670px;
-    height: 810px;
+    height: 820px;
     overflow-y: scroll;
     overflow-x: hidden;
 }
