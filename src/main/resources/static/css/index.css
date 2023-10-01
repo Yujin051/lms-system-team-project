@@ -20,6 +20,8 @@
     border: 0px solid black; width: 220px; height: 1200px;
     border-right: 1px solid #cccccc;
 }
+
+/*검색어 입력*/
 .aside_main > .menu_search {
     border: 0px solid black; width: 220px; height: 45px;
 }
@@ -37,6 +39,8 @@
     width: 32px; height: 30px; display: flex; align-items: center;
     justify-content: center; cursor: pointer;
 }
+
+/*메뉴*/
 .aside_main > .aside {
     border: 0px solid black; width: 220px; height: 100%; font-size: 0.9rem;
 }
@@ -64,6 +68,12 @@
 .aside_main > .aside > .menu_box > div {
     border: 0px solid black; height: 35px; align-items: center;
     width: 219px; cursor: pointer; line-height: 35px;
+}
+.aside_main > .aside > .menu_box > div:hover a{
+    color: #245396; font-weight: bold; transition: 0.2s all;
+}
+.aside_main > .aside > .menu_box > div a{
+    text-underline: none; text-decoration: none; color: black;
 }
 .menu_box_first i{
     margin-left: 15px; font-size: 1.2rem;

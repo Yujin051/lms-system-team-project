@@ -12,10 +12,10 @@
             </div>
             <div class="post_write_box">
                 <form method="post">
-                <button type="submit" name="" class="post_select_btn">조회</button>
-                <button type="submit" name="" class="post_create_btn">신규</button>
-                <button type="submit" name="" class="post_save_btn">저장</button>
-                <button type="submit" name="" class="post_delete_btn">삭제</button>
+                <button type="submit" name="" class="post_write_select_btn">조회</button>
+                <button type="submit" name="" class="post_write_create_btn">신규</button>
+                <button type="submit" name="" class="post_write_save_btn">저장</button>
+                <button type="submit" name="" class="post_write_delete_btn">삭제</button>
                 </form>
             </div>
         </div>
@@ -51,7 +51,7 @@
         </div>
         <div class="post_list_text_box">
             <div class="post_list_text">
-                <span>📕&nbsp 게시글 목록</span>
+                <span>📚&nbsp 게시글 목록</span>
             </div>
         </div>
         <div class="post_list_box">
@@ -61,7 +61,7 @@
         </div>
         <div class="post_content_text_box">
             <div class="post_content_text">
-                <span>📕&nbsp 게시글 내용</span>
+                <span>📄&nbsp 게시글 내용</span>
             </div>
         </div>
         <div class="post_content_box">
@@ -101,7 +101,50 @@
                     </div>
                 </div>
                 <div class="post_content_right_box">
-
+                    <div class="post_content_views_box">
+                        <div class="post_content_views_text_box">
+                            <span>조회수</span>
+                        </div>
+                        <div class="post_content_views">
+                            <input type="text" id="postView" placeholder="7" readonly/>
+                        </div>
+                    </div>
+                    <div class="post_content_board_type_box">
+                        <div class="post_content_board_type_text_box">
+                            <span>게시판종류</span>
+                        </div>
+                        <div class="post_content_board_type">
+                            <input type="text" id="boardType" placeholder="학생" readonly/>
+                        </div>
+                    </div>
+                    <div class="post_content_is_locked_box">
+                        <div class="post_content_is_locked_text_box">
+                            <span>공개여부</span>
+                        </div>
+                        <div class="post_content_is_locked">
+                            <input type="checkbox" id="isLocked"/>
+                        </div>
+                    </div>
+                    <div class="post_content_is_deleted_box">
+                        <div class="post_content_is_deleted_text_box">
+                            <span>삭제여부</span>
+                        </div>
+                        <div class="post_content_is_deleted">
+                            <input type="checkbox" id="isDeleted"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content_text_box">
+            <div class="content_text">
+                <span>📄&nbsp 게시내용</span>
+            </div>
+        </div>
+        <div class="content_box">
+            <div class="content">
+                <div class="real_content">
+                    <p>asdwqdq</p>
                 </div>
             </div>
         </div>
