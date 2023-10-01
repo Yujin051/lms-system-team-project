@@ -1,6 +1,6 @@
 /* 전체 섹션 */
 #mainFrame {
-    border: 0px solid black;
+    border: 0;
     width: 1670px;
     height: 820px;
     overflow-y: scroll;
@@ -13,7 +13,7 @@
     top: 10px;
     left: 1530px;
     width: 220px;
-    outline: 0px solid black;
+    outline: 0;
     height: 45px;
 }
 
@@ -42,7 +42,7 @@
     float: left;
     width: 748px;
     height: 69px;
-    outline: 0px solid black;
+    outline: 0;
 }
 
 .searchContainer {

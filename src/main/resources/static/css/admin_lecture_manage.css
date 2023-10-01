@@ -1,6 +1,6 @@
 /* 전체 섹션 */
 #mainFrame {
-    border: 0px solid black;
+    border: 0;
     width: 1670px;
     height: 820px;
     overflow-y: scroll;
@@ -10,7 +10,7 @@
 /* 검색 영역 */
 .searchFrame {
     height: 200px;
-    border: 0px solid black;
+    border: 0;
 }
 
 /* 조회 신규 등 버튼 */
@@ -19,7 +19,7 @@
     top: 10px;
     left: 1360px;
     width: 220px;
-    outline: 0px solid black;
+    outline: 0;
     height: 45px;
 }
 
@@ -48,7 +48,7 @@
     float: left;
     width: 498px;
     height: 69px;
-    outline: 0px solid black;
+    outline: 0;
 }
 
 .searchContainer {
@@ -96,7 +96,7 @@
     left: 85px;
     top: 30px;
     width: 1500px;
-    border: 0px solid black;
+    border: 0;
 }
 
 .detail {
