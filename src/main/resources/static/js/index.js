@@ -11,7 +11,7 @@ userManagement.addEventListener("click", function () {
 });
 
 const classManagement = document.querySelector(".class_management_tap");
-const courseManagement = document.querySelector(".course_management_tap");
+const courseManagement = document.querySelector(".course_management");
 const courseRegistrationManagement = document.querySelector(".course_registration_management");
 const onlineCourseStatus = document.querySelector(".online_course_status");
 
@@ -86,5 +86,4 @@ portalManagement.addEventListener('click', function () {
     portalManagementText.classList.toggle('before_click_color');
     portalManagementText.classList.toggle('after_click_color');
 });
-
 

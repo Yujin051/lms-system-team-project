@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{index}">
+
+<head>
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <link rel="stylesheet" href="/css/thisTimeRegistration.css">
+</head>
+
+<body>
+
+<div id="mainFrame" layout:fragment="content">
+    <div class="">
+        <form class="d-flex justify-content-end m-2">
+            <button type="button" class="btn btn-secondary">조회</button>
+        </form>
+
+        <div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="s1">온라인강의명</span>
+                    </div>
+                    <input class="form-control" type="search" placeholder="강좌 검색" aria-label="Search">
+                </div>
+            </div>
+            <div class="col mt-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="m-3 p-5">강의운영상태</span>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            전체
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">(전체)</a></li>
+                            <li><a class="dropdown-item" href="#">준비중</a></li>
+                            <li><a class="dropdown-item" href="#">운영중</a></li>
+                            <li><a class="dropdown-item" href="#">종료</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="grid"><div class="d1">온라인강의</div></div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pg1 pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="table-button-container border border-0">
+            <div class="d2 border border-0">강의 차시정보</div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="me-md-1 btn btn-secondary">신규</button>
+                <button type="button" class="me-md-1 btn btn-secondary">저장</button>
+                <button type="button" class="btn btn-secondary">삭제</button>
+            </div>
+        </div>
+
+        <div class="tbl1">
+            <div id="grid2"></div>
+            <nav aria-label="Page navigation example">
+                <ul class="pg2 pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+
+
+
+
+
+            <table class="right-align">
+
+                <tbody class="tbl2 border border-1">
+
+                <tr>
+                    <th class="border border-1 wider-th">차시관리번호</th>
+                    <td class="border border-1 border-dark-subtle">
+                        <input class="form-control" type="search" aria-label="Search">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="border border-1 wider-th">온라인 강의번호</th>
+                    <td class="border border-1 border-dark-subtle">
+                        <input class="form-control" type="search" aria-label="Search">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="border border-1 wider-th">차시 순서/명</th>
+                    <td class="border border-1 border-dark-subtle">
+                        <input class="form-control" type="search" aria-label="Search">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="border border-1 wider-th">컨텐츠명</th>
+                    <td class="border border-1 border-dark-subtle">
+                        <input class="form-control" type="search" aria-label="Search">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="border border-1 wider-th">차시 학습시간(초)</th>
+                    <td class="border border-1 border-dark-subtle">
+                        <input class="form-control" type="search" aria-label="Search">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="border border-1 wider-th">YouTube 연동번호</th>
+                    <td class="border border-1 border-dark-subtle">
+                        <input class="form-control" type="search" aria-label="Search">
+                    </td>
+                </tr>
+                <tr>
+                    <th class="border border-1 wider-th">차시 추가설명</th>
+                    <td class="border border-1 border-dark-subtle">
+                        <input class="form-control" type="search" aria-label="Search">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+
+</div>
+
+        <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+        <script src="/js/thisTimeRegistration.js"></script>
+    </div>
+
+</body>
+
+</html>
