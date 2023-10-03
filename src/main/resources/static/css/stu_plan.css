@@ -102,13 +102,21 @@ h4 {
     font-weight: bold;
 }
 
-.optContainer1 textarea {
+/* 강의 설명 상자 */
+
+.optContainer1 pre {
+    font-family: 'SUIT-Regular';
+    font-size: 15px;
+    padding: 5px;
     position: absolute;
     top: 19px;
     left: 110px;
     width: 1350px;
     height: 200px;
     margin-left: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: #f4f4f4;
 }
 
 /* 평가방식 상자 */
@@ -140,14 +148,4 @@ h4 {
 .subContainer2 div > p {
     font-size: 20px;
     margin-bottom: 30px;
-}
-
-.saveBtn {
-    position: relative;
-    left: 650px;
-    width: 200px;
-    height: 50px;
-    background: black;
-    font-size: 20px;
-    color: white;
 }

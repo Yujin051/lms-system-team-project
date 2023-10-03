@@ -17,4 +17,9 @@ public class StudentController {
     public String studentLecture() {
         return "/student/myLecture";
     }
+
+    @GetMapping("/lecturePlan")
+    public String studentPlan() {
+        return "/student/lecturePlan";
+    }
 }
