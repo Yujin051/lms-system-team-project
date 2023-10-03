@@ -1,0 +1,203 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/*그리드 폰트 변경*/
+.tui-grid-rside-area, .tui-grid-table{
+    font-family: 'SUIT-Regular';
+}
+
+.mainFrame {
+    font-family: 'SUIT-Regular';
+    border: 0px solid black; width: 1903px; display: flex;
+    justify-content: center; align-items: center; min-width: 1500px;
+}
+
+/*헤더, 푸터 사이 화면*/
+.assi_info_body {
+    border: 0px solid red; width: 1686px; min-width: 1400px;
+}
+
+/*과제제출정보 텍스트 부분*/
+.assi_info_btn_box > .assi_info_course_text_box {
+    border: 0px solid black; width: 1686px; height: 50px; display: flex;
+    align-items: center; font-size: 1.1rem;
+}
+
+/*제출, 돌아가기 버튼*/
+.assi_info_body > .assi_info_btn_box {
+    border: 0px solid black; width: 1686px; height: 40px; display: flex;
+    align-items: center;
+}
+.assi_info_body > .assi_info_btn_box > .assi_info_save_btn {
+    border: 0px solid black; width: 76px; height: 40px; font-size: 0.9rem; display: flex;
+    justify-content: center; align-items: center; text-align: center;
+    margin-right: 8px;
+}
+.assi_info_body > .assi_info_btn_box > .assi_info_back_btn {
+    border: 0px solid black; width: 76px; height: 40px; font-size: 0.9rem; display: flex;
+    justify-content: center; align-items: center; text-align: center;
+}
+.assi_info_body > .assi_info_btn_box > .assi_info_back_btn button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;
+    border-radius: 5px; line-height: 28px;
+}
+.assi_info_body > .assi_info_btn_box button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;
+    border-radius: 5px; line-height: 28px;
+}
+
+/*과제제출정보 내용 부분*/
+.assi_info_big_box {
+    border: 0px solid black; width: 1686px; height: 400px;
+}
+
+/*과제명, 참여자*/
+.assi_info_big_box > .assi_info_top_box{
+    border: 1px solid #cccccc; border-radius: 10px; width: 1686px; height: 50px;
+    display: flex; align-items: center;
+}
+
+/*과제명*/
+.assi_info_big_box > .assi_info_top_box > .assi_info_assi_name{
+    border: 0px solid black; width: 50%; height: 50px; display: flex; align-items: center;
+    font-size: 1.1rem;
+}
+.assi_info_big_box > .assi_info_top_box > .assi_info_assi_name > .assi_info_assi_name_text{
+    width: 50%; height: 50px; display: flex; justify-content: center;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_top_box > .assi_info_assi_name > .assi_info_assi_name_input{
+    width: 50%; height: 50px; display: flex; justify-content: center;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_top_box > .assi_info_assi_name > .assi_info_assi_name_input input{
+    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*참여자*/
+.assi_info_big_box > .assi_info_top_box > .assi_info_stud_name{
+    border: 0px solid black; width: 50%; height: 50px; display: flex; align-items: center;
+    font-size: 1.1rem;
+}
+.assi_info_big_box > .assi_info_top_box > .assi_info_stud_name > .assi_info_assi_stud_text{
+    width: 50%; height: 50px; display: flex; justify-content: center;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_top_box > .assi_info_stud_name > .assi_info_assi_stud_input{
+    width: 50%; height: 50px; display: flex; justify-content: center;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_top_box > .assi_info_stud_name > .assi_info_assi_stud_input input{
+    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+
+/*제출파일, 평가마감일*/
+.assi_info_big_box > .assi_info_mid_box{
+    border: 1px solid #cccccc; border-radius: 10px; width: 1686px; height: 50px;
+    display: flex; align-items: center; border-top: none;
+}
+
+/*과제제출*/
+.assi_info_big_box > .assi_info_mid_box > .assi_info_sub_file{
+    border: 0px solid black; width: 50%; height: 50px; display: flex; align-items: center;
+    font-size: 1.1rem;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_sub_file > .assi_info_sub_file_text{
+    width: 50%; height: 50px; display: flex; justify-content: center;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_sub_file > .assi_info_sub_file_download{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_sub_file > .assi_info_sub_file_download > .assi_info_sub_file_input{
+    width: 70%; height: 50px; display: flex; justify-content: center;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_sub_file > .assi_info_sub_file_download > .assi_info_download_btn{
+    width: 30%; height: 50px; display: flex; justify-content: center;
+    align-items: center; font-size: 0.9rem;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_sub_file > .assi_info_sub_file_download > .assi_info_download_btn button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;
+    border-radius: 5px; line-height: 28px;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_sub_file > .assi_info_sub_file_download > .assi_info_sub_file_input input{
+    margin-left: 10px; width: 300px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+    background: #cccccc;
+}
+
+/*평가마감일*/
+.assi_info_big_box > .assi_info_mid_box > .assi_info_assi_end{
+    border: 0px solid black; width: 50%; height: 50px; display: flex; align-items: center;
+    font-size: 1.1rem;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_assi_end > .assi_info_assi_end_text{
+    width: 50%; height: 50px; display: flex; justify-content: center;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_assi_end > .assi_info_assi_end_input{
+    width: 50%; height: 50px; display: flex; justify-content: center;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_mid_box > .assi_info_assi_end > .assi_info_assi_end_input input{
+    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*과제설명, 과제물 평가*/
+.assi_info_big_box > .assi_info_bottom_box{
+    border: 1px solid #cccccc; width: 1686px; height: 300px; border-radius: 10px;
+    border-top: none;
+}
+
+/*과제설명*/
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_assi_detail_box{
+    border: 0px solid black; width: 1686px; height: 200px; display: flex;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_assi_detail_box > .assi_info_assi_detail_text_box{
+    border: 0px solid black; width: 20%; height: 200px; display: flex;
+    justify-content: center; align-items: center; font-size: 1.1rem;
+}
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_assi_detail_box > .assi_info_assi_detail_content_box{
+    border: 0px solid black; width: 80%; height: 200px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_assi_detail_box > .assi_info_assi_detail_content_box > .assi_info_assi_detail{
+    width: 1309px; height: 180px;
+}
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_assi_detail_box > .assi_info_assi_detail_content_box > .assi_info_assi_detail textarea{
+    border: 1px solid #cccccc; width: 1309px; height: 180px; border-radius: 10px;
+    white-space: normal; resize: none; text-decoration: none; outline: none;
+    text-indent: 5px;
+}
+
+/*과제물 피드백*/
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_feedback_box{
+    border: 0px solid black; width: 1686px; height: 100px; display: flex;
+    align-items: center;
+}
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_feedback_box > .assi_info_feedback_text_box{
+    border: 0px solid black; width: 20%; height: 100px; display: flex;
+    justify-content: center; align-items: center; font-size: 1.1rem;
+}
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_feedback_box > .assi_info_feedback_content_box{
+    border: 0px solid black; width: 80%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_feedback_box > .assi_info_feedback_content_box > .assi_info_feedback{
+    width: 1309px; height: 80px; border-radius: 10px;
+}
+.assi_info_big_box > .assi_info_bottom_box > .assi_info_feedback_box > .assi_info_feedback_content_box > .assi_info_feedback textarea{
+    border: 1px solid #cccccc; width: 1309px; height: 80px; border-radius: 10px;
+    white-space: normal; resize: none; text-decoration: none; outline: none;
+    text-indent: 5px;
+}

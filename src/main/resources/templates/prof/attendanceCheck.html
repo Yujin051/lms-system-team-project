@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profdefault}">
+<head>
+    <link rel="stylesheet" href="/css/prof/attendanceCheck.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</head>
+
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+    <div class="att_ch_body">
+        <div class="att_ch_back_btn_box">
+            <div class="att_ch_course_search_text_box">
+                <span>🔍&nbsp 강좌검색</span>
+            </div>
+            <div class="att_ch_back_btn">
+                <button type="button" class="backBtn">돌아가기</button>
+            </div>
+        </div>
+        <div class="att_ch_search_box">
+            <div class="att_ch_search_top_box">
+                <div class="att_ch_search_year_sem_box">
+                    <div class="att_ch_search_year_text">
+                        <span>년도</span>
+                    </div>
+                    <div class="att_ch_search_year">
+                        <input type="text" id="lectYear" placeholder="2023"/>
+                    </div>
+                </div>
+                <div class="att_ch_search_semester_box">
+                    <div class="att_ch_search_semester_text">
+                        <span>학기</span>
+                    </div>
+                    <div class="att_ch_search_semester">
+                        <input type="text" id="lectSem" placeholder="2학기"/>
+                    </div>
+                </div>
+            </div>
+            <div class="att_ch_search_bottom_box">
+                <div class="att_ch_lect_name">
+                    <div class="att_ch_search_lect_name_text">
+                        <span>강좌명</span>
+                    </div>
+                    <div class="att_ch_search_lect_name">
+                        <input type="text" id="lectName" placeholder="슬기로운 코딩생활"/>
+                    </div>
+                </div>
+                <div>
+
+                </div>
+            </div>
+        </div>
+        <div class="att_ch_total_status_text_box">
+            <span>📊&nbsp 전체출결현황</span>
+        </div>
+        <div class="att_ch_total_status_grid">
+            <div id="grid1"></div>
+        </div>
+    </div>
+    <script src="/js/prof/attendanceCheck.js"></script>
+</div>

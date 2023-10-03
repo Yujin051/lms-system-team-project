@@ -1,0 +1,237 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+/* pretendard 폰트 cdn */
+#header ul , #header ul  li {
+    list-style: none;
+    padding: 0 !important;
+}
+.sub_menu {
+    box-sizing: border-box;
+    list-style: none;
+    font-family: 'Pretendard', 'sans-serif';
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+header a , .sub_menu  a {
+    color: black;
+    text-decoration: none;
+}
+header a:visited , .sub_menu a:visited {
+    color: black;
+}
+/* header 설정 */
+.header_menu > li > a:hover {
+    color: blue;
+}
+#header {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    display: flex;
+    font-family: 'Pretendard', 'sans-serif';
+}
+#nav {
+    /* border: 1px solid red; */
+    align-content: center;
+    height: auto;
+    padding-top: 0.5rem;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.brand {
+    background: url(../img/logo.jpg) no-repeat center;
+    background-size: contain;
+    display: inline-block;
+    height: 56px;
+    width: 178px;
+    /* border: 1px solid black; */
+}
+#menu {
+    display: flex;
+    width: 100%;
+    /* border: 1px solid blue; */
+    justify-content: space-between;
+}
+.header_menu{
+    display: flex;
+    padding-top: 0.5rem;
+    /* border: 1px solid red; */
+    align-items: center;
+    font-weight: bold;
+    /* font-family: 'Pretendard', 'sans-serif'; */
+    font-size: 1rem;
+}
+.header_menu > li {
+    margin-left: 15px;
+}
+.nav-right {
+    display: flex;
+    /* border: 1px solid black; */
+    width: 20%;
+    justify-content: center;
+}
+/* 로그아웃 */
+#logout {
+    padding: 0;
+    margin: 0;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+#logout:hover {
+    color: blue;
+}
+/* 서브메뉴 설정 */
+.sub_menu {
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    display: none;
+}
+.wrap_sub {
+    display: table;
+    /* border: 1px solid black; */
+    width: 100%;
+}
+.wrap_sub > li {
+    text-align: center;
+    /* border: 1px solid blue; */
+    display: table-cell;
+    /* width: 50%; */
+}
+/* 서브메뉴바 아이콘 크기 조절 */
+.sub_menu_icon {
+    width: 48px;
+    height: 48px;
+}
+/* 서브메뉴 바운스 효과 */
+.bounce:hover {
+    position: relative;
+      /* 파폭 */
+    -moz-animation: bounce 0.5s infinite linear;
+      /* 크롬 */
+    -webkit-animation: bounce 0.5s infinite linear;
+    -o-animation: bounce 0.5s infinite linear;
+    animation: bounce 0.5s infinite linear;
+}
+/*
+    바운스의 높이
+    0% 일 때, 0px
+    50%일 때, -5px
+    70%일 때, -5px
+    100%일 때, 0px
+*/
+@-webkit-keyframes bounce {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: -5px;
+    }
+    70% {
+    top: -5px;
+    }
+    100% {
+        top: 0;
+    }
+}
+@-moz-keyframes bounce {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: -5px;
+    }
+    70% {
+        top: -5px;
+    }
+    100% {
+        top: 0;
+    }
+}
+@-o-keyframes bounce {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: -5px;
+    }
+    70% {
+        top: -5px;
+    }
+    100% {
+        top: 0;
+    }
+}
+@-ms-keyframes bounce {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: -5px;
+    }
+    70% {
+        top: -5px;
+    }
+    100% {
+        top: 0;
+    }
+}
+@keyframes bounce {
+    0% {
+        top: 0;
+    }
+    50% {
+        top: -5px;
+    }
+    70% {
+        top: -5px;
+    }
+    100% {
+        top: 0;
+    }
+}
+.header_toggle {
+    display: none;
+}
+/* header 모바일 환경 설정 변경 */
+/* 767px 이하라면 아래의 css 설정을 적용 */
+@media screen and (max-width: 767px){
+    /* 메뉴바 토클 */
+    .header_toggle {
+        display: block;
+        position: absolute;
+        right: 32px;
+        cursor: pointer;
+    }
+    /* 기존 헤더바 컬럼으로 재편 수직배치 */
+    #nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #menu {
+        display: none;
+        flex-direction: column;
+        /* border: 1px solid red; */
+    }
+    .header_menu {
+        /* border: 1px solid black; */
+        flex-direction: column;
+    }
+    .header_menu > li {
+        text-align: center;
+        /* border: 1px solid black; */
+        margin-top: 0.5rem;
+    }
+    .nav-right {
+        width: 100%;
+    }
+    #menu.active {
+        display: flex;
+    }
+}

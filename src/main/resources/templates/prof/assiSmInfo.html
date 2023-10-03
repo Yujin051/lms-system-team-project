@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profdefault}">
+<head>
+    <link rel="stylesheet" href="/css/prof/assiSmInfo.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</head>
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+    <form class="assi_info_body" method="post">
+        <div class="assi_info_btn_box">
+            <div class="assi_info_course_text_box">
+                <span>🔍&nbsp 과제제출정보</span>
+            </div>
+            <div class="assi_info_save_btn">
+                <button type="button" class="backBtn">저장</button>
+            </div>
+            <div class="assi_info_back_btn">
+                <button type="button" class="backBtn">돌아가기</button>
+            </div>
+        </div>
+        <div class="assi_info_big_box">
+            <div class="assi_info_top_box">
+                <div class="assi_info_assi_name">
+                    <div class="assi_info_assi_name_text">
+                        <span>과제명</span>
+                    </div>
+                    <div class="assi_info_assi_name_input">
+                        <input type="text" id="assiName" placeholder="과제명"/>
+                    </div>
+                </div>
+                <div class="assi_info_stud_name">
+                    <div class="assi_info_assi_stud_text">
+                        <span>참여자</span>
+                    </div>
+                    <div class="assi_info_assi_stud_input">
+                        <input type="text" id="stud_id" placeholder="스폰지밥"/>
+                    </div>
+                </div>
+            </div>
+            <div class="assi_info_mid_box">
+                <div class="assi_info_sub_file">
+                    <div class="assi_info_sub_file_text">
+                        <span>과제제출</span>
+                    </div>
+                    <div class="assi_info_sub_file_download">
+                        <div class="assi_info_sub_file_input">
+                            <input type="text" id="assiName2" placeholder="과제명" readonly/>
+                        </div>
+                        <div class="assi_info_download_btn">
+                            <button type="button" class="download_btn">다운로드</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="assi_info_assi_end">
+                    <div class="assi_info_assi_end_text">
+                        <span>평가마감일</span>
+                    </div>
+                    <div class="assi_info_assi_end_input">
+                        <input type="text" id="assignEnd" placeholder="2023-09-30"/>
+                    </div>
+                </div>
+            </div>
+            <div class="assi_info_bottom_box">
+                <div class="assi_info_assi_detail_box">
+                    <div class="assi_info_assi_detail_text_box">
+                        <span>과제설명</span>
+                    </div>
+                    <div class="assi_info_assi_detail_content_box">
+                        <div class="assi_info_assi_detail">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="assi_info_feedback_box">
+                    <div class="assi_info_feedback_text_box">
+                        <span>과제 피드백</span>
+                    </div>
+                    <div class="assi_info_feedback_content_box">
+                        <div class="assi_info_feedback">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="/js/prof/assiSmInfo.js"></script>
+</div>
