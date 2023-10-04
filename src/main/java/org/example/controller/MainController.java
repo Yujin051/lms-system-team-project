@@ -9,8 +9,8 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    @GetMapping(value="/")
+    @GetMapping(value="")
     public String main() {
-        return "main";
+        return "member/login";
     }
 }
