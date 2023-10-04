@@ -1,0 +1,171 @@
+.middle_section {
+    border: 0px solid black;
+    max-width: 1640px;
+    padding: 0 20px;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.middle_section .title {
+    padding-top: 4px;
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle_section .title p {
+    font-size: 25px;
+    font-weight: 500;
+    border-left: 4px solid #000;
+    padding-left: 8px;
+    height: 20px;
+    line-height: 19px;
+    color: #000;
+    margin-top: 5px;
+}
+
+.middle_section .information {
+    border-top: 2px solid black;
+    margin-top: 10px;
+    height: 350px;
+    display: flex;
+}
+
+.middle_section .information .box1 {
+    border: 0px solid black;
+    width: 820px;
+}
+
+.middle_section .information .box1 .graph {
+    border-bottom: 1px solid black;
+    height: 50px;
+    display: flex;
+}
+
+.middle_section .information .box1 .graph .graph_left {
+    width: 330px;
+    background-color: rgb(235, 240, 247);
+    line-height: 50px;
+    text-indent: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.middle_section .information .box1 .graph .graph_right {
+    width: 510px;
+}
+
+.middle_section .information .box1 .graph .graph_right input {
+    width: 480px;
+    height: 40px;
+    margin-left: 10px;
+    margin-top: 5px;
+    text-indent: 5px;
+    font-size: 20px;
+    background-color: rgb(247, 248, 250);
+    border: none;
+}
+
+.middle_section .information .box2 {
+    border: 0px solid black;
+    width: 820px;
+}
+
+.middle_section .information .box2 .photo {
+    border-bottom: 1px solid black;
+    height: 350px;
+    display: flex;
+}
+
+.middle_section .information .box2 .photo .photo_left {
+    width: 330px;
+    background-color: rgb(235, 240, 247);
+    line-height: 350px;
+    text-indent: 10px;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.middle_section .information .box2 .photo .photo_right {
+    width: 510px;
+}
+
+.middle_section .information .box2 .photo .photo_right .img {
+    border: 0px solid black;
+    margin-left: 20px;
+    margin-top: 40px;
+    width: 230px;
+    height: 230px;
+}
+
+.middle_section .information .box2 .photo .photo_right .img img {
+    width: 230px;
+    height: 230px;
+}
+
+.middle_section .information .box2 .photo .photo_right .button {
+    display: flex;
+}
+
+.middle_section .information .box2 .photo .photo_right .button p {
+    border: 1px solid black;
+    margin-left: 20px;
+    width: 60px;
+    height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.middle_section .bank div:nth-child(1) {
+  width: 320px;
+  background-color: rgb(235, 240, 247);
+  line-height: 50px;
+  text-indent: 10px;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.middle_section .bank div:nth-child(2) {
+  width: 200px;
+  border-right: 1px solid black;
+}
+
+.middle_section .bank div:nth-child(2) select {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.middle_section .bank div:nth-child(3) {
+  width: 300px;
+  line-height: 50px;
+  text-indent: 10px;
+}
+
+.middle_section .bank div:nth-child(4) {
+  width: 320px;
+  background-color: rgb(235, 240, 247);
+  line-height: 50px;
+  text-indent: 10px;
+  font-weight: bolder;
+  font-size: 20px;
+}
+
+.middle_section .bank div:nth-child(5) {
+    line-height: 50px;
+    text-indent: 10px;
+}
+
+.middle_section .update {
+    width: 100px;
+    height: 35px;
+    font-size: 13px;
+    margin-left: 770px;
+    margin-top: 30px;
+    background-color: rgb(235, 240, 247);
+}
+
+
+

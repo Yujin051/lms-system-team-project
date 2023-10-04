@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profDefault}">
+<head>
+    <meta charset="UTF-8">
+    <title>나의 강의실 > 강의계획서 작성</title>
+    <link rel="stylesheet" href="/css/student/stu_plan.css">
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+    <article class="mainContainer">
+        <h4>강의계획서</h4>
+        <div class="subContainer">
+            <div class="optContainer">
+                <span>연도</span>
+                <div class="con1"><p>자동입력</p></div>
+            </div>
+            <div class="optContainer">
+                <span>학기</span>
+                <div class="con1"><p>자동입력</p></div>
+            </div>
+            <div class="optContainer">
+                <span>과목명</span>
+                <div class="con2"><p>자동입력</p></div>
+            </div>
+        </div>
+
+        <div class="subContainer">
+            <div class="optContainer">
+                <span>강사 성명</span>
+                <div class="con1"><p>여기에 강사 성명이 옵니다.</p></div>
+            </div>
+            <div class="optContainer">
+                <span>학점</span>
+                <div class="con1"><p>자동입력</p></div>
+            </div>
+            <div class="optContainer">
+                <span>E-mail</span>
+                <div class="con1"><p>여기에 이메일이 옵니다.</p></div>
+            </div>
+            <div class="optContainer">
+                <span>주교재</span>
+                <div class="con1"><p>여기에 주교재가 옵니다.</p></div>
+            </div>
+            <div class="optContainer">
+                <span>강의 시작일</span>
+                <div class="con1"><p>자동입력</p></div>
+            </div>
+            <div class="optContainer">
+                <span>강의 종료일</span>
+                <div class="con1"><p>자동입력</p></div>
+            </div>
+            <div class="optContainer1">
+                <span>강의 설명</span>
+                <pre>여기에 설명이 옵니다.</pre>
+            </div>
+        </div>
+
+        <div class="subContainer">
+            <div class="subName"><h4>평가 방식</h4></div>
+            <div class="subContainer2">
+                <div><p>출석</p><p>35</p></div>
+                <div><p>과제물</p><p>35</p></div>
+                <div><p>시험</p><p>30</p></div>
+            </div>
+        </div>
+    </article>
+</section>
+</body>
+</html>
