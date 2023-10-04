@@ -15,9 +15,9 @@
             <div class="assi_course_search_text_box">
                 <span>🔍&nbsp 강좌검색</span>
             </div>
-            <div class="assi_back_btn">
-                <button type="button" class="backBtn">돌아가기</button>
-            </div>
+<!--            <div class="assi_back_btn">-->
+<!--                <button type="button" class="backBtn">돌아가기</button>-->
+<!--            </div>-->
         </div>
         <div class="assi_search_box">
             <div class="assi_search_top_box">
@@ -56,17 +56,89 @@
             <div class="assi_total_status_text_box">
                 <span>📊&nbsp 과제정보</span>
                 <div class="assi_que_btn_box">
-                    <button type="button" class="assi_que_btn">과제출제</button>
+                    <button type="button" class="assi_que_btn"><a href="/prof/assiInfo">과제출제</a></button>
                 </div>
             </div>
             <div class="assi_ch_total_status_grid1">
-                <div id="grid1"></div>
+                <table class="assi_ch_assi_info_tb">
+                    <thead>
+                        <tr>
+                            <td><span>과제번호</span></td>
+                            <td><span>과제명</span></td>
+                            <td><span>제출시작일시</span></td>
+                            <td><span>제출마감일시</span></td>
+                            <td><span>진행상태</span></td>
+                            <td><span>과제수정</span></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>1742134213</span></td>
+                            <td><span>사회정석과제</span></td>
+                            <td><span>2023-09-04 00:00</span></td>
+                            <td><span>2023-09-05 23:59</span></td>
+                            <td><span>마감</span></td>
+                            <td>
+                                <button type="button" class="assiUpdateBtn"><span>수정</span></button>
+                                <button type="button" class="assiDeleteBtn"><span>삭제</span></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span>1742134213</span></td>
+                            <td><span>사회정석과제</span></td>
+                            <td><span>2023-09-04 00:00</span></td>
+                            <td><span>2023-09-05 23:59</span></td>
+                            <td><span>마감</span></td>
+                            <td>
+                                <button type="button" class="assiUpdateBtn"><span>수정</span></button>
+                                <button type="button" class="assiDeleteBtn"><span>삭제</span></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <div class="assi_stu_info_text_box">
                 <span>🙌&nbsp 학생정보</span>
             </div>
             <div class="assi_ch_total_status_grid2">
-                <div id="grid2"></div>
+                <table class="assi_ch_stud_info_tb">
+                    <thead>
+                        <tr>
+                            <td><span>학번</span></td>
+                            <td><span>성명</span></td>
+                            <td><span>제출일시</span></td>
+                            <td><span>제출구분</span></td>
+                            <td><span>과제제출정보</span></td>
+                            <td><span>피드백</span></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span>60171443</span></td>
+                            <td><span>김호우</span></td>
+                            <td><span>2023-09-05 23:59</span></td>
+                            <td><span>제출</span></td>
+                            <td><button type="button" class="assiDetailBtn"><span>과제상세보기</span></button></td>
+                            <td><span>완료</span></td>
+                        </tr>
+                        <tr>
+                            <td><span>60171443</span></td>
+                            <td><span>김호우</span></td>
+                            <td><span>2023-09-05 23:59</span></td>
+                            <td><span>제출</span></td>
+                            <td><button type="button" class="assiDetailBtn"><span>과제상세보기</span></button></td>
+                            <td><span>완료</span></td>
+                        </tr>
+                        <tr>
+                            <td><span>60171443</span></td>
+                            <td><span>김호우</span></td>
+                            <td><span>2023-09-05 23:59</span></td>
+                            <td><span>제출</span></td>
+                            <td><button type="button" class="assiDetailBtn"><span>과제상세보기</span></button></td>
+                            <td><span>완료</span></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </form>
     </div>

@@ -31,4 +31,10 @@ public class ProfController {
     public String assiWrite(){
         return "/prof/assiWrite";
     }
+
+    //강사 : 나의강의실 - 성적입력
+    @GetMapping("/assiGrade")
+    public String assiGrade(){
+        return "/prof/assiGrade";
+    }
 }

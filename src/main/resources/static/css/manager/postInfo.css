@@ -4,12 +4,12 @@
 }
 /*화면 전체*/
 .mainFrame {
-    border: 0px solid black; width: 1686px; height: 1200px;
+    width: 1903px; display: flex; justify-content: center; height: 800px;
 }
 
 /*제목, 조회 신규 저장 삭제 버튼 부분*/
 .post_info_body {
-    border: 0px solid red; width: 1686px; height: 1200px;
+    border: 0px solid red; width: 1500px; height: 800px;
 }
 .post_info_body > .post_info_title_box {
     border: 0px solid black; width: 100%; height: 60px; display: flex;
@@ -36,7 +36,7 @@
 
 /*검색조건 부분*/
 .post_info_search_body {
-    border: 0px solid black; width: 1686px; height: 100px;
+    border: 0px solid black; width: 1500px; height: 100px;
     display: flex; justify-content: center; align-items: center;
 }
 .post_info_search_body > .post_info_search_box {
@@ -78,7 +78,7 @@
 
 /*게시판 정보 목록 텍스트 부분*/
 .post_info_list_text_box {
-    border: 0px solid black; width: 1686px; height: 40px;
+    border: 0px solid black; width: 1500px; height: 40px;
     display: flex; align-items: center; justify-content: center;
 }
 .post_info_list_text_box > .post_info_list_text {
@@ -87,7 +87,7 @@
 
 /*게시글 정보 목록(그리드)*/
 .post_info_list_box {
-    border: 0px solid black; width: 1686px; height: 300px; display: flex;
+    border: 0px solid black; width: 1500px; height: 300px; display: flex;
     justify-content: center; align-items: center;
 }
 .post_info_list_box > .post_info_list {
@@ -96,7 +96,7 @@
 
 /*게시판 정보 텍스트 부분*/
 .post_info_text_box {
-    border: 0px solid black; width: 1686px; height: 40px;
+    border: 0px solid black; width: 1500px; height: 40px;
     display: flex; align-items: center; justify-content: center;
 }
 .post_info_text_box > .post_info_text {
@@ -105,7 +105,7 @@
 
 /*게시판 정보(그리드)*/
 .post_info_big_box {
-    border: 0px solid black; width: 1686px; height: 150px; display: flex;
+    border: 0px solid black; width: 1500px; height: 150px; display: flex;
     justify-content: center; align-items: center;
 }
 .post_info_big_box > .post_info_box {
@@ -135,7 +135,7 @@
     border-left: 1px solid #cccccc;
 }
 .post_info_big_box > .post_info_box > .post_info_left_box > .post_info_board_id_box > .post_info_board_id input{
-    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
     border: 1px solid #cccccc; outline: none; background: #cccccc;
     text-indent: 5px;
 }
@@ -155,7 +155,7 @@
     border-left: 1px solid #cccccc;
 }
 .post_info_big_box > .post_info_box > .post_info_left_box > .post_info_board_type_box > .post_info_board_type input{
-    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
     border: 1px solid #cccccc; outline: none; text-indent: 5px;
 }
 
@@ -180,7 +180,7 @@
     border-top: none; border-right: none;
 }
 .post_info_big_box > .post_info_box > .post_info_right_box > .post_info_board_name_box > .post_info_board_name input{
-    margin-left: 10px; width: 376px; height: 35px; border-radius: 5px;
+    margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
     border: 1px solid #cccccc; outline: none; text-indent: 5px;
 }
 

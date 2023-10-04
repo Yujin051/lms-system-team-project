@@ -14,7 +14,6 @@
     border: 0px solid black; width: 1903px; display: flex;
     justify-content: center; align-items: center; min-width: 1500px;
 }
-
 /*헤더, 푸터 사이 화면*/
 .assi_info_body {
     border: 0px solid red; width: 1500px;
@@ -200,3 +199,5 @@
     white-space: normal; resize: none; text-decoration: none; outline: none;
     text-indent: 5px;
 }
+
+

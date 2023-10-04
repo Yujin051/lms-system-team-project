@@ -88,3 +88,14 @@
 .menu_box_first:hover, .menu_box_second:hover, .menu_box_third:hover, .menu_box_fourth:hover {
     background: #cccccc; transition: 0.2s all;
 }
+
+.menu_box_second, .menu_box_third {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+}
+
+.menu_box_second.active, .menu_box_third.active {
+    height: auto;
+    transition: height 0.3s ease-in-out;
+}
