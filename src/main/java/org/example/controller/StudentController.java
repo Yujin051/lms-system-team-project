@@ -42,4 +42,9 @@ public class StudentController {
     public String test1() {
         return "/student/attendance";
     }
+
+    @GetMapping("/test")
+    public String test2() {
+        return "/student/onlineclass";
+    }
 }
