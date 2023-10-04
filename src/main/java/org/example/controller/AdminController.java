@@ -15,22 +15,22 @@ public class AdminController {
     }
 
     // 나중에 비동기로 전환할 수 있으면 전환할 것
-    @GetMapping("/lectureManager")
+    @GetMapping("/lecturemanager")
     public String adminLecture() {
         return "/admin/admin_lecture_manage";
     }
 
-    @GetMapping("/lectureApply")
+    @GetMapping("/lectureapply")
     public String adminApply() {
         return "/admin/admin_lecture_apply";
     }
 
-    @GetMapping("/studentManage")
+    @GetMapping("/studentmanage")
     public String adminStudent() {
         return "/admin/admin_student_manage";
     }
 
-    @GetMapping("/profManage")
+    @GetMapping("/profmanage")
     public String adminProf() {
         return "/admin/admin_prof_manage";
     }
