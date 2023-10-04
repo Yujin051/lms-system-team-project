@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profdefault}">
+<head>
+    <link rel="stylesheet" href="/css/prof/assiGrade.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</head>
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+    <div class="assi_grade_body">
+        <div class="assi_grade_lect_text_box">
+            <div class="assi_grade_lect_text">
+                <span>🔎&nbsp 강좌정보</span>
+            </div>
+        </div>
+        <div class="assi_grade_view_box">
+            <table class="assi_grade_tb_body">
+                <thead class="assi_grade_tb_thead">
+                    <tr>
+                        <td><span>강좌번호</span></td>
+                        <td><span>강좌명</span></td>
+                        <td><span>성적입력여부</span></td>
+                        <td><span>성적입력</span></td>
+                    </tr>
+                </thead>
+                <tbody class="assi_grade_tb_tbody">
+                    <tr>
+                        <td><span>2023-S25</span></td>
+                        <td><span>자바의 정석</span></td>
+                        <td><span>Y</span></td>
+                        <td><button type="button">작성하기</button></td>
+                    </tr>
+                    <tr>
+                        <td><span>2023-S26</span></td>
+                        <td><span>자바의 정석</span></td>
+                        <td><span>Y</span></td>
+                        <td><button type="button">작성하기</button></td>
+                    </tr>
+                    <tr>
+                        <td><span>2023-S26</span></td>
+                        <td><span>자바의 정석</span></td>
+                        <td><span>Y</span></td>
+                        <td><button type="button">작성하기</button></td>
+                    </tr>
+                    <tr>
+                        <td><span>2023-S26</span></td>
+                        <td><span>자바의 정석</span></td>
+                        <td><span>Y</span></td>
+                        <td><button type="button">작성하기</button></td>
+                    </tr>
+                    <tr>
+                        <td><span>2023-S26</span></td>
+                        <td><span>자바의 정석</span></td>
+                        <td><span>Y</span></td>
+                        <td><button type="button">작성하기</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="assi_grade_text_box">
+                <div class="assi_grade_text">
+                    <span>💻&nbsp 성적입력</span>
+                </div>
+            </div>
+            <table class="assi_grade_body_stud_tb_body">
+                <thead>
+                    <tr>
+                        <td><span>성명</span></td>
+                        <td><span>이메일</span></td>
+                        <td><span>출석</span></td>
+                        <td><span>과제</span></td>
+                        <td><span>시험</span></td>
+                        <td><span>평가등급</span></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span>스폰지밥</span></td>
+                        <td><span>tmvhswlqkq@naver.com</span></td>
+                        <td><input type="number" id="attBtn" placeholder="90%"/></td>
+                        <td><input type="number" id="assiBtn" placeholder="50%"/></td>
+                        <td><input type="number" id="testBtn" placeholder="40%"/></td>
+                        <td><input type="text" id="evalBtn" placeholder="A"/></td>
+                    </tr>
+                    <tr>
+                        <td><span>뚱이</span></td>
+                        <td><span>Enddl@naver.com</span></td>
+                        <td><input type="number" placeholder="90%"/></td>
+                        <td><input type="number" placeholder="50%"/></td>
+                        <td><input type="number" placeholder="40%"/></td>
+                        <td><input type="text" placeholder="A"/></td>
+                    </tr>
+                    <tr>
+                        <td><span>징징이</span></td>
+                        <td><span>wldwlddl@naver.com</span></td>
+                        <td><input type="number" placeholder="90%"/></td>
+                        <td><input type="number" placeholder="50%"/></td>
+                        <td><input type="number" placeholder="40%"/></td>
+                        <td><input type="text" placeholder="A"/></td>
+                    </tr>
+                    <tr>
+                        <td><span>다람이</span></td>
+                        <td><span>ekfkadl@naver.com</span></td>
+                        <td><input type="number" placeholder="90%"/></td>
+                        <td><input type="number" placeholder="50%"/></td>
+                        <td><input type="number" placeholder="40%"/></td>
+                        <td><input type="text" placeholder="A"/></td>
+                    </tr>
+                    <tr>
+                        <td><span>다람이</span></td>
+                        <td><span>ekfkadl@naver.com</span></td>
+                        <td><input type="number" placeholder="90%"/></td>
+                        <td><input type="number" placeholder="50%"/></td>
+                        <td><input type="number" placeholder="40%"/></td>
+                        <td><input type="text" placeholder="A"/></td>
+                    </tr>
+                    <tr>
+                        <td><span>다람이</span></td>
+                        <td><span>ekfkadl@naver.com</span></td>
+                        <td><input type="number" placeholder="90%"/></td>
+                        <td><input type="number" placeholder="50%"/></td>
+                        <td><input type="number" placeholder="40%"/></td>
+                        <td><input type="text" placeholder="A"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="assi_grade_reg_btn_box">
+                <button type="button" id="regBtn">등록</button>
+            </div>
+        </div>
+    </div>
+</div>

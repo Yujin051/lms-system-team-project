@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/*그리드 폰트 변경*/
+.tui-grid-rside-area, .tui-grid-table{
+    font-family: 'SUIT-Regular';
+}
+
+.mainFrame {
+    font-family: 'SUIT-Regular';
+    border: 0px solid black; width: 1903px; display: flex;
+    justify-content: center; align-items: center; min-width: 1500px;
+}
+/*헤더, 푸터 사이 화면*/
+.assi_write_body {
+    border: 0px solid red; width: 1500px; min-width: 1400px;
+}
+
+/*과제제출정보 텍스트 부분*/
+.assi_write_btn_box > .assi_write_assi_info_text_box {
+    border: 0px solid black; width: 1500px; height: 50px; display: flex;
+    align-items: center; font-size: 1.1rem;
+}
+
+/*제출, 돌아가기 버튼*/
+.assi_write_body > .assi_write_btn_box {
+    border: 0px solid black; width: 1500px; height: 40px; display: flex;
+    align-items: center;
+}
+.assi_write_body > .assi_write_btn_box > .assi_write_save_btn {
+    border: 0px solid black; width: 76px; height: 40px; font-size: 0.9rem; display: flex;
+    justify-content: center; align-items: center; text-align: center;
+    margin-right: 8px;
+}
+.assi_write_body > .assi_write_btn_box > .assi_write_back_btn {
+    border: 0px solid black; width: 76px; height: 40px; font-size: 0.9rem; display: flex;
+    justify-content: center; align-items: center; text-align: center;
+}
+.assi_write_body > .assi_write_btn_box > .assi_write_back_btn button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;
+    border-radius: 5px; line-height: 28px;
+}
+.assi_write_body > .assi_write_btn_box button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;
+    border-radius: 5px; line-height: 28px;
+}
+
+/*과제정보쓰는 부분*/
+.assi_write_big_box {
+    border: 0px solid black; width: 1500px; height: 450px;
+}
+
+/*과제명*/
+.assi_write_big_box > .assi_write_assi_name_box {
+    border: 1px solid #cccccc; width: 1500px; height: 100px; display: flex;
+    border-left: none; border-right: none;
+}
+.assi_write_big_box > .assi_write_assi_name_box > .assi_write_assi_name_text_box{
+    border: 0px solid black; width: 20%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_assi_name_box > .assi_write_assi_name_input{
+    border: 0px solid black; width: 80%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_assi_name_box > .assi_write_assi_name_input input{
+    margin-left: 10px; width: 1100px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*과제설명*/
+.assi_write_big_box > .assi_write_assi_detail_box {
+    border-bottom: 1px solid #cccccc; width: 1500px; height: 150px; display: flex;
+}
+.assi_write_big_box > .assi_write_assi_detail_box > .assi_write_assi_detail_text_box{
+    border: 0px solid black; width: 20%; height: 150px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_assi_detail_box > .assi_write_assi_detail_textarea{
+    border: 0px solid black; width: 80%; height: 150px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_assi_detail_box > .assi_write_assi_detail_textarea textarea{
+    margin-left: 10px; width: 1100px; height: 100px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px; resize: none;
+}
+
+/*과제 제출시작일시, 제출마감일시*/
+.assi_write_big_box > .assi_write_assi_date_box {
+    border-bottom: 1px solid #cccccc; width: 1500px; height: 100px; display: flex;
+}
+
+/*제출시작일시*/
+.assi_write_big_box > .assi_write_assi_date_box > .assi_write_assi_start_box{
+    border: 0px solid black; width: 50%; height: 100px; display: flex;
+    border-right: 1px solid #cccccc;
+}
+.assi_write_big_box > .assi_write_assi_date_box > .assi_write_assi_start_box > .assi_write_assi_start_text_box{
+    border: 0px solid black; width: 40%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_assi_date_box > .assi_write_assi_start_box > .assi_write_assi_start_input{
+    border: 0px solid black; width: 60%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_assi_date_box > .assi_write_assi_start_box > .assi_write_assi_start_input input{
+    margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*제출마감일시*/
+.assi_write_big_box > .assi_write_assi_date_box > .assi_write_assi_end_box{
+    border: 0px solid black; width: 50%; height: 100px; display: flex;
+}
+.assi_write_big_box > .assi_write_assi_date_box > .assi_write_assi_end_box > .assi_write_assi_end_text_box{
+    border: 0px solid black; width: 40%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_assi_date_box > .assi_write_assi_end_box > .assi_write_assi_end_input{
+    border: 0px solid black; width: 60%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_assi_date_box > .assi_write_assi_end_box > .assi_write_assi_end_input input{
+    margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*진행상태, 자료파일, 업로드, 다운로드, 파일삭제버튼 박스*/
+.assi_write_big_box > .assi_write_is_active_box {
+    border-bottom: 1px solid #cccccc; width: 1500px; height: 100px; display: flex;
+}
+
+/*진행상태*/
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_is_active{
+    border: 0px solid black; width: 33%; height: 100px; display: flex;
+}
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_is_active > .assi_write_is_active_text_box{
+    border: 0px solid black; width: 40%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_is_active > .assi_write_is_active_input{
+    border: 0px solid black; width: 60%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_is_active > .assi_write_is_active_input input{
+    margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*자료파일*/
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_assi_file{
+    border: 0px solid black; width: 34%; height: 100px; display: flex;
+}
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_assi_file > .assi_write_assi_file_text_box{
+    border: 0px solid black; width: 40%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_assi_file > .assi_write_assi_file_input{
+    border: 0px solid black; width: 60%; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_assi_file > .assi_write_assi_file_input input{
+    margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*업로드, 다운로드, 파일삭제 버튼 부분*/
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_assi_btns{
+    border: 0px solid black; width: 33%; height: 100px; display: flex;
+}
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_assi_btns > .assi_write_assi_file_btn_box{
+    border: 0px solid black; width: 100%; height: 100px; display: flex;
+    justify-content: center; align-items: center; font-size: 0.9rem;
+}
+.assi_write_big_box > .assi_write_is_active_box > .assi_write_assi_btns > .assi_write_assi_file_btn_box button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;
+    border-radius: 5px; line-height: 28px; margin-right: 5px;
+}

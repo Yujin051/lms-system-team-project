@@ -21,3 +21,12 @@ function toggleSubMenu(subMenu) {
     // 클릭한 메뉴 아이템과 연결된 서브메뉴를 보이도록 함
     subMenu.style.display = 'block';
 }
+
+// 767px 이하일 경우 햄버거바 클릭시 header 메뉴 토글 display
+const toggleBtn = document.querySelector('.header_toggle');
+const menu = document.getElementById('menu');
+
+//  토클방식으로 active class 추가/제거
+toggleBtn.addEventListener('click' , () => {
+    menu.classList.toggle('active');
+});

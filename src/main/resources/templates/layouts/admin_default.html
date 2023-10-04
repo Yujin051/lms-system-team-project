@@ -17,6 +17,10 @@
     <!-- toast UI Grid, toast UI Pagination css -->
     <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
     <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <!-- toast UI Grid cdn js -->
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <!-- 각 페이지의 script가 작성될 위치 -->
     <!-- 각 페이지의 css가 작성될 위치 -->
     <th:block layout:fragment="css"></th:block>
 </head>
@@ -98,7 +102,7 @@
                         <i class="fa-solid fa-folder"></i><span class="grade_management_text">성적관리</span>
                     </div>
                     <div class="menu_box_second overall_grade_management" style="display: none">
-                        <i class="fa-solid fa-folder-open"></i><span>전체성적관리</span>
+                        <i class="fa-solid fa-folder-open"></i><a href="/admin/grade">전체성적관리</a>
                     </div>
                 </div>
                 <div class="menu_box">
@@ -106,10 +110,10 @@
                         <i class="fa-solid fa-folder"></i><span class="portal_management_text">포털관리</span>
                     </div>
                     <div class="menu_box_second write_post" style="display: none">
-                        <i class="fa-solid fa-folder-open"></i><span>게시글 작성(담당용)</span>
+                        <i class="fa-solid fa-folder-open"></i><a href="/admin/postWrite">게시글 작성(담당용)</a>
                     </div>
                     <div class="menu_box_third post_info" style="display: none">
-                        <i class="fa-solid fa-folder-open"></i><span>게시글 정보관리</span>
+                        <i class="fa-solid fa-folder-open"></i><a href="/admin/postInfo">게시글 정보관리</a>
                     </div>
                 </div>
             </div>
@@ -125,9 +129,5 @@
 
 </body>
 <script src="/js/admin_defalut.js"></script>
-<!-- toast UI Grid cdn js -->
-<script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.js"></script>
-<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-<!-- 각 페이지의 script가 작성될 위치 -->
 <th:block layout:fragment="script"></th:block>
 </html>
