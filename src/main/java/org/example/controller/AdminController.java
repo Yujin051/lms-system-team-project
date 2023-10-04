@@ -34,4 +34,29 @@ public class AdminController {
     public String adminProf() {
         return "/admin/admin_prof_manage";
     }
+
+
+    /*
+    전체관리성적
+     */
+    @GetMapping("/grade")
+    public String grade(){
+        return "/manager/gradeManagement";
+    }
+
+    /*
+    게시글 관리(담당용)
+     */
+    @GetMapping("/postWrite")
+    public String postWrite(){
+        return "/manager/postWrite";
+    }
+
+    /*
+    게시글 정보관리
+     */
+    @GetMapping("/postInfo")
+    public String postInfo(){
+        return "/manager/postInfo";
+    }
 }
