@@ -39,13 +39,17 @@ public class Professor {
     @Column(name = "prof_account")
     private String profAccount;
 
+    @Column(name = "is_active")
+    private boolean isActive;
+
     @Builder
-    public Professor(Member member, String profAgency, String profBank, String profWork, String profAccount) {
+    public Professor(Member member, String profAgency, String profBank, String profWork, String profAccount, boolean isActive) {
         this.member = member;
         this.profBank = profBank;
         this.profWork = profWork;
         this.profAgency = profAgency;
         this.profAccount = profAccount;
+        this.isActive = isActive;
     }
 
     public static Professor createProfessor(ProfessorDto professorDto, Member member) {
@@ -55,6 +59,7 @@ public class Professor {
                 .profWork(professorDto.getProfWork())
                 .profAgency(professorDto.getProfAgency())
                 .profAccount(professorDto.getProfAccount())
+                .isActive(professorDto.isActive())
                 .build();
         return professor;
     }

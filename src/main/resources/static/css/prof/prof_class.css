@@ -1,0 +1,110 @@
+.middle_section {
+    border: 0px solid black;
+    max-width: 1200px;
+    padding: 0 20px;
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.middle_section .title {
+    padding-top: 4px;
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.middle_section .title p {
+    font-size: 25px;
+    font-weight: 500;
+    border-left: 4px solid #000;
+    padding-left: 8px;
+    height: 20px;
+    line-height: 19px;
+    color: #000;
+    margin-top: 5px;
+}
+
+.middle_section .title button {
+    width: 50px;
+}
+
+.middle_section .find {
+    border-top: 2px solid black;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+    height: 80px;
+    display: flex;
+}
+
+.middle_section .find .year {
+    margin-left: 30px;
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.middle_section .find .year_select {
+    width: 400px;
+    height: 40px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: 100px;
+    text-indent: 8px;
+}
+
+.middle_section .find .semester {
+    margin-left: 30px;
+    margin-top: 25px;
+    font-size: 20px;
+}
+
+.middle_section .find .semester_select {
+    width: 400px;
+    height: 40px;
+    font-size: 15px;
+    margin-top: 20px;
+    margin-left: 100px;
+    text-indent: 8px;
+}
+
+.middle_section .table {
+    border: 0px solid black;
+    margin-top: 20px;
+    height: 200px;
+}
+
+.middle_section .table .table_graph {
+    width: 1160px;
+    border-top: 2px solid black;
+}
+
+.middle_section .table .table_graph .table_graph_head {
+    text-align: center;
+    height: 50px;
+    font-weight: bolder;
+    background-color: rgb(235, 240, 247);
+}
+
+.middle_section .table .table_graph .table_graph_head td:nth-child(1) {
+    width: 15%;
+}
+
+.middle_section .table .table_graph .table_graph_head td:nth-child(2) {
+    width: 15%;
+}
+
+.middle_section .table .table_graph .table_graph_head td:nth-child(3) {
+    width: 30%;
+}
+
+.middle_section .table .table_graph .table_graph_head td:nth-child(4) {
+    width: 40%;
+}
+
+.middle_section .table .table_graph .table_graph_body {
+    height: 40px;
+    text-indent: 10px;
+}
+

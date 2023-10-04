@@ -49,7 +49,7 @@ public class MemberFormDto {
     // 프론트단에서 두개로 나누고 DTO에선 하나의 테이블로 값을 넣는다? -- 가능한가??
     @Builder
     public MemberFormDto(String userId, String userPassword, String userName, String userPhoneNum, String userEmail
-    , String userAddr, Gender userGender, LocalDate userRegDate, LocalDate userBirthday, RoleType userRole) {
+            , String userAddr, Gender userGender, LocalDate userRegDate, LocalDate userBirthday, RoleType userRole) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.userName = userName;

@@ -8,6 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/student")
 public class StudentController {
 
+    @GetMapping("")
+    public String main() {
+        return "/student/stud_main";
+    }
     @GetMapping("/grade")
     public String studentGrade() {
         return "/student/gradeCheck";

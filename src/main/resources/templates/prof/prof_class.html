@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/prof/prof_class.css">
+    <title>Document</title>
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+    <!-- 중앙 시작   -->
+    <section class="middle_section">
+        <div class="title">
+            <p>강의이력</p>
+            <button>조회</button>
+        </div>
+        <div class="find">
+            <p class="year">년도</p>
+            <select class="year_select" name="years" required>
+                <option value="">년도를 선택해주세요</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+            </select>
+            <p class="semester">학기</p>
+            <select class="semester_select" name="semesters" required>
+                <option value="">학기를 선택해주세요</option>
+                <option>1학기</option>
+                <option>계절학기(여름)</option>
+                <option>2학기</option>
+                <option>계절학기(겨울)</option>
+            </select>
+        </div>
+        <div class="table">
+            <table class="table_graph">
+                <tr class="table_graph_head">
+                    <td>강좌번호</td>
+                    <td>년도</td>
+                    <td>학기</td>
+                    <td>강좌명</td>
+                </tr>
+                <tr class="table_graph_body">
+                    <td>388</td>
+                    <td>2022</td>
+                    <td>여름(계절학기)</td>
+                    <td>세계사와 사회변화</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+    <!-- 중앙 끝 -->
+</section>
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+</body>
+</html>
