@@ -59,4 +59,22 @@ public class AdminController {
     public String postInfo(){
         return "/admin/postInfo";
     }
+
+    @GetMapping("/as")
+    public String attendanceStatus() {
+
+        return "/admin/attendance_status";
+    }
+
+    @GetMapping("/ttr")
+    public String thisTime() {
+
+        return "/admin/thisTime_registration";
+    }
+
+    @GetMapping("/ytr")
+    public String youTubeRegistration() {
+
+        return "/admin/youTube_registration";
+    }
 }

@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/courseRegisteration.css">
+    <title>Document</title>
+</head>
+<body>
+
+<header id="header">
+    <nav id="nav" class="container">
+        <a href="https:www.naver.com" target="_self" class="brand"></a>
+
+        <div class="menu" id="menu">
+
+            <ul class="header_menu">
+
+                <li class="menu-item">
+                    <a href="#" class="menu-link">학사정보</a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#" class="menu-link">수업정보</a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#" class="menu-link">커뮤니티</a>
+                </li>
+
+            </ul>
+
+            <div class="nav-right">
+                <a href="" id="logout">
+                    <i class="bi bi-box-arrow-right mx-2"></i>
+                    로그아웃
+                </a>
+            </div>
+        </div>
+        <a class="header_toggle">
+            <i class="fa-solid fa-bars" style="color: #000000;"></i>
+        </a>
+
+    </nav>
+
+
+</header>
+
+<div class="sub_menu" id="sub_menu1">
+
+    <div class="container">
+        <ul class="wrap_sub mt-3">
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_myinfo.png" alt="나의 정보 조회">
+                    <p>나의 정보 조회</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_grade.png" alt="성적조회">
+                    <p>성적 조회</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="sub_menu" id="sub_menu2">
+    <div class="container">
+        <ul class="wrap_sub mt-3">
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_blackboard.png" alt="나의강의실">
+                    <p>나의 강의실</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_onlineclass.png" alt="온라인강의실">
+                    <p>온라인강의실</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_click.png" alt="수강신청">
+                    <p>나의 강의실</p>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+
+<div class="sub_menu" id="sub_menu3">
+    <div class="container">
+        <ul class="wrap_sub mt-3">
+
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_memo.png" alt="공지사항">
+                    <p>공지사항</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_school.png" alt="학생">
+                    <p>학생</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_chat.png" alt="질문/건의">
+                    <p>질문/건의</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="" class="bounce">
+                    <img class="sub_menu_icon" src="/img/icon_envelop_2.png" alt="쪽지">
+                    <p>쪽지</p>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<form class="d-flex m-2">
+    <button type="button" class="bt btn btn-secondary">조회</button>
+</form>
+<div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
+    <div class="col">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="s1">년도/학기</span>
+            </div>
+                <div>
+                    <input class="form-control" type="search" placeholder="콘텐츠명 검색" aria-label="Search">
+                </div>
+            <!-- 학기 버튼-->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    전체
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">전체</a></li>
+                    <li><a class="dropdown-item" href="#">1학기</a></li>
+                    <li><a class="dropdown-item" href="#">2학기</a></li>
+                </ul>
+            </div>
+
+            <div class="input-group-prepend2 input-group-prepend">
+                <span class="s2">강의명</span>
+            </div>
+            <div>
+                <input class="form-control" type="search" placeholder="강의명 검색" aria-label="Search">
+            </div>
+
+
+            </div>
+    </div>
+
+
+
+</div>
+
+
+<div class="ct1 container">
+    <div class="d1">I 수강신청 대상 개설강좌</div>
+    <table id="userList" class="table table-hover">
+        <tr>
+            <th>개설강좌번호</th>
+            <th>개설강좌명</th>
+            <th>학점</th>
+            <th>교원명</th>
+            <th>신청현황</th>
+            <th>신청</th>
+        </tr>
+        <tr>
+            <td class="userId">1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-primary pull-right">신청</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="userId">2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-primary pull-right">신청</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="userId">3</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-primary pull-right">신청</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="userId">4</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-primary pull-right">신청</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="userId">5</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-primary pull-right">신청</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<!--페이징-->
+<nav aria-label="Page navigation example">
+    <ul class="pg1 pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- 2번쨰 테이블-->
+<div class="ct1 container">
+    <div class="d1">I 수강신청 신청강좌</div>
+    <table id="userList2" class="table table-hover">
+        <tr>
+            <th>개설강좌번호</th>
+            <th>개설강좌명</th>
+            <th>학점</th>
+            <th>교원명</th>
+            <th>신청현황</th>
+            <th>취소</th>
+        </tr>
+        <tr>
+            <td class="userId">1</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-danger pull-right">취소</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="userId">2</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-danger pull-right">취소</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="userId">3</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-danger pull-right">취소</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="userId">4</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-danger pull-right">취소</button>
+            </td>
+        </tr>
+        <tr>
+            <td class="userId">5</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button class="btn btn-danger pull-right">취소</button>
+            </td>
+        </tr>
+    </table>
+</div>
+<!--페이징-->
+<nav aria-label="Page navigation example">
+    <ul class="pg1 pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+<footer>
+    <div class="wrap_footer">
+        <div class="footer_top_wrap">
+            <div class="footer1">
+                <div class="logos">
+                    <a>
+                        <img src="/img/footerLeftLogo.png" alt="TRANSLATION ACADEMY LTI KOREA LOGO">
+                    </a>
+                    <a>
+                        <img src="/img/footerRightLogo.png" alt="한국문학번역원 로고">
+                    </a>
+                </div>
+            </div>
+            <div class="footer2">
+                <ul class="personalinfo">
+                    <li>
+                        <a>개인정보처리방침</a>
+                    </li>
+                    <li>
+                        <a>오시는길</a>
+                    </li>
+                    <li>
+                        <a>이용약관</a>
+                    </li>
+                    <li>
+                        <a>이메일무단수집금지</a>
+                    </li>
+                </ul>
+                <ul class = "address">
+                    <li>
+                        서울특별시 마포구 신촌로 176
+                    </li>
+                    <li>
+                        대표자 : 권혁인 &nbsp; &nbsp;
+                        사업자등록번호 : 103-91-93011 &nbsp; &nbsp;
+                        Tel : 010-5432-1313 Fax : 02-3448-4247
+                    </li>
+                </ul>
+                <p class="copyright">
+                    Copyright ⓒ Literature Translation Institute of Korea. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+        <div class="footer_btm_wrap">
+            <div class="footer3">
+                <ul>
+                    <li>
+                        이메일문의 lmsonline@naver.com
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        문의시간 평일:09:00 ~ 17:00/토.일요일,공휴일 휴무
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+<!-- bootstrap js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- header js -->
+<script src="/js/header.js"></script>
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script src="/js/courseRegisteration.js"></script>
+</body>
+</html>

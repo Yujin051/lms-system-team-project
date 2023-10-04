@@ -56,4 +56,16 @@ public class StudentController {
     public String assiView(){
         return "/student/assiView";
     }
+
+    @GetMapping("/scr")
+    public String courseRegisteration() {
+        return "/student/course_registeration";
+    }
+
+
+    /* 학생 나의 강의실 */
+    @GetMapping("/mc")
+    public String myClassroom() {
+        return "/student/my_classroom";
+    }
 }
