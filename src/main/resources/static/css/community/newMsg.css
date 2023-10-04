@@ -1,0 +1,378 @@
+/* 글꼴 폰트 프리텐다드 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+/* seceion 기본 css 설정 */
+section {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard', 'sans-serif';
+}
+
+section ul , section li {
+    list-style: none;
+    padding: 0;
+}
+
+section a {
+    color: black;
+    text-decoration: none;
+}
+
+section a:visited {
+    color: black;
+}
+
+.row > * {
+    /* padding-left: 0; */
+    /* padding-right: 0; */
+}
+
+/* 설정 시작 */
+section {
+    /* border: 1px solid black; */
+    height: 100%;
+    /* min-height: auto; */
+    
+}
+
+.board {
+    /* height: 100%; */
+    margin-top: 4rem;
+    /* border: 1px solid red; */
+    margin-bottom: 5rem;
+    
+    
+}
+
+/* 상단 쪽지 , 총 갯수 , 검색창 box */
+.msg_top {
+    /* border: 1px solid red; */
+}
+
+.msg_top > .row > div {
+    /* border: 2px solid green; */
+}
+
+.msg_left > span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #003a78;
+    /* border: 1px solid blue; */
+}
+
+/* 우측 상단 총갯수 , 검색 박스 정렬 설정 */
+.msg_right {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 우측 상단 총갯수 글자 설정 */
+.msg_right > div:first-child {
+    /* border: 1px solid blue; */
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* 메세지 전체 wrap 박스 */
+.msg_content {
+    height: 100%;
+    /* border: 1px solid blue; */
+    margin-top: 0.5rem;
+}
+
+/* 메세지 사이드바 설정 */
+.msg_side {
+    border-top: 2px solid black;
+}
+
+.msg_side > ul {
+    /* border: 1px solid black; */
+}
+
+.msg_side > div {
+    display: flex;
+    justify-content: center;
+}
+
+.msg_side > div > button {
+    width: 50%;
+    border-radius: 0;
+    margin-bottom: 1rem;
+}
+
+.msg_side > ul > li {
+    border-bottom: 1px dashed black;
+    /* padding: 0 !important; */
+    text-align: start;
+    font-size: 1.5rem;
+    /* font-weight: bold; */
+    
+}
+
+.msg_side > ul  li:hover {
+    border-bottom: 1px solid #003a78;
+}
+
+/* 사이드바 전체, 받은 쪽지 , 보낸 쪽지 , 휴지통 설정 */
+.msg_side > ul  li > a {
+    display: block;
+    /* border: 1px solid black; */
+    
+}
+
+.msg_side > ul  li > a:hover {
+    color: #003a78;
+}
+
+/* 쪽지 쓰기 양식 */
+.msg_write {
+    /* border: 1px solid black; */
+}
+/* 쓰기 상단 디자인 설정 */
+.msg_write_head {
+    /* border: 1px solid black; */
+    border-left: 7px solid black;
+}
+.msg_write_head > span {
+    margin-left: 0.3rem;
+    font-size: 1.3rem;
+}
+
+/* 쪽지 form 양식 설정 */
+
+.msg_write_body {
+    margin-top: 0.5rem;
+    border-top: 2px solid black;
+}
+
+.msg_write_body > div {
+    /* margin-top: 1rem; */
+    display: flex;
+}
+
+/* .msg_write_body > div:first-child {
+    justify-content: space-between;
+} */
+
+.msg_write_body > .row > div {
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.firstRow {
+    margin-top: 0.5rem;
+}
+
+.msg_write_body > .row > div:first-child {
+    background-color: #edf1f6;
+    text-align: start;
+    font-weight: bold;
+    
+}
+
+.msg_write_body > .row > div > ul {    
+    padding: 0;
+    margin: 0.5rem 0 0.5rem 0;
+}
+
+.msg_write_body > .row > div > ul > li {
+    margin-top: 0.2rem;
+    /* border: 1px dashed black; */
+    margin-bottom: 0.2rem;
+    border-radius: 5px;
+    background-color: #0d409725;
+    margin-left: 0.5rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.msg_write_body > .row > div > ul > li > span {
+    display: inline-block;
+    margin-left: 0.2rem;
+    border-top-right-radius: 5px;
+    /* border: 1px solid black; */
+    cursor: pointer;
+}
+
+.msg_write_body > .row > div > button {
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    padding: 0;
+}
+
+.msg_write_body > .row > div > input {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid #ffffff;
+    outline: 0;
+}
+
+.msg_write_body > .row > div > input:focus {
+    border-bottom: 1px solid black;
+}
+
+.msg_write_body > .row > div > textarea {
+    width: 100%;
+    resize: none;
+    border: 0;
+    outline: 0;
+    height: 200px;
+
+}
+
+.board_nav {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.board_nav > button {
+    margin-left: 0.5rem;
+}
+
+/* 모달창 설정 */
+#modalContainer {
+    /* border: 1px solid red; */
+    /* margin-top: 1rem; */
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: center;
+}
+
+.modalContent {
+    border: 1px solid black;
+    position: absolute;
+    background-color: #ffffff;
+    top: 2.5rem;
+}
+
+#modalContent > div {
+    /* border: 1px solid black; */
+}
+
+#modalContainer li {
+    /* font-size: 1.2rem; */
+    cursor: pointer;
+}
+
+#modalContainer li:hover {
+    background-color: #ccc;
+}
+
+#modalContainer li > span {
+    cursor: pointer;
+}
+
+/* 닫기 박스 */
+.closeBox {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;        
+    font-weight: bold;
+}
+
+#modalCloseBtn {
+    cursor: pointer;
+}
+
+#modalContainer ul {
+    list-style: none;
+    padding: 0;
+}
+
+.classtype , .class , .to {
+    border: 1px solid #ccc;
+}
+
+/* 참여자 박스 */
+.class > ul > li > input {
+    margin-right: 0.5rem;
+}
+
+.class > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 모든 박스 첫머릿글 폰트 설정 */
+.class > div > div > span ,
+.modalContent > div:nth-child(2) > div > span ,
+.modalContent > div:nth-child(4) > div > span {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+/* 추가 버튼 */
+.class > div > div > button {
+    /* padding: 0; */
+    font-weight: bold;
+}
+
+/* 받는사람 박스 */
+.modalContent > div:nth-child(4) > div > span:last-child {
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    color: #d92c4d;
+}
+
+.to {
+    /* border: 1px solid black; */
+}
+
+.msgTo > li {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-between;
+}
+
+.msgTo > li > span {
+    margin-right: 0.5rem;
+}
+
+#modalSeletedBtn {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* .hiddenBox {
+    display: none !important;
+} */
+
+/* 767px 이하라면 아래의 css 설정을 적용*/
+
+@media screen and (max-width: 767px){
+
+    .msg_side > ul > li {
+        font-size: 1rem;
+    }
+
+    .msg_write_body > div {
+        margin-top: 1rem; 
+        display: block;
+    }
+
+    .msg_write_body > div > label ,
+    .msg_write_body > div > input , 
+    .msg_write_body > div > ul ,
+    .msg_write_body > div > div ,
+    .msg_write_body > div > ul > li {
+        /* font-size: small; */
+    }
+
+    .msg_write_head > span {
+        margin-left: 0.3rem;
+        font-size: 1rem;
+    }
+    
+}
+

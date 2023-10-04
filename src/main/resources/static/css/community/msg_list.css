@@ -1,0 +1,231 @@
+/* 글꼴 폰트 프리텐다드 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+/* seceion 기본 css 설정 */
+section {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard', 'sans-serif';
+}
+
+section ul , section li {
+    list-style: none;
+    padding: 0;
+}
+
+section a {
+    color: black;
+    text-decoration: none;
+}
+
+section a:visited {
+    color: black;
+}
+
+.row > * {
+    /* padding-left: 0; */
+    /* padding-right: 0; */
+}
+
+/* 설정 시작 */
+section {
+    /* border: 1px solid black; */
+    height: 100%;
+    /* min-height: auto; */
+    
+}
+
+.board {
+    /* height: 100%; */
+    margin-top: 4rem;
+    /* border: 1px solid red; */
+    margin-bottom: 5rem;
+    
+    
+}
+
+/* 상단 쪽지 , 총 갯수 , 검색창 box */
+.msg_top {
+    /* border: 1px solid red; */
+}
+
+.msg_top > .row > div {
+    /* border: 2px solid green; */
+}
+
+.msg_left > span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #003a78;
+    /* border: 1px solid blue; */
+}
+
+/* 우측 상단 총갯수 , 검색 박스 정렬 설정 */
+.msg_right {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* 우측 상단 총갯수 글자 설정 */
+.msg_right > div:first-child {
+    /* border: 1px solid blue; */
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* 메세지 전체 wrap 박스 */
+.msg_content {
+    height: 100%;
+    /* border: 1px solid blue; */
+    margin-top: 0.5rem;
+}
+
+/* 메세지 사이드바 설정 */
+.msg_side {
+    border-top: 2px solid black;
+}
+
+.msg_side > ul {
+    /* border: 1px solid black; */
+}
+
+.msg_side > div {
+    display: flex;
+    justify-content: center;
+}
+
+.msg_side > div > button {
+    width: 50%;
+    border-radius: 0;
+    margin-bottom: 1rem;
+}
+
+.msg_side > ul > li {
+    border-bottom: 1px dashed black;
+    /* padding: 0 !important; */
+    text-align: start;
+    font-size: 1.5rem;
+    /* font-weight: bold; */
+    
+}
+
+.msg_side > ul  li:hover {
+    border-bottom: 1px solid #003a78;
+}
+
+/* 사이드바 전체, 받은 쪽지 , 보낸 쪽지 , 휴지통 설정 */
+.msg_side > ul  li > a {
+    display: block;
+    /* border: 1px solid black; */
+    
+}
+
+.msg_side > ul  li > a:hover {
+    color: #003a78;
+}
+
+
+.msg_list {
+    /* border-top: 2px solid black; */
+}
+
+.msg_list > div {
+    border-top: 2px solid black;
+}
+
+.msg_list > div > a {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    justify-content: flex-start;
+}
+
+.msg_list > div > a:hover {
+    background-color: #cccccc6e;
+}
+
+.msg_list > div > a > div {
+    /* border: 1px solid red; */
+}
+
+.msg_list > div > a > div:first-child {
+    width: 10%;
+    text-align: center;
+    
+}
+
+.msg_list > div > a > div:first-child > p {
+    margin: 0;
+    padding: 0;
+}
+
+.msg_list > div > a > div:last-child {
+    /* padding: 1px 1rem 1rem 1rem; */
+    width: 90%;
+}
+
+.msg_list > div > a > div:last-child > span {
+    font-weight: bold;
+}
+
+.msg_list > div > a > div:last-child > ul {
+    display: flex;
+    /* border: 1px solid black; */
+}
+
+.msg_list > div > a > div:last-child > ul > li:last-child {
+    margin-left: 2rem;
+}
+
+.msg_list > div > a > div:last-child > ul > li > span:first-child {
+    font-weight: bold;
+    color: gray;
+}
+
+.msg_list > div > a > div:last-child > ul > li > span:last-child {
+    font-weight: bold;
+}
+
+
+/* 페이징 부분 */
+.pageing {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.pageing > li {
+    /* border: 1px solid black; */
+    border-radius: 10px;
+    margin: 3px;
+    width: 2.4em;
+    height: 2.4em;
+    line-height: 2.4em;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* 페이징의 a태그 visited 설정 어떻게 유지하도록 할 것인지? */
+.page_active {
+    background: black;
+}
+
+.page_active > a {
+    color: white !important;
+}
+
+
+/* 767px 이하라면 아래의 css 설정을 적용 */
+@media screen and (max-width: 767px){
+
+    .msg_side > ul > li {
+        font-size: 1rem;
+    }
+
+    .msg_list {
+        font-size: small;
+    }
+}
