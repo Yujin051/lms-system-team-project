@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profdefault}">
+<head>
+    <link rel="stylesheet" href="/css/prof/assiWrite.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</head>
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+    <form class="assi_write_body" method="post">
+        <div class="assi_write_btn_box">
+            <div class="assi_write_assi_info_text_box">
+                <span>📄&nbsp 과제정보</span>
+            </div>
+            <div class="assi_write_save_btn">
+                <button type="button" class="backBtn">쓰기</button>
+            </div>
+            <div class="assi_write_back_btn">
+                <button type="button" class="backBtn">돌아가기</button>
+            </div>
+        </div>
+        <div class="assi_write_big_box">
+            <div class="assi_write_assi_name_box">
+                <div class="assi_write_assi_name_text_box">
+                    <span>과제명</span>
+                </div>
+                <div class="assi_write_assi_name_input">
+                    <input type="text" id="assignName" placeholder="과제명"/>
+                </div>
+            </div>
+            <div class="assi_write_assi_detail_box">
+                <div class="assi_write_assi_detail_text_box">
+                    <span>과제설명</span>
+                </div>
+                <div class="assi_write_assi_detail_textarea">
+                    <textarea id="assignDetail"></textarea>
+                </div>
+            </div>
+            <div class="assi_write_assi_date_box">
+                <div class="assi_write_assi_start_box">
+                    <div class="assi_write_assi_start_text_box">
+                        <span>제출시작일시</span>
+                    </div>
+                    <div class="assi_write_assi_start_input">
+                        <input type="text" id="assignStart" placeholder="2023-09-01"/>
+                    </div>
+                </div>
+                <div class="assi_write_assi_end_box">
+                    <div class="assi_write_assi_end_text_box">
+                        <span>제출마감일시</span>
+                    </div>
+                    <div class="assi_write_assi_end_input">
+                        <input type="text" id="assignEnd" placeholder="2023-09-30"/>
+                    </div>
+                </div>
+            </div>
+            <div class="assi_write_is_active_box">
+                <div class="assi_write_is_active">
+                    <div class="assi_write_is_active_text_box">
+                        <span>진행상태</span>
+                    </div>
+                    <div class="assi_write_is_active_input">
+                        <input type="text" id="isActive" placeholder="과제명"/>
+                    </div>
+                </div>
+                <div class="assi_write_assi_file">
+                    <div class="assi_write_assi_file_text_box">
+                        <span>자료파일</span>
+                    </div>
+                    <div class="assi_write_assi_file_input">
+                        <input type="text" placeholder="자료파일"/>
+                    </div>
+                </div>
+                <div class="assi_write_assi_btns">
+                    <div class="assi_write_assi_file_btn_box">
+                        <button type="button" class="upload_btn">업로드</button>
+                        <button type="button" class="download_btn">다운로드</button>
+                        <button type="button" class="delete_btn">파일삭제</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

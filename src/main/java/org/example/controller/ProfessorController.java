@@ -36,4 +36,44 @@ public class ProfessorController {
     public String lectureHistory() {
         return "/prof/prof_class";
     }
+
+
+    /**
+     * 강사 : 나의강의실 - 출결조회
+     * @author 임휘재
+     */
+    @GetMapping("/att")
+    public String AttendanceCheck(){
+        return "/prof/attendanceCheck";
+    }
+
+    /**
+     * 강사 : 나의강의실 - 과제출제
+     * @author 임휘재
+     */
+    @GetMapping("/assi")
+    public String assignment() {
+        return "/prof/assignment";
+    }
+
+    /**
+     * 강사 : 나의강의실 - 과제제출정보
+     * @author 임휘재
+     */
+    @GetMapping("/assiInfo")
+    public String assiSmInfo(){
+        return "/prof/assiSmInfo";
+    }
+
+    //강사 : 나의강의실 - 과제정보쓰기
+    @GetMapping("/assiWrite")
+    public String assiWrite(){
+        return "/prof/assiWrite";
+    }
+
+    //강사 : 나의강의실 - 성적입력
+    @GetMapping("/assiGrade")
+    public String assiGrade(){
+        return "/prof/assiGrade";
+    }
 }

@@ -10,7 +10,7 @@ public class StudentController {
 
     // 학생 메인 페이지
     @GetMapping("")
-    public String main() {
+    public String stuMain() {
         return "/student/stud_main";
     }
     // 학생 성적 페이지
@@ -46,5 +46,14 @@ public class StudentController {
     @GetMapping("/test")
     public String test2() {
         return "/student/onlineclass";
+    }
+
+    /**
+     * 학생 : 과제출제
+     * @author 임휘재
+     */
+    @GetMapping("/assi")
+    public String assiView(){
+        return "/student/assiView";
     }
 }
