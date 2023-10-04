@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-    @GetMapping(value= "/login")
-    public String adminLogin() {
-        return "/admin/login";
+    // 어드민 메인페이지
+    @GetMapping("")
+    public String adminMain() {
+        return "/admin/main";
     }
 
     // 나중에 비동기로 전환할 수 있으면 전환할 것
