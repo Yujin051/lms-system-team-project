@@ -1,0 +1,112 @@
+#top-table {
+    width: 1522px;
+    margin-left: 90px;
+}
+
+
+.table {
+    margin-left: 90px;
+    width: 94.5%;
+}
+
+.table th,
+.table td {
+    text-align: center;
+}
+
+.form-control {
+    height: 37px;
+}
+
+
+.s1 {
+    margin-right: 50px;
+}
+
+
+
+.d1 {
+    font-size: 19px;
+    font-weight: bold;
+}
+.d2 {
+    margin-left: 90px;
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
+.tbl1 {
+    margin-left: 90px;
+    width: 40%;
+    float: left;
+}
+
+
+.rbt {
+    width: 30px;
+    margin-left: 940px;
+    margin-bottom: 300px;
+}
+
+
+.brt {
+    width: 920px; /* 원하는 최대 너비로 조절 */
+    margin: 0; /* 가운데 정렬 */
+}
+
+.brt2 {
+    width: 40%;
+}
+
+.brt2 th {
+    padding: 4px 10px;
+    font-size: 17px;
+}
+
+
+.brt2 td {
+    width: 400px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.pg1.pagination li.page-item a.page-link {
+    font-size: 15px; /* 페이지 번호의 폰트 크기 조절 */
+    padding: 5px 13px; /* 페이지 번호의 패딩 조절 */
+    border-color: grey;
+    color: grey;
+}
+
+.pg2.pagination li.page-item a.page-link {
+    font-size: 12px; /* 페이지 번호의 폰트 크기 조절 */
+    padding: 5px 10px; /* 페이지 번호의 패딩 조절 */
+    border-color: grey;
+    color: grey;
+}
+
+
+
+     /* 오른쪽으로 이동시킬 클래스 */
+ .right-align {
+     float: right;
+ }
+
+/* 테이블 스타일 추가 (예시로 테두리 추가) */
+table {
+    border-collapse: collapse;
+    width: 50%; /* 원하는 너비로 조절하세요 */
+    margin-left: 10px; /* 테이블과 다른 내용과의 간격을 조절하세요 */
+}
+
+/* 테이블 헤더 셀 너비 조절 */
+.wider-th {
+    width: 150px; /* 원하는 너비로 조절하세요 */
+    border-color: grey;
+    height: 10px;
+    text-align: center;
+    background: grey;
+}
+
+

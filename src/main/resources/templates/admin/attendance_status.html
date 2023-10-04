@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin_default}">
+
+<head>
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <link rel="stylesheet" href="/css/attendanceStatus.css">
+</head>
+
+<body>
+
+<div id="mainFrame" layout:fragment="content">
+    <div class="">
+        <form class="d-flex justify-content-end m-2">
+            <button type="button" class="btn btn-secondary">조회</button>
+        </form>
+
+        <div id="top-table" class="row bg-body-tertiary justify-content-end p-4">
+            <div class="col mt-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="s1">온라인강좌명</span>
+                    </div>
+                    <input class="form-control" type="search" placeholder="강좌 검색" aria-label="Search">
+                </div>
+            </div>
+            <div class="col mt-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="m-3 p-5">강좌진행상태</span>
+                    </div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        전체
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="#">(전체)</a></li>
+                        <li><a class="dropdown-item" href="#">준비중</a></li>
+                        <li><a class="dropdown-item" href="#">운영중</a></li>
+                        <li><a class="dropdown-item" href="#">종료</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="grid"><div class="d1">학습강좌</div></div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pg1 pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+<!-- 하단테이블 -->
+        <div class="d2">전체이수형황</div>
+        <table class="table border border-2 justify-content-center  rounded rounded-5">
+
+            <thead>
+
+            <tr>
+                <th scope="col">강좌분류</th>
+                <th scope="col">학점</th>
+                <th scope="col">학번</th>
+                <th scope="col">성명</th>
+                <th scope="col">진도율(%)</th>
+            </tr>
+        </thead>
+
+
+        <tbody>
+        <tr>
+            <td>강좌명</td>
+            <td>4.0</td>
+            <td>20233001</td>
+            <td>홍길동</td>
+            <td>80%</td>
+        </tr>
+        <tr>
+            <td>강좌명</td>
+            <td>3.0</td>
+            <td>20233002</td>
+            <td>홍길동</td>
+            <td>80%</td>
+        </tr>
+        <tr>
+            <td>강좌명</td>
+            <td>4.0</td>
+            <td>20233003</td>
+            <td>홍길동</td>
+            <td>80%</td>
+        </tr>
+        <tr>
+            <td>강좌명</td>
+            <td>4.0</td>
+            <td>20233004</td>
+            <td>홍길동</td>
+            <td>80%</td>
+        </tr>
+        <tr>
+            <td>강좌명</td>
+            <td>4.0</td>
+            <td>20233005</td>
+            <td>홍길동</td>
+            <td>80%</td>
+        </tr>
+
+        </tbody>
+
+    </table>
+    </div>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <script src="/js/attendanceStatus.js"></script>
+
+</div>
+
+</body>
+
+</html>
