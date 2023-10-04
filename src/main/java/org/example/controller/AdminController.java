@@ -41,7 +41,7 @@ public class AdminController {
      */
     @GetMapping("/grade")
     public String grade(){
-        return "/manager/gradeManagement";
+        return "/admin/gradeManagement";
     }
 
     /*
@@ -49,7 +49,7 @@ public class AdminController {
      */
     @GetMapping("/postWrite")
     public String postWrite(){
-        return "/manager/postWrite";
+        return "/admin/postWrite";
     }
 
     /*
@@ -57,6 +57,6 @@ public class AdminController {
      */
     @GetMapping("/postInfo")
     public String postInfo(){
-        return "/manager/postInfo";
+        return "/admin/postInfo";
     }
 }
