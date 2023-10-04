@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/studentDefault}">
+<head>
+
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            // 무슨 이유인지는 모르겠는데 처음 보기 버튼을 클릭했을 땐 글자의 내용은 바뀌는데 차시 내용이 나오지 않아서 기본값을 접기로 설정해놓은 상태
+            window.onload = function(){
+                // 모든 .viewbutton 클래스를 가진 td 요소를 선택
+                const viewButtons = document.querySelectorAll('.viewbutton');
+                //const subtr1 = document.querySelectorAll('.subtr');
+                //subtr1.style.display = 'none';
+                viewButtons.forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        // 현재 클릭된 버튼에서 가장 가까운 div태그를 찾음
+                        const parentRow = button.closest('div');
+
+                        const subtr = parentRow.nextElementSibling;
+
+                        // subtr 요소의 스타일을 클릭할때마다 전환시키기
+                        subtr.style.display = subtr.style.display === 'none' ? 'table-row' : 'none';
+                        button.textContent = button.textContent === '보기' ? '접기' : '보기';
+                    });
+                });
+            };
+        </script>
+    </th:block>
+
+    <style>
+        .trheader {
+            width: 762px; height: 35px;
+            display: flex;
+            text-align: center;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+            background-color: #E6EDF8;
+        }
+
+        .trheader p {
+            line-height: 2rem;
+            text-align: center;
+        }
+
+        .maintr {
+            display: flex;
+        }
+
+        .maintr p {
+            line-height: 2rem;
+            text-align: center;
+        }
+        .subtr {
+            display: none;
+        }
+
+        .lecture {
+            width: 700px; height:150px;
+            border-radius: 5px;
+            border: 1px solid black;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+
+<section id="mainFrame" layout:fragment="content">
+    <div style="margin-bottom: 15px; font-size: 25px; border-left: 2px solid black; width: 150px;">강의 목록</div>
+    <div class="trheader">
+        <p style="width: 210px;">강좌명</p>
+        <p style="width: 240px;">강좌 운영기간</p>
+        <p style="width: 150px;">진도율</p>
+        <p style="width: 150px;">강의현황보기</p>
+    </div>
+    <!-- 1번 항목 예시(타임리프로 대체해야 함) -->
+    <div class="maintr">
+        <p style="width: 210px;">강좌1</p>
+        <p style="width: 240px;">2017.10.13. ~ 2023.1.1.</p>
+        <p style="width: 150px;">90%</p>
+        <a class="viewbutton" style="width:80px; height: 22px; text-align: center; background-color: black; color: white; border-radius: 5px; margin-left: 35px; margin-top: 5px; ">접기</a>
+    </div>
+    <div class="subtr">
+        <div class="lecture">
+            <div style="padding-top: 15px; display:flex; border-bottom: 1px solid black;">
+                <p style="margin-left: 10px;">강좌 이름 - n주차(차시)</p>
+                <a href="" style="width:80px; height: 22px; text-align: center; margin-left: 420px; background-color: black; color: white; border-radius: 5px;">학습하기</a>
+            </div>
+            <div style="display: flex;">
+                <img style = "width:107px; height: 63px; margin-left: 20px; margin-top:10px;" src="/img/student/header/icon_blackboard.png">
+                <div style="margin-left: 80px; margin-top: 15px; width: 150px;">차시명</div>
+                <div style="margin-left: 80px; margin-top: 15px; width: 180px;">
+                    <p>학습 시간 : 00분 00초</p>
+                    <p>진도율 : 90.0%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- =========================================2번 항목 예시(타임리프 대체 후 삭제)================================ -->
+    <div class="maintr">
+        <p style="width: 210px;">강좌551</p>
+        <p style="width: 240px;">2017.10.13. ~ 2023.10.10.</p>
+        <p style="width: 150px;">5.8%</p>
+        <a class="viewbutton" style="width:80px; height: 22px; text-align: center; background-color: black; color: white; border-radius: 5px; margin-left: 35px; margin-top: 5px; ">접기</a>
+    </div>
+    <div class="subtr">
+        <div class="lecture">
+            <div style="padding-top: 15px; display:flex; border-bottom: 1px solid black;">
+                <p style="margin-left: 10px;">강좌 이름 - 11주차(차시)</p>
+                <a href="" style="width:80px; height: 22px; text-align: center; margin-left: 420px; background-color: black; color: white; border-radius: 5px;">학습하기</a>
+            </div>
+            <div style="display: flex;">
+                <img style = "width:107px; height: 63px; margin-left: 20px; margin-top:10px;" src="/img/student/header/icon_blackboard.png">
+                <div style="margin-left: 80px; margin-top: 15px; width: 150px;">차시명</div>
+                <div style="margin-left: 80px; margin-top: 15px; width: 180px;">
+                    <p>학습 시간 : 0분 0초</p>
+                    <p>진도율 : 8.0%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =========================================2번 항목 예시 끝================================ -->
+</section>>
+</html>

@@ -1,0 +1,102 @@
+/*그리드 폰트 변경*/
+.tui-grid-container{
+    font-family: 'SUIT-Regular';
+}
+/*화면 전체*/
+.mainFrame {
+    width: 1903px; display: flex; justify-content: center; align-items: center;
+    height: 1200px;
+}
+.grade_body {
+    border: 0px solid red; width: 1500px; height: 1200px;
+}
+/*조건검색 부분*/
+.grade_body > .grade_search_box{
+    border: 0px solid blue; width: 100%; height: 45px; display: flex;
+    justify-content: space-between;
+}
+.grade_body > .grade_search_box > .title{
+    display: flex; justify-content: start; border: 0px solid black;
+    width: 300px; align-items: center; height: 60px; font-size: 1.3rem;
+}
+.grade_body > .grade_search_box > .grade_search {
+    display: flex; justify-content: end; align-items: end; border: 0px solid red;
+    width: 100px; height: 45px;
+}
+.grade_body > .grade_search_box > .grade_search button{
+    background: #6b6b6b; color: white; border: none; width: 50px; height: 30px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 30px;
+}
+.search_body {
+    border: 0px solid black; width: 100%; height: 120px; margin-top: 10px;
+    display: flex; align-items: center; justify-content: center;
+}
+.search_body > .search_box {
+    display: flex; justify-content: center; align-items: center;
+    border: 1px solid #cccccc; border-radius: 10px; width: 1500px;
+}
+.search_box > .student_id_box, .search_box > .student_name_box, .search_box > .student_grade_box{
+    border: 0px solid black; width: 533px; height: 100px; display: flex;
+    justify-content: center; align-items: center;
+}
+.search_body > .search_box span{
+    margin-right: 10px;
+}
+.search_body >.search_box input {
+    border-radius: 5px; border: 1px solid #245396; height: 30px; outline: none;
+}
+.search_body > .search_box > .student_grade_box select {
+    width: 197px; height: 30px; outline: none; border: 1px solid #245396;
+    border-radius: 5px;
+}
+/*학생정보 텍스트*/
+.student_info_text_box {
+    border: 0px solid black; width: 1600px; height: 40px;
+}
+.student_info_text_box > .student_info_text {
+    height: 40px; line-height: 40px; font-size: 1.1rem;
+}
+/*학생정보 (그리드)*/
+.student_info_box {
+    border: 0px solid black; width: 1500px; height: 300px; display: flex;
+    justify-content: center; align-items: center;
+}
+.student_info_box > .student_info {
+    border: 0px solid black; width: 1600px; height: 300px;
+}
+.student_info_box > .student_info > .paging_container {
+    display: flex; justify-content: center; align-items: center;
+    border: 0px solid black;
+}
+.student_info > .paging_container span{
+    text-align: center;
+}
+/*전체 학기성적 및 전체 현황 텍스트*/
+.semester_grades_text_box {
+    border: 0px solid black; width: 1600px; height: 40px; font-size: 1.1rem;
+}
+.semester_grades_text_box > .semester_grades_text{
+    height: 40px; line-height: 40px;
+}
+/*전체 학기성적 및 전체 현황(그리드)*/
+.semester_grade_box {
+    border: 0px solid black; width: 1500px; display: flex;
+    justify-content: center; align-items: center;
+}
+.semester_grade_box > .semester_grade {
+    border: 0px solid red; width: 1600px;
+}
+/*강좌별 성적*/
+.grade_course_text_box {
+    border: 0px solid black; width: 1600px; height: 40px; font-size: 1.1rem;
+}
+.grade_course_text_box > .grade_course_text{
+    height: 40px; line-height: 40px;
+}
+.grade_course_box {
+    border: 0px solid black; width: 1500px; display: flex;
+    justify-content: center; align-items: center;
+}
+.grade_course_box > .grade_course {
+    border: 0px solid red; width: 1600px;
+}

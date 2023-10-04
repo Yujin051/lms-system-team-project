@@ -1,0 +1,54 @@
+#mainFrame {
+    width: 100%;
+    min-height: 600px;
+    height: auto;
+}
+
+.gradeTable {
+    width: 1100px;
+    min-height: 400px;
+    height: auto;
+    margin: 100px auto auto;
+    /*border: 1px solid black;*/
+}
+
+/* 과목별 성적 테이블 */
+.subGrade {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    width: 1100px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.subGrade tr {
+    height: 45px;
+    border: 1px solid black;
+}
+
+.lecName {
+    text-align: left;
+}
+
+.semGrade {
+    margin-top: 20px;
+    width: 1100px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.semGrade tr {
+    height: 45px;
+    border: 1px solid black;
+}
+
+.semGrade #toDetail {
+    width: 100px;
+    height: 30px;
+    background: white;
+}
+
+.detail {
+    margin-top: 100px;
+    display: none;
+}

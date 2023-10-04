@@ -134,7 +134,7 @@ header a:visited , .sub_menu a:visited {
         top: -5px;
     }
     70% {
-        top: -5px;
+    top: -5px;
     }
     100% {
         top: 0;
@@ -234,4 +234,8 @@ header a:visited , .sub_menu a:visited {
     #menu.active {
         display: flex;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 74d4babed6f3d1d762c8c998f8ab99307c0e0057

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/studentDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/student/stud_my_page.css">
+    <title>마이 페이지</title>
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+    <!-- 중앙 시작   -->
+    <section class="middle_section">
+        <div class="title">
+            <p>개인정보수정</p>
+        </div>
+        <article class="information">
+            <div class="box1">
+                <div class="graph">
+                    <div class="graph_left">성명</div>
+                    <div class="graph_right">
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="graph">
+                    <div class="graph_left">생년월일</div>
+                    <div class="graph_right">
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="graph">
+                    <div class="graph_left">성별</div>
+                    <div class="graph_right">
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="graph">
+                    <div class="graph_left">학년</div>
+                    <div class="graph_right">
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="graph">
+                    <div class="graph_left">전화번호</div>
+                    <div class="graph_right">
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="graph">
+                    <div class="graph_left">이메일</div>
+                    <div class="graph_right">
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="graph">
+                    <div class="graph_left">주소</div>
+                    <div class="graph_right">
+                        <input type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="box2">
+                <div class="photo">
+                    <div class="photo_left">
+                       사진
+                    </div>
+                    <div class="photo_right">
+                       <p class="img">
+                           <img src="/img/student/suzi.png" alt="">
+                       </p>
+                       <div class="button">
+                           <p>업로드</p>
+                           <p>삭제</p>  
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <button class="update">회원정보 수정</button>
+    </section>
+    <!-- 중앙 끝 -->
+</section>
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+</body>
+</html>
