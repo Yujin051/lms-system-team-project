@@ -201,7 +201,7 @@ header a:visited , .sub_menu a:visited {
 }
 /* header 모바일 환경 설정 변경 */
 /* 767px 이하라면 아래의 css 설정을 적용 */
-@media screen and (max-width: 767px){
+@media screen and (max-width: 767px) {
     /* 메뉴바 토클 */
     .header_toggle {
         display: block;
@@ -209,33 +209,35 @@ header a:visited , .sub_menu a:visited {
         right: 32px;
         cursor: pointer;
     }
+
     /* 기존 헤더바 컬럼으로 재편 수직배치 */
     #nav {
         flex-direction: column;
         align-items: flex-start;
     }
+
     #menu {
         display: none;
         flex-direction: column;
         /* border: 1px solid red; */
     }
+
     .header_menu {
         /* border: 1px solid black; */
         flex-direction: column;
     }
+
     .header_menu > li {
         text-align: center;
         /* border: 1px solid black; */
         margin-top: 0.5rem;
     }
+
     .nav-right {
         width: 100%;
     }
+
     #menu.active {
         display: flex;
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 74d4babed6f3d1d762c8c998f8ab99307c0e0057
