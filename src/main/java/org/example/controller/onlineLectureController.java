@@ -1,4 +1,4 @@
-package org.example.controller.lecturemanagement;
+package org.example.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,13 +13,18 @@ public class onlineLectureController {
         return "/onlinelecture/attendance_status";
     }
 
-    @GetMapping("/tt")
+    @GetMapping("/ttr")
     public String thisTime() {
+
         return "/onlinelecture/thisTime_registration";
     }
 
-    @GetMapping("/ttr")
+    @GetMapping("/ytr")
     public String youTubeRegistration() {
+
         return "/onlinelecture/youTube_registration";
     }
+
+
+
 }

@@ -1,0 +1,88 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.bt {
+    margin-left: 1320px;
+    font-family: 'SUIT-Regular';
+}
+
+
+#top-table {
+    font-family: 'SUIT-Regular';
+    width: 900px;
+    margin-top: 20px;
+    margin-left: 485px;
+}
+
+.s1 {
+    font-family: 'SUIT-Regular';
+    font-size: 20px;
+    margin-left: 150px;
+    margin-right: 50px;
+    font-weight: bold;
+}
+
+.s2 {
+    font-family: 'SUIT-Regular';
+    font-size: 20px;
+    margin-left: 40px;
+    margin-right: 40px;
+    font-weight: bold;
+}
+
+.s3 {
+    font-family: 'SUIT-Regular';
+    font-size: 20px;
+    margin-left: 150px;
+    margin-right: 30px;
+    font-weight: bold;
+}
+
+
+.form-control-3 {
+    font-family: 'SUIT-Regular';
+    width: 500px;
+}
+
+.d1 {
+    font-family: 'SUIT-Regular';
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 200px;
+}
+
+.btt {
+    font-family: 'SUIT-Regular';
+    margin-left: 200px;
+
+    height: 350px;
+    width: 1520px;
+    background-color: rgb(244,244,244);
+}
+
+.btt2 {
+    font-family: 'SUIT-Regular';
+    margin-left: 370px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.dd1 {
+
+}
+.form2 {
+    width: 605px;
+}
+
+.downbtn {
+    font-family: 'SUIT-Regular';
+    margin-left: 20px;
+    width: 100px;
+    background-color: #6b6b6b;
+    border: none;
+}
