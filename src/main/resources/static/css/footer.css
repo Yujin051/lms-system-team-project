@@ -1,0 +1,73 @@
+footer {
+    background-color: #2F3135;
+    font-size: 15px;
+    font-weight: 400;
+    padding: 30px 0 0px;
+    margin-top: 150px;
+    clear: both;
+}
+footer .wrap_footer {
+    max-width: 1680px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
+footer .wrap_footer .footer_top_wrap {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+footer .wrap_footer .footer_top_wrap .footer1 {
+    font-size: 0;
+}
+footer .wrap_footer .footer_top_wrap .footer1 .logos a {
+    width: auto;
+    margin: 0 10px;
+    display: inline-block;
+}
+footer .wrap_footer .footer_top_wrap .footer2 ul.personalinfo {
+    margin-bottom: 10px;
+}
+footer .wrap_footer .footer_top_wrap .footer2 ul.personalinfo li {
+    display: inline-block;
+    margin: 9px 12px;
+    position: relative;
+}
+footer .wrap_footer .footer_top_wrap .footer2 ul.personalinfo li a {
+    letter-spacing: 0.5px;
+    font-size: 15px;
+    color: #FFF;
+}
+footer .wrap_footer .footer_top_wrap .footer2 ul.personalinfo li:nth-child(1) {
+    margin-left: 0;
+}
+footer .wrap_footer .footer_top_wrap .footer2 ul.personalinfo li:nth-last-child(1) {
+    margin-right: 350px;
+}
+footer .wrap_footer .footer_top_wrap .address li {
+    font-size: 14px;
+    letter-spacing: 0;
+    color: white;
+    margin-left: 20px;
+    list-style-type: disc;
+}
+footer .wrap_footer .footer_btm_wrap {
+    border-top: 1px solid #797979;
+    padding: 30px 0;
+}
+footer .wrap_footer .footer_btm_wrap .footer3 {
+    display: flex;
+    align-items: center;
+}
+footer .wrap_footer .footer_top_wrap .footer2 .copyright {
+    margin-top: 20px;
+    letter-spacing: 4px;
+    font-size: 14px;
+    color: #B8B8B8;
+    margin-left: 37px;
+}
+.footer3 ul li {
+    color: white;
+    margin-top: 15px;
+    list-style-type: disc;
+}
