@@ -115,8 +115,6 @@ public class SecurityConfig {
             else {
                 response.sendRedirect("/");
             }
-
         }
     }
-
 }

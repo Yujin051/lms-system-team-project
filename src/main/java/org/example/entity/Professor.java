@@ -16,8 +16,6 @@ import javax.swing.*;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Professor {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prof_id", updatable = false)
