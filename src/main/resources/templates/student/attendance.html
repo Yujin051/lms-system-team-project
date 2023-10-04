@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/studentDefault}">
+<head>
+
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+
+        </script>
+    </th:block>
+
+    <style>
+        section {
+            margin-left: 200px;
+            margin-top: 50px;
+        }
+
+        .lectureinfo {
+            width: 1500px;
+            height: 200px;
+            /*border: 1px solid black;*/
+            border-bottom: 1px solid black;
+            border-top: 1px solid black;
+        }
+
+        .lectureinfo div {
+            position: absolute;
+            display: flex;
+            width: 700px;
+            height: 100px;
+            /*border : 1px solid black;*/
+            padding: 30px;
+        }
+
+        .lectureinfo div p {
+            width: 200px;
+            height: 60px;
+            line-height: 60px;
+        }
+
+        .lectureinfo div select {
+            height: 60px;
+            line-height: 60px;
+        }
+
+        table {
+            width: 1500px;
+            border:1px solid black;
+        }
+
+        table tr {
+            border-bottom: 1px solid black;
+        }
+
+        table tr th {
+            text-align: center;
+            width: 334px;
+        }
+
+        table tr td {
+            text-align: center;
+            width: 334px;
+        }
+    </style>
+</head>
+
+<div layout:fragment="content">
+    <section>
+    <!--    강좌정보 (셀렉트박스 있는 곳)에 대한 html코드-->
+    <div style="margin-bottom: 15px; font-size: 25px; border-left: 2px solid black; width: 150px;">강좌정보</div>
+    <div class="lectureinfo">
+        <div>
+            <p>년도</p>
+            <select style="width: 400px" name="year">
+                <option>2023</option>
+                <!-- th:value로 option 내에 값 넣어줘야 함, 2023은 삭제할 것 -->
+            </select>
+        </div>
+        <div style="margin-left: 700px;">
+            <p>학기</p>
+            <select style="width: 400px" name="semester">
+                <option>1</option>
+                <option>2</option>
+                <!-- th:value로 option 내에 값 넣어줘야 함, 1, 2는 삭제할 것 -->
+            </select>
+        </div>
+        <div style="margin-top: 70px; width: 1400px;">
+            <p>과목명</p>
+            <select style="width: 1100px" name="semester">
+                <option>과목1</option>
+                <option>과목2</option>
+                <!-- th:value로 option 내에 값 넣어줘야 함, 과목 1, 2 내용은 삭제할 것 -->
+            </select>
+        </div>
+    </div>
+    <!--여기까지 강좌정보에 대한 html코드-->
+
+    <!--    출결조회와 관련된 html코드-->
+    <div style="margin-top: 50px; margin-bottom: 30px; font-size: 25px; border-left: 2px solid black; width: 150px;">출결조회</div>
+    <table>
+        <tr>
+            <th style="width:249px;">주차</th>
+            <th>출석</th>
+            <th>지각</th>
+            <th>결석</th>
+        </tr>
+        <!-- 주차별 출석 관련 내용, 타임리프로 내용 추가 필요-->
+        <tr>
+            <td style="width:249px;">1주차</td>
+            <td></td>
+            <td>O</td>
+            <td></td>
+        </tr>
+        <!--타임리프 추가 이후 이하 내용은 삭제할 것-->
+        <tr>
+            <td style="width:249px;">2주차</td>
+            <td>O</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td style="width:249px;">3주차</td>
+            <td></td>
+            <td></td>
+            <td>O</td>
+        </tr>
+        <!-- 여기까지 삭제-->
+    </table>
+    </section>
+</div>
+</html>
