@@ -19,7 +19,7 @@ public class StudentController {
         return "/student/gradecheck";
     }
 
-    // 학생 나의 강의현황
+    // 학생 나의 강의실
     @GetMapping("/lecture")
     public String studentLecture() {
         return "/student/mylecture";
@@ -43,7 +43,7 @@ public class StudentController {
         return "/student/attendance";
     }
 
-    @GetMapping("/test")
+    @GetMapping("/onlineclass")
     public String test2() {
         return "/student/onlineclass";
     }
@@ -56,6 +56,7 @@ public class StudentController {
     public String assiView(){
         return "/student/assiView";
     }
+
 
     @GetMapping("/scr")
     public String courseRegisteration() {

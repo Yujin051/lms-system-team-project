@@ -14,7 +14,7 @@ public class ProfessorController {
         return "/prof/prof_main";
     }
 
-    // 강사 나의 강의목록
+    // 강사 나의 강의실
     @GetMapping("/lecture")
     public String profLecture() {
         return "/prof/myLecture";
@@ -32,6 +32,7 @@ public class ProfessorController {
         return "/prof/prof_my_page";
     }
 
+    // 강사 강의이력
     @GetMapping("/history")
     public String lectureHistory() {
         return "/prof/prof_class";
@@ -75,5 +76,10 @@ public class ProfessorController {
     @GetMapping("/assiGrade")
     public String assiGrade(){
         return "/prof/assiGrade";
+    }
+
+    @GetMapping("/onlineclass")
+    public String test2() {
+        return "/prof/onlineclass";
     }
 }

@@ -10,7 +10,21 @@
 .after_click_color{
     color: #245396; font-weight: bold;
 }
+/* 슬라이드 인 애니메이션 정의 */
+.slide-in {
+    animation-name: slideIn;
+    animation-duration: 0.3s; /* 애니메이션 지속 시간 설정 */
+    animation-timing-function: ease;
+}
 
+@keyframes slideIn {
+    0% {
+        transform: translateY(-23%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
 .index_body {
     display: flex; font-family: 'SUIT-Regular';
 }
