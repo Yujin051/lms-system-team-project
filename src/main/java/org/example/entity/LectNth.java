@@ -21,6 +21,7 @@ public class LectNth {
     @JoinColumn(name = "lect_id")
     private LectInfo lectInfo;
 
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "conts_no")
     private LmsConts lmsConts;

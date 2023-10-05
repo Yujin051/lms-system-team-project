@@ -1,12 +1,20 @@
 package org.example.controller;
 
+import lombok.RequiredArgsConstructor;
+import org.example.dto.LectNthDto;
+import org.example.service.LectNthService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/admin")
+@RequiredArgsConstructor
 public class AdminController {
+
+    private final LectNthService lectNthService;
 
     // 어드민 메인페이지
     @GetMapping("")
@@ -67,12 +75,14 @@ public class AdminController {
     //온라인강의수강현황
     @GetMapping("/as")
     public String attendanceStatus() {
+
         return "/admin/attendance_status";
     }
 
     //온라인강의정보관리
     @GetMapping("/ttr")
     public String thisTime() {
+        List<LectNthDto> nthList = lectNthService.lectNthList();
         return "/admin/thisTime_registration";
     }
 
