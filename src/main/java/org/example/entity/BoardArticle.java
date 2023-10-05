@@ -9,6 +9,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author 임승범
+ */
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -60,11 +63,16 @@ public class BoardArticle {
     @Column(name = "article_writer" , nullable = false)
     private String articleWriter;
 
+    // 게시글 첨부파일 번호
+    @Column(name = "file_num" , nullable = false)
+    @ColumnDefault("0")
+    private Long articleFileNum;
+
 
     @Builder
     public BoardArticle(
             BoardInfo boardInfo , String articleTitle , String articleContent , Long articleView ,
-            Boolean isLocked , Boolean isDeleted , String articleWriter){
+            Boolean isLocked , Boolean isDeleted , String articleWriter , Long articleFileNum){
         this.boardInfo = boardInfo;
         this.articleTitle = articleTitle;
         this.articleContent = articleContent;
@@ -72,6 +80,7 @@ public class BoardArticle {
         this.isLocked = isLocked;
         this.isDeleted = isDeleted;
         this.articleWriter = articleWriter;
+        this.articleFileNum = articleFileNum;
     }
 
 

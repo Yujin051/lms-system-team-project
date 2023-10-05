@@ -7,6 +7,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author 임승범
+ */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "board_comnt")
@@ -21,17 +24,21 @@ public class BoardComnt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "comnt_id" , updatable = false)
     private Long Id;
+
     //  게시글(article) id (외래키)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id" , updatable = false , nullable = false)
     private BoardArticle boardArticle;
+
     // 댓글 작성일시
     @CreatedDate
     @Column(name = "comnt_at" , nullable = false)
     private LocalDateTime comntAt;
+
     // 댓글 작성자
     @Column(name = "comnt_writer" , nullable = false)
     private String comntWriter;
+
     // 댓글 내용
     @Column(name = "comnt_cont" , nullable = false)
     private String comntCont;

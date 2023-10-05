@@ -9,7 +9,9 @@ import org.springframework.data.annotation.CreatedDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author 임승범
+ */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Table(name = "direct_msg")

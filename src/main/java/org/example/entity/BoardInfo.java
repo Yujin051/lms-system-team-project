@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-
+/**
+ * @author 임승범
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "board_info")
