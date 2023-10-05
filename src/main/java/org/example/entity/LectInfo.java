@@ -80,8 +80,8 @@ public class LectInfo {
     private Long lectAssign;
 
     //출석 배점
-    @Column(name = "lect_attend")
-    private Long lectAttend;
+    @Column(name = "lect_check")
+    private Long lectCheck;
 
     //시험 배점
     @Column(name = "lect_test")
