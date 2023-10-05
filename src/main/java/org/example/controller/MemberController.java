@@ -18,6 +18,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Controller
@@ -52,7 +54,7 @@ public class MemberController {
 
 
     @PostMapping(value = "newprofessor")
-    public String professorForm(@Validated MemberFormDto memberFormDto, @Validated ProfessorDto professorDto, BindingResult bindingResult, Model model) {
+    public String professorForm(@Validated MemberFormDto memberFormDto, @Validated ProfessorDto professorDto, BindingResult bindingResult, Model model, @RequestPart MultipartFile file) {
         if (bindingResult.hasErrors()) {
             return "prof/signup";
         }
@@ -61,17 +63,19 @@ public class MemberController {
             Member member = Member.createProf(memberFormDto, profpasswordEncoder);
             Professor professor = Professor.createProfessor(professorDto, member);
 
-            memberService.saveMember(member);
+            memberService.saveMember(member, file);
             professorService.saveProfessor(professor);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "prof/signup";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return "prof/signupSuccess";
     }
 
     @PostMapping(value = "newstudent")
-    public String studentForm(@Validated MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
+    public String studentForm(@Validated MemberFormDto memberFormDto, BindingResult bindingResult, Model model, @RequestPart MultipartFile file) {
         if (bindingResult.hasErrors()) {
             return "student/signup";
         }
@@ -79,10 +83,12 @@ public class MemberController {
         try {
             Member member = Member.createStudent(memberFormDto, studentpasswordEncoder);
 
-            memberService.saveMember(member);
+            memberService.saveMember(member, file);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "student/signup";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return "student/signupSuccess";
     }

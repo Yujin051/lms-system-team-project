@@ -1,18 +1,37 @@
 package org.example.controller;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.example.entity.Member;
+import org.example.repository.MemberRepository;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/student")
+@AllArgsConstructor
 public class StudentController {
 
+
+    private final MemberRepository memberRepository;
     // 학생 메인 페이지
     @GetMapping("")
-    public String stuMain() {
+    public String stuMain(Principal principal, Model model) {
+        // 학생 프로필에 이름 띄우기
+        Member member = memberRepository.findByUserId(principal.getName());
+        String name = (member != null) ? member.getUserName() : "Unknown";
+        String savedProfile = (member != null) ? member.getImgSaved() : "Unknown";
+        model.addAttribute("name", name);
+        model.addAttribute("profileImg", savedProfile);
+        System.out.println(savedProfile);
+
         return "/student/stud_main";
     }
+
     // 학생 성적 페이지
     @GetMapping("/grade")
     public String studentGrade() {

@@ -60,10 +60,16 @@ public class Member {
     @Column(name = "user_role", nullable = false)
     private RoleType userRole;
 
+    @Column(name = "img_original", nullable = true)
+    private String imgOriginal; // 원본 이미지 이름
+
+    @Column(name = "img_saved", nullable = true)
+    private String imgSaved; // db에 저장될 이미지 이름
+
 
     @Builder
     public Member(String userId, String userPassword, String userName, String userPhoneNum,
-                  String userAddr, String userEmail, LocalDate userRegDate, LocalDate userBirthday, Gender userGender, RoleType userRole) {
+                  String userAddr, String userEmail, LocalDate userRegDate, LocalDate userBirthday, Gender userGender, RoleType userRole, String imgOriginal, String imgSaved) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.userName = userName;
@@ -74,6 +80,8 @@ public class Member {
         this.userBirthday = userBirthday;
         this.userGender = userGender;
         this.userRole = userRole;
+        this.imgOriginal = imgOriginal;
+        this.imgSaved = imgSaved;
     }
 
     public static Member createStudent(MemberFormDto memberFormDto , PasswordEncoder passwordEncoder) {
