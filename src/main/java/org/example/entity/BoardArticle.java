@@ -21,7 +21,7 @@ public class BoardArticle {
     // 게시글 id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id" , updatable = false)
+    @Column(name = "article_id" , updatable = false)
     private Long Id;
 
     //  게시판 id (외래키)
