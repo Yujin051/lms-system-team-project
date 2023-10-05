@@ -22,17 +22,13 @@ public class DirectMsg {
     // 쪽지 id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "msg_id" , updatable = false)
+    @Column(name = "msg_id", updatable = false)
     private Long id;
 
+    //이전쪽지 ID
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "par_msg_id")
-    private DirectMsg parent;
-
-    // 이전쪽지 id
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-    @Column(name = "msg_org_id")
-    private List<DirectMsg> orgMsgId = new ArrayList<>();
+    @JoinColumn(name = "msg_org_id", nullable = true)
+    private DirectMsg orgMsg;
 
     // 발신자 id
     @OneToOne
