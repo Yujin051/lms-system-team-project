@@ -13,7 +13,11 @@ public class Assignments {
     @Column(name="assign_id")
     private Long id;
 
-    // 강좌 키 외래키로
+
+    // 강좌 키
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "lect_id")
+    private LectInfo lectInfo;
 
     // 과제 이름
     @Column(name="assign_name")
