@@ -13,7 +13,6 @@ import org.example.repository.MemberRepository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -88,8 +87,8 @@ public class MemberService implements UserDetailsService {
         return memberRepository.findByUserId(userId);
     }
 
-    public Member updateMember(Member member) {
-        return memberRepository.save(member);
+    public void updateMember(Member member) {
+        memberRepository.save(member);
     }
 
     public void memberDelete(Long id) {
