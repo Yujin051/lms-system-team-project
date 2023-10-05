@@ -57,6 +57,7 @@ public class StudentController {
         return "/student/assiView";
     }
 
+
     @GetMapping("/scr")
     public String courseRegisteration() {
         return "/student/course_registeration";
