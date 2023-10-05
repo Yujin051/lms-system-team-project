@@ -66,7 +66,7 @@ public class StudentController {
         model.addAttribute("member", member);
         return "/student/stud_my_page";
     }
-
+    // 학생 마이페이지 수정기능
     @PostMapping("/mypage/modify")
     public String studentUpdate(Member member, Principal principal, @RequestPart MultipartFile file, Model model) throws Exception {
         Member memberT = memberService.memberView(principal.getName());

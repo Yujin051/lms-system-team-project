@@ -6,6 +6,7 @@ import org.example.constant.RoleType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.dto.MemberFormDto;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.crypto.password.PasswordEncoder;
