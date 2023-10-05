@@ -1,3 +1,7 @@
+/*그리드 폰트 변경*/
+.tui-grid-container{
+    font-family: 'SUIT-Regular';
+}
 #top-table {
     width: 1522px;
     margin-left: 90px;
