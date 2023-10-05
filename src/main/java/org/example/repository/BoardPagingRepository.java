@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BoardPagingRepository extends PagingAndSortingRepository<BoardArticle , Long> {
-    Page<BoardArticle> findByBoardId_id(Long boardId , Pageable pageable);
+    Page<BoardArticle> findByBoardInfo_Id(Long boardId , Pageable pageable);
 }

@@ -28,7 +28,7 @@
             <div class="board_top">
                 <!-- 리스트 총 갯수 출력 -->
                 <div>
-                    <p>TOTAL <span>0</span></p>
+                    <p>TOTAL <span th:text="${total}">0</span></p>
                 </div>
 
                 <!-- 검색창 -->
@@ -65,95 +65,14 @@
                     <tbody>
                         <th:block th:each="article : ${articles}">
                             <tr>
-                                <td th:text="${article.id}"></td>
-                                <td th:text="${article.type}"></td>
-                                <td th:text="${article.title}"></td>
-                                <td th:text="${article.writer}"></td>
-                                <td th:text="${article.viewNum}"></td>
-                                <td th:text="${article.articleAt}"></td>
+                                <td th:text="${article.getId()}"></td>
+                                <td th:text="${article.getBoardInfo().getBoardType()}"></td>
+                                <td th:text="${article.getArticleTitle()}"></td>
+                                <td th:text="${article.getArticleWriter()}"></td>
+                                <td th:text="${article.getArticleView()}"></td>
+                                <td th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:MM')}"></td>
                             </tr>
-
                         </th:block>
-<!--                        <tr>-->
-<!--                            <td>10</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>다음의 수업일정이 연기되었습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>253</td>-->
-<!--                            <td>2023.10.06</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>9</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>다음의 수업일정이 연기되었습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>253</td>-->
-<!--                            <td>2023.10.06</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>8</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>다음의 수업일정이 연기되었습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>253</td>-->
-<!--                            <td>2023.10.06</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>7</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>다음의 수업일정이 연기되었습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>253</td>-->
-<!--                            <td>2023.10.06</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>6</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>다음의 수업일정이 연기되었습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>253</td>-->
-<!--                            <td>2023.10.06</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>5</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>다음의 수업일정이 연기되었습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>571</td>-->
-<!--                            <td>2023.10.05</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>4</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>다음의 수업일정이 연기되었습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>1022</td>-->
-<!--                            <td>2023.09.30</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>3</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>다음의 수업일정이 연기되었습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>1022</td>-->
-<!--                            <td>2023.09.30</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>2</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>관리자는 어떤 개인정보도 요구하지 않습니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>1022</td>-->
-<!--                            <td>2023.09.30</td>-->
-<!--                        </tr>-->
-<!--                        <tr>-->
-<!--                            <td>1</td>-->
-<!--                            <td>공지사항</td>-->
-<!--                            <td>최초 로그인 이후 꼭 비밀번호 재설정바랍니다.</td>-->
-<!--                            <td>관리자</td>-->
-<!--                            <td>1022</td>-->
-<!--                            <td>2023.09.30</td>-->
-<!--                        </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -163,23 +82,37 @@
                 현재 페이지에는 class로 active 넣어주고 
                 한 페이지 뿐이라면 양쪽 꺽쇠는 존재하지 않도록 설정할 것.
             -->
+
+
             <div class="board_bottom">
                 <ul class="pageing">
-                    <li>
-                        <a href=""><i class="bi bi-caret-left-fill"></i></a>
-                    </li>
-                    
-                    <li class="page_active">
-                        <a href="">1</a>
-                    </li>
-                    
-                    <li>
-                        <a href="">2</a>
-                    </li>
+                    <th:block th:each="page : ${#numbers.sequence(startPage , endPage)}">
 
-                    <li>
-                        <a href=""><i class="bi bi-caret-right-fill"></i></a>
-                    </li>
+                        <li th:if="${page == noowPage}" th:classappend="${page == nowPage}? 'page_active' : ''">
+                            <a th:if="${page == nowPage}" th:text="${page}"></a>
+                        </li>
+
+                        <li>
+                            <a th:if="${page != nowPage}" th:href="@{/board/list/{id}(page = ${page -1} , id=${id})}" th:text="${page}"></a>
+                        </li>
+
+                    </th:block>
+
+<!--                    <li>-->
+<!--                        <a href=""><i class="bi bi-caret-left-fill"></i></a>-->
+<!--                    </li>-->
+
+<!--                    <li class="page_active">-->
+<!--                        <a href="">1</a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href="">2</a>-->
+<!--                    </li>-->
+
+<!--                    <li>-->
+<!--                        <a href=""><i class="bi bi-caret-right-fill"></i></a>-->
+<!--                    </li>         -->
                 </ul>
                 
                 <div class="board_write_article">

@@ -26,9 +26,9 @@ public class BoardService {
 //        return boardRepository.findByBoardInfo_Id(boardId);
 //    }
 
-    public Page<BoardArticle> getArticlesByBoardId(Pageable pageable , Long boardId){
+    public Page<BoardArticle> getArticlesByBoardId(Long boardId , Pageable pageable){
 
-        return boardPagingRepository.findByBoardId_id(boardId , pageable);
+        return boardPagingRepository.findByBoardInfo_Id(boardId , pageable);
     }
 
 

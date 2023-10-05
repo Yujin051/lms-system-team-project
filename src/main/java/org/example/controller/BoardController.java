@@ -8,6 +8,8 @@ import org.example.service.BoardService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,27 +33,25 @@ public class BoardController {
     private final BoardService boardService;
 
     // 리스트 전체 글 보기
-    @GetMapping("/notice_list/{id}/{page}")
-    public String noticeList(Model model ,
-                             @PathVariable(name = "id" , required = false) Long id ,
-                             @PathVariable(name = "page" , required = false) int page) {
+    @GetMapping("/list/{id}")
+    public String boardList(
+            Model model ,
+            @PathVariable(name = "id" , required = false) Long boardId,
+            @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC) Pageable pageable) {
 
-        // 페이지당 표시할 게시글 갯수
-        int pageSize = 10;
+        Page<BoardArticle> articles = boardService.getArticlesByBoardId(boardId , pageable);
 
-        PageRequest pageable = PageRequest.of(page -1 , pageSize);
+        int nowPage = articles.getPageable().getPageNumber() + 1 ;   // 현재 페이지
+        int startPage = Math.max(nowPage - 4 , 1);
+        int endPage = Math.min(nowPage + 5 , articles.getTotalPages());
+        Long total = articles.getTotalElements();
 
-        Page<BoardArticle> articles = boardService.getArticlesByBoardId(pageable , id);
-
-        model.addAttribute("articles" , articles.getContent());
-        model.addAttribute("currentPage" , articles.getNumber() + 1);
-        model.addAttribute("totalPages" , articles.getTotalPages());
-
-//        List<ArticleListViewDto> articles = boardService.getArticleByBoardId(id)
-//                .stream()
-//                .map(ArticleListViewDto::new)
-//                .toList();
-//        model.addAttribute("articles" , articles);
+        model.addAttribute("articles" , articles);
+        model.addAttribute("nowPage" , nowPage);
+        model.addAttribute("startPage" , startPage);
+        model.addAttribute("endPage" , endPage);
+        model.addAttribute("total" , total);
+        model.addAttribute("id" , boardId);
 
         return "/community/commu_list";
     }
