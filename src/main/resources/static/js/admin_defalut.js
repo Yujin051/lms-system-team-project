@@ -11,10 +11,10 @@ const tabs = [
         tab: document.querySelector(".class_management_tap"),
         content: [
             document.querySelector(".course_management"),
-            document.querySelector(".course_registration_management"),
-            document.querySelector(".online_course_status")
+            document.querySelector(".course_registration_management")
         ],
         text: document.querySelector(".class_management_text"),
+        slideInClass: "slide-in"
     },
     {
         tab: document.querySelector(".course_management_tap"),
@@ -43,8 +43,17 @@ const tabs = [
 tabs.forEach((tabInfo) => {
     tabInfo.tab.addEventListener("click", function () {
         tabInfo.content.forEach((contentElement) => {
-            contentElement.style.display =
-                contentElement.style.display === "none" ? "block" : "none";
+            if (contentElement.style.display === "none") {
+                contentElement.classList.add("slide-in");
+                contentElement.style.display = "block";
+            } else {
+                contentElement.classList.add("slide-out");
+                contentElement.style.display = "none";
+
+                contentElement.addEventListener("animationend", function () {
+                    contentElement.classList.remove("slide-out");
+                });
+            }
         });
         tabInfo.text.classList.toggle("before_click_color");
         tabInfo.text.classList.toggle("after_click_color");
