@@ -21,7 +21,7 @@ public class ProfessorController {
     }
 
     // 강사 강의계획서
-    @GetMapping("/lectureplan")
+    @GetMapping("/lecture번호/lectureplan")
     public String profPlan() {
         return "/prof/lecturePlan";
     }
