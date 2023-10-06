@@ -3,7 +3,7 @@
     font-family: 'SUIT-Regular';
 }
 #top-table {
-    width: 1522px;
+    width: 1500px;
     margin-left: 90px;
 }
 
@@ -43,7 +43,7 @@
 
 .tbl1 {
     margin-left: 90px;
-    width: 40%;
+
     float: left;
 }
 
@@ -94,6 +94,7 @@
 
      /* 오른쪽으로 이동시킬 클래스 */
  .right-align {
+     width: 700px;
      float: right;
  }
 

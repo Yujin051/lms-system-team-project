@@ -1,20 +1,31 @@
 package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.dto.AttendanceStatusDto;
 import org.example.dto.LectNthDto;
+import org.example.entity.LectNth;
+import org.example.service.AdminAttendanceStatusService;
 import org.example.service.LectNthService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
+@Slf4j
+
 public class AdminController {
 
     private final LectNthService lectNthService;
+
 
     // 어드민 메인페이지
     @GetMapping("")
@@ -75,7 +86,7 @@ public class AdminController {
     //온라인강의수강현황
     @GetMapping("/as")
     public String attendanceStatus() {
-
+//        List<AttendanceStatusDto>  asList = adminAttendanceStatusServic.attendanceStatusList();/**/
         return "/admin/attendance_status";
     }
 
@@ -85,6 +96,21 @@ public class AdminController {
         List<LectNthDto> nthList = lectNthService.lectNthList();
         return "/admin/thisTime_registration";
     }
+
+
+
+    // 검색기능
+  @GetMapping("/ttr/search")
+  public String search(String keyword, Model model) {
+    List<LectNth> searchList = lectNthService.search(keyword);
+
+    model.addAttribute("searchList", searchList);
+
+    return "ttr-search";
+    }
+
+
+
 
     //온라인강의콘텐츠관리
     @GetMapping("/ytr")
