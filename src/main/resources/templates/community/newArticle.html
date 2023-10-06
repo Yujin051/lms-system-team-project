@@ -30,18 +30,23 @@
         <div class="container board">
             <form class="writeBox mt-2">
                 <!-- 전페이지에서 게시판 타입 가져오기 > get에서 모델 담아 html 반환 -->
-                <input type="hidden" name="boardType">
+                <input type="text" name="boardType" id="boardType" th:value="${article.getBoardInfo()}">
+                <input type="text" name="memberId" id="memberId" th:value="${article.getMemberId()}">
+                <input type="text" name="memberName" id="memberName" th:value="${article.getWriter()}">
+
                 <div class="row">
                     <div class="col-md-3 boxset titlediv boxStart">
                         <label for="title" class="titletext">제목</label>
                     </div>
                     <div class="col-md-7 boxset">
-                        <input type="text" required="required" id="title" name="title">
+                        <input type="text" required="required" id="title" name="title"
+                               th:value="${article.getTitle()}">
                     </div>
                     
                     <div class="col-md-2 boxset privateBox">
                         <label for="private_ck">비공개여부</label>
-                        <input type="checkbox" class="mx-2" name="private_ck">
+                        <input type="checkbox" class="mx-2" name="private_ck" id="private_ck"
+                               th:checked="${article.getIsLocked()}" >
                     </div>
                 </div>
                 
@@ -58,13 +63,13 @@
                 </div>
 
                 <div class="mt-2">
-                    <textarea name="editordata" id="summernote"></textarea>
+                    <textarea name="editordata" required="required" id="summernote" th:utext="${article.getContent()}"></textarea>
                 </div>
             </form>
 
             <div class="btnBox mt-5">
-                <button class="btn btn-dark">등록</button>
-                <button class="btn btn-dark">취소</button>
+                <button class="btn btn-dark" id="saveBtn">등록</button>
+                <button class="btn btn-dark" id="cancelBtn">취소</button>
             </div>
         </div>
     </section>

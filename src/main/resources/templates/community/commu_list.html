@@ -84,7 +84,7 @@
                                 </td>
 
                                 <td>
-                                    <a th:text="${article.getArticleWriter()}"
+                                    <a th:text="${article.getMemberId().getUserName()}"
                                        th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
                                 </td>
 

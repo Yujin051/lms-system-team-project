@@ -44,7 +44,7 @@
                 
                 <div>
                     <!-- 작성자 -->
-                    <span class="article_writer" th:text="${article.getArticleWriter()}">Denma</span>
+                    <span class="article_writer" th:text="${article.getMemberId().getUserName()}">Denma</span>
                     <span>|</span>
                     <!-- 작성일 -->
                     <span class="article_at" th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:MM')}">2023.10.01</span>

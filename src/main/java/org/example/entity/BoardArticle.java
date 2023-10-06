@@ -59,9 +59,11 @@ public class BoardArticle {
     @ColumnDefault("false")
     private Boolean isDeleted;
 
-    // 게시글 작성자
-    @Column(name = "article_writer" , nullable = false)
-    private String articleWriter;
+    // 게시글 작성자(외래키)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id" , updatable = false , nullable = false)
+//    @ColumnDefault("3")
+    private Member memberId;
 
     // 게시글 첨부파일 번호
     @Column(name = "file_num" , nullable = false)
@@ -72,14 +74,14 @@ public class BoardArticle {
     @Builder
     public BoardArticle(
             BoardInfo boardInfo , String articleTitle , String articleContent , Long articleView ,
-            Boolean isLocked , Boolean isDeleted , String articleWriter , Long articleFileNum){
+            Boolean isLocked , Boolean isDeleted , Member memberId , Long articleFileNum){
         this.boardInfo = boardInfo;
         this.articleTitle = articleTitle;
         this.articleContent = articleContent;
         this.articleView = articleView;
         this.isLocked = isLocked;
         this.isDeleted = isDeleted;
-        this.articleWriter = articleWriter;
+        this.memberId = memberId;
         this.articleFileNum = articleFileNum;
     }
 

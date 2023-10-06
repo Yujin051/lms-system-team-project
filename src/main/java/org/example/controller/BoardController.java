@@ -1,14 +1,13 @@
 package org.example.controller;
 
-import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.board.ArticleViewDto;
-import org.example.dto.board.notice.ArticleListViewDto;
+import org.example.dto.board.ArticleDto;
 import org.example.entity.BoardArticle;
+import org.example.entity.Member;
 import org.example.service.BoardService;
+import org.example.service.MemberService;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -19,10 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Collections;
-import java.util.List;
-
-import static java.util.Collections.reverse;
+import java.security.Principal;
 
 /**
  * @author 임승범
@@ -34,15 +30,16 @@ import static java.util.Collections.reverse;
 public class BoardController {
 
     private final BoardService boardService;
+    private final MemberService memberService;
 
     // 리스트 전체 글 보기
     @GetMapping("/list/{id}")
-    public String boardList(
+    public String getBoardList(
             Model model ,
             @PathVariable(name = "id" , required = false) Long boardId,
             @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC) Pageable pageable) {
 
-        log.info("Get요청 /board/list{id} >>> boardList() 실행됨. ");
+        log.info("Get요청 /board/list{id} >>> getBoardList() 실행됨. ");
 
         // jpa PagingAndSortRepository 이용
         Page<BoardArticle> articles = boardService.getArticlesByBoardId(boardId , pageable);
@@ -67,9 +64,9 @@ public class BoardController {
 
     // 게시글 상세 조회
     @GetMapping("/view/{id}")
-    public String boardView(Model model , @PathVariable(name = "id" , required = false) Long id) {
+    public String getBoardView(Model model , @PathVariable(name = "id" , required = false) Long id) {
 
-        log.info("Get요청 /board/view >>> boardView() 실행됨.");
+        log.info("Get요청 /board/view >>> getboardView() 실행됨.");
 
         // id 해당하는 boardArticle 레코드 가져옴.
         BoardArticle article = boardService.findById(id);
@@ -77,6 +74,36 @@ public class BoardController {
         model.addAttribute("article" , article);
 
         return "/community/article";
+    }
+
+    // 게시판 글 쓰기
+    @GetMapping("/write/{type}")
+    public String addBoardArticle( @PathVariable(name = "type") Long type ,
+                                   @RequestParam(name = "id" , required = false) Long id ,
+                                   Model model,
+                                   Principal principal) {
+        // username = userId
+        log.info("******************************* principal::{}",principal);
+
+
+        if(id == null){
+            log.info("Get요청 >>> /board/write/{type} >>> addBoardArticle() 실행됨.");
+
+            // 사용자 회원 정보 가져오기.
+            Member member = memberService.memberView(principal.getName());
+            // dto 생성
+            ArticleDto articleDto = new ArticleDto();
+            // 작성자 이름 user_name 할당
+            articleDto.setWriter(member.getUserId());
+            // 작성자 id(pk) 설정
+            articleDto.setMemberId(member.getId());
+            // 게시판 종류 board_id 할당
+            articleDto.setBoardInfo(type);
+
+            model.addAttribute("article" ,articleDto);
+        }
+
+        return "/community/newArticle";
     }
 
     // 쪽지 전체 보기
@@ -89,12 +116,6 @@ public class BoardController {
     @GetMapping("/msg/article")
     public String msgView() {
         return "/community/msg_view";
-    }
-
-    // 게시판 글 쓰기(아마도 공지사항인것 같음, PostMapping 필요)
-    @GetMapping("/notice/article_write")
-    public String test5() {
-        return "/community/newArticle";
     }
 
     // 새 쪽지 작성하기(PostMapping 필요)
