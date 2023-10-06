@@ -2,6 +2,8 @@ package org.example.controller;
 
 import jakarta.persistence.Id;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.dto.board.ArticleViewDto;
 import org.example.dto.board.notice.ArticleListViewDto;
 import org.example.entity.BoardArticle;
 import org.example.service.BoardService;
@@ -25,6 +27,7 @@ import static java.util.Collections.reverse;
 /**
  * @author 임승범
  */
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 @RequestMapping("/board")
@@ -39,26 +42,40 @@ public class BoardController {
             @PathVariable(name = "id" , required = false) Long boardId,
             @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC) Pageable pageable) {
 
+        log.info("Get요청 /board/list{id} >>> boardList() 실행됨. ");
+
+        // jpa PagingAndSortRepository 이용
         Page<BoardArticle> articles = boardService.getArticlesByBoardId(boardId , pageable);
 
-        int nowPage = articles.getPageable().getPageNumber() + 1 ;   // 현재 페이지
-        int startPage = Math.max(nowPage - 4 , 1);
-        int endPage = Math.min(nowPage + 5 , articles.getTotalPages());
-        Long total = articles.getTotalElements();
+        int nowPage = articles.getPageable().getPageNumber() + 1 ;      // 현재 페이지
+        int startPage = Math.max(nowPage - 4 , 1);                      // 시작 페이지 (Math.max이용 , 비교 큰 값 할당)
+        int endPage = Math.min(nowPage + 5 , articles.getTotalPages()); // 마지막 페이지 (Math.max이용 , 비교 작은 값 할당)
+        int totalPage = articles.getTotalPages();   // 페이지 수
+        Long total = articles.getTotalElements();   // 게시글 갯수(레코드 수)
 
+        // model에 담기
         model.addAttribute("articles" , articles);
         model.addAttribute("nowPage" , nowPage);
         model.addAttribute("startPage" , startPage);
         model.addAttribute("endPage" , endPage);
         model.addAttribute("total" , total);
         model.addAttribute("id" , boardId);
+        model.addAttribute("totalPage" , totalPage);
 
         return "/community/commu_list";
     }
 
-    // notice 게시글 보기 - DB 연동 필요
-    @GetMapping("/notice/article")
-    public String noticeView() {
+    // 게시글 상세 조회
+    @GetMapping("/view/{id}")
+    public String boardView(Model model , @PathVariable(name = "id" , required = false) Long id) {
+
+        log.info("Get요청 /board/view >>> boardView() 실행됨.");
+
+        // id 해당하는 boardArticle 레코드 가져옴.
+        BoardArticle article = boardService.findById(id);
+
+        model.addAttribute("article" , article);
+
         return "/community/article";
     }
 

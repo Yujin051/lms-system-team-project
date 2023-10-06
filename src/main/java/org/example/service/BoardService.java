@@ -26,13 +26,17 @@ public class BoardService {
 //        return boardRepository.findByBoardInfo_Id(boardId);
 //    }
 
+    // jpa 페이징 리스트 가져오기(게시글 목록)
     public Page<BoardArticle> getArticlesByBoardId(Long boardId , Pageable pageable){
 
         return boardPagingRepository.findByBoardInfo_Id(boardId , pageable);
     }
 
-
-
+    // 게시글 하나 id로 가져오기(상세조회)
+    public BoardArticle findById(Long id){
+        return boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Not Found : BoardArticle의" + id + "를 찾을 수 없음."));
+    }
 
 
 }

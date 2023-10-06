@@ -92,6 +92,7 @@ section {
 .article_content > div:first-child {
     padding-left: 1rem;
     padding-right: 1rem;
+    min-height: 200px;
 }
 
 /* 첨부파일 설정 */

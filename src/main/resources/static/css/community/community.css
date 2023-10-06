@@ -7,6 +7,7 @@ section {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Pretendard', 'sans-serif';
+    min-height: 500px;
 }
 
 section ul , section li {
@@ -116,7 +117,7 @@ table {
 }
 
 .pageing > li {
-     border: 1px solid black;
+    /*border: 1px solid black;*/
     border-radius: 10px;
     margin: 3px;
     width: 2.4em;
@@ -129,9 +130,14 @@ table {
     font-weight: bold;
 }
 
+.pageing > li > a {
+    display: block;
+}
+
 /* 페이징의 a태그 visited 설정 어떻게 유지하도록 할 것인지? */
 .page_active {
     background: black;
+    color: white;
 }
 
 .page_active > a {

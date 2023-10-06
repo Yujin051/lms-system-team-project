@@ -53,7 +53,7 @@
                     <thead>
                         <!-- 리스트 컬럼 -->
                         <tr>
-                            <th scope="col" class="px-2">번호</th>
+                            <th scope="col" class="px-2">게시글번호</th>
                             <th scope="col" class="px-2">분류</th>
                             <th scope="col" class="px-2">제목</th>
                             <th scope="col" class="px-2">작성자</th>
@@ -61,16 +61,42 @@
                             <th scope="col" class="px-2">작성일</th>
                         </tr>
                     </thead>
-                    <!-- 아래는 th:each 사용하여 리스트 반복출력토록 -->
+                    <!--/*
+                        아래는 th:each 사용하여 리스트 반복출력.
+                        제목 칸 보정해주던가 아님 td colspan 써보기
+                    */-->
                     <tbody>
                         <th:block th:each="article : ${articles}">
                             <tr>
-                                <td th:text="${article.getId()}"></td>
-                                <td th:text="${article.getBoardInfo().getBoardType()}"></td>
-                                <td th:text="${article.getArticleTitle()}"></td>
-                                <td th:text="${article.getArticleWriter()}"></td>
-                                <td th:text="${article.getArticleView()}"></td>
-                                <td th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:MM')}"></td>
+                                <td>
+                                   <a th:text="${article.getId()}"
+                                      th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                </td>
+
+                                <td>
+                                    <a th:text="${article.getBoardInfo().getBoardType()}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                </td>
+
+                                <td >
+                                    <a th:text="${article.getArticleTitle()}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                </td>
+
+                                <td>
+                                    <a th:text="${article.getArticleWriter()}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                </td>
+
+                                <td>
+                                    <a th:text="${article.getArticleView()}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                </td>
+
+                                <td>
+                                    <a th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:MM')}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                </td>
                             </tr>
                         </th:block>
                     </tbody>
@@ -86,35 +112,24 @@
 
             <div class="board_bottom">
                 <ul class="pageing">
-                    <th:block th:each="page : ${#numbers.sequence(startPage , endPage)}">
+                    <li th:if="${nowPage != 1}">
+                        <a th:href="@{/board/list/{id}(page=${startPage -1},id=${id})}"><i class="fa-solid fa-backward" style="color: #000000;"></i></a>
+                    </li>
 
-                        <li th:if="${page == noowPage}" th:classappend="${page == nowPage}? 'page_active' : ''">
+                    <th:block th:each="page : ${#numbers.sequence(startPage , endPage)}">
+                        <li th:if="${page == nowPage}" th:classappend="${page == nowPage}? 'page_active' : ''">
                             <a th:if="${page == nowPage}" th:text="${page}"></a>
                         </li>
-
-                        <li>
+                        <li th:if="${page != nowPage && page >= startPage}">
                             <a th:if="${page != nowPage}" th:href="@{/board/list/{id}(page = ${page -1} , id=${id})}" th:text="${page}"></a>
                         </li>
-
                     </th:block>
 
-<!--                    <li>-->
-<!--                        <a href=""><i class="bi bi-caret-left-fill"></i></a>-->
-<!--                    </li>-->
-
-<!--                    <li class="page_active">-->
-<!--                        <a href="">1</a>-->
-<!--                    </li>-->
-
-<!--                    <li>-->
-<!--                        <a href="">2</a>-->
-<!--                    </li>-->
-
-<!--                    <li>-->
-<!--                        <a href=""><i class="bi bi-caret-right-fill"></i></a>-->
-<!--                    </li>         -->
+                    <li th:if="${nowPage != endPage}">
+                        <a th:href="@{/board/list/{id}(page=${endPage -1},id=${id})}"><i class="fa-solid fa-forward" style="color: #000000;"></i></a>
+                    </li>
                 </ul>
-                
+<!--                nowPage : <input type="text" th:value="${nowPage}"></input>-->
                 <div class="board_write_article">
                     <button class="btn" type="button">글쓰기</button>
                 </div>

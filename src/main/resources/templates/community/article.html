@@ -40,23 +40,23 @@
                     <div class="profile"></div>
                 </div>
                 <!-- 제목 -->
-                <div class="article_title mt-2">즐거운 추석연휴 보내셨나요?</div>
+                <div class="article_title mt-2" th:text="${article.getArticleTitle()}">즐거운 추석연휴 보내셨나요?</div>
                 
                 <div>
                     <!-- 작성자 -->
-                    <span class="article_writer">Denma</span>
+                    <span class="article_writer" th:text="${article.getArticleWriter()}">Denma</span>
                     <span>|</span>
                     <!-- 작성일 -->
-                    <span class="article_at">2023.10.01</span>
+                    <span class="article_at" th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:MM')}">2023.10.01</span>
                     <span>|</span>
                     <!-- 조회수 -->
-                    <span>352</span>
+                    <span th:text="${article.getArticleView()}">352</span>
                 </div>
             </div>
 
             <div class="article_content">
                 <!-- 게시글 내용 출력 -->
-                <div>
+                <div th:text="${article.getArticleContent()}">
                     [th:text : 게시글 내용 출력하기] <br/><br/>
                     
                     당신의 코드를 유지보수하게 될 친구가 당신이 어디에 사는지 아는 
@@ -65,8 +65,6 @@
                     소프트웨어 설계를 구성하는 데에는 두 가지 방법이 있다. <br/>
                     한가지 방법은 아주 단순하게 만들어서 명백히 결함이 없게 된다. <br/>
                     그리고 다른 방법은 너무 복잡하게 만들어서 명백한 결함이 없게 된다.<br/>
-
-                    
                 </div>
 
                 <!-- 첨부파일 있다면 아래에 추가되도록 출력 -->
