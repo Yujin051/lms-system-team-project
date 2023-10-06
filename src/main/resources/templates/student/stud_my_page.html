@@ -37,19 +37,30 @@
                 }
             }
 
+
             $(function () {
-                $(".reg_btn").click(function () {
-                    if(!confirm('등록하시겠습니까?')) {
-                        return false;
-                    }
+                $(".delete_img").click(function () {
+                    // 이미지 미리보기를 초기화 (이미지를 비움)
+                    $("#preView").attr('src', '#');
+
+                    // 파일 입력 필드를 초기화 (파일 선택 해제)
+                    $(".select_img").val('');
+
+                    // 혹은, 파일 입력 필드를 삭제하는 방법 (선택적)
+                    // $(".select_img").remove();
                 })
-            })
+            });
 
 
         </script>
 
 
     </th:block>
+    <style>
+        .delete_img:hover {
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <section id="mainFrame" layout:fragment="content">
@@ -111,10 +122,8 @@
                        <p class="img">
                            <img id = "preView" src = "#" alt="이미지가 없습니다.">
                        </p>
-
                         <input name = "file" type = "file" accept = "image/*" class = "select_img">
-
-
+                        <div style="border: 1px solid black; border-radius:5px; position: absolute; margin-top: -28px; margin-left: 300px;" class="delete_img">삭제</div>
                     </div>
                 </div>
             </div>

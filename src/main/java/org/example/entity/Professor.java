@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.example.dto.MemberFormDto;
 import org.example.dto.ProfessorDto;
+import org.hibernate.annotations.Fetch;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.swing.*;
@@ -50,8 +51,16 @@ public class Professor {
         this.isActive = isActive;
     }
 
+    @Builder
+    public Professor(String profAgency, String profBank, String profWork, String profAccount, boolean isActive) {
+        this.profBank = profBank;
+        this.profWork = profWork;
+        this.profAgency = profAgency;
+        this.profAccount = profAccount;
+        this.isActive = isActive;
+    }
     public static Professor createProfessor(ProfessorDto professorDto, Member member) {
-        Professor professor = Professor.builder()
+        return Professor.builder()
                 .member(member)
                 .profBank(professorDto.getProfBank())
                 .profWork(professorDto.getProfWork())
@@ -59,6 +68,5 @@ public class Professor {
                 .profAccount(professorDto.getProfAccount())
                 .isActive(professorDto.isActive())
                 .build();
-        return professor;
     }
 }
