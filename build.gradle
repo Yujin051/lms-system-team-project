@@ -43,6 +43,8 @@ dependencies {
 
     runtimeOnly 'com.h2database:h2'
 
+    // JSON 오브젝트 사용
+    implementation 'org.json:json:20230618'
 
 
 

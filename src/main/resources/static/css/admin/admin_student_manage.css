@@ -87,14 +87,13 @@
     position: relative;
     left: 85px;
     width: 1500px;
-    margin-bottom: 50px;
-    display: flex;
 }
 
 /* 상세정보 영역 */
 .table {
     width: 1500px;
     height: 600px;
+    margin-top: 50px;
     margin-left: 85px;
     display: flex;
 }

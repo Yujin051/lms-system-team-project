@@ -15,6 +15,7 @@ public class Assignments {
 
     // 강좌 키 외래키로
 
+
     // 과제 이름
     @Column(name="assign_name")
     private String name;

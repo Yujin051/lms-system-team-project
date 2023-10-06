@@ -25,14 +25,11 @@ public class DirectMsg {
     @Column(name = "msg_id" , updatable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "par_msg_id")
-    private DirectMsg parent;
 
     // 이전쪽지 id
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "parent")
-    @Column(name = "msg_org_id")
-    private List<DirectMsg> orgMsgId = new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="org_msg_id")
+    private DirectMsg orgMsgId;
 
     // 발신자 id
     @OneToOne

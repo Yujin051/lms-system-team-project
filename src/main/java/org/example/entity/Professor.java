@@ -10,7 +10,7 @@ import javax.swing.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name= "teacher")
+@Table(name= "professor")
 @Getter
 @Setter
 @Entity
@@ -36,6 +36,9 @@ public class Professor {
 
     @Column(name = "prof_account")
     private String profAccount;
+
+    @Column(name= "prof_acOwner")
+    private String profAcOwner;
 
     @Column(name = "is_active")
     private boolean isActive;

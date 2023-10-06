@@ -9,10 +9,6 @@ const gridData = [
     { studentID : '202301050', studentName : '학생1', birthDate : '1994-05-17', tel : '010-1111-2222', email : 'student@student.com' },
     { studentID : '202301050', studentName : '학생1', birthDate : '1994-05-17', tel : '010-1111-2222', email : 'student@student.com' },
     { studentID : '202301050', studentName : '학생1', birthDate : '1994-05-17', tel : '010-1111-2222', email : 'student@student.com' },
-    { studentID : '202301050', studentName : '학생1', birthDate : '1994-05-17', tel : '010-1111-2222', email : 'student@student.com' },
-    { studentID : '202301050', studentName : '학생1', birthDate : '1994-05-17', tel : '010-1111-2222', email : 'student@student.com' },
-    { studentID : '202301050', studentName : '학생1', birthDate : '1994-05-17', tel : '010-1111-2222', email : 'student@student.com' },
-    { studentID : '202301050', studentName : '학생1', birthDate : '1994-05-17', tel : '010-1111-2222', email : 'student@student.com' },
     { studentID : '202301050', studentName : '학생1', birthDate : '1994-05-17', tel : '010-1111-2222', email : 'student@student.com' }
 ];
 
@@ -56,5 +52,6 @@ const grid = new tui.Grid({
             name: 'email',
             sortable: true,
         }
-    ]
+    ],
+    minBodyHeight: 30
 });

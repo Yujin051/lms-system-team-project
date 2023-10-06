@@ -87,7 +87,6 @@
     position: relative;
     left: 85px;
     width: 1500px;
-    margin-bottom: 50px;
     display: flex;
 }
 
@@ -96,6 +95,7 @@
     width: 1500px;
     height: 600px;
     margin-left: 85px;
+    margin-bottom: 50px;
     display: flex;
 }
 
