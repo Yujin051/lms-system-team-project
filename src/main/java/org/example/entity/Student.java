@@ -20,6 +20,7 @@ public class Student {
 
     //회원ID
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id")
     private Member member;
 
     //수강생 학년

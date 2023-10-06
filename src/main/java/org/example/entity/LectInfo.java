@@ -73,7 +73,7 @@ public class LectInfo {
 
     //강좌 운영상태
     @Column(name = "is_active")
-    private String isActive;
+    private boolean isActive;
 
     //과제 배점
     @Column(name = "lect_assign")

@@ -2,6 +2,10 @@
 .tui-grid-container{
     font-family: 'SUIT-Regular';
 }
+body {
+    font-family: 'SUIT-Regular';
+}
+
 .bt {
     margin-left: 1395px;
 }

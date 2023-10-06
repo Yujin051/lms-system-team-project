@@ -18,6 +18,14 @@ a {
     text-decoration: none;
 }
 
+select {
+    width: 80px; height: 30px; outline: none; margin-right: 5px;
+}
+
+input {
+    outline: none; margin-right: 5px; height: 30px;
+}
+
 a:visited {
     color: black;
 }
@@ -45,6 +53,7 @@ section {
 .board_top > div {
     /* border: 1px solid blue; */
     height: 2.5rem;
+    display: flex;
 }
 
 .board_top > div:first-child {
@@ -60,9 +69,11 @@ section {
 /* 검색 버튼 설정 */
 .searchBtn , .searchBtn:hover{
     /* border: 1px solid black; */
-    border-radius: 0;
+    border-radius: 5px;
     background: black;
     color: white;
+    line-height: 15px;
+    height: 30px;
 }
 
 /* 리스트 상단 부분 설정 */
@@ -145,12 +156,18 @@ table {
     justify-content: end;
 }
 
+/*글쓰기 버튼*/
+.btn {
+
+}
+
 .board_write_article > button , .board_write_article > button:hover {
     border: 1px solid black;
     background: black;
     color: white;
-    border-radius: 0;
+    border-radius: 5px; height: 30px; line-height: 15px;
 }
+
 
 
 
