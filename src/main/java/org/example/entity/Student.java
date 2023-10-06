@@ -1,7 +1,10 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 수강생 정보 엔티티
@@ -10,6 +13,8 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "student")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
     //수강생ID
@@ -38,4 +43,12 @@ public class Student {
     @Column(name = "stud_crecpl")
     private Long studCreCpl;
 
+    @Builder
+    public Student(Member member, Long studGrade, Long studMaxCr, Long studNowCr, Long studCreCpl) {
+        this.member = member;
+        this.studGrade = studGrade;
+        this.studMaxCr = studMaxCr;
+        this.studNowCr = studNowCr;
+        this.studCreCpl = studCreCpl;
+    }
 }

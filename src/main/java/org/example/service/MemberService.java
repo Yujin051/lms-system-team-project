@@ -1,8 +1,10 @@
 package org.example.service;
 
+import org.example.entity.LectInfo;
 import org.example.entity.Member;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.repository.LectInfoRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -62,5 +64,7 @@ public class MemberService implements UserDetailsService {
     public void memberDelete(Long id) {
         memberRepository.deleteById(id);
     }
+
+
 
 }

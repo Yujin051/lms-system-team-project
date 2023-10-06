@@ -1,7 +1,10 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 강좌성적 엔티티
@@ -10,6 +13,8 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "grade_info")
+@NoArgsConstructor
+@AllArgsConstructor
 public class GradeInfo {
 
     //성적ID
@@ -48,4 +53,14 @@ public class GradeInfo {
     @Column(name = "is_record")
     private boolean isRecord;
 
+    @Builder
+    public  GradeInfo(LectInfo lectInfo, Student student, String grade, Long checkScore, Long assignScore, Long testScore, boolean isRecord) {
+        this.lectInfo = lectInfo;
+        this.student = student;
+        this. grade = grade;
+        this.checkScore = checkScore;
+        this.assignScore = assignScore;
+        this.testScore = testScore;
+        this.isRecord = isRecord;
+    }
 }

@@ -1,8 +1,12 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -10,8 +14,8 @@ import java.time.LocalDateTime;
  * @author 임휘재
  */
 @Entity
-//@AllArgsConstructor
-//@NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Table(name = "lect_info")
 public class LectInfo {
@@ -57,23 +61,23 @@ public class LectInfo {
 
     //수강신청 시작일정
     @Column(name = "enroll_start")
-    private LocalDateTime enrollStart;
+    private LocalDate enrollStart;
 
     //수강신청 종료일정
     @Column(name = "enroll_end")
-    private LocalDateTime enrollEnd;
+    private LocalDate enrollEnd;
 
     //강좌 시작일시
     @Column(name = "lect_start")
-    private LocalDateTime lectStart;
+    private LocalDate lectStart;
 
     //강좌 종료일시
     @Column(name = "lect_end")
-    private LocalDateTime lectEnd;
+    private LocalDate lectEnd;
 
     //강좌 운영상태
     @Column(name = "is_active")
-    private String isActive;
+    private boolean isActive;
 
     //과제 배점
     @Column(name = "lect_assign")
@@ -86,5 +90,28 @@ public class LectInfo {
     //시험 배점
     @Column(name = "lect_test")
     private Long lectTest;
+
+    @Builder
+    public LectInfo(Professor professor, String lectName, String lectSubject, String lectYear, String lectSem,
+                    Long lectCredit, Long lectNownum, Long lectMaxnum, LocalDate enrollStart, LocalDate enrollEnd,
+                    LocalDate lectStart, LocalDate lectEnd, boolean isActive, Long lectAssign, Long lectCheck, Long lectTest) {
+
+        this.professor = professor;
+        this.lectName = lectName;
+        this.lectSubject = lectSubject;
+        this.lectYear = lectYear;
+        this.lectSem = lectSem;
+        this.lectCredit = lectCredit;
+        this.lectNownum = lectNownum;
+        this.lectMaxnum = lectMaxnum;
+        this.enrollStart = enrollStart;
+        this.enrollEnd = enrollEnd;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+        this.lectAssign = lectAssign;
+        this.lectCheck = lectCheck;
+        this.lectTest = lectTest;
+    }
 
 }

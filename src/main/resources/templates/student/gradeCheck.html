@@ -21,12 +21,12 @@
                         <th style="width: 15%">담당 강사명</th>
                         <th style="width: 15%">평가등급</th>
                     </tr>
-                    <tr><!-- 해당 자료만큼 반복됩니다. -->
-                        <td>번호가 옵니다.</td>
-                        <td class="lecName">강좌명이 옵니다.</td>
-                        <td>학점이 옵니다.</td>
-                        <td>담당 강사명이 옵니다.</td>
-                        <td>총 평가 등급이 옵니다.</td>
+                    <tr th:each="gradeInfo : ${list}" ><!-- 해당 자료만큼 반복됩니다. -->
+                        <td th:text="${gradeInfo.lectId}">번호가 옵니다.</td>
+                        <td th:text="${gradeInfo.lectName}" class="lecName">강좌명이 옵니다.</td>
+                        <td th:text="${gradeInfo.lectCredit}">학점이 옵니다.</td>
+                        <td th:text="${gradeInfo.userName}">담당 강사명이 옵니다.</td>
+                        <td th:text="${gradeInfo.grade}">총 평가 등급이 옵니다.</td>
                     </tr>
                 </table>
             </div>

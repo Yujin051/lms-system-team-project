@@ -73,52 +73,12 @@
             <th>신청현황</th>
             <th>신청</th>
         </tr>
-        <tr>
-            <td class="userId">1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr th:each="lectInfo : ${list}" >
+            <td th:text="${lectInfo.lectId}" class="userId">1</td>
+            <td th:text="${lectInfo.lectName}"></td>
+            <td th:text="${lectInfo.lectCredit}"></td>
+            <td th:text="${lectInfo.userName}"></td>
+            <td th:text="${lectInfo.lectNownum} + '/' + ${lectInfo.lectMaxnum}"></td>
             <td>
                 <button class="btn btn-primary pull-right">신청</button>
             </td>

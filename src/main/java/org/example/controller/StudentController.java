@@ -1,5 +1,9 @@
 package org.example.controller;
 
+import org.example.repository.LectInfoRepository;
+import org.example.service.MemberService;
+import org.example.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,10 @@ import java.security.Principal;
 @RequestMapping("/student")
 public class StudentController {
 
+//    private LectInfoRepository lectInfoRepository;
+
+    @Autowired
+    private StudentService studentService;
     // 학생 메인 페이지
     @GetMapping("")
     public String stuMain() {
@@ -18,7 +26,8 @@ public class StudentController {
     }
     // 학생 성적 페이지
     @GetMapping("/grade")
-    public String studentGrade() {
+    public String studentGrade(Model model) {
+        model.addAttribute("list", studentService.gradeCheckList());
         return "/student/gradecheck";
     }
 
@@ -62,7 +71,8 @@ public class StudentController {
 
 
     @GetMapping("/scr")
-    public String courseRegisteration() {
+    public String courseRegisteration(Model model) {
+        model.addAttribute("list", studentService.lectInfoList());
         return "/student/course_registeration";
     }
 
