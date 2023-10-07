@@ -85,6 +85,22 @@ table {
     height: auto;
 }
 
+#listBody > tr > td > a {
+    /*border: 1px solid black !important;*/
+    display: block;
+    width: 100%;
+}
+
+@media screen and (max-width: 991px){
+
+    table {
+        font-size: 14px;
+        /*font-weight: bold;*/
+    }
+
+}
+
+
 /* 767px 이하라면 아래의 css 적용 */
 @media screen and (max-width: 767px){
 
@@ -97,8 +113,8 @@ table {
     }
 
     table {
-        font-size: small;
-        font-weight: bold;
+        font-size: 12px;
+        /*font-weight: bold;*/
     }
 }
 
@@ -150,6 +166,18 @@ table {
     display: flex;
     justify-content: end;
 }
+.board_write_article > button > a {
+    display: block;
+    height: 100%;
+    width: 100%;
+    /*border: 1px solid red;*/
+    color: white;
+}
+
+.board_write_article > button > a:visited {
+    color: white;
+}
+
 
 .board_write_article > button , .board_write_article > button:hover {
     border: 1px solid black;
@@ -157,6 +185,8 @@ table {
     color: white;
     border-radius: 0;
 }
+
+
 
 
 

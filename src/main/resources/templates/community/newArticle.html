@@ -30,7 +30,7 @@
         <div class="container board">
             <form class="writeBox mt-2">
                 <!-- 전페이지에서 게시판 타입 가져오기 > get에서 모델 담아 html 반환 -->
-                <input type="text" name="boardType" id="boardType" th:value="${article.getBoardInfo()}">
+                <input type="text" name="boardType" id="boardType" th:value="${article.getType()}">
                 <input type="text" name="memberId" id="memberId" th:value="${article.getMemberId()}">
                 <input type="text" name="memberName" id="memberName" th:value="${article.getWriter()}">
 

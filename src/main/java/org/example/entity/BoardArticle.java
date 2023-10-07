@@ -29,19 +29,20 @@ public class BoardArticle {
 
     //  게시판 id (외래키)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id" , updatable = false , nullable = true)
+    @JoinColumn(name = "board_id" , updatable = false , nullable = false)
     private BoardInfo boardInfo;
 
     // 게시글 이름
     @Column(name = "article_title" , nullable = false)
     private String articleTitle;
 
-    // 게시글 내용
-    @Column(name = "article_cont" , nullable = false)
+    // 게시글 내용 , 값 손실 방지 = varchar말고 text로 설정
+    @Column(name = "article_cont" , nullable = false  , columnDefinition = "TEXT")
     private String articleContent;
 
     // 게시글 조회수
     @Column(name = "article_view" , nullable = false)
+    @ColumnDefault("0")
     private Long articleView;
 
     // 게시글 작성일시
@@ -73,7 +74,7 @@ public class BoardArticle {
 
     @Builder
     public BoardArticle(
-            BoardInfo boardInfo , String articleTitle , String articleContent , Long articleView ,
+            BoardInfo boardInfo , String articleTitle , String articleContent , Long articleView,
             Boolean isLocked , Boolean isDeleted , Member memberId , Long articleFileNum){
         this.boardInfo = boardInfo;
         this.articleTitle = articleTitle;

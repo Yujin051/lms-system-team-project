@@ -34,4 +34,12 @@ public class BoardInfo {
     @Column(name = "board_type" , nullable = false)
     private String boardType;
 
+
+    @Builder
+    public BoardInfo(String boardName , Boolean boardResp , String boardType){
+        this.boardName = boardName;
+        this.boardResp = boardResp;
+        this.boardType = boardType;
+    }
+
 }

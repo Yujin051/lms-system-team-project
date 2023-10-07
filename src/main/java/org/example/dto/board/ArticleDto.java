@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.example.entity.BoardArticle;
+import org.example.entity.BoardInfo;
+import org.example.entity.Member;
 
 import java.time.LocalDateTime;
 
@@ -15,21 +17,21 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-// 게시글 리스트 출력 DTO
+// 새로운 게시글 요청 DTO
 public class ArticleDto {
 
     // 게시글 id
     private Long id;
-    // 게시판 종류
-    private String type;
     // 게시판 종류 id
-    private Long boardInfo;
+    private Long type;
     // 게시글 제목
     private String title;
     // 게시글 작성자 이름
     private String writer;
     // 게시글 작성자 id
     private Long memberId;
+    // 게시글 멤버
+    private Member member;
     // 게시글 작성 시간
     private LocalDateTime articleAt;
     // 게시글 내용
@@ -37,14 +39,20 @@ public class ArticleDto {
     // 게시글 공개여부
     private Boolean isLocked;
 
+    private BoardInfo boardInfo;
 
-    public ArticleDto(BoardArticle article){
-        this.id = article.getId();
-        this.type = article.getBoardInfo().getBoardType();
-        this.title = article.getArticleTitle();
-        this.writer = article.getMemberId().getUserName();
-        this.articleAt = getArticleAt();
-        this.boardInfo = article.getBoardInfo().getId();
+
+    public BoardArticle toEntity(){
+        return BoardArticle.builder()
+                .articleTitle(title)
+                .articleContent(content)
+                .isLocked(isLocked)
+                .boardInfo(boardInfo)
+                .memberId(member)
+                .articleView(0L)
+                .articleFileNum(0L)
+                .isDeleted(false)
+                .build();
     }
 
 }

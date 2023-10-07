@@ -65,7 +65,7 @@
                         아래는 th:each 사용하여 리스트 반복출력.
                         제목 칸 보정해주던가 아님 td colspan 써보기
                     */-->
-                    <tbody>
+                    <tbody id="listBody">
                         <th:block th:each="article : ${articles}">
                             <tr>
                                 <td>
@@ -94,7 +94,7 @@
                                 </td>
 
                                 <td>
-                                    <a th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:MM')}"
+                                    <a th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:mm')}"
                                        th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
                                 </td>
                             </tr>
@@ -131,7 +131,7 @@
                 </ul>
 <!--                nowPage : <input type="text" th:value="${nowPage}"></input>-->
                 <div class="board_write_article">
-                    <button class="btn" type="button">글쓰기</button>
+                    <button class="btn" type="button"><a th:href="@{/board/write/{id}(id=${id})}">글쓰기</a></button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.board;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +11,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -78,18 +80,19 @@ public class BoardController {
 
     // 게시판 글 쓰기
     @GetMapping("/write/{type}")
+    // type = 게시판 종류 , id는 게시글 번호인데 있을수도 없을 수도 있음.
     public String addBoardArticle( @PathVariable(name = "type") Long type ,
                                    @RequestParam(name = "id" , required = false) Long id ,
                                    Model model,
-                                   Principal principal) {
+                                   Principal principal) throws Exception {
         // username = userId
         log.info("******************************* principal::{}",principal);
-
+        log.info("Get요청 >>> /board/write/{type} >>> addBoardArticle() 실행됨.");
+        log.info("type*********************************************************** = " + type);
 
         if(id == null){
-            log.info("Get요청 >>> /board/write/{type} >>> addBoardArticle() 실행됨.");
-
-            // 사용자 회원 정보 가져오기.
+            log.info("이곳으로 드루와");
+            // 사용자 회원 정보 가져오기.(principal의 userName은 userId에 해당. unique)
             Member member = memberService.memberView(principal.getName());
             // dto 생성
             ArticleDto articleDto = new ArticleDto();
@@ -98,7 +101,7 @@ public class BoardController {
             // 작성자 id(pk) 설정
             articleDto.setMemberId(member.getId());
             // 게시판 종류 board_id 할당
-            articleDto.setBoardInfo(type);
+            articleDto.setType(type);
 
             model.addAttribute("article" ,articleDto);
         }

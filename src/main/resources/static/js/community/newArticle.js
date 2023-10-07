@@ -14,6 +14,7 @@ $('#summernote').summernote({
     height: 500,                 // 에디터 높이
     minHeight: 500,             // 최소 높이
     maxHeight: 500,             // 최대 높이
+    maxWidth: 1200,
     focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
     lang: "ko-KR",					// 한글 설정
     placeholder: '내용을 입력해주세요.'	//placeholder 설정
@@ -52,6 +53,34 @@ saveBtn.addEventListener('click' , ()=>{
     console.log("memberName : " + memberName);
     console.log("title : " + title);
     console.log("content : " + content);
+
+    let data = {
+        type : boardType,
+        memberId : memberId,
+        writer : memberName,
+        title : title,
+        content : content ,
+        isLocked : privateCk
+    };
+
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/board/write' , true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+
+    xhr.onreadystatechange = function (){
+        if(xhr.readyState === 4){
+            // 성공 응답시
+            if(xhr.status === 201){
+                alert('등록됨');
+            }
+            else {
+                alert('실패');
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+
 
 });
 
