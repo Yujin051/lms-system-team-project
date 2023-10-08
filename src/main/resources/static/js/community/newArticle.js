@@ -1,3 +1,78 @@
+// 파일목록 추가 생성
+function addFileInput() {
+    // ul 태그 가져오기
+    let fileList = document.getElementById('fileList');
+
+    if(fileList.getElementsByTagName('li').length === 5){
+        alert('더 이상 파일을 추가 할 수 없습니다.');
+        return ;
+    }
+
+    // 새로운 input file 생성
+    var newInput = document.createElement('input');
+    newInput.type = 'file';
+    newInput.accept = '*/*';
+    newInput.multiple = 'multiple';
+    // li 생성
+    let li = document.createElement('li');
+    // li안에 input 넣어주기
+    li.append(newInput);
+
+    // li를 fileList ul에 추가
+    fileList.appendChild(li);
+}
+
+
+// 파일 업로드 버튼
+function uploadFile(){
+    // let fileInput = document.getElementById('fileInput');
+    // let files = fileInput.files;
+
+    // let formData = new FormData();
+    // for(let i=0; i<files.length; i++){
+    //     formData.append('files',files[i]);
+    // }
+
+    let formData = new FormData();
+
+    // fileList 엘리먼트에서 모든 input file 엘리먼트를 찾음
+    let fileInputs = document.querySelectorAll('#fileList input[type="file"]');
+    let files;
+
+    // 각각의 input file 엘리먼트에서 선택된 파일들을 formData에 추가
+    fileInputs.forEach(input => {
+        files = input.files;
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files', files[i]);
+        }
+    });
+
+    console.log('filesEa = ' + files.length);
+    console.log('files = ' + files.value);
+    console.log("formdata = " + formData);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload', true);
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // 업로드 성공 시 처리할 코드
+            console.log('파일 업로드 성공');
+        } else {
+            // 업로드 실패 시 처리할 코드
+            console.error('파일 업로드 실패');
+        }
+    };
+    xhr.onerror = function () {
+        // 네트워크 오류 등으로 업로드에 실패한 경우 처리할 코드
+        console.error('파일 업로드 중 오류 발생');
+    };
+    xhr.send(formData);
+}
+
+
+
+
+
 //  summernote 설정
 // $('#summernote').summernote('code', '<p>가나다</p><p>마바사</p><p>아자차카타파하</p>');
 $('#summernote').summernote({

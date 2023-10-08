@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.board.FileInfoId;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.io.File;
@@ -13,17 +14,22 @@ import java.io.File;
 @Setter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@IdClass(FileInfoId.class)
 public class FileInfo {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="file_no", updatable = false)
-    private long fileNo;
+    private Long fileNo;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="file_seq", updatable = false)
-    private long fileSeq;
+    private Long fileSeq;
+
+//    @EmbeddedId
+//    private FileInfoId fileInfoId;
 
     @Column(name="org_file_name")
     private String orgFileName;
@@ -35,10 +41,10 @@ public class FileInfo {
     private String filePath;
 
     @Column(name="file_size")
-    private long fileSize;
+    private Long fileSize;
 
     @Builder
-    public FileInfo(String orgFileName, String saveFileName, String filePath, long fileSize) {
+    public FileInfo(String orgFileName, String saveFileName, String filePath, Long fileSize) {
         this.orgFileName = orgFileName;
         this.saveFileName = saveFileName;
         this.filePath = filePath;

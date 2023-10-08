@@ -1,9 +1,11 @@
 package org.example.controller.board;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.board.UploadFileDto;
 import org.example.dto.board.UploadResultDto;
-import org.springframework.beans.factory.annotation.Value;
+import org.example.entity.FileInfo;
+import org.example.repository.FileInfoRepository;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -24,11 +26,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @RestController
 @Slf4j
 public class UpDownController {
 
-    private String uploadPath = "C:\\upload";
+    private final String uploadPath = "C:\\upload";
+    private final FileInfoRepository fileInfoRepository;
 
     @PostMapping(value = "/upload" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public List<UploadResultDto> upload(UploadFileDto uploadFileDto){
@@ -37,7 +41,8 @@ public class UpDownController {
 
         if(uploadFileDto.getFiles() != null){
 
-            final List<UploadResultDto> list = new ArrayList<>();
+            List<UploadResultDto> list = new ArrayList<>();
+            List<FileInfo> fileInfoList = new ArrayList<>();
 
             uploadFileDto.getFiles().forEach(multipartFile -> {
 
@@ -54,6 +59,15 @@ public class UpDownController {
                     e.printStackTrace();
                 }
 
+                fileInfoList.add(FileInfo.builder()
+                                .orgFileName(originName)
+                                .saveFileName(uuid + "_" + originName)
+                                .filePath(savePath.toString())
+                                .fileSize(multipartFile.getSize())
+                                .build());
+
+                log.info("fileInfoList::{}",fileInfoList);
+
                 list.add(UploadResultDto.builder()
                         .uuid(uuid)
                         .fileName(originName)
@@ -61,6 +75,7 @@ public class UpDownController {
                 );
             }); // end each
 
+            fileInfoRepository.saveAll(fileInfoList);
             return list;
         } // end if
         return null;

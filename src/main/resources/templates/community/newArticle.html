@@ -55,10 +55,15 @@
                         파일첨부
                     </div>
                     <div class="col-md-7 boxset inputBox">
-                        <span id="fileList">파일을 이곳에 드래그 앤 드롭하세요.</span>
+                        <ul id="fileList">
+                            <li>파일을 이곳에 끌어오시거나 파일 선택을 클릭해주세요.</li>
+                            <li><input type="file" accept="*/*" multiple="multiple"></li>
+                            <li><input type="file" accept="*/*" multiple="multiple"></li>
+                        </ul>
                     </div>
-                    <div class="col-md-2 boxset boxEnd">
-                        <div class="btn btn-dark">업로드</div>
+                    <div class="col-md-2 boxset boxEnd fileBtnBox">
+                        <button class="btn btn-dark" type="button" onclick="uploadFile()" >업로드</button>
+                        <button class="btn btn-dark" type="button" onclick="addFileInput()" >파일목록</button>
                     </div>
                 </div>
 

@@ -78,9 +78,37 @@ section {
     background: white;
 }
 
+#fileList {
+    padding: 0;
+    margin: 0;
+}
+
+.inputBox > #fileList > li > input {
+    display: block;
+    width: 100%;
+    color: #21447d;
+    cursor: pointer;
+}
+
+.fileBtnBox > button {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/*input#file-upload-button {*/
+/*    display: none;*/
+/*    cursor: pointer;*/
+/*}*/
+
 .titletext {
     width: 100%;
     height: 100%;
+}
+
+.boxStart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -93,6 +121,14 @@ section {
 .btnBox > button {
     width: 10%;
     margin-left: 1rem;
+}
+
+@media screen and (max-width: 1199px){
+    .fileBtnBox > button {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+    }
+
 }
 
 
@@ -110,4 +146,11 @@ section {
     .boxEnd {
         text-align: end;
     }
+
+    .fileBtnBox {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
 }
