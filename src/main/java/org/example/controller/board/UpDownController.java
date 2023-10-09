@@ -6,6 +6,7 @@ import org.example.dto.board.UploadFileDto;
 import org.example.dto.board.UploadResultDto;
 import org.example.entity.FileInfo;
 import org.example.repository.FileInfoRepository;
+import org.example.service.FileInfoService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -32,7 +33,7 @@ import java.util.UUID;
 public class UpDownController {
 
     private final String uploadPath = "C:\\upload";
-    private final FileInfoRepository fileInfoRepository;
+    private final FileInfoService fileInfoService;
 
     @PostMapping(value = "/upload" , consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public List<UploadResultDto> upload(UploadFileDto uploadFileDto){
@@ -44,11 +45,12 @@ public class UpDownController {
             List<UploadResultDto> list = new ArrayList<>();
             List<FileInfo> fileInfoList = new ArrayList<>();
 
+            // dto안의 파일들 수만큼 반복문
             uploadFileDto.getFiles().forEach(multipartFile -> {
-
+                // 파일의 원본이름 저장
                 String originName = multipartFile.getOriginalFilename();
                 log.info(originName);
-
+                // 랜덤갑 생성, 저장경로에 uui를 붙여서 중복방지용으로.
                 String uuid = UUID.randomUUID().toString();
                 Path savePath = Paths.get(uploadPath , uuid + "_" + originName);
 
@@ -75,7 +77,8 @@ public class UpDownController {
                 );
             }); // end each
 
-            fileInfoRepository.saveAll(fileInfoList);
+            fileInfoService.saveAllFile(fileInfoList);
+
             return list;
         } // end if
         return null;

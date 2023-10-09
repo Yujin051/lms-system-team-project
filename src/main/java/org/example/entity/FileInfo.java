@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.io.File;
 
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name="file_info")
 @Getter
 @Setter
@@ -17,14 +16,11 @@ import java.io.File;
 @IdClass(FileInfoId.class)
 public class FileInfo {
 
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="file_no", updatable = false)
     private Long fileNo;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="file_seq", updatable = false)
     private Long fileSeq;
 
@@ -44,7 +40,9 @@ public class FileInfo {
     private Long fileSize;
 
     @Builder
-    public FileInfo(String orgFileName, String saveFileName, String filePath, Long fileSize) {
+    public FileInfo(Long fileNo , Long fileSeq , String orgFileName, String saveFileName, String filePath, Long fileSize) {
+        this.fileNo = fileNo;
+        this.fileSeq = fileSeq;
         this.orgFileName = orgFileName;
         this.saveFileName = saveFileName;
         this.filePath = filePath;
