@@ -112,7 +112,6 @@ grid.on('click', async (ev) => {
 });
 
 
-
 const retrieveButton = document.querySelector('.stud_select_btn');
 const searchNameInput = document.querySelector('.lName');
 const searchNumInput = document.querySelector('.lNum');

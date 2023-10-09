@@ -3,6 +3,7 @@ package org.example.service.admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.admin.MemberDto;
+import org.example.dto.admin.StudentDto;
 import org.example.repository.admin.AdminRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,5 +56,41 @@ public class AdminService {
     public MemberDto getFindMemberInfo(Long memberId){
         log.info("serviceMemberId : " + memberId);
         return adminRepository.findMemberInfo(memberId);
+    }
+
+    // 관리자 - 전체성적관리 : 학생정보
+    public List<MemberDto> getAdminGradeStudInfo(){
+        return adminRepository.findGradeStudInfo();
+    }
+
+    //관리자 - 전체성적관리 : 이름검색
+    public List<MemberDto> getAdminGradeUserNameSearch(String keyword){
+        return adminRepository.gradeFindByUserNameContainingIgnoreCase(keyword);
+    }
+
+    //관리자 - 전체성적관리 : 학번검색
+    public List<MemberDto> getAdminGradeStudIdSearch(Long keyword){
+        return adminRepository.gradeFindByStudId(keyword);
+    }
+
+    //관리자 - 전체성적관리 : 학년검색
+    public List<MemberDto> getAdminGradeStudGradeSearch(Long keyword){
+        return adminRepository.gradeFindByStudGrade(keyword);
+    }
+
+    //관리자 - 전체성적관리 : 이름, 학번, 학년 전체 검색
+    public List<MemberDto> getAdminGradeAllSearch(Long idKeyword, String nameKeyword, Long gradeKeyword){
+        return adminRepository.gradeFindAllSearch(idKeyword, nameKeyword, gradeKeyword);
+    }
+
+    //관리자 - 전체성적관리 : 검색어가 비어있을 때 전체 조회되게
+    public List<MemberDto> getAdminGradeNoSearch(Long idKeyword, String nameKeyword) {
+        return adminRepository.gradeNoSearch(idKeyword, nameKeyword);
+    }
+
+    // 관리자 - 전체성적관리 : 강좌별성적
+    public List<MemberDto> getGradesByCourse(Long studId){
+        log.info("studId : " + studId);
+        return adminRepository.gradesByCourse(studId);
     }
 }

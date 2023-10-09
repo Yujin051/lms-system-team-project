@@ -55,6 +55,10 @@
 }
 .student_info_text_box > .student_info_text {
     height: 40px; line-height: 40px; font-size: 1.1rem;
+    display: flex;
+}
+.student_info_text_box > .student_info_text div{
+    margin-left: 25px; font-size: 0.9rem;
 }
 /*학생정보 (그리드)*/
 .student_info_box {
