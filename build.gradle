@@ -46,7 +46,8 @@ dependencies {
     // JSON 오브젝트 사용
     implementation 'org.json:json:20230618'
 
-
+    // JSON.Simple 라이브러리
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
     // 스프링 프레임워크
     compileOnly 'org.projectlombok:lombok'

@@ -27,6 +27,12 @@ public class Member {
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @OneToOne(mappedBy = "member")
+    private Professor professor;
+
+    @OneToOne(mappedBy = "member")
+    private Student student;
+
     @Column(name= "user_id", nullable = false, unique = true)
     private String userId;
 

@@ -99,14 +99,50 @@ searchBtn.addEventListener('click', () => {
 grid.on('click', (ev) => {
     const url = "/admin/getdetail"
     console.log(ev.rowKey)
-    console.log(JSON.stringify(grid.getRow(ev.rowKey), ['profWork', 'userName']))
+    // 그리드에서 가져온 행의 키값 추출
+    const valueList = Object.values(grid.getRow(ev.rowKey))
+
+    const pId = $("#pId")
+    const name =$("#name")
+    const bDay = $("#birthDay")
+    const gender = $("#gender")
+    const tel = $("#tel")
+    const addr = $("#addr")
+    const mId = $("#mId")
+    const email = $("#email")
+    const isActive = $("#isActive")
+    const aOwn = $("#aOwn")
+    const bank = $("#bank")
+    const acc = $("#account")
+    const agency = $("#agency")
+
+
     $.ajax({
         url: url,
         type: "POST",
+        async: false,
         dataType: 'json',
-        data: JSON.stringify(grid.getRow(ev.rowKey), ['profWork', 'userName']),
+        data: {
+            name : valueList[0],
+            work : valueList[6]
+        },
         success: function (response) {
-            console.log(response)
+            const repList = Object.values(response)
+            console.log(repList)
+
+            pId.html(repList[0])
+            name.html(repList[6])
+            bDay.html(repList[10])
+            gender.html(repList[11])
+            tel.html(repList[7])
+            addr.html(repList[9])
+            mId.html(repList[12])
+            email.html(repList[8])
+            isActive.html(String(repList[13]))
+            aOwn.html(repList[2])
+            bank.html(repList[3])
+            acc.html(repList[4])
+            agency.html(repList[1])
         },
         error: function () {
             console.log("실패")
