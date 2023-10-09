@@ -15,6 +15,8 @@ public class UploadResultDto {
 
     private String fileName;
 
+    private Long id;
+
 //    @Builder
 //    public UploadResultDto(String uuid , String fileName){
 //        this.uuid = uuid;

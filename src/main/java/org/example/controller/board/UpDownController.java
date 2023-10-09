@@ -77,7 +77,11 @@ public class UpDownController {
                 );
             }); // end each
 
-            fileInfoService.saveAllFile(fileInfoList);
+            Long finalId = fileInfoService.saveAllFile(fileInfoList);
+
+            list.forEach(uploadResultDto -> {
+                uploadResultDto.setId(finalId);
+            });
 
             return list;
         } // end if

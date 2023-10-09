@@ -22,7 +22,7 @@ public class ArticleDto {
 
     // 게시글 id
     private Long id;
-    // 게시판 종류 id
+    // 게시판 종류 식별 id
     private Long type;
     // 게시글 제목
     private String title;
@@ -38,8 +38,10 @@ public class ArticleDto {
     private String content;
     // 게시글 공개여부
     private Boolean isLocked;
-
+    // 게시판 종류 id(외래키)
     private BoardInfo boardInfo;
+    // 첨부파일 번호
+    private Long fileNo;
 
 
     public BoardArticle toEntity(){
@@ -50,7 +52,7 @@ public class ArticleDto {
                 .boardInfo(boardInfo)
                 .memberId(member)
                 .articleView(0L)
-                .articleFileNum(0L)
+                .articleFileNum(fileNo != null? fileNo:0L)
                 .isDeleted(false)
                 .build();
     }

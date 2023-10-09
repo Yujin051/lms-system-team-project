@@ -15,7 +15,7 @@ public class FileInfoService {
 
     private final FileInfoRepository fileInfoRepository;
 
-    public void saveAllFile(List<FileInfo> fileInfoList){
+    public Long saveAllFile(List<FileInfo> fileInfoList){
         // db에 저장되 있는 마지막 fileNo 값 가져오기
         Long lastFileInfoId = fileInfoRepository.findMaxFileNo();
         // 만약 마지막 fileNo가 없는 초기상황일때 값 지정.
@@ -32,10 +32,9 @@ public class FileInfoService {
             fileInfoList.get(i).setFileNo(lastFileInfoId+1L);
             fileInfoList.get(i).setFileSeq(k);
             fileInfoRepository.save(fileInfoList.get(i));
-
         }
 
-
+        return lastFileInfoId+1L;
     }
 
 }

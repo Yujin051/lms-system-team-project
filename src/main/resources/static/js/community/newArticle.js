@@ -22,16 +22,10 @@ function addFileInput() {
     fileList.appendChild(li);
 }
 
+let fileNo;
 
 // 파일 업로드 버튼
 function uploadFile(){
-    // let fileInput = document.getElementById('fileInput');
-    // let files = fileInput.files;
-
-    // let formData = new FormData();
-    // for(let i=0; i<files.length; i++){
-    //     formData.append('files',files[i]);
-    // }
 
     let formData = new FormData();
 
@@ -47,9 +41,9 @@ function uploadFile(){
         }
     });
 
-    console.log('filesEa = ' + files.length);
-    console.log('files = ' + files.value);
-    console.log("formdata = " + formData);
+    // console.log('filesEa = ' + files.length);
+    // console.log('files = ' + files.value);
+    // console.log("formdata = " + formData);
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/upload', true);
@@ -57,9 +51,15 @@ function uploadFile(){
         if (xhr.status >= 200 && xhr.status < 300) {
             // 업로드 성공 시 처리할 코드
             console.log('파일 업로드 성공');
+            alert('파일 업로드 되었습니다.');
+            let result = JSON.parse(xhr.response);
+            console.log("result = " + result);
+            fileNo = result[0].id;
+            console.log("fileNo = " + fileNo);
         } else {
             // 업로드 실패 시 처리할 코드
             console.error('파일 업로드 실패');
+            alert('파일 업로드 실패...');
         }
     };
     xhr.onerror = function () {
@@ -129,14 +129,28 @@ saveBtn.addEventListener('click' , ()=>{
     console.log("title : " + title);
     console.log("content : " + content);
 
-    let data = {
-        type : boardType,
-        memberId : memberId,
-        writer : memberName,
-        title : title,
-        content : content ,
-        isLocked : privateCk
-    };
+    let data;
+
+    if(fileNo !== null || fileNo === 0){
+            data = {
+            type : boardType,
+            memberId : memberId,
+            writer : memberName,
+            title : title,
+            content : content ,
+            isLocked : privateCk,
+            fileNo : fileNo
+        };
+    }else {
+            data = {
+            type : boardType,
+            memberId : memberId,
+            writer : memberName,
+            title : title,
+            content : content ,
+            isLocked : privateCk
+        };
+    }
 
 
     let xhr = new XMLHttpRequest();
