@@ -241,9 +241,9 @@ const formTemplate = `<form action="/ttr/search" method="GET" class="form-inline
 </form>`;
 
 // 데이터 객체 (빈 객체)
-const data = {};
+// const data = {};
 
-const renderedForm = Mustache.render(template, data);
+// const renderedForm = Mustache.render(template, data);
 
 // 생성된 폼을 원하는 HTML  요소에 추가
-const formContainer = document.getElementById("")
+// const formContainer = document.getElementById("")

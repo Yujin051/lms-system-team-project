@@ -21,4 +21,5 @@ public interface AdminThisTimeRegisTration extends JpaRepository<LectNth, Long> 
 
     /* 검색 기능 */
     List<LectNth> findByNthIdContaining(String keyword);
+
 }

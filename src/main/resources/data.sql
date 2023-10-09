@@ -27,22 +27,22 @@ insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values (
 
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (1, '집게리아', '집게사장', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (1, '가', '가', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (2, '집게리아2', '집게사장2', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (2, '나', '나', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (3, '집게리아3', '집게사장3', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (3, '다', '다', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (4, '집게리아4', '집게사장4', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (4, '라', '라', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (5, '집게리아5', '집게사장5', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (5, '마', '마', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (6, '집게리아6', '집게사장6', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (6, '바', '바', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
 
 
 

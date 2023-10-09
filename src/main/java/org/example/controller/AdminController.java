@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dto.AttendanceStatusDto;
 import org.example.dto.LectNthDto;
 import org.example.entity.LectNth;
+import org.example.repository.AdminThisTimeRegisTration;
 import org.example.service.AdminAttendanceStatusService;
 import org.example.service.LectNthService;
 import org.springframework.data.domain.Pageable;
@@ -98,18 +99,25 @@ public class AdminController {
     }
 
 
+    /* 온라인 차시정보 상단 검색 메뉴바 */
+    @GetMapping("/ttr/sc")
+    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+        List<LectNth> lectNths = lectNthService.search(keyword);
+        model.addAttribute("lectNths", lectNths);
+        return "/ttr/sc";
 
-    // 검색기능
-  @GetMapping("/ttr/search")
-  public String search(String keyword, Model model) {
-    List<LectNth> searchList = lectNthService.search(keyword);
-
-    model.addAttribute("searchList", searchList);
-
-    return "ttr-search";
     }
 
-
+    /* 온라인 차시정보 데이터 값 테이블에 불러오기  */
+    @GetMapping("/ttr/search")
+    @ResponseBody
+    public ResponseEntity<List<LectNthDto>> adminLectNth() {
+        List<LectNthDto> lectNthDtos = lectNthService.lectNthList();
+        for(int i=0; i < lectNthDtos.size(); i++){
+            LectNthDto lectNthDto = lectNthDtos.get(i);
+        }
+        return ResponseEntity.ok(lectNthDtos);
+    }
 
 
     //온라인강의콘텐츠관리

@@ -4,12 +4,20 @@
 }
 #top-table {
     width: 1500px;
-    margin-left: 90px;
+    margin-left: 6px;
+}
+.bt1 {
+    width: 1500px;
+}
+
+.btn1 {
+    margin-left: 1455px;
+
 }
 
 
 .table {
-    margin-left: 90px;
+    margin-left: 50px;
     width: 94.5%;
 }
 
@@ -23,8 +31,12 @@
 }
 
 
+
+
+
 .s1 {
-    margin-right: 50px;
+    margin-top: 40px;
+    margin-right: 10px;
 }
 
 
