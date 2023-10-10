@@ -41,7 +41,7 @@ public class SecurityConfig {
                                 .requestMatchers(
                                         "/h2-console/**"   // H2 콘솔 허용
                                 ).permitAll()
-                                .requestMatchers("/admin","prof/**").hasRole(RoleType.ADMIN.toString())
+                                .requestMatchers("/admin","admin/**").hasRole(RoleType.ADMIN.toString())
                                 .requestMatchers("/prof","prof/**").hasRole(RoleType.TEACHER.toString())
                                 .requestMatchers("/student","student/**").hasRole(RoleType.USER.toString())
                         //.requestMatchers("/my/**").hasAnyRole(RoleType.ADMIN.toString(), RoleType.TEACHER.toString(), RoleType.USER.toString())
