@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.ProfessorDto;
 import org.example.service.admin.ProfInfoService;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;

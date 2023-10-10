@@ -1,17 +1,20 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 /**
  * 강좌정보 엔티티
  * @author 임휘재
  */
 @Entity
-//@AllArgsConstructor
-//@NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Table(name = "lect_info")
 public class LectInfo {
@@ -73,7 +76,7 @@ public class LectInfo {
 
     //강좌 운영상태
     @Column(name = "is_active")
-    private String isActive;
+    private boolean isActive;
 
     //과제 배점
     @Column(name = "lect_assign")
@@ -87,4 +90,7 @@ public class LectInfo {
     @Column(name = "lect_test")
     private Long lectTest;
 
+    // 수강 대상 학년
+    @Column(name="lect_elem")
+    private int lectElem;
 }

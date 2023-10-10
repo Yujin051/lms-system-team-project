@@ -3,8 +3,6 @@
     border: 0;
     width: 1670px;
     height: 820px;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 /* 검색 영역 */
@@ -23,15 +21,17 @@
     height: 45px;
 }
 
-.buttonGroup > div{
+.buttonGroup > button{
     margin-left: 10px;
     float: left;
     width: 45px;
     height: 30px;
     border: 1px solid black;
     border-radius: 3px;
-    line-height: 30px;
+    line-height: 27px;
     text-align: center;
+    color: white;
+    background-color: black;
 }
 
 /* 검색 박스 */
@@ -124,3 +124,15 @@
     background: #f4f4f4;
 }
 
+.detail td .readOnly {
+    border: 0;
+    background-color: #f4f4f4;
+}
+
+.detail td > input, select {
+    width: 450px;
+    border: 1px solid black;
+    border-radius: 5px;
+    height: 35px;
+    text-align: center;
+}

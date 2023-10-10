@@ -9,21 +9,21 @@
     <!-- 검색 조건 설정, 조회 등 버튼 위치 구역 -->
     <article class="searchFrame">
         <div class="buttonGroup">
-            <div>조회</div>
-            <div>신규</div>
-            <div>저장</div>
-            <div>삭제</div>
+            <button id="search">조회</button>
+            <button id="create">신규</button>
+            <button id="save">저장</button>
+            <button id="delete">삭제</button>
         </div>
         <div class="searchBox">
             <div>
                 <div class="searchContainer">
                     <span>수업년도/학기</span>
-                    <select>
-                        <option>2021</option>
-                        <option>2022</option>
-                        <option>2023</option>
+                    <select id="lectYear">
+                        <option>2021년</option>
+                        <option>2022년</option>
+                        <option>2023년</option>
                     </select>
-                    <select>
+                    <select id="lectSem">
                         <option>1학기</option>
                         <option>2학기</option>
                     </select>
@@ -31,28 +31,28 @@
             </div>
             <div>
                 <div class="searchContainer">
-                    <span>과정구분</span>
-                    <select>
-                        <option>정규과정</option>
-                        <option>비정규과정</option>
+                    <span>운영구분</span>
+                    <select id="lectActive">
+                        <option value="true">운영중</option>
+                        <option value="false">마감됨</option>
                     </select>
                 </div>
             </div>
             <div>
                 <div class="searchContainer">
                     <span>수강학년</span>
-                    <select>
-                        <option>1학년</option>
-                        <option>2학년</option>
-                        <option>3학년</option>
-                        <option>4학년</option>
+                    <select id="lectElem">
+                        <option value="1">1학년</option>
+                        <option value="2">2학년</option>
+                        <option value="3">3학년</option>
+                        <option value="4">4학년</option>
                     </select>
                 </div>
             </div>
             <div>
                 <div class="searchContainer">
                     <span>과목구분</span>
-                    <select>
+                    <select id="lectSubj">
                         <option>언어</option>
                         <option>사회</option>
                         <option>과학</option>
@@ -79,31 +79,49 @@
             <table class="detail">
                 <tr>
                     <th>개설강좌 번호</th>
-                    <td>번호</td>
+                    <td><input id="lectId" class="readOnly" type="text" value="번호" readonly/></td>
                     <th>강좌명</th>
-                    <td>강좌 이르으음</td>
+                    <td><input id="lectName" type="text" value="강좌 이르으음"/></td>
                 </tr>
                 <tr>
                     <th>교과목</th>
-                    <td>과목명</td>
+                    <td><input id="lectSubject" type="text" value="과목명"/></td>
                     <th>수강학년</th>
-                    <td>수강학년</td>
+                    <td>
+                        <select id="lectGrade">
+                            <option value="1">1학년</option>
+                            <option value="2">2학년</option>
+                            <option value="3">3학년</option>
+                            <option value="4">4학년</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <th>학점</th>
-                    <td>3</td>
+                    <td><input id="lectCredit" type="number" value="3" min="1" max="3"/></td>
                     <th>진행상태</th>
-                    <td>운영중</td>
+                    <td>
+                        <select id="isActive">
+                            <option value="true">운영중</option>
+                            <option value="false">마감됨</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
                     <th>강의 시작일</th>
-                    <td>시작일</td>
+                    <td>
+                        <input type="datetime-local" id="startDateInput"
+                               name="selectedDatetime" min="2017-01-01T00:00"
+                               max="2030-12-31T23:59" value="">
+                    </td>
                     <th>강의 종료일</th>
-                    <td>종료일</td>
+                    <td><input type="datetime-local" id="endDateInput"
+                               name="selectedDatetime" min="2017-01-01T00:00"
+                               max="2030-12-31T23:59" value=""></td>
                 </tr>
                 <tr>
                     <th>담당강사</th>
-                    <td>강사명</td>
+                    <td><input id="profName" type="text" value="강사 이름"/></td>
                 </tr>
             </table>
         </div>
@@ -114,5 +132,22 @@
 </body>
 <th:block layout:fragment="script">
     <script src="/js/admin_lecture_manage.js"></script>
+    <script>
+        // 현재 날짜와 시간을 얻기 위한 함수
+        function getCurrentDatetime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+
+            return `${year}-${month}-${day}T${hours}:${minutes}`;
+        }
+
+        // 현재 날짜와 시간 값을 <input> 요소에 설정
+        document.getElementById("startDateInput").value = getCurrentDatetime();
+        document.getElementById("endDateInput").value = getCurrentDatetime();
+    </script>
 </th:block>
 </html>

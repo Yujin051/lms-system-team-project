@@ -26,13 +26,4 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Long findStudentIdByNameAndGrade(@Param("name") String name,
                                      @Param("grade") String grade);
 
-
-
-    @Query("SELECT NEW org.example.dto.admin.MemberDto" +
-            "(l.lectId, l.lectName, l.lectStart, l.lectEnd, l.lectCredit, l.isActive," +
-            "m.userName, s.studId) " +
-            "FROM Member m JOIN Professor p ON m.professor.id = p.id " +
-            "JOIN LectInfo l ON p.id = l.professor.id JOIN Student s ON s.studId = m.student.studId " +
-            "WHERE s.studId = :studId")
-    List<MemberDto> gradesByCourse(@Param("studId") Long studId);
 }
