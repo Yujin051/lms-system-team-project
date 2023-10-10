@@ -70,7 +70,7 @@ public class BoardController {
         model.addAttribute("id" , boardId);
         model.addAttribute("totalPage" , totalPage);
         model.addAttribute("roleType" , roleType);  // USER , TEACHER , ADMIN
-        model.addAttribute("userName" , principal.getName());
+//        model.addAttribute("userName" , principal.getName());
 
         return "/community/commu_list";
     }

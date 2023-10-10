@@ -57,4 +57,7 @@ public class BoardRestController {
         return article;
     }
 
+//    @PostMapping("/deleted/{id}")
+//    public void deleteBoardArticle()
+
 }

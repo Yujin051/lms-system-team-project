@@ -74,8 +74,8 @@
             </form>
 
             <div class="btnBox mt-5">
-                <button class="btn btn-dark" id="modifyBtn">수정</button>
-                <button class="btn btn-dark" id="saveBtn">등록</button>
+                <button th:if="${article.getId() != null}" class="btn btn-dark" id="modifyBtn">수정</button>
+                <button th:if="${article.getId() == null}" class="btn btn-dark" id="saveBtn">등록</button>
                 <button class="btn btn-dark" id="cancelBtn">취소</button>
             </div>
         </div>

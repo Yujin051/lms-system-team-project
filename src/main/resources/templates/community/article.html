@@ -29,8 +29,8 @@
             <input type="text" name="boardType" id="boardType" th:value="${article.getBoardInfo().getId()}">
             <div class="board_nav">
                 <!-- th:if="${article.getMemberId() == member}"-->
-                <button id="modifyBtn" class="btn btn-dark">수정</button>
-                <button id="deleteBtn"  class="btn btn-dark">삭제</button>
+                <button th:if="${article.getMemberId().getId() == member.getId()}" id="modifyBtn" class="btn btn-dark">수정</button>
+                <button th:if="${article.getMemberId().getId() == member.getId()}" id="deleteBtn"  class="btn btn-dark">삭제</button>
                 <button id="backBtn" class="btn btn-dark">돌아가기</button>
             </div>
 
