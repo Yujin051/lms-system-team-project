@@ -30,4 +30,8 @@ public class LectNthService {
     public List<LectNthDto> getLectNthData() {
         return adminThisTimeRegisTration.findLectNthDtos();
     }
+
+    public List<LectNthDto> getFindLectNthSearch(String lectName) {
+        return adminThisTimeRegisTration.findLectNthSearch(lectName);
+    }
 }

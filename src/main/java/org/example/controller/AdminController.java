@@ -146,4 +146,11 @@ public class AdminController {
 
         return "/admin/youTube_registration";
     }
+
+    //lectName 검색
+    @GetMapping("/api/lectName/search")
+    @ResponseBody
+    public List<LectNthDto> lectNameSearch(@RequestParam(value = "lectName") String lectName) {
+        return lectNthService.getFindLectNthSearch(lectName);
+    }
 }

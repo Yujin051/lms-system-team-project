@@ -1,47 +1,3 @@
-const gridData = [
-    {
-        name: '강의 1',
-        artist: '강좌명',
-        type: '과목명',
-        release: '2023-01-15',
-        genre: '2023-10-24',
-        lectureStatus:'운영중'
-    },
-    {
-        name: '강의 2',
-        artist: '강좌명',
-        type: '과목명',
-        release: '2023-01-15',
-        genre: '2023-10-24',
-        lectureStatus:'운영중'
-    },
-    {
-        name: '강의 3',
-        artist: '강좌명',
-        type: '과목명',
-        release: '2023-01-15',
-        genre: '2023-10-24',
-        lectureStatus:'운영중'
-    },
-    {
-        name: '강의 4',
-        artist: '강좌명',
-        type: '과목명',
-        release: '2023-01-15',
-        genre: '2023-10-24',
-        lectureStatus:'운영중'
-    },
-    {
-        name: '강의 5',
-        artist: '강좌명',
-        type: '과목명',
-        release: '2023-01-15',
-        genre: '2023-10-24',
-        lectureStatus:'운영중'
-    },
-    // 다른 데이터 항목 추가 가능
-];
-
 const grid = new tui.Grid({
     el: document.getElementById('grid'),
     "result": true,
@@ -116,7 +72,7 @@ console.log(grid)
 grid.el.style.width = '1500px';
 grid.el.style.marginLeft = '90px';
 
-// 버튼 클릭시 데이터 조회
+// // 버튼 클릭시 데이터 조회
 const retrieveButton = document.querySelector('.btn-secondary');
 retrieveButton.addEventListener('click', async () => {
     try {
@@ -302,8 +258,102 @@ $(document).ready(function() {
     });
 });
 
+/*
 grid.on('click', (ev) => {
-
-
-
+    console.log(grid.getValue(ev.rowKey, 'nthSequence'))
+    const nthSequence = document.querySelector("nthSequence");
+    grid2.resetData(grid2.getData());
 })
+
+
+// 검색조회버튼
+let searchBtn = document.getElementById('search-button');
+
+searchBtn.addEventListener('click',()=>{
+    // 검색창 값
+    let searchValue = document.getElementById('search-input').value;
+    console.log(searchValue);
+
+    let searchData = {
+        searchValue : searchValue
+    };
+
+    // XMLHttpRequest 객체 생성
+    let xhr = new XMLHttpRequest();
+    // GET 요청 보내기
+    xhr.open('POST', '/api/post' , true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+    // 서버 응답 처리
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                // 서버 응답이 성공적으로 완료된 경우
+                alert('성공');
+            } else {
+                // 서버 응답이 실패한 경우
+                console.error('서버 응답 실패:', xhr.status);
+            }
+        }
+    };
+    xhr.send(JSON.stringify(searchData));
+});*/
+// 검색조회버튼
+
+
+// searchBtn.addEventListener('click', async () => {
+//     // 검색창 값
+//     let searchValue = document.getElementById('search-input').value;
+//     console.log(searchValue);
+//
+//     let searchData = {
+//         searchValue: searchValue
+//     };
+//
+//     try {
+//         const response = await fetch('/api/post', {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(searchData)
+//         });
+//
+//         if (response.ok) {
+//             // 서버 응답이 성공적으로 완료된 경우
+//             alert('성공');
+//         } else {
+//             // 서버 응답이 실패한 경우
+//             console.error('서버 응답 실패:', response.status);
+//         }
+//     } catch (error) {
+//         console.error('데이터 가져오기 오류:', error);
+//     }
+// });
+
+const searchBtn = document.querySelector('#search-button');
+const searchInput = document.querySelector('#search-input');
+const resultElement = document.querySelector('.result2');
+
+searchBtn.addEventListener('click', async () => {
+    try {
+        const searchInputValue = searchInput.value;
+
+        let apiUrl;
+        console.log("searchInputValue : " + searchInputValue)
+
+        if (searchInputValue) {
+            // 게시판 종류 검색어만 입력한 경우
+            apiUrl = `/admin/api/lectName/search?lectName=${searchInputValue}`;
+        }
+
+        const response = await fetch(apiUrl);
+        const searchData = await response.json();
+        console.log("search : " + JSON.stringify(searchData));
+
+        grid.resetData(searchData); // 검색 결과를 그리드에 업데이트
+        resultElement.textContent = `검색결과 : ${searchData.length} 건`;
+    } catch (error) {
+        console.error('데이터 가져오기 오류:', error);
+    }
+});
+
