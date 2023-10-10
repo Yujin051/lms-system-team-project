@@ -3,6 +3,7 @@ package org.example.controller.admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.admin.MemberDto;
+import org.example.dto.admin.StudentDto;
 import org.example.entity.Student;
 import org.example.service.admin.AdminService;
 import org.springframework.http.HttpStatus;
@@ -117,7 +118,6 @@ public class AdminController {
         return adminService.getNoSearch(idKeyword, nameKeyword);
     }
 
-
     @GetMapping("/studentmanage/api/info/{memberId}")
     @ResponseBody
     public ResponseEntity<?> studInfo(@PathVariable("memberId") Long memberId) {
@@ -132,20 +132,110 @@ public class AdminController {
         }
     }
 
-
     @GetMapping("/profmanage")
     public String adminProf() {
         return "/admin/admin_prof_manage";
     }
 
-
     /**
-     * 관리자 : 전체관리성적
+     * 관리자 : 전체관리성적 조회
      * @author 임휘재
      */
     @GetMapping("/grade")
     public String grade(){
         return "/admin/gradeManagement";
+    }
+
+    /**
+     * 관리자 : 전체관리성적 : 학생정보 조회
+     * @author 임휘재
+     */
+    @GetMapping("/api/grade")
+    @ResponseBody
+    public ResponseEntity<List<MemberDto>> adminGradeStudInfo() {
+        List<MemberDto> dtos = adminService.getAdminGradeStudInfo();
+        for(int i=0; i < dtos.size(); i++){
+            MemberDto dto = dtos.get(i);
+            log.info("gradeUserName : {}", dto.getUserName());
+            log.info("userEmail : {}", dto.getUserEmail());
+        }
+        return ResponseEntity.ok(dtos);
+    }
+
+    /**
+     * 관리자 - 전체관리성적 이름 검색
+     * @author 임휘재
+     */
+    @GetMapping("/grade/userName/api/search")
+    @ResponseBody
+    public List<MemberDto> gradeUserNameSearch(@RequestParam(value = "keyword") String keyword){
+        log.info("keyword : " + keyword);
+        return adminService.getAdminGradeUserNameSearch(keyword);
+    }
+
+    /**
+     * 관리자 - 전체관리성적 학번 검색
+     * @author 임휘재
+     */
+    @GetMapping("/grade/studId/api/search")
+    @ResponseBody
+    public List<MemberDto> gradeStudIdSearch(@RequestParam(value = "keyword") Long keyword){
+        log.info("keyword : " + keyword);
+        return adminService.getAdminGradeStudIdSearch(keyword);
+    }
+
+    /**
+     * 관리자 - 전체관리성적 학년 검색
+     * @author 임휘재
+     */
+    @GetMapping("/grade/studGrade/api/search")
+    @ResponseBody
+    public List<MemberDto> gradeStudGradeSearch(@RequestParam(value = "keyword") Long keyword){
+        log.info("keyword : " + keyword);
+        return adminService.getAdminGradeStudGradeSearch(keyword);
+    }
+
+    /**
+     * 관리자 - 전체관리성적 이름, 학번, 학년 검색
+     * @author 임휘재
+     */
+    @GetMapping("/grade/all/api/search")
+    @ResponseBody
+    public List<MemberDto> gradeAllSearch(@RequestParam(value = "idKeyword", required = false) Long idKeyword ,
+                                     @RequestParam(value = "nameKeyword", required = false) String nameKeyword,
+                                          @RequestParam(value = "gradeKeyword") Long gradeKeyword){
+        log.info("idKeyword : " + idKeyword);
+        log.info("nameKeyword : " + nameKeyword);
+        log.info("gradeKeyword : " + gradeKeyword);
+        return adminService.getAdminGradeAllSearch(idKeyword, nameKeyword, gradeKeyword);
+    }
+
+    /**
+     * 관리자 - 전체관리성적 : 검색어가 비어있을때 조회버튼 누르면 전체 조회
+     * @author 임휘재
+     */
+    @GetMapping("/grade/no/api/search")
+    @ResponseBody
+    public List<MemberDto> gradeNoSearch(@RequestParam(value = "idKeyword", required = false) Long idKeyword ,
+                                    @RequestParam(value = "nameKeyword", required = false) String nameKeyword){
+        log.info("idKeyword : " + idKeyword);
+        log.info("nameKeyword : " + nameKeyword);
+        return adminService.getAdminGradeNoSearch(idKeyword, nameKeyword);
+    }
+
+    /**
+     * 관리자 - 전체성적관리 : 강좌별성적
+     * @author 임휘재
+     */
+    @GetMapping("/api/gradeByCourse")
+    @ResponseBody
+    public ResponseEntity<List<MemberDto>> gradeByCourse(@RequestParam(value = "studId") Long studId) {
+        List<MemberDto> dtos = adminService.getGradesByCourse(studId);
+        log.info("controller studId : " + studId);
+        log.info("controller lectName : " + dtos.get(0).getLectName());
+        log.info("controller lectStart : " + dtos.get(0).getLectStart());
+        log.info("controller lectStart : " + dtos.toString());
+        return ResponseEntity.ok(dtos);
     }
 
     /**

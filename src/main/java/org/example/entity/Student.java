@@ -3,6 +3,8 @@ package org.example.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * 수강생 정보 엔티티
  * @author 임휘재
@@ -22,6 +24,9 @@ public class Student {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     private Member member;
+
+    @OneToMany(mappedBy = "student")
+    private List<SemGrade> semGrade;
 
     //수강생 학년
     @Column(name = "stud_grade")
