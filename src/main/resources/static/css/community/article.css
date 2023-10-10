@@ -95,6 +95,17 @@ section {
     min-height: 200px;
 }
 
+#content > a {
+    color: #0a53be !important;
+    text-decoration: underline;
+}
+
+#content > a:visited {
+    color: #0a53be !important;
+    text-decoration: underline;
+}
+
+
 /* 첨부파일 설정 */
 .file_download {
     margin-top: 2rem;

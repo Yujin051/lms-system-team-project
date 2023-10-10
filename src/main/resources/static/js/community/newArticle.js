@@ -72,9 +72,8 @@ function uploadFile(){
 
 
 
-
 //  summernote 설정
-// $('#summernote').summernote('code', '<p>가나다</p><p>마바사</p><p>아자차카타파하</p>');
+// $('#summernote').summernote('code', );
 $('#summernote').summernote({
     toolbar: [
         ['fontname', ['fontname']],
@@ -102,8 +101,9 @@ $('#summernote').summernote('redo');
 // 기존 작성값 불러오기(html로 변환해서 가져와야 양식 유지)
 // $('#summernote').summernote('pasteHTML', data);
 
+// 등록버튼
 const saveBtn = document.getElementById('saveBtn');
-
+// 등록버튼 클릭시
 saveBtn.addEventListener('click' , ()=>{
 
     // 게시판 종류 값 가져오기
@@ -162,6 +162,10 @@ saveBtn.addEventListener('click' , ()=>{
             // 성공 응답시
             if(xhr.status === 201){
                 alert('등록됨');
+                let article = JSON.parse(xhr.response);
+                let articleId = article.id;
+                // console.log("articleId = " + articleId);
+                window.location = '/board/view/' + articleId;
             }
             else {
                 alert('실패');
@@ -173,3 +177,84 @@ saveBtn.addEventListener('click' , ()=>{
 
 });
 
+// 수정버튼
+const modifyBtn = document.getElementById('modifyBtn');
+
+// 수정버튼 클릭시
+modifyBtn.addEventListener('click' , ()=>{
+
+    // 게시판 종류 값 가져오기
+    const boardType = document.getElementById('boardType').value;
+    // 사용자 id 값 가져오기
+    const memberId = document.getElementById('memberId').value;
+    // 사용자 이름 값 가져오기
+    const memberName = document.getElementById('memberName').value;
+    // 게시글 제목 가져오기
+    const title = document.getElementById('title').value;
+    // 서머 노트 입력값 가져오기
+    const content = $('#summernote').summernote('code');
+    // 비공개 글 여부 체크 값 가져오기
+    let privateCk = false;
+    if(document.getElementById('private_ck').checked == true){
+        privateCk = true;
+    }
+    // 게시판 id 가져오기
+    const articleId = document.getElementById('articleId').value;
+
+    console.log("privateCk : " + privateCk);
+    console.log("boardType : " + boardType);
+    console.log("memberId : " + memberId);
+    console.log("memberName : " + memberName);
+    console.log("title : " + title);
+    console.log("content : " + content);
+    console.log("articleId : " + articleId);
+
+    let data;
+
+    if(fileNo !== null || fileNo === 0){
+        data = {
+            type : boardType,
+            memberId : memberId,
+            writer : memberName,
+            title : title,
+            content : content ,
+            isLocked : privateCk,
+            fileNo : fileNo,
+            id : articleId
+        };
+    }else {
+        data = {
+            type : boardType,
+            memberId : memberId,
+            writer : memberName,
+            title : title,
+            content : content ,
+            isLocked : privateCk,
+            id : articleId
+        };
+    }
+
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('PUT', '/board/modify' , true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+
+    xhr.onreadystatechange = function (){
+        if(xhr.readyState === 4){
+            // 성공 응답시
+            if(xhr.status === 200){
+                alert('수정됨');
+                let article = JSON.parse(xhr.response);
+                let articleId = article.id;
+                // console.log("articleId = " + articleId);
+                window.location = '/board/view/' + articleId;
+            }
+            else {
+                alert('실패');
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+
+
+});

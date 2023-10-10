@@ -11,6 +11,7 @@ import org.example.repository.BoardArticleRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author 임승범
@@ -38,10 +39,24 @@ public class BoardService {
     // 새로운 게시글 추가하기(게시글 추가)
     public BoardArticle save(ArticleDto articleDto){
 
-        log.info("articleDto::{}" , articleDto);
+//        log.info("articleDto::{}" , articleDto);
         BoardArticle article = articleDto.toEntity();
 
         return boardRepository.save(article);
+    }
+
+    // 게시글 하나 id로 수정하기(게시글 수정)
+    @Transactional
+    public BoardArticle update(Long id , ArticleDto articleDto){
+
+        BoardArticle article = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Not Found : BoardArticle의 " + id + "를 찾을 수 없음."));
+
+        log.info("업데이트 하려는 articleDto::{}",articleDto);
+        article.update(articleDto);
+
+        return article;
+
     }
 
 

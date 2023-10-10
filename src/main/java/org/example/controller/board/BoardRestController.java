@@ -29,21 +29,32 @@ public class BoardRestController {
     @PostMapping("/write")
     public ResponseEntity<BoardArticle> addNewBoardArticle(@RequestBody ArticleDto articleDto , Principal principal){
 
-        log.info("Post요청 /board/write{id} >>> addNewBoardArticle() 실행됨.");
+        log.info("Post요청 /board/write >>> addNewBoardArticle() 실행됨.");
         // userId를 이용하여 member 가져오고 dto설정
         Member member = memberService.memberView(principal.getName());
         articleDto.setMember(member);
-
         // dto에 기록되어 있는 boardId 가져온 걸로 BoardInfo 레코드 찾아오기.
         Long id = articleDto.getType();
         BoardInfo boardInfo = BoardInfoService.findById(id);
-
         // dto에 넣어주고 BoardArticle로 만들어준다.
         articleDto.setBoardInfo(boardInfo);
+        // dto에 fileInfo 넣어주기
 
         BoardArticle article = boardService.save(articleDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(article);
+    }
+
+    @PutMapping("/modify")
+    public BoardArticle updateBoardArticle(@RequestBody ArticleDto articleDto){
+
+        log.info("Post요청 /board/modify >>> updateBoardArticle() 실행됨. ");
+
+        BoardArticle article = boardService.update(articleDto.getId() , articleDto);
+
+        log.info("articleDto******************************************************************" + articleDto);
+
+        return article;
     }
 
 }

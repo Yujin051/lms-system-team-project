@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -13,6 +14,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Getter
 @Entity
 @ToString
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BoardInfo {
 
     // 게시판 id

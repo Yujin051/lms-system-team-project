@@ -1,7 +1,10 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.board.ArticleDto;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Fetch;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,6 +22,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @ToString
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BoardArticle {
 
     // 게시글 id
@@ -30,6 +34,7 @@ public class BoardArticle {
     //  게시판 id (외래키)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id" , updatable = false , nullable = false)
+    @JsonIgnore
     private BoardInfo boardInfo;
 
     // 게시글 이름
@@ -63,7 +68,7 @@ public class BoardArticle {
     // 게시글 작성자(외래키)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id" , updatable = false , nullable = false)
-//    @ColumnDefault("3")
+    @JsonIgnore
     private Member memberId;
 
     // 게시글 첨부파일 번호
@@ -86,6 +91,14 @@ public class BoardArticle {
         this.articleFileNum = articleFileNum;
     }
 
+    public void update(ArticleDto articleDto){
+        this.articleTitle = articleDto.getTitle();
+        this.articleContent = articleDto.getContent();
+        this.isLocked = articleDto.getIsLocked();
+        this.articleFileNum =
+                articleDto.getFileNo() != null && articleDto.getFileNo() != 0L && this.articleFileNum == 0L?
+                        articleDto.getFileNo() : this.articleFileNum;
+    }
 
 
 }

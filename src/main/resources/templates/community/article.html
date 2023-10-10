@@ -26,14 +26,17 @@
 <section >
     <section>
         <div class="container board">
-            
+            <input type="text" name="boardType" id="boardType" th:value="${article.getBoardInfo().getId()}">
             <div class="board_nav">
-                <button class="btn btn-dark">수정</button>
-                <button class="btn btn-dark">삭제</button>
-                <button class="btn btn-dark">돌아가기</button>
+                <!-- th:if="${article.getMemberId() == member}"-->
+                <button id="modifyBtn" class="btn btn-dark">수정</button>
+                <button id="deleteBtn"  class="btn btn-dark">삭제</button>
+                <button id="backBtn" class="btn btn-dark">돌아가기</button>
             </div>
 
             <div class="article_top">
+                <!-- 전페이지에서 게시판 타입 가져오기 > get에서 모델 담아 html 반환 -->
+                <input type="hidden" id="articleId" th:value="${article.getId()}">
                 
                 <div class="mt-4">
                     <!-- 프로필사진 -->
@@ -47,7 +50,7 @@
                     <span class="article_writer" th:text="${article.getMemberId().getUserName()}">Denma</span>
                     <span>|</span>
                     <!-- 작성일 -->
-                    <span class="article_at" th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:MM')}">2023.10.01</span>
+                    <span class="article_at" th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:mm')}">2023.10.01</span>
                     <span>|</span>
                     <!-- 조회수 -->
                     <span th:text="${article.getArticleView()}">352</span>
@@ -56,7 +59,7 @@
 
             <div class="article_content">
                 <!-- 게시글 내용 출력 -->
-                <div th:text="${article.getArticleContent()}">
+                <div id="content" th:utext="${article.getArticleContent()}">
                     [th:text : 게시글 내용 출력하기] <br/><br/>
                     
                     당신의 코드를 유지보수하게 될 친구가 당신이 어디에 사는지 아는 
@@ -103,7 +106,7 @@
                 </ul>
             </div>
 
-            <div class="article_comment">
+            <div th:if="${article.getBoardInfo().getId() != 3}" class="article_comment">
                 <div class="comment_title">
                     댓글
                     <div>
@@ -148,7 +151,7 @@
                         <!-- 댓글 내용 -->
                         <!-- 위의 메뉴 > 댓글 수정 클릭할 경우 readonly를 풀어준다. -->
                         <div class="comment_text">
-                            <textarea name="reply" id="reply" rows="3" readonly> 썸 바리 헬미~</textarea>
+                            <textarea name="reply" class="reply" rows="3" readonly> 썸 바리 헬미~</textarea>
                             <div class="mt-2 comment_btnBox">
                                 <button class="btn btn-dark">등록</button>
                                 <button class="btn btn-dark">취소</button>
@@ -189,7 +192,7 @@
                         <!-- 댓글 내용 -->
                         <!-- 위의 메뉴 > 댓글 수정 클릭할 경우 readonly를 풀어준다. -->
                         <div class="comment_text">
-                            <textarea name="reply" id="reply" rows="3" readonly> th:text 로 댓글 내용 출력</textarea>
+                            <textarea name="reply" class="reply" rows="3" readonly> th:text 로 댓글 내용 출력</textarea>
                             <div class="mt-2 comment_btnBox">
                                 <button class="btn btn-dark">등록</button>
                                 <button class="btn btn-dark">취소</button>
@@ -208,5 +211,7 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <!-- header js -->
     <script src="/js/header.js"></script>
+    <!-- article js -->
+    <script src="/js/community/article.js"></script>
 </body>
 </html>

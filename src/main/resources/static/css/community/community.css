@@ -76,7 +76,7 @@ section {
 
 /* 리스트의 출력 설정 */
 .board_list > table > tbody > tr:hover {
-    border-bottom: 1px solid rgba(11, 11, 66, 0.651);
+    /*border-bottom: 1px solid rgba(11, 11, 66, 0.651);*/
     cursor: pointer;
 }
 
@@ -186,6 +186,11 @@ table {
     border-radius: 0;
 }
 
+/*.articleTitle {*/
+/*    display: flex;*/
+/*    padding: 0;*/
+/*    margin: 0;*/
+/*}*/
 
 
 

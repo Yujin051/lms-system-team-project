@@ -48,7 +48,7 @@ public class ArticleDto {
         return BoardArticle.builder()
                 .articleTitle(title)
                 .articleContent(content)
-                .isLocked(isLocked)
+                .isLocked(isLocked? true:false)
                 .boardInfo(boardInfo)
                 .memberId(member)
                 .articleView(0L)
