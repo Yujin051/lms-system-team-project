@@ -24,8 +24,10 @@ public class LectNthService {
     /* search */
     @Transactional
     public List<LectNth> search(String keyword) {
-        List<LectNth> lectNthList = adminThisTimeRegisTration.findByNthIdContaining(keyword);
-        return lectNthList;
+        return adminThisTimeRegisTration.findByNthIdContaining(keyword);
     }
 
+    public List<LectNthDto> getLectNthData() {
+        return adminThisTimeRegisTration.findLectNthDtos();
+    }
 }

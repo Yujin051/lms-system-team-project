@@ -98,15 +98,33 @@ public class AdminController {
         return "/admin/thisTime_registration";
     }
 
+    /* 온라인 차시정보 데이터 값 다른 테이블에 불러오기  */
+    @GetMapping("/ttr/api")
+    @ResponseBody
+    public ResponseEntity<List<LectNthDto>> findLectNthDtos() {
+        List<LectNthDto> lectNthData = lectNthService.getLectNthData();
+
+        log.info(lectNthData.toString());
+
+        return ResponseEntity.ok(lectNthData);
+    }
+
+/*    @GetMapping("/ttr/api")
+    public ResponseEntity<List<LectNthDto>> getLectNthData() {
+        List<LectNthDto> lectNthData = lectNthService.getLectNthData();
+        return ResponseEntity.ok(lectNthData);
+    }*/
+
+
 
     /* 온라인 차시정보 상단 검색 메뉴바 */
-    @GetMapping("/ttr/sc")
+ /*   @GetMapping("/ttr/sc")
     public String search(@RequestParam(value = "keyword") String keyword, Model model) {
         List<LectNth> lectNths = lectNthService.search(keyword);
         model.addAttribute("lectNths", lectNths);
         return "/ttr/sc";
+    }*/
 
-    }
 
     /* 온라인 차시정보 데이터 값 테이블에 불러오기  */
     @GetMapping("/ttr/search")
@@ -118,6 +136,8 @@ public class AdminController {
         }
         return ResponseEntity.ok(lectNthDtos);
     }
+
+
 
 
     //온라인강의콘텐츠관리

@@ -24,4 +24,5 @@ public class LectNthDto {
     private Long nthSequence;
 
 
+
 }
