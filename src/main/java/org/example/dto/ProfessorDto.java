@@ -2,10 +2,16 @@ package org.example.dto;
 
 import lombok.*;
 import org.example.entity.Member;
+import org.example.entity.Professor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
 @NoArgsConstructor
+@Getter
+@Setter
 public class ProfessorDto {
     private Long profId;
     private Long memberId;
@@ -25,4 +31,14 @@ public class ProfessorDto {
         this.profAccount = profAccount;
         this.isActive = isActive;
     }
+
+//    public List<Professor> ProfessorDtoToListEntity(List<Professor> professor) {
+//        return professor.stream()
+//                .map(Professor::toEntity)
+//                .collect(Collectors.toList());
+//    }
+
+
+
+
 }

@@ -54,28 +54,18 @@ public class MemberController {
 
 
     @PostMapping(value = "newprofessor")
-    public String professorForm(@Validated MemberFormDto memberFormDto, @Validated ProfessorDto professorDto, BindingResult bindingResult, Model model, @RequestPart MultipartFile file) {
-        if (bindingResult.hasErrors()) {
-            return "prof/signup";
-        }
+    public String professorForm(@Validated MemberFormDto memberFormDto, @Validated ProfessorDto professorDto, BindingResult bindingResult, Model model) {
 
-        try {
-            Member member = Member.createProf(memberFormDto, profpasswordEncoder);
-            Professor professor = Professor.createProfessor(professorDto, member);
+        Member member = Member.createProf(memberFormDto, profpasswordEncoder);
+        Professor professor = Professor.createProfessor(professorDto, member);
 
-            memberService.saveMember(member, file);
-            professorService.saveProfessor(professor);
-        } catch (IllegalStateException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "prof/signup";
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        memberService.updateMember(member);
+        professorService.saveProfessor(professor);
         return "prof/signupSuccess";
     }
 
     @PostMapping(value = "newstudent")
-    public String studentForm(@Validated MemberFormDto memberFormDto, BindingResult bindingResult, Model model, @RequestPart MultipartFile file) {
+    public String studentForm(@Validated MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "student/signup";
         }
@@ -83,7 +73,7 @@ public class MemberController {
         try {
             Member member = Member.createStudent(memberFormDto, studentpasswordEncoder);
 
-            memberService.saveMember(member, file);
+            memberService.updateMember(member);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "student/signup";

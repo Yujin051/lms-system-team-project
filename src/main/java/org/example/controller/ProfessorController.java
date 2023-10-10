@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.example.dto.ProfessorDto;
@@ -13,10 +14,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
@@ -56,36 +55,52 @@ public class ProfessorController {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
         Member member = memberRepository.findByUserId(userDetails.getUsername());
 
-        model.addAttribute("professor", professorService.ProfessorView(member.getUserId()));
+        Professor professor = professorService.ProfessorView(member.getUserId());
+
+        model.addAttribute("professor", professor);
         model.addAttribute("member", member);
 
         return "/prof/prof_my_page";
     }
 
-    @PostMapping("/mypage/modify")
-    public String profUpdate(Professor professor, Member member, Long memberId, Principal principal, Model model, Authentication auth) {
 
+    @PostMapping("/mypage/modify")
+    public String profUpdate(Professor professor, Member member, Principal principal, Model model, @RequestPart MultipartFile file) throws Exception {
         Member memberT = memberService.memberView(principal.getName());
+        log.info("1차 memberT : "+ memberT.getUserName());
+        log.info("1차 memberT : "+ memberT.getUserId());
         memberT.setUserName(member.getUserName());
         memberT.setUserBirthday(member.getUserBirthday());
         memberT.setUserPhoneNum(member.getUserPhoneNum());
         memberT.setUserEmail(member.getUserEmail());
         memberT.setUserAddr(member.getUserAddr());
 
-        // html에서 th:each때문에 못들어가는것 같은 예감이 조금 드는데 모르겠다
+        memberService.updateMember(memberT, file);
+
+        System.out.println("pm : "+professor);
+        System.out.println("member"+ member);
+
+
         Professor professorT = professorService.ProfessorView(memberT.getId());
+
         professorT.setProfBank(professor.getProfBank());
         professorT.setProfWork(professor.getProfWork());
         professorT.setProfAccount(professor.getProfAccount());
         professorT.setProfAgency(professor.getProfAgency());
-        professorT.setActive(professor.isActive());
 
-        log.info("멤버아이디는 "+memberId);
         professorService.professorUpdate(professorT);
+
+
+
+        log.info("memberT : "+ memberT.getUserId() +"유저이름 : "+ memberT.getUserName());
+        log.info("멤버아이디는 "+principal.getName());
+        log.info("프로페서T"+professorT);
+
         model.addAttribute("message", "정보가 수정되었습니다.");
         model.addAttribute("SearchUrl", "/prof");
         return "/student/message";
     }
+
 
 //  실험중인것
 //    Professor professorT = new Professor();
@@ -156,5 +171,14 @@ public class ProfessorController {
     @GetMapping("/assiGrade")
     public String assiGrade(){
         return "/prof/assiGrade";
+    }
+
+    @GetMapping("/test")
+    public String proftest(Authentication auth) {
+        UserDetails userDetails = (UserDetails) auth.getPrincipal();
+        Member member = memberRepository.findByUserId(userDetails.getUsername());
+        System.out.println(professorRepository.findByProfessorId(member.getId()));
+
+        return "";
     }
 }
