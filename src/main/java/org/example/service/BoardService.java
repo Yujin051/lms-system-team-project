@@ -64,7 +64,6 @@ public class BoardService {
     // 게시글 하나 논리삭제(isDeleted = true 변경)
     @Transactional
     public BoardArticle delete(Long id){
-
         BoardArticle article = boardRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Not Found : BoardArticle의 " + id + "를 찾을 수 없음."));
         article.delete();
@@ -74,21 +73,22 @@ public class BoardService {
 
 
     // 게시글 리스트 제목 검색
-    public void searchByTitle(String searchValue , Pageable pageable){
+    public Page<BoardArticle> searchByTitle(String searchValue , Pageable pageable){
 
-        Page<BoardArticle> articles = boardRepository.searchByArticleTitle(searchValue);
-
+        Page<BoardArticle> articles = boardPagingRepository.searchByArticleTitle(searchValue , pageable);
+        return articles;
     }
     // 게시글 리스트 내용 검색
-    public void searchByContent(String searchValue , Pageable pageable){
+    public Page<BoardArticle> searchByContent(String searchValue , Pageable pageable){
 
-        Page<BoardArticle> articles = boardRepository.searchByArticleContent(searchValue);
+        Page<BoardArticle> articles = boardPagingRepository.searchByArticleContent(searchValue , pageable);
+        return articles;
     }
     // 게시글 리스트 작성자 검색
-    public void searchByWriter(String searchValue , Pageable pageable){
+    public Page<BoardArticle> searchByWriter(String searchValue , Pageable pageable){
 
         Page<BoardArticle> articles = boardPagingRepository.searchByMemberId_UserName(searchValue , pageable);
-
+        return articles;
     }
 
 

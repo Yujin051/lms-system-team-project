@@ -47,13 +47,14 @@ public class BoardController {
 
         log.info("Get요청 /board/list{id} >>> getBoardList() 실행됨. ");
 
-        // jpa PagingAndSortRepository 이용
-        Page<BoardArticle> articles = boardService.getArticlesByBoardId(boardId , pageable);
         // principal로 사용자 권한 가져오기
         String userId = principal.getName();
         Member member = memberService.memberView(userId);
         RoleType roleType = member.getUserRole();
         log.info("roleType::{}" , roleType);
+
+        // jpa PagingAndSortRepository 이용
+        Page<BoardArticle> articles = boardService.getArticlesByBoardId(boardId , pageable);
 
         int nowPage = articles.getPageable().getPageNumber() + 1 ;      // 현재 페이지
         int startPage = Math.max(nowPage - 4 , 1);                      // 시작 페이지 (Math.max이용 , 비교 큰 값 할당)

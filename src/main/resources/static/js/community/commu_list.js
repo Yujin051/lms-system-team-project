@@ -21,22 +21,39 @@ if(searchBtn){
         let searchType = document.getElementById('search_select').value;
         let searchValue = document.getElementById('search_input').value;
 
+        let searchTitle = '/board/search/title';
+        let searchContent = '/board/search/content';
+        let searchWriter = '/board/search/writer';
+
+        let postUrl = "";
+
         if(searchValue == null || searchValue == ""){
             alert('검색하실 내용을 입력해주세요.');
             return ;
         }
         else{
+
+            if(searchType === 'title'){
+                postUrl = searchTitle;
+            }
+            else if(searchType === 'content'){
+                postUrl = searchContent;
+            }
+            else{
+                postUrl = searchWriter;
+            }
+
             let searchData = {
                 searchType : searchType,
                 searchValue : searchValue
             };
 
             let xhr = new XMLHttpRequest();
-            xhr.open('POST' , '/board/search' , true);
+            xhr.open('POST' , postUrl , true);
             xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
             xhr.onreadystatechange = function (){
                 if (xhr.readyState === 4){
-                    if(xhr.response >= 200 && xhr.response < 300){
+                    if(xhr.status === 200){
                         alert('성공');
                     }
                     else{

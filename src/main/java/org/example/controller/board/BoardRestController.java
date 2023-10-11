@@ -3,6 +3,7 @@ package org.example.controller.board;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.board.ArticleDto;
+import org.example.dto.board.PageDto;
 import org.example.dto.board.SearchDto;
 import org.example.entity.BoardArticle;
 import org.example.entity.BoardInfo;
@@ -11,12 +12,14 @@ import org.example.repository.BoardInfoRepository;
 import org.example.service.BoardInfoService;
 import org.example.service.BoardService;
 import org.example.service.MemberService;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 import java.util.Map;
@@ -79,28 +82,70 @@ public class BoardRestController {
     }
 
     // 게시글 검색
-    @PostMapping("/search")
-    public void searchList(
+    @PostMapping("/search/title")
+    public ResponseEntity<PageDto> searchTitle(
             @RequestBody SearchDto searchDto ,
-            @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC)Pageable pageable){
-
-        log.info("Post요청 /board/search >>> searchList() 실행됨.");
-        log.info("searchDto::{}",searchDto);
+            @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC)Pageable pageable ){
 
         String type = searchDto.getSearchType();
+        String value = searchDto.getSearchValue();
 
-        if(type == "title"){ // 게시글 제목
+        log.info("Post요청 /board/search >>> searchList() 실행됨.");
+        log.info("type = " + type + ", value = " +  value);
+        log.info("searchDto::{}",searchDto);
 
-        }
-        else if(type == "content"){ // 게시글 내용
+        Page<BoardArticle> articles = boardService.searchByTitle(value , pageable);
 
-        }
-        else if(type == "writer"){ // 게시글 작성자
+        PageDto pageDto = new PageDto(articles);
+        log.info("pageDto::{}" , pageDto);
 
-        }
-        else{
-            return ;
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(pageDto);
     }
+
+    @PostMapping("/search/content")
+    public void searchContent(){
+    }
+
+    @PostMapping("/search/writer")
+    public void searchWriter(){
+
+    }
+
+
+    // 게시글 검색
+//    @PostMapping("/search")
+//    public String searchList(
+//            @RequestBody SearchDto searchDto ,
+//            @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC)Pageable pageable,
+//            RedirectAttributes redirectAttributes){
+//
+//        log.info("Post요청 /board/search >>> searchList() 실행됨.");
+//        log.info("type = " + type + ", value = " +  value);
+//        log.info("searchDto::{}",searchDto);
+//            PageDto pageDto = new PageDto(articles);
+//
+//        String type = searchDto.getSearchType();
+//        String value = searchDto.getSearchValue();
+//
+//
+//        if(type.equals("title")){ // 게시글 제목
+//            Page<BoardArticle> articles = boardService.searchByTitle( value , pageable);
+//
+//        }
+//        else if(type.equals("content")){ // 게시글 내용
+//            Page<BoardArticle> articles = boardService.searchByContent( value , pageable);
+//            PageDto pageDto = new PageDto(articles);
+//
+//        }
+//        else if(type.equals("writer")){ // 게시글 작성자
+//            Page<BoardArticle> articles = boardService.searchByWriter(value , pageable);
+//            PageDto pageDto = new PageDto(articles);
+//
+//        }
+//        else{
+//
+//        }
+//
+//    }
 
 }
