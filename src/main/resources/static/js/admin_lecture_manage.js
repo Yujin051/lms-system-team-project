@@ -105,7 +105,6 @@ grid.on('click', (ev) => {
     // 번호가 정수가 아닐 때 0으로 처리, 빈 값일 경우
     const id = valueList.lectId
     const getId = typeof id === 'number' ? id : 0;
-    console.log(id, getId)
 
     $.ajax({
         url: url,
@@ -205,7 +204,6 @@ searchBtn.addEventListener('click', () => {
             elem: lectElem.value
         },
         success: function (response) {
-            console.log(response)
             grid.resetData(response)
         },
         error: function () {

@@ -40,7 +40,7 @@ public class LectureManageController {
 
     // 강좌 상세정보 찾아오기
     @GetMapping("/getlecturedetail")
-    public ResponseEntity lectureDetail(@RequestParam("id") int id) {
+    public ResponseEntity<?> lectureDetail(@RequestParam("id") int id) {
         Long lectId = (long) id;
         LectureListDto lecture = lectureRepository.findLecture(lectId);
         return ResponseEntity.status(HttpStatus.OK).body(lecture);
@@ -48,7 +48,7 @@ public class LectureManageController {
 
     // 뷰에서 넘어온 조건으로 강좌 리스트 검색
     @GetMapping("/searchlectlist")
-    public ResponseEntity lectSearch(@RequestParam("year") String year, @RequestParam("sem") String sem,
+    public ResponseEntity<?> lectSearch(@RequestParam("year") String year, @RequestParam("sem") String sem,
                                      @RequestParam("active") String active, @RequestParam("elem") String elem,
                                      @RequestParam("subject") String subject, @RequestParam("name") String name) {
 
@@ -67,7 +67,7 @@ public class LectureManageController {
 
     // 수정, 삭제, 추가된 데이터 업데이트
     @PutMapping("/savelecturedata")
-    public ResponseEntity lectureUpdate(@RequestBody LectureListDto mLecture) {
+    public ResponseEntity<?> lectureUpdate(@RequestBody LectureListDto mLecture) {
         logger.info("name : {}", mLecture.getUserName());
         // 이름으로 교수 객체 찾기
         Professor professor = professorRepository.findProfessorByMember_UserName(mLecture.getUserName());
