@@ -11,3 +11,40 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// 검색버튼
+const searchBtn = document.getElementById('searchBtn');
+
+if(searchBtn){
+    searchBtn.addEventListener('click' , ()=>{
+
+        let searchType = document.getElementById('search_select').value;
+        let searchValue = document.getElementById('search_input').value;
+
+        if(searchValue == null || searchValue == ""){
+            alert('검색하실 내용을 입력해주세요.');
+            return ;
+        }
+        else{
+            let searchData = {
+                searchType : searchType,
+                searchValue : searchValue
+            };
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST' , '/board/search' , true);
+            xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+            xhr.onreadystatechange = function (){
+                if (xhr.readyState === 4){
+                    if(xhr.response >= 200 && xhr.response < 300){
+                        alert('성공');
+                    }
+                    else{
+                        alert('실패');
+                    }
+                }
+            };
+            xhr.send(JSON.stringify(searchData));
+        }
+    });
+}

@@ -100,5 +100,9 @@ public class BoardArticle {
                         articleDto.getFileNo() : this.articleFileNum;
     }
 
+    public void delete(){
+        this.isDeleted = true;
+    }
+
 
 }

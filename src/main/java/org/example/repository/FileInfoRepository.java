@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FileInfoRepository extends JpaRepository<FileInfo , FileInfoId> {
 
+    // 가장 높은 수의 id 값 가져오기 (id만)
     @Query("SELECT MAX(fi.fileNo) FROM FileInfo fi")
     Long findMaxFileNo();
 

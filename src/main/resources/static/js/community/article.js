@@ -29,9 +29,10 @@ if(deleteBtn){
         let data = {
             articleId : articleId
         };
+        console.log(data);
 
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "/board/deleted/" + articleId , true);
+        xhr.open("POST", "/board/deleted" , true);
         xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
 
         xhr.onreadystatechange = function (){

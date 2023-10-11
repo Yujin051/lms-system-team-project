@@ -5,13 +5,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.board.ArticleDto;
 import org.example.entity.BoardArticle;
+import org.example.repository.BoardArticleRepository;
 import org.example.repository.BoardInfoRepository;
 import org.example.repository.BoardPagingRepository;
-import org.example.repository.BoardArticleRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * @author 임승범
@@ -27,7 +29,7 @@ public class BoardService {
     // jpa 페이징 리스트 가져오기(게시글 목록)
     public Page<BoardArticle> getArticlesByBoardId(Long boardId , Pageable pageable){
 
-        return boardPagingRepository.findByBoardInfo_Id(boardId , pageable);
+        return boardPagingRepository.findByBoardInfo_IdAndIsDeletedFalse(boardId , pageable);
     }
 
     // 게시글 하나 id로 가져오기(상세조회)
@@ -56,6 +58,36 @@ public class BoardService {
         article.update(articleDto);
 
         return article;
+
+    }
+
+    // 게시글 하나 논리삭제(isDeleted = true 변경)
+    @Transactional
+    public BoardArticle delete(Long id){
+
+        BoardArticle article = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Not Found : BoardArticle의 " + id + "를 찾을 수 없음."));
+        article.delete();
+
+        return article;
+    }
+
+
+    // 게시글 리스트 제목 검색
+    public void searchByTitle(String searchValue , Pageable pageable){
+
+        Page<BoardArticle> articles = boardRepository.searchByArticleTitle(searchValue);
+
+    }
+    // 게시글 리스트 내용 검색
+    public void searchByContent(String searchValue , Pageable pageable){
+
+        Page<BoardArticle> articles = boardRepository.searchByArticleContent(searchValue);
+    }
+    // 게시글 리스트 작성자 검색
+    public void searchByWriter(String searchValue , Pageable pageable){
+
+        Page<BoardArticle> articles = boardPagingRepository.searchByMemberId_UserName(searchValue , pageable);
 
     }
 
