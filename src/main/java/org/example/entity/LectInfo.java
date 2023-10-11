@@ -2,8 +2,10 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -16,6 +18,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "lect_info")
 public class LectInfo {
 
@@ -52,11 +55,11 @@ public class LectInfo {
 
     //현재 수강자 수
     @Column(name = "lect_nownum")
-    private Long lectNownum;
+    private Long lectNowNum;
 
     //최대 수강자 수
     @Column(name = "lect_maxnum")
-    private Long lectMaxnum;
+    private Long lectMaxNum;
 
     //수강신청 시작일정
     @Column(name = "enroll_start")

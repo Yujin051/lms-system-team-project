@@ -88,51 +88,73 @@ const start = document.querySelector("#startDateInput")
 const end = document.querySelector("#endDateInput")
 const profName = document.querySelector("#profName")
 const active = document.querySelector("#isActive")
+const lYear = document.querySelector("#year")
+const lSem = document.querySelector("#sem")
+const enrollStart = document.querySelector("#startEnrollDateInput")
+const enrollEnd = document.querySelector("#endEnrollDateInput")
+const enrollMax = document.querySelector("#enrollMax")
+const enrollNow = document.querySelector("#enrollNow")
+const test = document.querySelector("#test")
+const check = document.querySelector("#check")
+const assign = document.querySelector("#assign")
 
 // 행 클릭했을 때 상세정보 출력하기
 grid.on('click', (ev) => {
-    const valueList = Object.values(grid.getRow(ev.rowKey))
+    const valueList = grid.getRow(ev.rowKey)
     const url = "/getlecturedetail"
-    // console.log(valueList.toString())
+    // 번호가 정수가 아닐 때 0으로 처리, 빈 값일 경우
+    const id = valueList.lectId
+    const getId = typeof id === 'number' ? id : 0;
+    console.log(id, getId)
 
     $.ajax({
         url: url,
         data: {
-            name: valueList[1]
+            id: getId
         },
         success: function (response) {
-            const details = Object.values(response)
-            // console.log(details.toString())
-
             // 강좌 이름 undefined 처리
-            if (details[0] === null || details[0] === undefined) {
+            if (response.lectName === null || response.lectName === undefined) {
                 lectName.value = "강좌 이름을 입력해주세요."
             } else {
-                lectName.value = details[0]
+                lectName.value = response.lectName
             }
             // 강좌 분류(과목) undefined 처리
-            if (details[3] === null || details[3] === undefined) {
+            if (response.lectSubject === null || response.lectSubject === undefined) {
                 subject.value = "과목을 입력해주세요."
             } else {
-                subject.value = details[3]
+                subject.value = response.lectSubject
             }
             // 강좌 번호(프라이머리키) 처리
-            if (details[4] === null || details[4] === undefined) {
+            if (response.lectId === null || response.lectId === undefined) {
                 lectId.value = "저장 후 자동 생성됩니다."
             } else {
-                lectId.value = details[4]
+                lectId.value = response.lectId
             }
-            if (details[7] === null || details[7] === undefined) {
+            if (response.userName === null || response.userName === undefined) {
                 profName.value = "강사 이름을 입력해주세요."
             } else {
-                profName.value = details[7]
+                profName.value = response.userName
+            }
+            if (response.lectNowNum === null || response.lectNowNum === undefined) {
+                enrollNow.value = "등록되지 않은 강좌거나 현재 수강 인원이 없습니다."
+            } else {
+                enrollNow.value = response.lectNowNum
             }
 
-            lectGrade.value = details[1]
-            credit.value = details[2]
-            start.value = details[5]
-            end.value = details[6]
-            active.value = details[8]
+            lectGrade.value = response.lectElem
+            credit.value = response.lectCredit
+            start.value = response.lectStart
+            end.value = response.lectEnd
+            active.value = response.active
+            lYear.value = response.lectYear
+            lSem.value = response.lectSem
+            enrollStart.value = response.enrollStart
+            enrollEnd.value = response.enrollEnd
+            enrollMax.value = response.lectMaxNum
+            test.value = response.lectTest
+            check.value = response.lectCheck
+            assign.value = response.lectAssign
         },
         error: function () {
             alert("데이터 불러오기 오류")
@@ -197,8 +219,11 @@ saveBtn.addEventListener('click', () => {
     const url = "/savelecturedata"
     // 서버로 보낼 data 지정
     let id = lectId.value
-    // id 값은 신규 생성 시 할당되지 않으므로 null 처리
-    id = id || "";
+    let nowNum = enrollNow.value
+    // id 값은 신규 생성 시 할당되지 않으므로 0으로 처리
+    id = typeof id === 'number' ? id : 0
+    // 현재 수강인원도 신규 시 생성되지 않으므로
+    nowNum = typeof nowNum === 'number' ? nowNum : 0
 
     const data = {
         lectName:lectName.value,
@@ -209,25 +234,35 @@ saveBtn.addEventListener('click', () => {
         lectStart: start.value,
         lectEnd: end.value,
         userName: profName.value,
-        active: active.value
+        active: active.value,
+        lectYear: lYear.value,
+        lectSem: lSem.value,
+        enrollStart: enrollStart.value,
+        enrollEnd: enrollEnd.value,
+        lectMaxNum: enrollMax.value,
+        lectNowNum: nowNum,
+        lectTest: test.value,
+        lectCheck: check.value,
+        lectAssign: assign.value
     }
 
-    const modifiedData = JSON.stringify(data);
+    const newData = JSON.stringify(data);
 
     $.ajax({
         url: url,
         type: 'PUT',
         contentType: "application/json",
         dataType: 'json',
-        data: modifiedData,
-        success: function () {
-
+        data: newData,
+        success: function (response) {
+            grid.resetData(response)
         },
-        error: function () {
-
+        error: function (jqXHR) {
+            console.log(jqXHR.status)
+            console.log(jqXHR.error())
+            alert("강좌 등록에 실패했습니다.")
         }
     })
-
 })
 
 // 행 삭제(데이터 삭제)는 그리드 이용하여 처리

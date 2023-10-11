@@ -37,4 +37,8 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     ProfessorDto findProfessorDetail(@Param("work") String work,
                                      @Param("name") String name);
 
+    // 이름으로 교수 ID 조회하는 JPA 메소드
+    Professor findProfessorByMember_UserName(String userName);
+
+
 }

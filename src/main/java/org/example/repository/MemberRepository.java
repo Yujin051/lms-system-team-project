@@ -21,9 +21,9 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 //    @Query("SELECT NEW org.example.dto.admin.StudentDto ()"
 //    List<StudentDto> findLectureInfoBySem()
 
-    @Query("select s.studId FROM Student s Join s.member m where m.id = s.member.id"
-            + " and m.userName = :name and s.studGrade = :grade")
-    Long findStudentIdByNameAndGrade(@Param("name") String name,
-                                     @Param("grade") String grade);
+//    @Query("select s.studId FROM Student s Join s.member m where m.id = s.member.id"
+//            + " and m.userName = :name and s.studGrade = :grade")
+//    Long findStudentIdByNameAndGrade(@Param("name") String name,
+//                                     @Param("grade") String grade);
 
 }
