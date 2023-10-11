@@ -7,54 +7,121 @@
     <meta charset="UTF-8">
     <title>나의 강의실</title>
     <link rel="stylesheet" href="/css/stud/stu_lecture.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const lecCon = document.querySelector(".lectureName")
+            const lecDetail = document.querySelector(".lectureClick")
+            const plus = document.querySelector("#plus")
+            const minus = document.querySelector("#minus")
+
+            lecCon.addEventListener('click', function () {
+                const isLectureVisible = lecDetail.style.display !== 'none'
+
+                lecDetail.style.display = isLectureVisible ? 'none' : 'block'
+                plus.style.display = isLectureVisible ? 'block' : 'none'
+                minus.style.display = isLectureVisible ? 'none' : 'block'
+            })
+
+            $('#courseForm').submit(function (event) {
+                event.preventDefault();
+
+                var memberId = $('#memberId').val();
+                var year = $('#year').val();
+                var semester = $('#semester').val();
+
+                var h4Text = year + "년도 " + semester;
+                $('#yearAndSemester').text(h4Text);
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/student/lecture/find',
+                    data: {
+                        memberId: memberId,
+                        year: year,
+                        semester: semester
+                    },
+                    success: function (data) {
+                        var courseResult = $('#courseResult');
+                        courseResult.empty();
+                        $.each(data, function (index, lectinfo) {
+                            courseResult.append('<p>' + lectinfo.lectName +'</p>');
+                        });
+
+                        var courseSubResult = $('#courseSubResult');
+                        courseSubResult.empty();
+                        $.each(data, function(index, lectinfo) {
+                            courseSubResult.append('<div class="lectureClick'+index+'">');
+                            courseSubResult.append('<a href="/lecture/'+ lectinfo.lectId +'"><div class="lecMenu">강의 계획서</div></a>');
+                            courseSubResult.append('<a href="#"><div class="lecMenu">출결 조회</div></a>');
+                            courseSubResult.append('<a href="#"><div class="lecMenu">과제 제출</div></a>');
+                            courseSubResult.append('<a href="#"><div class="lecMenu">수업 게시판</div></a>');
+                            courseSubResult.append('</div>');
+                        });
+                    },
+                    error: function () {
+                        alert('Error fetching courses.');
+                    }
+                });
+            });
+
+        });
+    </script>
 </head>
 <body>
     <section id="mainFrame" layout:fragment="content">
         <article class="mainContainer">
             <h4>나의 강의 현황</h4>
+            <form id="courseForm">
             <div class="optContainer">
                 <div>
                     <div>
                         <span>년도</span>
-                        <select class="selector">
-                            <option>2020</option>
-                            <option>2021</option>
-                            <option>2022</option>
-                            <option>2023</option>
+                        <input type="hidden" id="memberId" th:value="${memberId}">
+                        <select id="year" class="selector">
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
                         </select>
                     </div>
                 </div>
                 <div>
                     <div>
                         <span>학기</span>
-                        <select class="selector">
-                            <option>1학기</option>
-                            <option>2학기</option>
+                        <select id="semester" class="selector">
+                            <option value="1학기">1학기</option>
+                            <option value="2학기">2학기</option>
                         </select>
                     </div>
                 </div>
             </div>
+                <button type="submit">조회</button>
+            </form>
 
             <!-- 학기 정보는 위의 현황 테이블에서 받아서 적용되도록. 타임리프 사용? -->
-            <h4>2023년도 2학기</h4>
+            <h4 id="yearAndSemester">2020년도 1학기</h4>
             <div>
                 <div class="lectureContainer">
+
                     <div class="lectureName">
-                        <span>과목 : 과목 이름이 옵니다. 타임리프 반복</span>
+                        <span id="courseResult">과목 : 과목 이름이 옵니다. 타임리프 반복</span>
                         <i id="plus" class="fa-solid fa-plus"></i>
                         <i id="minus" class="fa-solid fa-minus"></i>
                     </div>
-                    <div class="lectureClick">
+                    <div id="courseSubResult" class="lectureClick">
                         <!-- 타임리프 통해서 각 페이지로 이동 -->
-                        <a href="#"><div class="lecMenu">강의 계획서</div></a>
-                        <a href="#"><div class="lecMenu">출결 조회</div></a>
-                        <a href="#"><div class="lecMenu">과제 제출</div></a>
-                        <a href="#"><div class="lecMenu">수업 게시판</div></a>
+<!--                        <a href="#"><div class="lecMenu">강의 계획서</div></a>-->
+<!--                        <a href="#"><div class="lecMenu">출결 조회</div></a>-->
+<!--                        <a href="#"><div class="lecMenu">과제 제출</div></a>-->
+<!--                        <a href="#"><div class="lecMenu">수업 게시판</div></a>-->
                     </div>
                 </div>
             </div>
         </article>
         <script src="/js/stud/stu_lecture.js"></script>
     </section>
+
+
 </body>
 </html>

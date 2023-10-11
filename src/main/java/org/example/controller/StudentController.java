@@ -3,9 +3,13 @@ package org.example.controller;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.example.constant.Gender;
+import org.example.dto.LectInfoDTO;
+import org.example.entity.LectInfo;
 import org.example.entity.Member;
 import org.example.repository.MemberRepository;
+import org.example.service.LectureService;
 import org.example.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/student")
@@ -21,7 +27,8 @@ import java.security.Principal;
 public class StudentController {
 
 
-
+    @Autowired
+    private LectureService lectureService;
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
@@ -47,8 +54,27 @@ public class StudentController {
 
     // 학생 나의 강의현황
     @GetMapping("/lecture")
-    public String studentLecture() {
-        return "/student/mylecture";
+    public String studentLecture(Principal principal, Model model) {
+        Member member = memberRepository.findByUserId(principal.getName());
+        Long id =  member.getId();
+        model.addAttribute("memberId", id);
+
+        List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기");
+        model.addAttribute("lectInfoList", lectInfoList);
+
+        return "/student/myLecture";
+    }
+
+    @RequestMapping(value = "/lecture/find", method = RequestMethod.GET)
+    @ResponseBody
+    public List<LectInfoDTO> findCoursesByMemberAndSemester(@RequestParam Long memberId, @RequestParam String year, @RequestParam String semester) {
+        List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(memberId, year, semester);
+
+        List<LectInfoDTO> lectInfoDTOList = new ArrayList<>();
+        for (LectInfo lectInfo : lectInfoList) {
+            lectInfoDTOList.add(LectInfoDTO.fromLectInfo(lectInfo));
+        }
+        return lectInfoDTOList;
     }
 
     // 학생 강의계획서 보기

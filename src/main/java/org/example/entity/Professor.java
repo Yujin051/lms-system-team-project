@@ -2,13 +2,8 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.dto.MemberFormDto;
 import org.example.dto.ProfessorDto;
-import org.hibernate.annotations.Fetch;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.security.core.parameters.P;
-
-import javax.swing.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -52,17 +47,8 @@ public class Professor {
         this.isActive = isActive;
     }
 
-    @Builder
-    public Professor(Long profId, String profAgency, String profBank, String profWork, String profAccount, boolean isActive) {
-        this.profId = profId;
-        this.profBank = profBank;
-        this.profWork = profWork;
-        this.profAgency = profAgency;
-        this.profAccount = profAccount;
-        this.isActive = isActive;
-    }
     public static Professor createProfessor(ProfessorDto professorDto, Member member) {
-        return Professor.builder()
+        Professor professor = Professor.builder()
                 .member(member)
                 .profBank(professorDto.getProfBank())
                 .profWork(professorDto.getProfWork())
@@ -70,19 +56,6 @@ public class Professor {
                 .profAccount(professorDto.getProfAccount())
                 .isActive(professorDto.isActive())
                 .build();
-    }
-
-//    public Professor toEntity() {
-//        return new Professor(id, member, profAgency, profBank, profWork, profAccount, isActive);
-//    }
-
-    public static Professor toEntity(ProfessorDto dto) {
-        return Professor.builder()
-                .profAccount(dto.getProfAccount())
-                .profAgency(dto.getProfAgency())
-                .profBank(dto.getProfBank())
-                .profWork(dto.getProfWork())
-                .isActive(dto.isActive())
-                .build();
+        return professor;
     }
 }
