@@ -33,34 +33,34 @@ insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, le
 VALUES (2, '나', '나', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (3, '다', '다', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (3, '다', '다', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (4, '라', '라', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (4, '라', '라', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
 VALUES (5, '마', '마', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (6, '바', '바', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (6, '바', '바', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
 
 
 
 
 insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (1, 1, '집게사장', 1);
+values (1, 1, '가', 1);
 
 insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (2, 2, '집게사장2', 2);
+values (2, 2, '나', 2);
 
 insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (3, 3, '집게사장3', 3);
+values (3, 3, '다', 3);
 
 insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (4, 4, '집게사장4', 4);
+values (4, 4, '라', 4);
 
 insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (5, 5, '집게사장5', 5);
+values (5, 5, '마', 5);
 
 insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (6, 6, '집게사장6', 6);
+values (6, 6, '바', 6);

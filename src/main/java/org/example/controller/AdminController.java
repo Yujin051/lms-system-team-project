@@ -10,6 +10,7 @@ import org.example.service.AdminAttendanceStatusService;
 import org.example.service.LectNthService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -93,48 +94,45 @@ public class AdminController {
 
     //온라인강의정보관리
     @GetMapping("/ttr")
-    public String thisTime() {
-        List<LectNthDto> nthList = lectNthService.lectNthList();
+    public String thisTime(String searchType, Boolean nthKeyword) {
+        List<LectNthDto> nthList = lectNthService.lectNthList(searchType, nthKeyword);
         return "/admin/thisTime_registration";
     }
 
     /* 온라인 차시정보 데이터 값 다른 테이블에 불러오기  */
     @GetMapping("/ttr/api")
     @ResponseBody
-    public ResponseEntity<List<LectNthDto>> findLectNthDtos() {
-        List<LectNthDto> lectNthData = lectNthService.getLectNthData();
+    public ResponseEntity<List<LectNthDto>> findLectNthDtos(String searchType, Boolean nthKeyword) {
+        List<LectNthDto> lectNthData = lectNthService.getLectNthData(searchType, nthKeyword);
 
         log.info(lectNthData.toString());
 
         return ResponseEntity.ok(lectNthData);
     }
 
-/*    @GetMapping("/ttr/api")
-    public ResponseEntity<List<LectNthDto>> getLectNthData() {
-        List<LectNthDto> lectNthData = lectNthService.getLectNthData();
-        return ResponseEntity.ok(lectNthData);
-    }*/
-
-
-
-    /* 온라인 차시정보 상단 검색 메뉴바 */
- /*   @GetMapping("/ttr/sc")
-    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
-        List<LectNth> lectNths = lectNthService.search(keyword);
-        model.addAttribute("lectNths", lectNths);
-        return "/ttr/sc";
-    }*/
 
 
     /* 온라인 차시정보 데이터 값 테이블에 불러오기  */
     @GetMapping("/ttr/search")
     @ResponseBody
-    public ResponseEntity<List<LectNthDto>> adminLectNth() {
-        List<LectNthDto> lectNthDtos = lectNthService.lectNthList();
-        for(int i=0; i < lectNthDtos.size(); i++){
-            LectNthDto lectNthDto = lectNthDtos.get(i);
-        }
+    public ResponseEntity<List<LectNthDto>> adminLectNth(String searchType, Boolean nthKeyword) {
+        List<LectNthDto> lectNthDtos = lectNthService.lectNthList(searchType, nthKeyword);
+//        log.info(lectNthDtos.toString());
         return ResponseEntity.ok(lectNthDtos);
+    }
+    /* 운영 상태 드롭박스 검색 */
+    @GetMapping("/api/ttr/isActive/search")
+    @ResponseBody
+    public List<LectNthDto> findLectNthBox(@RequestParam(value = "isActive", required = false) Boolean isActive) {
+        log.info("isAc : " + isActive);
+        return lectNthService.getFindLectNthBox(isActive);
+    }
+    /* 강좌명 검색 */
+    @GetMapping("/api/ttr/lectName/search")
+    @ResponseBody
+    public List<LectNthDto> findLectName(@RequestParam(value = "lectName") String lectName) {
+        log.info("isAc : " + lectName);
+        return lectNthService.getFindLectName(lectName);
     }
 
 
@@ -143,14 +141,25 @@ public class AdminController {
     //온라인강의콘텐츠관리
     @GetMapping("/ytr")
     public String youTubeRegistration() {
-
         return "/admin/youTube_registration";
     }
 
-    //lectName 검색
+    //lectSubject 검색
     @GetMapping("/api/lectName/search")
     @ResponseBody
-    public List<LectNthDto> lectNameSearch(@RequestParam(value = "lectName") String lectName) {
-        return lectNthService.getFindLectNthSearch(lectName);
+    public List<LectNthDto> lectNameSearch(@RequestParam(value = "lectName") String lectName,
+                                              @RequestParam(value = "isActive") Boolean isActive) {
+        return lectNthService.getFindLectNthSearch(lectName, isActive);
     }
+
+
+
+    /* 강의 차시정보 하단테이블 비동기 처리 */
+    @GetMapping("/api/nthName/search")
+    @ResponseBody
+    public List<LectNthDto> nthNameSearch(@RequestParam(value = "nthName") String nthName) {
+        return lectNthService.getFindNtnName(nthName);
+    }
+
+
 }

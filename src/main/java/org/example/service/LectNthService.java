@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.dto.LectNthDto;
 import org.example.entity.LectNth;
 import org.example.repository.AdminThisTimeRegisTration;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ public class LectNthService {
 
     private final AdminThisTimeRegisTration adminThisTimeRegisTration;
 
-    public List<LectNthDto> lectNthList() {
-        return adminThisTimeRegisTration.findLectNthDtos();
+    public List<LectNthDto> lectNthList(String searchType, Boolean nthKeyword) {
+        return adminThisTimeRegisTration.findLectNthDtos(searchType, nthKeyword);
     }
 
 
@@ -27,11 +28,24 @@ public class LectNthService {
         return adminThisTimeRegisTration.findByNthIdContaining(keyword);
     }
 
-    public List<LectNthDto> getLectNthData() {
-        return adminThisTimeRegisTration.findLectNthDtos();
+    public List<LectNthDto> getLectNthData(String searchType, Boolean nthKeyword) {
+        return adminThisTimeRegisTration.findLectNthDtos(searchType, nthKeyword);
     }
 
-    public List<LectNthDto> getFindLectNthSearch(String lectName) {
-        return adminThisTimeRegisTration.findLectNthSearch(lectName);
+    // 온라인 강좌명 조회기능
+    public List<LectNthDto> getFindLectNthSearch(String lectName, Boolean isActive) {
+        return adminThisTimeRegisTration.findLectNthSearch(lectName, isActive);
+    }
+
+    public List<LectNthDto> getFindLectNthBox(Boolean isActive) {
+        return adminThisTimeRegisTration.findLectNthBox(isActive);
+    }
+
+    public List<LectNthDto> getFindLectName(String lectName) {
+        return adminThisTimeRegisTration.findLectName(lectName);
+    }
+    /* 강의 차시정보 하단테이블 비동기 처리*/
+    public List<LectNthDto> getFindNtnName(String nthName) {
+        return adminThisTimeRegisTration.findLectNthInfo(nthName);
     }
 }

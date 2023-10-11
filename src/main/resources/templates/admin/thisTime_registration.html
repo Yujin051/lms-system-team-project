@@ -18,10 +18,10 @@
         <div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
             <div class="col">
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="s1">온라인강의명</span>
+                    <div class="input-group-prepend mt-2">
+                        <span class="s1">온라인강좌명</span>
                     </div>
-                    <input class="form-control" type="text" id="search-input" placeholder="강좌 검색" aria-label="Search">
+                    <input class="form-control mt-1" type="text" id="search-input" placeholder="강좌 검색" aria-label="Search">
                 </div>
             </div>
             <div class="col mt-2">
@@ -29,26 +29,31 @@
                     <div class="input-group-prepend">
                         <span class="m-3 p-5">강의운영상태</span>
                     </div>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                    <!--<div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
                             전체
                         </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">(전체)</a></li>
-                            <li><a class="dropdown-item" href="#">준비중</a></li>
-                            <li><a class="dropdown-item" href="#">운영중</a></li>
-                            <li><a class="dropdown-item" href="#">종료</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <li><a class="dropdown-item" id="item-all" href="#">(전체)</a></li>
+                            <li><a class="dropdown-item" id="item-ready" href="#">준비중</a></li>
+                            <li><a class="dropdown-item" id="item-running" href="#">운영중</a></li>
+                            <li><a class="dropdown-item" id="item-closed" href="#">종료</a></li>
                         </ul>
-                    </div>
+                    </div>-->
+                    <select class="box" id="dropdown-menu">
+                        <option id="item-all" value="">(전체)</option>
+                        <option id="item-running" value="운영중">운영중</option>
+                        <option id="item-closed" value="종료">종료</option>
+                    </select>
                 </div>
             </div>
         </div>
 
 
         <div id="grid">
-            <div class="d1">온라인강의</div>
-            <div class="result2"></div>
+            <div class="d1 mt-3">온라인강의</div><div class="result2"></div>
+
         </div>
 
 
