@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.AttendanceStatusDto;
 import org.example.dto.LectNthDto;
+import org.example.dto.LmsContsDto;
 import org.example.entity.LectNth;
 import org.example.repository.AdminThisTimeRegisTration;
 import org.example.service.AdminAttendanceStatusService;
@@ -157,9 +158,29 @@ public class AdminController {
     /* 강의 차시정보 하단테이블 비동기 처리 */
     @GetMapping("/api/nthName/search")
     @ResponseBody
-    public List<LectNthDto> nthNameSearch(@RequestParam(value = "nthName") String nthName) {
-        return lectNthService.getFindNtnName(nthName);
+    public List<LectNthDto> lectIdSearch(@RequestParam(value = "lectId") Long lectId) {
+        return lectNthService.getFindLectId(lectId);
     }
+
+    /* 강의 차시정보 하단 우측 세번째 테이블 */
+    @GetMapping("/api/contsName/search")
+    @ResponseBody
+    public List<LmsContsDto> contsNameSearch(@RequestParam(value = "contsNo") Long contsNo) {
+        log.info("contsNo : " + contsNo);
+        List<LmsContsDto> dtos = lectNthService.getFindContsNo(contsNo);
+        log.info("dtos : " + dtos);
+        for(int i = 0; i < dtos.size(); i++) {
+
+        }
+        return dtos;
+    }
+
+    /* 강의 차시정보 저장 */
+    @PostMapping("/api/edit/{id}")
+    public List<LmsContsDto> updateLectNthEdit(@PathVariable Long editId) {
+        return lectNthService.postEdit(editId);
+    }
+
 
 
 }

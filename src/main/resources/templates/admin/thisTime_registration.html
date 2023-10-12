@@ -61,7 +61,7 @@
         <div class="table-button-container border border-0">
             <div class="d2 border border-0">강의 차시정보</div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="me-md-1 btn btn-secondary">신규</button>
+                <button id="createBtn" type="button" class="me-md-1 btn btn-secondary">신규</button>
                 <button type="button" class="me-md-1 btn btn-secondary">저장</button>
                 <button type="button" class="btn btn-secondary">삭제</button>
             </div>
@@ -76,53 +76,56 @@
 
 
 
-        <table class="right-align">
+        <table class="right-align" id="tb1">
 
-            <tbody class="tbl2 border border-1">
+            <form method="post" th:action="">
+
+             <tbody class="tbl2 border border-1">
 
             <tr>
                 <th class="border border-1 wider-th">차시관리번호</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="form-control" type="search" aria-label="Search">
+                    <input id="contsNthIdInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">온라인 강의번호</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="form-control" type="search" aria-label="Search">
+                    <input id="contsNoInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             <tr>
-                <th class="border border-1 wider-th">차시 순서/명</th>
+                <th class="border border-1 wider-th">차시 순서</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="form-control" type="search" aria-label="Search">
+                    <input id="contsSequenceInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">컨텐츠명</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="form-control" type="search" aria-label="Search">
+                    <input id="contsNameInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">차시 학습시간(초)</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="form-control" type="search" aria-label="Search">
+                    <input id="contsTimeInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">YouTube 연동번호</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="form-control" type="search" aria-label="Search">
+                    <input id="contsYoutInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">차시 추가설명</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="form-control" type="search" aria-label="Search">
+                    <input id="contsDetailInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             </tbody>
+            </form>
         </table>
 
 

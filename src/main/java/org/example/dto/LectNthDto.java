@@ -25,7 +25,41 @@ public class LectNthDto {
     private boolean isActive;
     private Long nthSequence;
     private String nthName;
-    /*private LmsConts lmsConts;*/
     private int contsTime;
+    private Long contsNo;
+    private Long nthId;
+    private String contsName;
+    private String contsYout;
+    private String contsDetail;
+
+
+    public LectNthDto(
+            Long lectId,
+            String lectName,
+            String lectSubject,
+            LocalDateTime enrollStart,
+            LocalDateTime enrollEnd,
+            LocalDateTime lectStart,
+            LocalDateTime lectEnd,
+            boolean isActive,
+            Long nthSequence,
+            String nthName,
+            int contsTime
+    ) {
+        this.lectId = lectId;
+        this.lectName = lectName;
+        this.lectSubject = lectSubject;
+        this.enrollStart = enrollStart;
+        this.enrollEnd = enrollEnd;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+        this.nthSequence = nthSequence;
+        this.nthName = nthName;
+        this.contsTime = contsTime;
+    }
+
+
+
 
 }

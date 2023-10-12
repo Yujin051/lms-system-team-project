@@ -1,15 +1,15 @@
 insert into  member (user_id, user_pw, user_role)
-values ('1', '1234','TEACHER');
+values ('sss1', '1234','TEACHER');
 insert into  member (user_id, user_pw, user_role)
-values ('2', '1234','TEACHER');
+values ('ssss2', '1234','TEACHER');
 insert into  member (user_id, user_pw, user_role)
-values ('3', '1234','TEACHER');
+values ('3sss', '1234','TEACHER');
 insert into  member (user_id, user_pw, user_role)
-values ('4', '1234','TEACHER');
+values ('4sasa', '1234','TEACHER');
 insert into  member (user_id, user_pw, user_role)
-values ('5', '1234','TEACHER');
+values ('5sadasd', '1234','TEACHER');
 insert into  member (user_id, user_pw, user_role)
-values ('6', '1234','TEACHER');
+values ('ssss6', '1234','TEACHER');
 
 insert into teacher (member_id) values(1);
 insert into teacher (member_id) values(2);
@@ -18,12 +18,12 @@ insert into teacher (member_id) values(4);
 insert into teacher (member_id) values(5);
 insert into teacher (member_id) values(6);
 
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('1', '1', 1, '1');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('2', '2', 2, '2');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('3', '3', 3, '3');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('4', '4', 4, '4');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('5', '5', 5, '5');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('6', '6', 6, '6');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('asd', 'bbsa1', 1, 'asds');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('qwdqd', '2as', 2, 'xzv');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('qgfada', 'ds3', 3, 'xzc');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('4qqdqw', 'dasd4', 4, '4wq');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('qgq', '5ssdasda', 5, '5wqe');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('fgqwdqwd', '6sad', 6, '6sad');
 
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
@@ -64,3 +64,4 @@ values (5, 5, '마', 5);
 
 insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
 values (6, 6, '바', 6);
+
