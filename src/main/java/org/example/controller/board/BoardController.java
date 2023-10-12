@@ -70,7 +70,8 @@ public class BoardController {
     public String getBoardView(
             Model model ,
             @PathVariable(name = "id" , required = false) Long id,
-            Principal principal) {
+            Principal principal,
+            Pageable pageable) {
 
         log.info("Get요청 /board/view" + id + " >>> getboardView() 실행됨.");
 
@@ -85,6 +86,13 @@ public class BoardController {
         if(fileNo != null || fileNo != 0L){
             files = fileInfoService.findFileInfoList(fileNo);
             log.info("files::{}",files);
+        }
+
+        BoardArticle beforeArticle = boardService.findBeforeBoardArticle(
+                article.getId() , article.getBoardInfo().getId() , pageable);
+
+        if(beforeArticle != null){
+            model.addAttribute("beforeArticle" , beforeArticle);
         }
 
         // member 가져오기

@@ -2,19 +2,30 @@ package org.example.repository;
 
 import org.example.entity.BoardArticle;
 import org.example.entity.BoardInfo;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author 임승범
+ */
+
 @Repository
 public interface BoardArticleRepository extends JpaRepository<BoardArticle , Long> {
 
-    // 게시글 리스트 내용 검색
-    List<BoardArticle> searchByArticleContent(String searchValue);
-    // 게시글 리스트 제목 검색
-    List<BoardArticle> searchByArticleTitle(String searchValue);
-    // 게시글 리스트 작성자(실명) 검색
-    List<BoardArticle> searchByMemberId_UserName(String searchValue);
+
+// 다음 게시글 가져오기
+//    BoardArticle findNextBoardArticle(@);
+
+    // 이전 게시글 가져오기
+    @Query("SELECT ba FROM BoardArticle ba WHERE ba.Id < :nowArticleId AND ba.boardInfo.Id = :boardId ORDER BY ba.Id DESC")
+    Page<BoardArticle> findBeforeBoardArticle(@Param("nowArticleId")Long nowArticleId , @Param("boardId") Long boardId , Pageable pageable);
+
+
 }

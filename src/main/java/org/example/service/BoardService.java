@@ -71,7 +71,6 @@ public class BoardService {
         return article;
     }
 
-
     // 게시글 리스트 제목 검색
     public Page<BoardArticle> searchByTitle(String searchValue , Long boardInfoId , Pageable pageable){
         Page<BoardArticle> articles = boardPagingRepository.searchByArticleTitle(searchValue , boardInfoId, pageable);
@@ -88,6 +87,12 @@ public class BoardService {
     public Page<BoardArticle> searchByWriter(String searchValue , Long boardInfoId, Pageable pageable){
         Page<BoardArticle> articles = boardPagingRepository.searchByMemberId_UserName(searchValue , boardInfoId, pageable);
         return articles;
+    }
+
+    // 이전 게시글 가져오기
+    public BoardArticle findBeforeBoardArticle(Long nowId , Long boardId , Pageable pageable){
+        BoardArticle article = boardRepository.findBeforeBoardArticle(nowId , boardId , pageable).getContent().get(0);
+        return article;
     }
 
 

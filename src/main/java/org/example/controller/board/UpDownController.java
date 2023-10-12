@@ -121,22 +121,23 @@ public class UpDownController {
             @PathVariable(name = "fileSeq") Long fileSeq ,
             HttpServletResponse response) throws ServletException , IOException{
 
+        log.info("Get요청 /download/file/" + fileNo + "/" + fileSeq + " >>> downloadFile()실행됨.");
+
         FileInfo file = fileInfoService.findByFileNoAndFileSeq(fileNo , fileSeq);
 
         String orgFileName = file.getOrgFileName(); // 오리지널 파일이름
         String filePath = file.getFilePath();   // 저장된경로와 파일이름
 
-        File downfile = new File(filePath);
-//        FileInputStream in = new FileInputStream(downfile);
+        File downfile = new File(filePath); // 다운로드 파일 하나 만든다.
 
-        byte fileByte[] = FileUtil.readAsByteArray(downfile);
+        byte fileByte[] = FileUtil.readAsByteArray(downfile);   // byte 배열에 담고
 
-        response.setContentType("application/octet-stream");
+        response.setContentType("application/octet-stream");    // 설정
         response.setContentLength(fileByte.length);
 
         response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(orgFileName,"UTF-8") +"\";");
         response.setHeader("Content-Transfer-Encoding", "binary");
-
+        // 버퍼에 쓰고 모두 강제 흘려보낸다.
         response.getOutputStream().write(fileByte);
         response.getOutputStream().flush();
         response.getOutputStream().close();
