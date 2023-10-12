@@ -42,9 +42,9 @@ public class LectureApplyController {
     // 대상 강좌 수강신청 한 학생들 불러오기
     @GetMapping("/studentlist")
     public ResponseEntity<?> studentList(@RequestParam(name = "lectId") Long id) {
-        System.out.println(id);
+//        System.out.println(id);
         List<ApplyStudentDto> applyStudentDtos = lectApplyRepository.findAllByLectId(id);
-        System.out.println(applyStudentDtos.toString());
+//        System.out.println(applyStudentDtos.toString());
         return ResponseEntity.status(HttpStatus.OK).body(applyStudentDtos);
     }
 

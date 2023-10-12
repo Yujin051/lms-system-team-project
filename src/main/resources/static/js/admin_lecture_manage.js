@@ -231,7 +231,7 @@ saveBtn.addEventListener('click', () => {
     // 서버로 보낼 data 지정
     let id = parseInt(lectId.value)
     let nowNum = parseInt(enrollNow.value)
-    console.log(id)
+    // console.log(id)
     // id 값은 신규 생성 시 할당되지 않으므로 0으로 처리
     id = typeof id === 'number' ? id : 0
     // 현재 수강인원도 신규 시 생성되지 않으므로

@@ -84,6 +84,17 @@ const grid2 = new tui.Grid({
             sortingType: 'asc',
             name: 'userGender',
             sortable: true,
+            formatter: (props) => {
+                // 성별 변경하는 포매터
+                const value = props.value;
+                if (value === 'MALE') {
+                    return '남성';
+                } else if (value === 'FEMALE') {
+                    return '여성';
+                } else {
+                    return '';
+                }
+            }
         }
     ]
 })

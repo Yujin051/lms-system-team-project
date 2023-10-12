@@ -60,7 +60,7 @@ public class AdminController {
         pagination.put("page", 1);
         pagination.put("totalCount", 12);
 
-        System.out.println(object.toString());
+//        System.out.println(object.toString());
         return new ResponseEntity<>(object.toString(), HttpStatus.OK);
     }
 
@@ -71,7 +71,7 @@ public class AdminController {
                                      @RequestParam("name") String name) {
         List<ProfessorDto> profList = profInfoService.professorConditionList(active, subject, name);
 
-        System.out.println(profList.toString());
+//        System.out.println(profList.toString());
         return new ResponseEntity<>(profList, HttpStatus.OK);
     }
 
@@ -80,7 +80,7 @@ public class AdminController {
     public ResponseEntity profDetail(@RequestParam("name") String name,
                                      @RequestParam("work") String work) {
         ProfessorDto professorDto = profInfoService.professorDetails(work, name);
-        System.out.println(professorDto);
+//        System.out.println(professorDto);
         return new ResponseEntity(professorDto, HttpStatus.OK);
     }
 

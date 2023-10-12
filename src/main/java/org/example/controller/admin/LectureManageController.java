@@ -65,7 +65,7 @@ public class LectureManageController {
         // 이름 가져오기
         String profName = mLecture.getUserName();
         // 넘어온 강좌 id 로깅
-        logger.info("Received LectId : {}", mLecture.getLectId());
+//        logger.info("Received LectId : {}", mLecture.getLectId());
         Professor professor = professorRepository.findProfessorByMember_UserName(mLecture.getUserName());
         // 해당 교수 아래로 새로운 강좌 생성
         // 뷰에서 강좌 ID 값이 없는 경우 0으로 넘어오므로 0일 때와 아닐 때로 처리

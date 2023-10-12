@@ -43,27 +43,41 @@ const grid = new tui.Grid({
             sortingType: 'asc',
             name: 'userGender',
             sortable: true,
+            formatter: (props) => {
+                // 성별 변경하는 포매터
+                const value = props.value;
+                if (value === 'MALE') {
+                    return '남성';
+                } else if (value === 'FEMALE') {
+                    return '여성';
+                } else {
+                    return '';
+                }
+            }
         },
         {
             header: '활동상태',
             sortingType: 'asc',
             name: 'active',
             sortable: true,
-            editor: {
-                type: 'select',
-                options: {
-                    listItems: [
-                        {text: 'true', value: true},
-                        {text: 'false', value: false}
-                    ]
+            formatter: (props) => {
+                // boolean값 변경하는 포매터
+                const value = props.value;
+                if (value === true) {
+                    return '활둥중';
+                } else if (value === false) {
+                    return '활동중이지 않음';
+                } else {
+                    return '';
                 }
             }
+
         },
         {
             header: '강좌 분류',
             sortingType: 'asc',
             name: 'profWork',
-            sortable: true,
+            sortable: true
         }
     ],
     minBodyHeight: 30
