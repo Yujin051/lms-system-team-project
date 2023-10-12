@@ -147,13 +147,13 @@
         </article>
             <article class="bank">
                 <div>직무</div>
-                <div><input type="text" name="profWork" th:field="${professor.profWork}" ></div>
+                <div><input style="width: 95%; height: 95%;" type="text" name="profWork" th:field="${professor.profWork}" ></div>
                 <div>   </div>
                 <div>활동상태</div>
                 <div><div style="width: 200px; height: 45px; background-color: white;" th:text="${professor.isActive} ? 활성 : 비활성"></div></div>
             </article>
 
-        <button type="submit"></button>
+        <button type="submit" class="update">회원정보 수정</button>
         </form>
 
     </section>

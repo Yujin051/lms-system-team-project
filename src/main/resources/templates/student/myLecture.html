@@ -10,18 +10,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function () {
-            const lecCon = document.querySelector(".lectureName")
-            const lecDetail = document.querySelector(".lectureClick")
-            const plus = document.querySelector("#plus")
-            const minus = document.querySelector("#minus")
-
-            lecCon.addEventListener('click', function () {
-                const isLectureVisible = lecDetail.style.display !== 'none'
-
-                lecDetail.style.display = isLectureVisible ? 'none' : 'block'
-                plus.style.display = isLectureVisible ? 'block' : 'none'
-                minus.style.display = isLectureVisible ? 'none' : 'block'
-            })
+            // const lecCon = document.querySelector(".lectureName")
+            // const lecDetail = document.querySelector(".lectureClick")
+            // const plus = document.querySelector("#plus")
+            // const minus = document.querySelector("#minus")
+            //
+            // lecCon.addEventListener('click', function () {
+            //     const isLectureVisible = lecDetail.style.display !== 'none'
+            //
+            //     lecDetail.style.display = isLectureVisible ? 'none' : 'block'
+            //     plus.style.display = isLectureVisible ? 'block' : 'none'
+            //     minus.style.display = isLectureVisible ? 'none' : 'block'
+            // })
 
             $('#courseForm').submit(function (event) {
                 event.preventDefault();
@@ -45,19 +45,19 @@
                         var courseResult = $('#courseResult');
                         courseResult.empty();
                         $.each(data, function (index, lectinfo) {
-                            courseResult.append('<p>' + lectinfo.lectName +'</p>');
+                            courseResult.append('<a style="display: block; text-decoration: none; color: black; width: 200px;" href="/student/lecture/' + lectinfo.lectId + '">' + lectinfo.lectName +'</a>');
                         });
 
                         var courseSubResult = $('#courseSubResult');
                         courseSubResult.empty();
-                        $.each(data, function(index, lectinfo) {
-                            courseSubResult.append('<div class="lectureClick'+index+'">');
-                            courseSubResult.append('<a href="/lecture/'+ lectinfo.lectId +'"><div class="lecMenu">강의 계획서</div></a>');
-                            courseSubResult.append('<a href="#"><div class="lecMenu">출결 조회</div></a>');
-                            courseSubResult.append('<a href="#"><div class="lecMenu">과제 제출</div></a>');
-                            courseSubResult.append('<a href="#"><div class="lecMenu">수업 게시판</div></a>');
-                            courseSubResult.append('</div>');
-                        });
+                        // $.each(data, function(index, lectinfo) {
+                        //     courseSubResult.append('<div class="lectureClick'+index+'">');
+                        //     courseSubResult.append('<a href="/lecture/'+ lectinfo.lectId +'"><div class="lecMenu">강의 계획서</div></a>');
+                        //     courseSubResult.append('<a href="#"><div class="lecMenu">출결 조회</div></a>');
+                        //     courseSubResult.append('<a href="#"><div class="lecMenu">과제 제출</div></a>');
+                        //     courseSubResult.append('<a href="#"><div class="lecMenu">수업 게시판</div></a>');
+                        //     courseSubResult.append('</div>');
+                        // });
                     },
                     error: function () {
                         alert('Error fetching courses.');
@@ -105,11 +105,11 @@
                 <div class="lectureContainer">
 
                     <div class="lectureName">
-                        <span id="courseResult">과목 : 과목 이름이 옵니다. 타임리프 반복</span>
-                        <i id="plus" class="fa-solid fa-plus"></i>
-                        <i id="minus" class="fa-solid fa-minus"></i>
+                        <span id="courseResult">과목명</span>
+<!--                        <i id="plus" class="fa-solid fa-plus"></i>-->
+<!--                        <i id="minus" class="fa-solid fa-minus"></i>-->
                     </div>
-                    <div id="courseSubResult" class="lectureClick">
+<!--                    <div id="courseSubResult" class="lectureClick">-->
                         <!-- 타임리프 통해서 각 페이지로 이동 -->
 <!--                        <a href="#"><div class="lecMenu">강의 계획서</div></a>-->
 <!--                        <a href="#"><div class="lecMenu">출결 조회</div></a>-->

@@ -33,7 +33,14 @@ public class ProfessorController {
 
     // 강사 메인페이지
     @GetMapping("")
-    public String profMain() {
+    public String profMain(Principal principal, Model model) {
+
+        // 강사 프로필에 이름 띄우기
+        Member member = memberRepository.findByUserId(principal.getName());
+        String name = (member != null) ? member.getUserName() : "Unknown";
+        String savedProfile = (member != null) ? member.getImgSaved() : "Unknown";
+        model.addAttribute("name", name);
+        model.addAttribute("profileImg", savedProfile);
         return "/prof/prof_main";
     }
 

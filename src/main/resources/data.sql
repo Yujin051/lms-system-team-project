@@ -35,9 +35,10 @@ insert into stud_lect_apply(apply_id, stud_id, lect_id) values
                                                             (4, 1, 4),
                                                             (5, 1, 5),
                                                             (6, 1, 6),
-                                                            (7, 2, 1),
-                                                            (8, 2, 2),
-                                                            (9, 2, 3);
+                                                            (7, 1, 8),
+                                                            (8, 2, 1),
+                                                            (9, 2, 2),
+                                                            (10, 2, 3);
 
 insert into grade_info(lect_id, stud_id, grade, check_score, assign_score, test_score, is_record) values
                                                                                                       (1, 1, 'D', 25, 33, 20, true),
