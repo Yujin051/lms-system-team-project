@@ -38,5 +38,14 @@ public interface LectureRepository extends JpaRepository<LectInfo, Long> {
                                          @Param("active") boolean active, @Param("subject") String subject,
                                          @Param("name") String name, @Param("elem") int elem);
 
+    // 수강신청에서 사용하는 검색(학년, 학기, 이름)
+    @Query("SELECT new org.example.dto.admin.LectureListDto(l.isActive, l.lectName, l.lectElem, " +
+            "l.lectCredit, l.lectSubject, l.lectId, l.lectStart, l.lectEnd, p.member.userName) from LectInfo l" +
+            " JOIN Professor p ON l.professor.id = p.id WHERE " +
+            "l.lectYear LIKE %:year% AND " +
+            "l.lectSem LIKE %:sem% AND " +
+            "l.lectName LIKE %:name%")
+    List<LectureListDto> findApplyLectList(@Param("year") String year, @Param("sem") String sem,
+                                           @Param("name") String name);
 
 }
