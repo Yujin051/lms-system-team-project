@@ -1,7 +1,12 @@
 const dataSource = {
+    contentType: 'application/json',
     api: {
-        readData: {url: "/getlecturelist", method: "GET"},
-        modifyData:{url: "/savelecturedata", method: "PUT"}
+        readData: {
+            url: '/api/getlecturelist', method: 'GET'
+        },
+        deleteData: {
+            url: '/api/deletelecturedata', method: 'DELETE'
+        }
     }
 }
 const grid = new tui.Grid({
@@ -101,7 +106,7 @@ const assign = document.querySelector("#assign")
 // 행 클릭했을 때 상세정보 출력하기
 grid.on('click', (ev) => {
     const valueList = grid.getRow(ev.rowKey)
-    const url = "/getlecturedetail"
+    const url = "/api/getlecturedetail"
     // 번호가 정수가 아닐 때 0으로 처리, 빈 값일 경우
     const id = valueList.lectId
     const getId = typeof id === 'number' ? id : 0;
@@ -181,17 +186,25 @@ newBtn.addEventListener('click', () => {
     grid.appendRow();
 })
 
-// 체크된 행 삭제
+// 체크된 데이터 삭제
 deleteBtn.addEventListener('click', () => {
     // 체크된 행 키 값의 배열
     const rows = grid.getCheckedRowKeys()
+    const deleteRows = grid.getCheckedRows();
     // 해당 행들 삭제
     grid.removeRows(rows)
+    // 삭제된 행 정보 컨트롤러로 전송
+    $.ajax({
+        url : '/api/deletelecturedata',
+        method : 'DELETE',
+        contentType: 'application/json',
+        data : JSON.stringify(deleteRows)
+    })
 })
 
 // 설정된 조건으로 해당하는 데이터 검색
 searchBtn.addEventListener('click', () => {
-    const url = "/searchlectlist"
+    const url = "/api/searchlectlist"
     $.ajax({
         url: url,
         type: "GET",
@@ -214,17 +227,18 @@ searchBtn.addEventListener('click', () => {
 
 // 수정, 추가는 ajax 이용하여 직접 처리
 saveBtn.addEventListener('click', () => {
-    const url = "/savelecturedata"
+    const url = "/api/savelecturedata"
     // 서버로 보낼 data 지정
-    let id = lectId.value
-    let nowNum = enrollNow.value
+    let id = parseInt(lectId.value)
+    let nowNum = parseInt(enrollNow.value)
+    console.log(id)
     // id 값은 신규 생성 시 할당되지 않으므로 0으로 처리
     id = typeof id === 'number' ? id : 0
     // 현재 수강인원도 신규 시 생성되지 않으므로
     nowNum = typeof nowNum === 'number' ? nowNum : 0
 
     const data = {
-        lectName:lectName.value,
+        lectName: lectName.value,
         lectElem: lectGrade.value,
         lectCredit: credit.value,
         lectSubject: subject.value,
@@ -262,6 +276,3 @@ saveBtn.addEventListener('click', () => {
         }
     })
 })
-
-// 행 삭제(데이터 삭제)는 그리드 이용하여 처리
-

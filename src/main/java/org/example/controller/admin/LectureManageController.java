@@ -1,14 +1,9 @@
 package org.example.controller.admin;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.example.dto.admin.LectureListDto;
-import org.example.dto.admin.MemberDto;
-import org.example.entity.Member;
 import org.example.entity.Professor;
 import org.example.repository.LectureRepository;
-import org.example.repository.MemberRepository;
 import org.example.repository.ProfessorRepository;
 import org.example.service.admin.LectureService;
 import org.json.JSONObject;
@@ -18,12 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class LectureManageController {
 
     private static final Logger logger = LoggerFactory.getLogger(LectureManageController.class);
@@ -49,8 +43,8 @@ public class LectureManageController {
     // 뷰에서 넘어온 조건으로 강좌 리스트 검색
     @GetMapping("/searchlectlist")
     public ResponseEntity<?> lectSearch(@RequestParam("year") String year, @RequestParam("sem") String sem,
-                                     @RequestParam("active") String active, @RequestParam("elem") String elem,
-                                     @RequestParam("subject") String subject, @RequestParam("name") String name) {
+                                        @RequestParam("active") String active, @RequestParam("elem") String elem,
+                                        @RequestParam("subject") String subject, @RequestParam("name") String name) {
 
         // 받아온 변수값 검색을 위해 변형
         boolean isActive = Boolean.parseBoolean(active);
@@ -65,22 +59,28 @@ public class LectureManageController {
         return ResponseEntity.status(HttpStatus.OK).body(lectureList);
     }
 
-    // 수정, 삭제, 추가된 데이터 업데이트
+    // 수정, 추가된 데이터 업데이트
     @PutMapping("/savelecturedata")
     public ResponseEntity<?> lectureUpdate(@RequestBody LectureListDto mLecture) {
-        logger.info("name : {}", mLecture.getUserName());
-        // 이름으로 교수 객체 찾기
+        // 이름 가져오기
+        String profName = mLecture.getUserName();
+        // 넘어온 강좌 id 로깅
+        logger.info("Received LectId : {}", mLecture.getLectId());
         Professor professor = professorRepository.findProfessorByMember_UserName(mLecture.getUserName());
-        logger.info("professor : {}", professor);
         // 해당 교수 아래로 새로운 강좌 생성
-        if(mLecture.getLectId() == 0) {
-            lectureService.newLecture(professor, mLecture.getLectName(), mLecture.getLectSubject(), mLecture.getLectYear(),
+        // 뷰에서 강좌 ID 값이 없는 경우 0으로 넘어오므로 0일 때와 아닐 때로 처리
+        if (mLecture.getLectId() == 0) {
+            lectureService.newLecture(profName, mLecture.getLectName(), mLecture.getLectSubject(), mLecture.getLectYear(),
                     mLecture.getLectSem(), mLecture.getLectCredit(), mLecture.getLectNowNum(), mLecture.getLectMaxNum(),
                     mLecture.getLectStart(), mLecture.getLectEnd(), mLecture.getEnrollStart(), mLecture.getEnrollEnd(),
                     mLecture.isActive(), mLecture.getLectAssign(), mLecture.getLectCheck(), mLecture.getLectTest(),
                     mLecture.getLectElem());
         } else {
-
+            lectureService.updateLecture(mLecture.getLectId(), profName, mLecture.getLectName(), mLecture.getLectSubject(),
+                    mLecture.getLectYear(), mLecture.getLectSem(), mLecture.getLectCredit(), mLecture.getLectNowNum(),
+                    mLecture.getLectMaxNum(), mLecture.getLectStart(), mLecture.getLectEnd(), mLecture.getEnrollStart(),
+                    mLecture.getEnrollEnd(), mLecture.isActive(), mLecture.getLectAssign(), mLecture.getLectCheck(), mLecture.getLectTest(),
+                    mLecture.getLectElem());
         }
         // 새로 저장된 강좌를 포함한 전체 강좌 리스트 반환
 
@@ -88,4 +88,15 @@ public class LectureManageController {
         return new ResponseEntity<>(lectureList, HttpStatus.OK);
     }
 
+    @DeleteMapping("/deletelecturedata")
+    public void lectureDelete(@RequestBody List<LectureListDto> deletedRows) {
+        // 삭제된 행 정보를 받아와서 해당하는 강좌 ID로 DB에서 삭제
+        for(LectureListDto lectureListDto : deletedRows) {
+            Long lectId = lectureListDto.getLectId();
+            // 받아온 강좌 ID가 없다면 삭제 실행하지 않음
+            if(lectId != null) {
+                lectureRepository.deleteById(lectId);
+            }
+        }
+    }
 }
