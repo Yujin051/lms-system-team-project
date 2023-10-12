@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface FileInfoRepository extends JpaRepository<FileInfo , FileInfoId> {
 
@@ -13,6 +15,9 @@ public interface FileInfoRepository extends JpaRepository<FileInfo , FileInfoId>
     @Query("SELECT MAX(fi.fileNo) FROM FileInfo fi")
     Long findMaxFileNo();
 
+    List<FileInfo> findByFileNo(Long fileNo);
+
+    FileInfo findByFileNoAndFileSeq(Long fileNo , Long fileSeq);
 
 
 }

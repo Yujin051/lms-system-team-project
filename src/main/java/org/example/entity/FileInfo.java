@@ -5,8 +5,6 @@ import lombok.*;
 import org.example.dto.board.FileInfoId;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.io.File;
-
 @NoArgsConstructor
 @Table(name="file_info")
 @Getter
@@ -14,6 +12,7 @@ import java.io.File;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @IdClass(FileInfoId.class)
+@ToString
 public class FileInfo {
 
     @Id

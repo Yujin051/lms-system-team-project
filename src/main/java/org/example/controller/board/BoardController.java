@@ -7,8 +7,11 @@ import org.example.constant.RoleType;
 import org.example.dto.board.ArticleDto;
 import org.example.dto.board.PageDto;
 import org.example.entity.BoardArticle;
+import org.example.entity.FileInfo;
 import org.example.entity.Member;
+import org.example.service.BoardInfoService;
 import org.example.service.BoardService;
+import org.example.service.FileInfoService;
 import org.example.service.MemberService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +22,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 임승범
@@ -31,6 +36,7 @@ public class BoardController {
 
     private final BoardService boardService;
     private final MemberService memberService;
+    private final FileInfoService fileInfoService;
 
     // 리스트 전체 글 보기
     @GetMapping("/list/{id}")
@@ -71,10 +77,19 @@ public class BoardController {
         // id 해당하는 boardArticle 레코드 가져옴.
         BoardArticle article = boardService.findById(id);
 
-//        article.getArticleFileNum();
+        List<FileInfo> files = new ArrayList<>();
+
+        // 첨부파일 번호
+        Long fileNo = article.getArticleFileNum();
+
+        if(fileNo != null || fileNo != 0L){
+            files = fileInfoService.findFileInfoList(fileNo);
+            log.info("files::{}",files);
+        }
+
         // member 가져오기
         Member member = memberService.memberView(principal.getName());
-
+        model.addAttribute("files" , files);
         model.addAttribute("member" , member);
         model.addAttribute("article" , article);
 

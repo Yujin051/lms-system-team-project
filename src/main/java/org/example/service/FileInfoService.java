@@ -38,6 +38,17 @@ public class FileInfoService {
         return lastFileInfoId+1L;
     }
 
+    // id로 seq 기록된 최댓값까지 레코드 가져오기
+
+    public List<FileInfo> findFileInfoList(Long fileNo){
+        return fileInfoRepository.findByFileNo(fileNo);
+    }
+
+    public FileInfo findByFileNoAndFileSeq(Long fileNo , Long fileSeq){
+        return fileInfoRepository.findByFileNoAndFileSeq(fileNo , fileSeq);
+    }
+
+
 
 
 }

@@ -3,6 +3,7 @@ insert into board_info (board_type , board_name) values ('학생' , '공통');
 insert into board_info (board_type , board_name) values ('질문건의' , '공통');
 insert into board_info (board_type , board_name) values ('공지사항' , '공통');
 insert into board_info (board_type , board_name) values ('교원' , '공통');
+-- insert into board_info (board_type , board_name) values ('수업' , '자바의 정석');
 
 -- insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role)
 --     values

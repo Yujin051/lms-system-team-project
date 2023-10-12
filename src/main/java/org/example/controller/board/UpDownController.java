@@ -1,11 +1,16 @@
 package org.example.controller.board;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.util.FileUtil;
 import org.example.dto.board.UploadFileDto;
 import org.example.dto.board.UploadResultDto;
 import org.example.entity.FileInfo;
 import org.example.repository.FileInfoRepository;
+import org.example.service.BoardInfoService;
+import org.example.service.BoardService;
 import org.example.service.FileInfoService;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -19,7 +24,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -88,8 +95,8 @@ public class UpDownController {
         return null;
     }
 
-
-    @GetMapping("/download/{fileName}")
+    // 파일 조회
+    @GetMapping("/view/{fileName}")
     public ResponseEntity<Resource> viewFileGet(@PathVariable String fileName){
 
         log.info("Get요청 /download/filename >>> viewFileGet() 실행됨");
@@ -106,6 +113,33 @@ public class UpDownController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(resource);
+    }
+
+    @GetMapping("/download/file/{fileNo}/{fileSeq}")
+    public void downloadFile(
+            @PathVariable(name = "fileNo") Long fileNo ,
+            @PathVariable(name = "fileSeq") Long fileSeq ,
+            HttpServletResponse response) throws ServletException , IOException{
+
+        FileInfo file = fileInfoService.findByFileNoAndFileSeq(fileNo , fileSeq);
+
+        String orgFileName = file.getOrgFileName(); // 오리지널 파일이름
+        String filePath = file.getFilePath();   // 저장된경로와 파일이름
+
+        File downfile = new File(filePath);
+//        FileInputStream in = new FileInputStream(downfile);
+
+        byte fileByte[] = FileUtil.readAsByteArray(downfile);
+
+        response.setContentType("application/octet-stream");
+        response.setContentLength(fileByte.length);
+
+        response.setHeader("Content-Disposition", "attachment; fileName=\"" + URLEncoder.encode(orgFileName,"UTF-8") +"\";");
+        response.setHeader("Content-Transfer-Encoding", "binary");
+
+        response.getOutputStream().write(fileByte);
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
     }
 
 

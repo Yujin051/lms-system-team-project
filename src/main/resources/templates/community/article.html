@@ -72,19 +72,19 @@
 
                 <!-- 첨부파일 있다면 아래에 추가되도록 출력 -->
                 <!-- th:each 사용 반복문처리 -->
-                <th:block>
-                    <div class="file_download">
-                        <div class="fileText">파일첨부</div>
 
-                        <div class="file_list">
+                <th:block th:if="${files != null and #lists.size(files) > 0}">
+                <div class="file_download">
+                    <div class="fileText">파일첨부</div>
+
+                        <div th:each="file : ${files}" class="file_list">
                             <i class="bi bi-cloud-arrow-down"></i>
-                            <span>아이콘.jpg</span>
+                            <a th:href="@{/download/file/{fileNo}/{fileSeq}(fileNo=${file.getFileNo()},fileSeq=${file.getFileSeq()})}">
+                                <span th:text="${file.getOrgFileName()}">아이콘.jpg</span>
+                            </a>
                         </div>
-                        <div class="file_list">
-                            <i class="bi bi-cloud-arrow-down"></i>
-                            <span>강의시간표.txt</span>
-                        </div>
-                    </div>
+
+                </div>
                 </th:block>
             </div>
 
