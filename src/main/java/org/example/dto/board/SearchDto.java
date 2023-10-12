@@ -16,5 +16,7 @@ public class SearchDto {
     private String searchValue;
     // 검색 조건
     private String searchType;
+//    // 검색 당시 보드 타입
+//    private Long boardTypeId;
 
 }

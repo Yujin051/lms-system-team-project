@@ -15,53 +15,41 @@ document.addEventListener('DOMContentLoaded', function() {
 // 검색버튼
 const searchBtn = document.getElementById('searchBtn');
 
+// 검색버튼 클릭 이벤트
 if(searchBtn){
-    searchBtn.addEventListener('click' , ()=>{
-
+    searchBtn.addEventListener('click', () => {
         let searchType = document.getElementById('search_select').value;
         let searchValue = document.getElementById('search_input').value;
+        let boardType = document.getElementById('boardType').value;
 
-        let searchTitle = '/board/search/title';
-        let searchContent = '/board/search/content';
-        let searchWriter = '/board/search/writer';
-
-        let postUrl = "";
-
-        if(searchValue == null || searchValue == ""){
+        if(searchValue === null || searchValue === ""){
             alert('검색하실 내용을 입력해주세요.');
-            return ;
+            return;
         }
-        else{
 
-            if(searchType === 'title'){
-                postUrl = searchTitle;
-            }
-            else if(searchType === 'content'){
-                postUrl = searchContent;
-            }
-            else{
-                postUrl = searchWriter;
-            }
+        let postUrl = "/board/search/";
 
-            let searchData = {
-                searchType : searchType,
-                searchValue : searchValue
-            };
+        if (searchType === 'title') {
+            postUrl += "title";
+        } else if (searchType === 'content') {
+            postUrl += "content";
+        } else {
+            postUrl += "writer";
+        }
 
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST' , postUrl , true);
-            xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
-            xhr.onreadystatechange = function (){
-                if (xhr.readyState === 4){
-                    if(xhr.status === 200){
-                        alert('성공');
-                    }
-                    else{
-                        alert('실패');
-                    }
+        postUrl += `/${boardType}?searchValue=${searchValue}`;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', postUrl, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    window.location = postUrl;
+                } else {
+                    alert('검색실패 : firetrap5319@gmail.com 문의 바람.');
                 }
-            };
-            xhr.send(JSON.stringify(searchData));
-        }
+            }
+        };
+        xhr.send();
     });
 }

@@ -15,6 +15,7 @@ public class FileInfoService {
 
     private final FileInfoRepository fileInfoRepository;
 
+    // 모든 파일 저장
     public Long saveAllFile(List<FileInfo> fileInfoList){
         // db에 저장되 있는 마지막 fileNo 값 가져오기
         Long lastFileInfoId = fileInfoRepository.findMaxFileNo();
@@ -36,5 +37,7 @@ public class FileInfoService {
 
         return lastFileInfoId+1L;
     }
+
+
 
 }

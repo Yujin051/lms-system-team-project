@@ -60,7 +60,7 @@ public class UpDownController {
                 catch (IOException e){
                     e.printStackTrace();
                 }
-
+                // fileInfo 데이터 만들어주기
                 fileInfoList.add(FileInfo.builder()
                                 .orgFileName(originName)
                                 .saveFileName(uuid + "_" + originName)
@@ -76,7 +76,7 @@ public class UpDownController {
                         .build()
                 );
             }); // end each
-
+            // DB에 만든 데이터 넣고 id 값 받아온다
             Long finalId = fileInfoService.saveAllFile(fileInfoList);
 
             list.forEach(uploadResultDto -> {
@@ -91,6 +91,8 @@ public class UpDownController {
 
     @GetMapping("/download/{fileName}")
     public ResponseEntity<Resource> viewFileGet(@PathVariable String fileName){
+
+        log.info("Get요청 /download/filename >>> viewFileGet() 실행됨");
 
         Resource resource = new FileSystemResource(uploadPath + File.separator + fileName);
 

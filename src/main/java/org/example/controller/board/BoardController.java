@@ -1,11 +1,12 @@
 package org.example.controller.board;
 
+import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.constant.RoleType;
 import org.example.dto.board.ArticleDto;
+import org.example.dto.board.PageDto;
 import org.example.entity.BoardArticle;
-import org.example.entity.BoardInfo;
 import org.example.entity.Member;
 import org.example.service.BoardService;
 import org.example.service.MemberService;
@@ -13,16 +14,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 import java.security.Principal;
 
 /**
@@ -48,30 +43,18 @@ public class BoardController {
         log.info("Get요청 /board/list{id} >>> getBoardList() 실행됨. ");
 
         // principal로 사용자 권한 가져오기
-        String userId = principal.getName();
-        Member member = memberService.memberView(userId);
+        Member member = memberService.memberView(principal.getName());
         RoleType roleType = member.getUserRole();
-        log.info("roleType::{}" , roleType);
 
         // jpa PagingAndSortRepository 이용
         Page<BoardArticle> articles = boardService.getArticlesByBoardId(boardId , pageable);
-
-        int nowPage = articles.getPageable().getPageNumber() + 1 ;      // 현재 페이지
-        int startPage = Math.max(nowPage - 4 , 1);                      // 시작 페이지 (Math.max이용 , 비교 큰 값 할당)
-        int endPage = Math.min(nowPage + 5 , articles.getTotalPages()); // 마지막 페이지 (Math.max이용 , 비교 작은 값 할당)
-        int totalPage = articles.getTotalPages();   // 페이지 수
-        Long total = articles.getTotalElements();   // 게시글 갯수(레코드 수)
+        PageDto pageDto = new PageDto(articles);
 
         // model에 담기
-        model.addAttribute("articles" , articles);
-        model.addAttribute("nowPage" , nowPage);
-        model.addAttribute("startPage" , startPage);
-        model.addAttribute("endPage" , endPage);
-        model.addAttribute("total" , total);
+        model.addAttribute("pageDto" , pageDto);
         model.addAttribute("id" , boardId);
-        model.addAttribute("totalPage" , totalPage);
         model.addAttribute("roleType" , roleType);  // USER , TEACHER , ADMIN
-//        model.addAttribute("userName" , principal.getName());
+        model.addAttribute("userName" , principal.getName());
 
         return "/community/commu_list";
     }
@@ -83,10 +66,12 @@ public class BoardController {
             @PathVariable(name = "id" , required = false) Long id,
             Principal principal) {
 
-        log.info("Get요청 /board/view >>> getboardView() 실행됨.");
+        log.info("Get요청 /board/view" + id + " >>> getboardView() 실행됨.");
 
         // id 해당하는 boardArticle 레코드 가져옴.
         BoardArticle article = boardService.findById(id);
+
+//        article.getArticleFileNum();
         // member 가져오기
         Member member = memberService.memberView(principal.getName());
 
@@ -105,7 +90,7 @@ public class BoardController {
                                    Principal principal) throws Exception {
         // username = userId
         log.info("*************************************************************** principal::{}",principal);
-        log.info("Get요청 >>> /board/write/{type} >>> addBoardArticle() 실행됨.");
+        log.info("Get요청 >>> /board/write/" + type + " >>> addBoardArticle() 실행됨.");
         log.info("*************************************************************** type = " + type);
 
         // 사용자 회원 정보 가져오기.(principal의 userName은 userId에 해당. unique)
@@ -126,7 +111,6 @@ public class BoardController {
         else{
             // 게시글 정보 가져오기
             BoardArticle boardArticle = boardService.findById(id);
-            log.info("id 있는걸로 인식함");
             log.info("boardArticle::{}",boardArticle);
             // 게시글 id 넣어주기
             articleDto.setId(id);
@@ -140,6 +124,51 @@ public class BoardController {
             model.addAttribute("article" , articleDto);
         }
         return "/community/newArticle";
+    }
+
+    // 게시글 검색
+    @GetMapping("/search/{searchType}/{id}")
+    public String searchList(
+            Model model,
+            @PathVariable(name = "searchType") String searchType,
+            @PathVariable(name = "id") Long id,
+            @RequestParam(name = "searchValue") String value,
+            @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC)Pageable pageable,
+            Principal principal){
+
+        log.info("Get요청 /board/search/" + searchType + "/" + id + " >>> searchList() 실행됨.");
+
+        Page<BoardArticle> articles = null;
+
+        if(searchType.equals("title")){
+            articles = boardService.searchByTitle(value , id , pageable);
+        }
+        else if(searchType.equals("content")){
+            articles = boardService.searchByContent(value , id , pageable);
+        }
+        else if(searchType.equals("writer")){
+            log.info("writer sql 검색 들어간다");
+            articles = boardService.searchByWriter(value , id , pageable);
+        }
+
+        if(articles != null){
+            PageDto pageDto = new PageDto(articles);
+            log.info("pageDto::{}" , pageDto);
+
+            // principal로 사용자 권한 가져오기
+            Member member = memberService.memberView(principal.getName());
+            RoleType roleType = member.getUserRole();
+
+            // model에 담기
+            model.addAttribute("searchType" , searchType);
+            model.addAttribute("searchValue" , value);
+            model.addAttribute("pageDto" , pageDto);
+            model.addAttribute("id" , id);
+            model.addAttribute("roleType" , roleType);  // USER , TEACHER , ADMIN
+            model.addAttribute("userName" , principal.getName());
+        }
+
+        return "/community/search_list";
     }
 
     // 쪽지 전체 보기

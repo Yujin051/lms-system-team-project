@@ -73,21 +73,20 @@ public class BoardService {
 
 
     // 게시글 리스트 제목 검색
-    public Page<BoardArticle> searchByTitle(String searchValue , Pageable pageable){
-
-        Page<BoardArticle> articles = boardPagingRepository.searchByArticleTitle(searchValue , pageable);
+    public Page<BoardArticle> searchByTitle(String searchValue , Long boardInfoId , Pageable pageable){
+        Page<BoardArticle> articles = boardPagingRepository.searchByArticleTitle(searchValue , boardInfoId, pageable);
         return articles;
     }
+
     // 게시글 리스트 내용 검색
-    public Page<BoardArticle> searchByContent(String searchValue , Pageable pageable){
-
-        Page<BoardArticle> articles = boardPagingRepository.searchByArticleContent(searchValue , pageable);
+    public Page<BoardArticle> searchByContent(String searchValue , Long boardInfoId, Pageable pageable){
+        Page<BoardArticle> articles = boardPagingRepository.searchByArticleContent(searchValue , boardInfoId, pageable);
         return articles;
     }
-    // 게시글 리스트 작성자 검색
-    public Page<BoardArticle> searchByWriter(String searchValue , Pageable pageable){
 
-        Page<BoardArticle> articles = boardPagingRepository.searchByMemberId_UserName(searchValue , pageable);
+    // 게시글 리스트 작성자 검색
+    public Page<BoardArticle> searchByWriter(String searchValue , Long boardInfoId, Pageable pageable){
+        Page<BoardArticle> articles = boardPagingRepository.searchByMemberId_UserName(searchValue , boardInfoId, pageable);
         return articles;
     }
 

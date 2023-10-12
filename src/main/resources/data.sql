@@ -61,8 +61,19 @@ insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate 
 
 
 INSERT INTO board_article (board_id, article_title, article_cont, article_view, article_at, is_locked, is_deleted , member_id) values
-    (1, '돌겠네~ 제목크기 때문에 돌겠어', '돌겠다고', 0, NOW(), FALSE, FALSE, 2),
+(1, '돌겠네~ 제목크기 때문에 돌겠어', '돌겠다고', 0, NOW(), FALSE, FALSE, 2),
 (2, '어떤 제목을 정할까 고민인데', '내용은 대충 어쩌구저쩌구...', 0, NOW(), FALSE, FALSE, 2),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
+(2, '검색은 성공하는가?', '성공하길 바란다...', 0, NOW(), FALSE, FALSE, 5),
 (3, '최초 로그인 이후 비밀번호 변경 바랍니다.', '분명 경고했음...', 0, NOW(), FALSE, FALSE, 1),
 (4, '비대면 월급루팡 개꿀~', '너무 좋아', 0, NOW(), FALSE, FALSE, 3), (1, '돌겠네~ 제목크기 때문에 돌겠어', '돌겠다고', 0, NOW(), FALSE, FALSE, 2),
 (2, '어떤 제목을 정할까 고민인데', '내용은 대충 어쩌구저쩌구...', 0, NOW(), FALSE, FALSE, 2),

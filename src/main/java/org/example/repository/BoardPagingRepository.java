@@ -15,15 +15,17 @@ public interface BoardPagingRepository extends PagingAndSortingRepository<BoardA
     Page<BoardArticle> findByBoardInfo_IdAndIsDeletedFalse(Long boardId , Pageable pageable);
 
     // 게시글 리스트 내용 검색
-    @Query("SELECT ba FROM BoardArticle ba WHERE ba.articleContent LIKE %:searchValue%")
-    Page<BoardArticle> searchByArticleContent(@Param("searchValue")String searchValue , Pageable pageable);
+    @Query("SELECT ba FROM BoardArticle ba WHERE ba.articleContent LIKE %:searchValue%  AND ba.boardInfo.Id = :boardInfoId")
+    Page<BoardArticle> searchByArticleContent(@Param("searchValue")String searchValue , @Param("boardInfoId") Long boardInfoId , Pageable pageable);
 
-//    select * from boardArticle where articlecontent like %value%;
+
 
     // 게시글 리스트 제목 검색
-    Page<BoardArticle> searchByArticleTitle(String searchValue , Pageable pageable);
+    @Query("SELECT ba FROM BoardArticle ba WHERE ba.articleTitle LIKE %:searchValue%  AND ba.boardInfo.Id = :boardInfoId")
+    Page<BoardArticle> searchByArticleTitle(@Param("searchValue")String searchValue , @Param("boardInfoId") Long boardInfoId , Pageable pageable);
 
     // 게시글 리스트 작성자(실명) 검색
-    Page<BoardArticle> searchByMemberId_UserName(String searchValue , Pageable pageable);
+    @Query("SELECT ba FROM BoardArticle ba WHERE ba.memberId.userName LIKE %:searchValue%  AND ba.boardInfo.Id = :boardInfoId")
+    Page<BoardArticle> searchByMemberId_UserName(@Param("searchValue")String searchValue , @Param("boardInfoId") Long boardInfoId , Pageable pageable);
 
 }

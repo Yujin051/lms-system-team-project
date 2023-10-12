@@ -13,4 +13,6 @@ public interface FileInfoRepository extends JpaRepository<FileInfo , FileInfoId>
     @Query("SELECT MAX(fi.fileNo) FROM FileInfo fi")
     Long findMaxFileNo();
 
+
+
 }
