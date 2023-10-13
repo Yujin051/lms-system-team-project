@@ -13,7 +13,6 @@ const grid = new tui.Grid({
     data: dataSource,
     scrollX: false,
     scrollY: false,
-    rowHeaders: ['checkbox'],
     minBodyHeight: 40,
     pageOptions: {
         useClient: true, // 클라이언트 페이징 활성화
@@ -49,6 +48,7 @@ const grid2 = new tui.Grid({
     data: null,
     scrollX: false,
     scrollY: false,
+    rowHeaders: ['checkbox'],
     mimBodyHeight: 40,
     pageOptions: {
         useClient: true, // 클라이언트 페이징 활성화
@@ -121,6 +121,28 @@ grid.on('click', (ev) => {
             alert("데이터 불러오기 오류")
         }
     })
+
+    // 체크된 학생 데이터 삭제
+    deleteBtn.addEventListener('click', () => {
+        const url = '/api/apply/deletestudent'
+        // 체크된 행 키 값의 배열
+        const rows = grid2.getCheckedRowKeys()
+        const deleteRows = grid2.getCheckedRows();
+        let deleteData = {
+            lectId : lectId,
+            deleteRows : deleteRows
+        }
+        console.log(JSON.stringify(deleteData))
+        // 해당 행들 삭제
+        grid2.removeRows(rows)
+        // 삭제된 행 정보 컨트롤러로 전송
+        $.ajax({
+            url : url,
+            method : 'DELETE',
+            contentType: 'application/json',
+            data : JSON.stringify(deleteData)
+        })
+    })
 })
 
 // 검색하여 그리드 갱신하기
@@ -148,3 +170,4 @@ searchBtn.addEventListener('click', () => {
         }
     })
 })
+

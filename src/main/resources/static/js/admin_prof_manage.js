@@ -163,3 +163,16 @@ grid.on('click', (ev) => {
         }
     })
 })
+
+// 개수 업데이트 로직
+const count = document.querySelector("#result")
+// 그리드 로딩됐을 때
+grid.on('onGridMounted', (ev)=> {
+    let number = grid.getRowCount();
+    count.innerText = '검색 결과 : ' + number + '건'
+})
+
+grid.on('onGridUpdated', (ev) => {
+    let number = grid.getRowCount();
+    count.innerText = '검색 결과 : ' + number + '건'
+})

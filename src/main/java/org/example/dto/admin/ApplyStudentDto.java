@@ -7,6 +7,7 @@ import org.example.constant.Gender;
 @Data
 @AllArgsConstructor
 public class ApplyStudentDto {
+    private Long studId;
     private String userName;
     private String userId;
     private String userEmail;
