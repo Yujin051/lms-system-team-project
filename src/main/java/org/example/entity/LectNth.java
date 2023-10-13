@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -21,14 +22,26 @@ public class LectNth {
     @JoinColumn(name = "lect_id")
     private LectInfo lectInfo;
 
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "conts_no")
     private LmsConts lmsConts;
+
 
     @Column(name = "nth_name")
     private String nthName;
 
     @Column(name = "nth_sequence")
     private Long nthSequence;
+
+    public LectNth() {
+    }
+
+    @Builder
+    public LectNth(Long nthId, LectInfo lectInfo, LmsConts lmsConts, String nthName, Long nthSequence) {
+        this.nthId = nthId;
+        this.lectInfo = lectInfo;
+        this.lmsConts = lmsConts;
+        this.nthName = nthName;
+        this.nthSequence = nthSequence;
+    }
 }

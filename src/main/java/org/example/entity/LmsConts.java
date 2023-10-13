@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -28,4 +29,20 @@ public class LmsConts {
 
     @Column(name = "conts_yout")
     private String contsYout;
+
+    public LmsConts() {
+
+    }
+
+    @Builder
+    public LmsConts(Long contsNo, String contsName,
+                    String contsDetail, int contsTime,
+                    String contsYout) {
+        this.contsNo = contsNo;
+        this.contsName = contsName;
+        this.contsDetail = contsDetail;
+        this.contsTime = contsTime;
+        this.contsYout = contsYout;
+
+    }
 }

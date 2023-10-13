@@ -2,20 +2,14 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.AttendanceStatusDto;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
+import org.example.dto.LmsContsRequestDto;
 import org.example.entity.LectNth;
-import org.example.repository.AdminThisTimeRegisTration;
-import org.example.service.AdminAttendanceStatusService;
 import org.example.service.LectNthService;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -155,7 +149,7 @@ public class AdminController {
 
 
 
-    /* 강의 차시정보 하단테이블 비동기 처리 */
+    /* 강의 차시정보 하단 왼쪽 첫번째 테이블 비동기 처리 */
     @GetMapping("/api/nthName/search")
     @ResponseBody
     public List<LectNthDto> lectIdSearch(@RequestParam(value = "lectId") Long lectId) {
@@ -176,11 +170,15 @@ public class AdminController {
     }
 
     /* 강의 차시정보 저장 */
-    @PostMapping("/api/edit/{id}")
-    public List<LmsContsDto> updateLectNthEdit(@PathVariable Long editId) {
-        return lectNthService.postEdit(editId);
+    @PostMapping("/api/lectNth")
+    @ResponseBody
+    public ResponseEntity<LectNth> addLectNth(@RequestBody LmsContsRequestDto request) {
+        LectNth savedLectNth = lectNthService.save(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(savedLectNth);
     }
-
-
-
 }
+
+
+
+

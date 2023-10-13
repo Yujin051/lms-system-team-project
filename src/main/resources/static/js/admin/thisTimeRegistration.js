@@ -216,7 +216,7 @@ $(document).ready(function() {
             dataType: "json",
             success: function(data) {
                 // 데이터를 첫 번째 그리드에 표시
-                grid1.resetData(data);
+                grid.resetData(data);
             },
             error: function() {
                 // 오류 처리
@@ -363,7 +363,7 @@ searchBtn.addEventListener('click', async () => {
 });
 
 /* 강의 차시정보 하단테이블 비동기 처리*/
-
+grid2.resetData([]);
 grid.on('click', async (ev) => {
     const rowKey = ev.rowKey;
     const rowData = grid.getRow(rowKey);
@@ -371,7 +371,7 @@ grid.on('click', async (ev) => {
     console.log("grid1LectId : " + lectId);
 
     try {
-        // memberId를 사용하여 해당 학생의 데이터를 가져오는 API 호출
+        // lectId를 사용하여 해당 강좌의 데이터를 가져오는 API 호출
         const response = await fetch(`/admin/api/nthName/search?lectId=${lectId}`);
         const studentData = await response.json();
 
@@ -426,4 +426,33 @@ createButton.addEventListener('click', () => {
         contsDetail: ''
     };
     grid2.appendRow(newEmptyRow);
+});
+
+// 저장 버튼 클릭 이벤트 처리
+// 저장 버튼 클릭 이벤트 핸들러
+$("#saveButton").click(function() {
+    // tb1의 입력 필드에서 데이터 가져오기
+    var nthSequence = $("#nthSequence").val();
+    var nthName = $("#nthName").val();
+    var contsTime = $("#contsTime").val();
+
+    // 서버로 데이터를 보내는 AJAX 요청
+    $.ajax({
+        type: "POST",
+        url: "/admin/api/lectNth", // Spring Boot Controller의 엔드포인트 경로
+        data: {
+            nthSequence: nthSequence,
+            nthName: nthName,
+            contsTime: contsTime
+        },
+        dataType: "json",
+        success: function(data) {
+            // 데이터를 grid2에 표시
+            grid2.resetData(data);
+        },
+        error: function() {
+            // 오류 처리
+            alert("데이터를 불러오는 중에 오류가 발생했습니다.");
+        }
+    });
 });

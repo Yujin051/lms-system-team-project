@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
+import org.example.dto.LmsContsRequestDto;
 import org.example.entity.LectNth;
 import org.example.repository.AdminThisTimeRegisTration;
 import org.springframework.data.repository.query.Param;
@@ -57,8 +58,7 @@ public class LectNthService {
 
 
     /* 하단 우측 3번째 테이블 update (저장) */
-    public List<LmsContsDto> postEdit(Long editId) {
-        return adminThisTimeRegisTration.updatePost(editId);
+    public LectNth save(LmsContsRequestDto request) {
+        return adminThisTimeRegisTration.save(request.toEntity());
     }
-
 }

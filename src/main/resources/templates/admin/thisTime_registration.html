@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin_default}">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
     <link rel="stylesheet" href="/css/admin/thisTimeRegistration.css">
@@ -57,12 +57,15 @@
         </div>
 
 
-
+        <form method="post" th:action="@{/api/edit/{id}(id=${id})}">
         <div class="table-button-container border border-0">
+
+
             <div class="d2 border border-0">강의 차시정보</div>
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button id="createBtn" type="button" class="me-md-1 btn btn-secondary">신규</button>
-                <button type="button" class="me-md-1 btn btn-secondary">저장</button>
+                <button type="button" class="me-md-1 btn btn-secondary" id="saveButton">저장</button>
                 <button type="button" class="btn btn-secondary">삭제</button>
             </div>
         </div>
@@ -78,7 +81,6 @@
 
         <table class="right-align" id="tb1">
 
-            <form method="post" th:action="">
 
              <tbody class="tbl2 border border-1">
 
@@ -125,11 +127,8 @@
                 </td>
             </tr>
             </tbody>
-            </form>
+
         </table>
-
-
-
 
     </div>
 
