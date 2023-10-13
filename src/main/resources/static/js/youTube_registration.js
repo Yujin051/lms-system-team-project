@@ -78,3 +78,10 @@ const grid = new tui.Grid({
 //  그리드 요소에 CSS 스타일 적용
 grid.el.style.width = '700px';
 
+
+// API 인증 버튼
+const auth = document.querySelector("#api-auth")
+auth.addEventListener('click', () => {
+    location.href='/youtubeAPIAuth'
+})
+
