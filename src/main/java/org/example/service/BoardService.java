@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * @author 임승범
@@ -91,8 +92,24 @@ public class BoardService {
 
     // 이전 게시글 가져오기
     public BoardArticle findBeforeBoardArticle(Long nowId , Long boardId , Pageable pageable){
-        BoardArticle article = boardRepository.findBeforeBoardArticle(nowId , boardId , pageable).getContent().get(0);
-        return article;
+        Page<BoardArticle> page = boardRepository.findBeforeBoardArticle(nowId , boardId , pageable);
+        List<BoardArticle> articles = page.getContent();
+        if(articles.isEmpty()){
+            BoardArticle article = null;
+            return null;
+        }
+        return articles.get(0);
+    }
+
+    // 다음 게시글 가져오기
+    public BoardArticle findNextBoardArticle(Long nowId , Long boardId , Pageable pageable){
+        Page<BoardArticle> page = boardRepository.findNextBoardArticle(nowId, boardId, pageable);
+        List<BoardArticle> articles = page.getContent();
+        if (articles.isEmpty()) {
+            BoardArticle article = null;
+            return article;
+        }
+        return articles.get(0);
     }
 
 

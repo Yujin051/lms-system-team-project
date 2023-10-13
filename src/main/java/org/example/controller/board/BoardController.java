@@ -46,7 +46,7 @@ public class BoardController {
             @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC) Pageable pageable ,
             Principal principal) {
 
-        log.info("Get요청 /board/list{id} >>> getBoardList() 실행됨. ");
+        log.info("Get요청 /board/list/{" + boardId + "} >>> getBoardList() 실행됨. ");
 
         // principal로 사용자 권한 가져오기
         Member member = memberService.memberView(principal.getName());
@@ -73,7 +73,7 @@ public class BoardController {
             Principal principal,
             Pageable pageable) {
 
-        log.info("Get요청 /board/view" + id + " >>> getboardView() 실행됨.");
+        log.info("Get요청 /board/view/{" + id + "} >>> getboardView() 실행됨.");
 
         // id 해당하는 boardArticle 레코드 가져옴.
         BoardArticle article = boardService.findById(id);
@@ -87,12 +87,17 @@ public class BoardController {
             files = fileInfoService.findFileInfoList(fileNo);
             log.info("files::{}",files);
         }
-
+        // 이전 게시글
         BoardArticle beforeArticle = boardService.findBeforeBoardArticle(
                 article.getId() , article.getBoardInfo().getId() , pageable);
-
         if(beforeArticle != null){
             model.addAttribute("beforeArticle" , beforeArticle);
+        }
+        // 다음 게시글
+        BoardArticle nextArticle = boardService.findNextBoardArticle(
+                article.getId(), article.getBoardInfo().getId() , pageable);
+        if(nextArticle != null){
+            model.addAttribute("nextArticle" , nextArticle);
         }
 
         // member 가져오기
@@ -113,7 +118,7 @@ public class BoardController {
                                    Principal principal) throws Exception {
         // username = userId
         log.info("*************************************************************** principal::{}",principal);
-        log.info("Get요청 >>> /board/write/" + type + " >>> addBoardArticle() 실행됨.");
+        log.info("Get요청 >>> /board/write/{" + type + "} >>> addBoardArticle() 실행됨.");
         log.info("*************************************************************** type = " + type);
 
         // 사용자 회원 정보 가져오기.(principal의 userName은 userId에 해당. unique)
@@ -159,7 +164,7 @@ public class BoardController {
             @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC)Pageable pageable,
             Principal principal){
 
-        log.info("Get요청 /board/search/" + searchType + "/" + id + " >>> searchList() 실행됨.");
+        log.info("Get요청 /board/search/{" + searchType + "}/{" + id + "} >>> searchList() 실행됨.");
 
         Page<BoardArticle> articles = null;
 
@@ -193,6 +198,7 @@ public class BoardController {
 
         return "/community/search_list";
     }
+
 
     // 쪽지 전체 보기
     @GetMapping("/msg/all")

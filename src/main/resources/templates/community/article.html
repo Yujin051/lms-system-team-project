@@ -27,6 +27,11 @@
     <section>
         <div class="container board">
             <input type="text" name="boardType" id="boardType" th:value="${article.getBoardInfo().getId()}">
+            <input type="text" name="isDel" id="isDel" th:value="${article.getIsDeleted()}">
+            <input type="text" name="isLock" id="isLock" th:value="${article.getIsLocked()}">
+            <input type="text" name="memId" id="memId" th:value="${member.getId()}">
+            <input type="text" name="artMemId" id="artMemId" th:value="${article.getMemberId().getId()}">
+            <input type="hidden" id="articleId" th:value="${article.getId()}">
             <div class="board_nav">
                 <!-- th:if="${article.getMemberId() == member}"-->
                 <button th:if="${article.getMemberId().getId() == member.getId()}" id="modifyBtn" class="btn btn-dark">수정</button>
@@ -35,9 +40,6 @@
             </div>
 
             <div class="article_top">
-                <input type="hidden" id="articleId" th:value="${article.getId()}">
-                <!-- 전페이지에서 게시판 타입 가져오기 > get에서 모델 담아 html 반환 -->
-
                 <div class="mt-4">
                     <!-- 프로필사진 -->
                     <div class="profile"></div>
@@ -93,17 +95,24 @@
             <!-- th:text 게시글 제목 출력 -->
             <div class="article_nav">
                 <ul>
-                    <li  class="article_prev">
-                        <i class="bi bi-caret-up-fill"></i>
-                        <span class="article_navText">이전글 </span>
-                        <span>관리자는 개인정보를 요구하지 않습니다.</span>
-                    </li>
-
-                    <li class="article_next">
-                        <i class="bi bi-caret-down-fill"></i>
-                        <span class="article_navText">다음글</span>
-                        <span>수업일정 연기에 관하여.</span>
-                    </li>
+                    <th:block th:if="${nextArticle != null}">
+                        <li class="article_next">
+                            <a th:href="@{/board/view/{id}(id=${nextArticle.getId()})}">
+                                <i class="bi bi-caret-up-fill"></i>
+                                <span class="article_navText">다음글</span>
+                                <span th:text="${nextArticle.getArticleTitle()}">수업일정 연기에 관하여.</span>
+                            </a>
+                        </li>
+                    </th:block>
+                    <th:block th:if="${beforeArticle != null}">
+                        <li  class="article_prev">
+                            <a th:href="@{/board/view/{id}(id=${beforeArticle.getId()})}">
+                                <i class="bi bi-caret-down-fill"></i>
+                                <span class="article_navText">이전글 </span>
+                                <span th:text="${beforeArticle.getArticleTitle()}">관리자는 개인정보를 요구하지 않습니다.</span>
+                            </a>
+                        </li>
+                    </th:block>
                 </ul>
             </div>
 
@@ -113,7 +122,7 @@
                     <div>
                         <textarea name="write_comment" id="write_comment" placeholder="내용을 입력해주세요" rows="2"></textarea>
                         <!-- <input type="" class="comment_input"> -->
-                        <button class="btn btn-dark">작성</button>
+                        <button id="commentBtn" class="btn btn-dark">작성</button>
                     </div>
                     <div>
                     </div>
