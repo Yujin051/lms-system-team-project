@@ -7,12 +7,10 @@ import org.example.constant.RoleType;
 import org.example.dto.board.ArticleDto;
 import org.example.dto.board.PageDto;
 import org.example.entity.BoardArticle;
+import org.example.entity.BoardComnt;
 import org.example.entity.FileInfo;
 import org.example.entity.Member;
-import org.example.service.BoardInfoService;
-import org.example.service.BoardService;
-import org.example.service.FileInfoService;
-import org.example.service.MemberService;
+import org.example.service.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -37,6 +35,7 @@ public class BoardController {
     private final BoardService boardService;
     private final MemberService memberService;
     private final FileInfoService fileInfoService;
+    private final CommentService commentService;
 
     // 리스트 전체 글 보기
     @GetMapping("/list/{id}")
@@ -79,11 +78,10 @@ public class BoardController {
         BoardArticle article = boardService.findById(id);
 
         List<FileInfo> files = new ArrayList<>();
-
         // 첨부파일 번호
         Long fileNo = article.getArticleFileNum();
 
-        if(fileNo != null || fileNo != 0L){
+        if(fileNo != null && fileNo != 0L){
             files = fileInfoService.findFileInfoList(fileNo);
             log.info("files::{}",files);
         }
@@ -98,6 +96,11 @@ public class BoardController {
                 article.getId(), article.getBoardInfo().getId() , pageable);
         if(nextArticle != null){
             model.addAttribute("nextArticle" , nextArticle);
+        }
+        // 댓글 목록 가져오기
+        List<BoardComnt> comnts = commentService.findAll(article.getId());
+        if(comnts != null){
+            model.addAttribute("comnts" , comnts);
         }
 
         // member 가져오기

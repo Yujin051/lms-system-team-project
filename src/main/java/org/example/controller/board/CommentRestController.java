@@ -9,6 +9,8 @@ import org.example.entity.Member;
 import org.example.service.BoardService;
 import org.example.service.CommentService;
 import org.example.service.MemberService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,8 +34,9 @@ public class CommentRestController {
 
     // 댓글 작성
     @PostMapping("/write")
-    public void addCommentArticle(@RequestBody CommentDto commentDto , Principal principal){
+    public ResponseEntity<BoardComnt> addCommentArticle(@RequestBody CommentDto commentDto , Principal principal){
 
+        log.info("POST요청 /comment/write >>> addCommentArticle()실행됨.");
         log.info("commentDto::{}",commentDto);
 
         BoardArticle boardArticle =boardService.findById(commentDto.getBoardArticleId());
@@ -42,10 +45,10 @@ public class CommentRestController {
         commentDto.setBoardArticle(boardArticle);
         commentDto.setCommentWriter(member.getUserName());
 
+        BoardComnt comnt = commentService.save(commentDto);
 
-
+         return ResponseEntity.status(HttpStatus.CREATED).body(comnt);
     }
-
 
     // 댓글 수정
 

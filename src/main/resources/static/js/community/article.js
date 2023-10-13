@@ -93,18 +93,14 @@ if(commentBtn){
             if(xhr.readyState === 4){
                 if(xhr.status === 201){
                     alert('성공');
+                    location.reload();
                 }
                 else {
-                    alert('실패');
+                    alert('실패 : firetrap5319@gmail.com로 문의 바랍니다.');
                 }
             }
         };
         xhr.send(JSON.stringify(data));
-
-
-
-
-
     });
 
 }

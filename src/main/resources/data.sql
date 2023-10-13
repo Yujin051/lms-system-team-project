@@ -7,44 +7,46 @@ insert into board_info (board_type , board_name) values ('교원' , '공통');
 
 -- insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role)
 --     values
---         ('admin1' , '123123' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN');
---         ('admin2' , '123123' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN');
---         ('admin3' , '123123' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN');
---         ('admin4' , '123123' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN');
+--         ('admin1' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN');
+--         ('admin2' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN');
+--         ('admin3' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN');
+--         ('admin4' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN');
 
 -- insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role)
 
-insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role) values
-('admin1' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin2' , '123123' , '관리자2','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin3' , '123123' , '관리자3','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin4' , '123123' , '관리자4','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin5' , '123123' , '관리자5','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin6' , '123123' , '관리자6','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin7' , '123123' , '관리자7','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin8' , '123123' , '관리자8','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin9' , '123123' , '관리자9','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin10' , '123123' , '관리자10','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin11' , '123123' , '관리자11','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin12' , '123123' , '관리자12','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin13' , '123123' , '관리자13','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin14' , '123123' , '관리자14','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin15' , '123123' , '관리자15','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin16' , '123123' , '관리자16','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin17' , '123123' , '관리자17','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin18' , '123123' , '관리자18','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin19' , '123123' , '관리자19','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin20' , '123123' , '관리자20','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin21' , '123123' , '관리자21','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin22' , '123123' , '관리자22','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin23' , '123123' , '관리자23','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin24' , '123123' , '관리자24','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin25' , '123123' , '관리자25','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin26' , '123123' , '관리자26','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin27' , '123123' , '관리자27','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin28' , '123123' , '관리자28','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('admin29' , '123123' , '관리자29','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-('dlatmdqja' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '임승범','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'USER');
+insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role , img_original , img_saved) values
+('admin1' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자99','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN' , 'noimg2.png' , 'noimg2.png'),
+('admin2' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자2','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin3' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자3','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin4' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자4','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin5' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자5','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin6' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자6','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin7' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자7','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin8' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자8','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin9' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자9','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin10' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자10','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin11' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자11','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin12' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자12','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin13' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자13','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin14' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자14','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin15' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자15','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin16' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자16','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin17' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자17','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin18' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자18','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin19' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자19','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin20' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자20','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin21' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자21','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin22' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자22','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin23' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자23','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin24' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자24','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin25' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자25','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin26' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자26','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin27' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자27','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin28' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자28','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png'),
+('admin29' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '관리자29','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' , 'noimg2.png');
+
+insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role , img_original , img_saved ) values
+('dlatmdqja' , '$2a$10$ITnRi2fLSyEH1ZiKLNq1d.PVX5JQwU/5NP37jR/N7KbzQnxEV00uu' , '임승범','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'USER' , 'noimg2.png' , 'noimg2.png');
 
 
 

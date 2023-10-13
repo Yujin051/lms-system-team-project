@@ -60,6 +60,12 @@ public class Member {
     @Column(name = "user_role", nullable = false)
     private RoleType userRole;
 
+    @Column(name = "img_original", nullable = true)
+    private String imgOriginal; // 원본 이미지 이름
+
+    @Column(name = "img_saved", nullable = true)
+    private String imgSaved; // db에 저장될 이미지 이름
+
 
     @Builder
     public Member(String userId, String userPassword, String userName, String userPhoneNum,

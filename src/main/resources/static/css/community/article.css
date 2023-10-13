@@ -65,15 +65,28 @@ section {
 
 /* 프로필 사진 설정 */
 .profile {
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     border-radius: 25px;
-    background: url(/img/logo_640x320.png) no-repeat center;
-    background-size: contain;
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    /*background-image: url(/img/logo_640x320.png);*/
+    /*background-size: contain;*/
     width: 64px;
     height: 64px;
     text-align: center;
     margin: auto;
 }
+
+.profile > img {
+    border: 1px solid #ccc;
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    border-radius: inherit;
+    text-align: center;
+
+}
+
 /* 제목 설정 */
 .article_title {
     font-weight: bold;
