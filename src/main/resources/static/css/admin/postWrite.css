@@ -59,16 +59,24 @@
     width: 34%; height: 100px; border: 0px solid black; display: flex;
     justify-content: center; align-items: center;
 }
+.post_search_body > .post_search_box > .post_search_requirement_box > .post_search_requirement_select{
+    width: 100px;
+}
+.post_search_body > .post_search_box > .post_search_requirement_box > .post_search_requirement_input{
+    outline: none; border-radius: 5px; text-decoration: none;
+    border: 1px solid #245396; height: 30px; margin-left: 5px;
+}
 .post_search_body > .post_search_box > .post_search_requirement_box span{
     margin-right: 10px;
 }
 .post_search_body > .post_search_box > .post_date_box{
     width: 33%; height: 100px; border: 0px solid black; display: flex;
-    justify-content: center; align-items: center;
+    justify-content: center; align-items: center; position: relative;
 }
-.post_search_body > .post_search_box > .post_date_box input{
+.post_search_body > .post_search_box > .post_date_box > input {
     outline: none; border-radius: 5px; text-decoration: none;
-    border: 1px solid #245396;
+    border: 1px solid #245396; height: 30px; width: 200px;
+    text-align: center;
 }
 .post_search_body > .post_search_box > .post_date_box span{
     height: 30px; line-height: 30px; margin-left: 10px; width: 50px;
@@ -250,7 +258,7 @@
 }
 .post_content_box > .post_content > .post_content_right_box > .post_content_board_type_box > .post_content_board_type input{
     margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
-    border: 1px solid #cccccc; outline: none; background: #cccccc; text-indent: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
 }
 
 /*공개여부*/
@@ -313,9 +321,16 @@
     display: flex; justify-content: center; align-items: center;
 }
 .content_box > .content > .real_content {
-    border: 1px solid #cccccc; width: 1500px; height: 380px; border-radius: 5px;
-    text-indent: 5px;
+    border: 0px solid #cccccc; width: 1500px; height: 380px; border-radius: 5px;
 }
-.content_box > .content > .real_content p{
-    text-indent: 5px;
+
+/*게시글 내용 textarea*/
+.content_box > .content > .real_content textarea {
+    resize: none; outline: none; width: 1500px; height: 380px;
+    border-radius: 5px; text-indent: 5px; border: 1px solid #cccccc;
+}
+
+/*검색결과 : n건*/
+.result2 {
+    font-size: 0.85rem; margin-left: 10px;
 }

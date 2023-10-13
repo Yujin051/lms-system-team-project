@@ -32,8 +32,8 @@ public class SemGrade {
     private String semSem;
 
     //등급
-    @Column(name = "sem_grade")
-    private String semGrade;
+    @Column(name = "sem_rating")
+    private String semRating;
 
     //평균
     @Column(name = "sem_avg")

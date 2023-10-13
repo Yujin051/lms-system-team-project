@@ -1,7 +1,8 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +11,9 @@ import java.time.LocalDateTime;
  * @author 신민기
  */
 @Entity
-@Data
+@Setter @Getter
 @Table(name = "stud_lect_prog")
+@NoArgsConstructor
 public class StudLectProg {
 
     @Id
@@ -36,17 +38,23 @@ public class StudLectProg {
 
     /* 최종재생위치 */
     @Column(name = "fnl_posi")
-    private int fnlPosi;
+    private Integer fnlPosi;
 
     /* 최대재생위치 */
     @Column(name = "max_posi")
-    private int maxPosi;
+    private Integer maxPosi = 0;
 
     /* 출석 상태 */
     @Column(name = "is_checked")
-    private boolean isChecked;
+    private boolean isChecked = false;
 
     /* 출석 날짜 */
     @Column(name = "check_date")
     private LocalDateTime checkDate;
+
+    @Builder
+    public StudLectProg(int fnlPosi, int maxPosi) {
+        this.fnlPosi = fnlPosi;
+        this.maxPosi = maxPosi;
+    }
 }

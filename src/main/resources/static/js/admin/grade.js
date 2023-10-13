@@ -11,7 +11,7 @@ const grid1 = new tui.Grid({
             },
             {
                 header: '학번',
-                name: 'studId',
+                name: 'userId',
                 sortingType: 'asc',
                 sortable: true
             },
@@ -40,8 +40,8 @@ const grid1 = new tui.Grid({
                 sortable: true
             },
             {
-                header: '현재수강학점',
-                name: 'studNowCr',
+                header: '수강생ID',
+                name: 'studId',
                 hidden: true
             }
         ]
@@ -61,59 +61,61 @@ const grid1 = new tui.Grid({
         },
         {
             header: '학번',
-            name: 'studId',
+            name: 'userId',
             sortingType: 'asc',
-            sortable: true,
+            sortable: true
         },
         {
             header: '생년월일',
             sortingType: 'asc',
             name: 'userBirthday',
-            sortable: true,
+            sortable: true
         },
         {
             header: '성별',
             sortingType: 'asc',
             name: 'userGender',
-            sortable: true,
+            sortable: true
         },
         {
             header: '이메일',
             sortingType: 'asc',
             name: 'userEmail',
-            sortable: true,
+            sortable: true
         },
         {
             header: '학년',
             sortingType: 'asc',
             name: 'studGrade',
-            sortable: true,
+            sortable: true
         },
         {
-            header: '현재수강학점',
-            name: 'studNowCr',
+            header: '수강생ID',
+            name: 'studId',
             hidden: true
         }
     ]
 });
 console.log("grid1 : " + grid1);
 
+// 관리자 - 전체성적관리 : 페이지 로드될때 학생정보 조회
+window.addEventListener('load', async () => {
+    try {
+        const response = await fetch('/admin/api/grade');
+        const data2 = await response.json();
+        console.log(data2);
+        grid1.resetData(data2);
+        resultElement.textContent = `검색결과 : ${data2.length} 건`;
+    } catch (error) {
+        console.error('데이터 가져오기 오류:', error);
+    }
+});
+
 const retrieveButton = document.querySelector('.grade_btn');
 const searchNameInput = document.querySelector('.student_name_input');
 const searchNumInput = document.querySelector('.student_grade_input');
 const resultElement = document.querySelector('.result1');
 const searchGradeInput = document.querySelector('.student_grade_select_box');
-
-// 학번입력에 문자가 입력되면 알림창 후 초기화
-searchNumInput.addEventListener('input', function () {
-    const inputValue = this.value;
-
-    // 숫자가 아닌 문자가 입력된 경우
-    if (!/^\d*$/.test(inputValue)) {
-        alert('학번에는 숫자만 입력 가능합니다.');
-        this.value = '';
-    }
-});
 
 // 이름입력에 숫자가 입력되면 알림창 후 초기화
 searchNameInput.addEventListener('input', function () {
@@ -139,11 +141,11 @@ retrieveButton.addEventListener('click', async () => {
             apiUrl = `/admin/grade/all/api/search?idKeyword=${numKeyword}&nameKeyword=${nameKeyword}&gradeKeyword=${gradeKeyword}`;
         } else if (nameKeyword && numKeyword) {
             // 이름과 학번 검색 모두 입력한 경우
-            apiUrl = `/admin/grade/all/api/search?idKeyword=${numKeyword}&nameKeyword=${nameKeyword}`;
-        } else if (nameKeyword) {
+            apiUrl = `/admin/grade/userIdAndUserName/api/search?idKeyword=${numKeyword}&nameKeyword=${nameKeyword}`;
+        } else if (nameKeyword && numKeyword === "") {
             // 이름 검색어만 입력한 경우
             apiUrl = `/admin/grade/userName/api/search?keyword=${nameKeyword}`;
-        } else if (numKeyword) {
+        } else if (numKeyword && nameKeyword === "") {
             // 학번 검색어만 입력한 경우
             apiUrl = `/admin/grade/studId/api/search?keyword=${numKeyword}`;
         } else if (gradeKeyword) {
@@ -165,43 +167,26 @@ retrieveButton.addEventListener('click', async () => {
     }
 });
 
-// 관리자 - 전체성적관리 : 페이지 로드될때 학생정보 조회
-window.addEventListener('load', async () => {
-    try {
-        const response = await fetch('/admin/api/grade');
-        const data2 = await response.json();
-        console.log(data2);
-        grid1.resetData(data2);
-        resultElement.textContent = `검색결과 : ${data2.length} 건`;
-    } catch (error) {
-        console.error('데이터 가져오기 오류:', error);
-    }
-});
 
 let selectedRowKey = null; // 선택한 행의 키를 추적하는 변수
 
 grid1.on('click', async (ev) => {
     const rowKey = ev.rowKey;
-
-    // 선택한 행이 변경된 경우, grid2의 데이터를 초기화
-    if (selectedRowKey !== rowKey) {
-        grid2.resetData([]);
-        selectedRowKey = rowKey;
-    }
-
-    // 클릭한 행의 데이터 가져오기
     const rowData = grid1.getRow(rowKey);
+    const studId = rowData.studId;
+    console.log("grid1StudId : " + studId);
 
-    // grid2에 중복되지 않는 데이터 추가 또는 설정
-    const grid2Data = grid2.getData();
+    try {
+        // memberId를 사용하여 해당 학생의 데이터를 가져오는 API 호출
+        const response = await fetch(`/admin/api/gradeRecord?studId=${studId}`);
+        const studentData = await response.json();
 
-    // 중복을 체크하여 추가
-    if (!grid2Data.some(item => item.studId === rowData.studId)) {
-        grid2Data.push(rowData);
-        grid2.resetData(grid2Data);
+        // grid2에 데이터 설정
+        grid2.resetData(studentData);
+    } catch (error) {
+        console.error('An error occurred:', error);
     }
 });
-
 
 const grid2 = new tui.Grid({
     el: document.getElementById('grid2'),
@@ -210,33 +195,38 @@ const grid2 = new tui.Grid({
         "contents": [
             {
                 header: '학번',
-                name: 'studId',
+                name: 'userId',
                 sortingType: 'asc',
                 sortable: true
             },
             {
                 header: '등급',
-                name: 'semGrade',
+                name: 'semRating',
                 sortingType: 'asc',
-                sortable: true
-            },
-            {
-                header: '년도',
-                sortingType: 'asc',
-                name: 'semYear',
                 sortable: true
             },
             {
                 header: '학기',
-                sortingType: 'asc',
                 name: 'semSem',
+                sortingType: 'asc',
+                sortable: true
+            },
+            {
+                header: '최대수강학점',
+                name: 'studMaxCr',
+                sortingType: 'asc',
                 sortable: true
             },
             {
                 header: '현재수강학점',
-                sortingType: 'asc',
                 name: 'studNowCr',
+                sortingType: 'asc',
                 sortable: true
+            },
+            {
+                header: '수강생ID',
+                name: 'studId',
+                hidden: true
             }
         ],
         "pagination": {
@@ -253,35 +243,57 @@ const grid2 = new tui.Grid({
     "columns": [
         {
             header: '학번',
-            name: 'studId',
+            name: 'userId',
             sortingType: 'asc',
             sortable: true
         },
         {
             header: '등급',
-            name: 'semGrade',
+            name: 'semRating',
             sortingType: 'asc',
-            sortable: true
-        },
-        {
-            header: '년도',
-            sortingType: 'asc',
-            name: 'semYear',
             sortable: true
         },
         {
             header: '학기',
-            sortingType: 'asc',
             name: 'semSem',
+            sortingType: 'asc',
+            sortable: true
+        },
+        {
+            header: '최대수강학점',
+            name: 'studMaxCr',
+            sortingType: 'asc',
             sortable: true
         },
         {
             header: '현재수강학점',
-            sortingType: 'asc',
             name: 'studNowCr',
+            sortingType: 'asc',
             sortable: true
+        },
+        {
+            header: '수강생ID',
+            name: 'studId',
+            hidden: true
         }
     ]
+});
+
+grid2.on('click', async (ev) => {
+    const rowKey = ev.rowKey;
+    const rowData = grid2.getRow(rowKey);
+    const studId = rowData.studId;
+    console.log("grid2StudId : " + studId);
+
+    try {
+        const response = await fetch(`/admin/api/findGradeByCourse?studId=${studId}`);
+        const studentData = await response.json();
+
+        // grid2에 데이터 설정
+        grid3.resetData(studentData);
+    } catch (error) {
+        console.error('An error occurred:', error);
+    }
 });
 
 const grid3 = new tui.Grid({
@@ -290,45 +302,39 @@ const grid3 = new tui.Grid({
     data: [{
         "contents": [
             {
-                header: ' 강좌번호',
-                name: 'lectId',
-                sortingType: 'asc',
-                sortable: true
-            },
-            {
-                header: '담당강사',
-                name: 'userName',
-                sortingType: 'asc',
-                sortable: true
-            },
-            {
                 header: '강좌명',
-                sortingType: 'asc',
                 name: 'lectName',
+                sortingType: 'asc',
                 sortable: true
             },
             {
-                header: '강좌시작일',
+                header: '평가등급',
+                name: 'grade',
                 sortingType: 'asc',
-                name: 'lectStart',
                 sortable: true
             },
             {
-                header: '강좌종료일',
+                header: '출석점수',
                 sortingType: 'asc',
-                name: 'lectEnd',
+                name: 'checkScore',
                 sortable: true
             },
             {
-                header: '강좌상태',
+                header: '과제점수',
                 sortingType: 'asc',
-                name: 'isActive',
+                name: 'assignScore',
                 sortable: true
             },
             {
-                header: '강좌학점',
+                header: '시험점수',
                 sortingType: 'asc',
-                name: 'lectCredit',
+                name: 'testScore',
+                sortable: true
+            },
+            {
+                header: '성적입력여부',
+                sortingType: 'asc',
+                name: 'isRecord',
                 sortable: true
             }
         ],
@@ -345,77 +351,40 @@ const grid3 = new tui.Grid({
     },
     "columns": [
         {
-            header: ' 강좌번호',
-            name: 'lectId',
-            sortingType: 'asc',
-            sortable: true
-        },
-        {
-            header: '담당강사',
-            name: 'userName',
-            sortingType: 'asc',
-            sortable: true
-        },
-        {
             header: '강좌명',
-            sortingType: 'asc',
             name: 'lectName',
+            sortingType: 'asc',
             sortable: true
         },
         {
-            header: '강좌시작일',
+            header: '평가등급',
+            name: 'grade',
             sortingType: 'asc',
-            name: 'lectStart',
             sortable: true
         },
         {
-            header: '강좌종료일',
+            header: '출석점수',
             sortingType: 'asc',
-            name: 'lectEnd',
+            name: 'checkScore',
             sortable: true
         },
         {
-            header: '강좌상태',
+            header: '과제점수',
             sortingType: 'asc',
-            name: 'isActive',
+            name: 'assignScore',
             sortable: true
         },
         {
-            header: '강좌학점',
+            header: '시험점수',
             sortingType: 'asc',
-            name: 'lectCredit',
+            name: 'testScore',
+            sortable: true
+        },
+        {
+            header: '성적입력여부',
+            sortingType: 'asc',
+            name: 'isRecord',
             sortable: true
         }
     ]
-});
-
-grid2.on('click', async (ev) => {
-    const rowKey = ev.rowKey;
-    const rowData = grid2.getRow(rowKey);
-    const studId = rowData.studId; // 선택한 행의 studId 가져오기
-    console.log("studId : " + studId);
-
-    try {
-        // studId를 사용하여 해당 학생의 데이터를 가져오는 API 호출
-        $.ajax({
-            url: `/admin/api/gradeByCourse?studId=${studId}`,
-            method: 'GET',
-            dataType: 'json',
-            success: function (studentData) {
-                console.log("studentData : " + studentData.lectCredit);
-
-                // grid3에 데이터 설정
-                const grid3Data = studentData;
-                grid3.resetData(grid3Data);
-                console.log("grid3 : " + JSON.stringify(grid3Data)); // JSON.stringify를 사용하여 객체를 문자열로 변환
-            },
-            error: function (error) {
-                // 오류 처리
-                console.error('An error occurred:', error);
-            }
-        });
-    } catch (error) {
-        // 오류 처리
-        console.error('An error occurred:', error);
-    }
 });

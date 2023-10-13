@@ -5,7 +5,7 @@ const grid = new tui.Grid({
         "contents": [
             {
                 header: '학번',
-                name: 'studId',
+                name: 'userId',
                 sortingType: 'asc',
                 sortable: true,
             },
@@ -22,16 +22,44 @@ const grid = new tui.Grid({
                 sortable: true,
             },
             {
+                header: '성별',
+                sortingType: 'asc',
+                name: 'userGender',
+                sortable: true,
+                hidden: true,
+            },
+            {
                 header: '전화번호',
                 sortingType: 'asc',
                 name: 'userPhoneNum',
                 sortable: true,
             },
             {
+                header: '주소',
+                sortingType: 'asc',
+                name: 'userAddr',
+                sortable: true,
+                hidden: true,
+            },
+            {
+                header: '수강생 번호',
+                sortingType: 'asc',
+                name: 'studId',
+                sortable: true,
+                hidden: true,
+            },
+            {
                 header: '이메일',
                 sortingType: 'asc',
                 name: 'userEmail',
                 sortable: true,
+            },
+            {
+                header: '학점',
+                sortingType: 'asc',
+                name: 'studNowCr',
+                sortable: true,
+                hidden: true,
             }
         ],
         "pagination": {
@@ -48,7 +76,7 @@ const grid = new tui.Grid({
     "columns": [
         {
             header: '학번',
-            name: 'studId',
+            name: 'userId',
             sortingType: 'asc',
             sortable: true,
         },
@@ -65,16 +93,44 @@ const grid = new tui.Grid({
             sortable: true,
         },
         {
+            header: '성별',
+            sortingType: 'asc',
+            name: 'userGender',
+            sortable: true,
+            hidden: true,
+        },
+        {
             header: '전화번호',
             sortingType: 'asc',
             name: 'userPhoneNum',
             sortable: true,
         },
         {
+            header: '주소',
+            sortingType: 'asc',
+            name: 'userAddr',
+            sortable: true,
+            hidden: true,
+        },
+        {
+            header: '수강생 번호',
+            sortingType: 'asc',
+            name: 'studId',
+            sortable: true,
+            hidden: true,
+        },
+        {
             header: '이메일',
             sortingType: 'asc',
             name: 'userEmail',
             sortable: true,
+        },
+        {
+            header: '학점',
+            sortingType: 'asc',
+            name: 'studNowCr',
+            sortable: true,
+            hidden: true,
         }
     ],
 });
@@ -83,31 +139,50 @@ grid.on('click', async (ev) => {
     const rowData = grid.getRow(ev.rowKey);
 
     // 각 열에 대한 데이터 추출
-    const studId = rowData.studId;
-    const userName = rowData.userName;
-    const userBirthday = rowData.userBirthday;
-    const userPhoneNum = rowData.userPhoneNum;
-    const userEmail = rowData.userEmail;
+    const userId = rowData.userId; //학번
+    const studId = rowData.studId; //수강생번호
+    const userName = rowData.userName; //성명
+    const userBirthday = rowData.userBirthday; //생년월일
+    const userPhoneNum = rowData.userPhoneNum; //전화번호
+    const userEmail = rowData.userEmail; //이메일
+    const userStudNowCr = rowData.studNowCr; //학점
+    const userGender = rowData.userGender; //성별
+    const userAddr = rowData.userAddr; //주소
+    console.log("studId : " + rowData.studId);
 
-    const studIdSpan = document.querySelector('.stud_id');
+
+    const userIdSpan = document.querySelector('.user_id');
+    const studIdSpan = document.querySelector('.user_stud_id');
     const userNameSpan = document.querySelector('.user_name');
     const userBirthdaySpan = document.querySelector('.user_birthday');
     const userPhoneNumSpan = document.querySelector('.user_phonenum');
     const userEmailSpan = document.querySelector('.user_email');
+    const userGenderSpan = document.querySelector('.user_gender');
+    const userAddrSpan = document.querySelector('.user_addr');
+    const userStudNowCrSpan = document.querySelector('.user_stud_now_cr');
 
+
+    userIdSpan.style.display = 'block';
     studIdSpan.style.display = 'block';
     userNameSpan.style.display = 'block';
     userBirthdaySpan.style.display = 'block';
     userPhoneNumSpan.style.display = 'block';
     userEmailSpan.style.display = 'block';
+    userStudNowCrSpan.style.display = 'block';
+    userGenderSpan.style.display = 'block';
+    userAddrSpan.style.display = 'block';
+
 
     // 데이터 넣기
+    userIdSpan.textContent = userId;
     studIdSpan.textContent = studId;
     userNameSpan.textContent = userName;
     userBirthdaySpan.textContent = userBirthday;
     userPhoneNumSpan.textContent = userPhoneNum;
     userEmailSpan.textContent = userEmail;
-
+    userStudNowCrSpan.textContent = userStudNowCr;
+    userGenderSpan.textContent = userGender;
+    userAddrSpan.textContent = userAddr;
 
 });
 
@@ -116,17 +191,6 @@ const retrieveButton = document.querySelector('.stud_select_btn');
 const searchNameInput = document.querySelector('.lName');
 const searchNumInput = document.querySelector('.lNum');
 const resultElement = document.querySelector('.result');
-
-// 학번입력에 문자가 입력되면 알림창 후 초기화
-searchNumInput.addEventListener('input', function () {
-    const inputValue = this.value;
-
-    // 숫자가 아닌 문자가 입력된 경우
-    if (!/^\d*$/.test(inputValue)) {
-        alert('학번에는 숫자만 입력 가능합니다.');
-        this.value = '';
-    }
-});
 
 // 이름입력에 숫자가 입력되면 알림창 후 초기화
 searchNameInput.addEventListener('input', function () {
@@ -155,7 +219,7 @@ retrieveButton.addEventListener('click', async () => {
         } else if (numKeyword) {
             // 학번 검색어만 입력한 경우
             apiUrl = `/admin/studentmanage/studId/api/search?keyword=${numKeyword}`;
-        } else {
+        } else if(numKeyword === "" && nameKeyword === "") {
             // 이름과 학번 모두 비어 있는 경우 전체 검색
             apiUrl = `/admin/studentmanage/no/api/search?idKeyword=${numKeyword}&nameKeyword=${nameKeyword}`;
         }
