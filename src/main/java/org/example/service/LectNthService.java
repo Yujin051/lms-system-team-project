@@ -57,8 +57,28 @@ public class LectNthService {
     }
 
 
+
+
     /* 하단 우측 3번째 테이블 update (저장) */
-    public LectNth save(LmsContsRequestDto request) {
-        return adminThisTimeRegisTration.save(request.toEntity());
+    @Transactional
+    public LectNth createLectNth(LmsContsRequestDto lmsContsRequestDto) {
+        LectNth lectNth = adminThisTimeRegisTration.findById(1L)
+                .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
+        lmsContsRequestDto.setLectNth(lectNth);
+        return adminThisTimeRegisTration.save(lmsContsRequestDto.toEntity());
+
+
+    }
+
+    /* 하단 우측 3번째 테이블 update (수정) */
+    @Transactional
+    public LectNth updateLectNth(LmsContsRequestDto lmsContsRequestDto) {
+        LectNth lectNth = adminThisTimeRegisTration.findById(lmsContsRequestDto.getNthId())
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없어"));
+        /* 수정 필드 업뎃*/
+        lectNth.setNthSequence(lmsContsRequestDto.getNthSequence());
+        lectNth.setNthName(lmsContsRequestDto.getNthName());
+        lectNth.setLmsConts(lmsContsRequestDto.getLmsConts());
+        return lmsContsRequestDto.save(lectNth);
     }
 }

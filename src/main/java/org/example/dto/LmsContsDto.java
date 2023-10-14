@@ -13,9 +13,9 @@ public class LmsContsDto {
         private Long contsNo;
         private Long nthSequence;
         private String contsName;
-        private int contsTime;
+        private String nthName;
         private String contsYout;
-        private String contsDetail;
+        private int contsTime;
 
 
 }

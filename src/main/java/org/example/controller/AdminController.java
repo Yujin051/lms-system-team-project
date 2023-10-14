@@ -170,15 +170,17 @@ public class AdminController {
     }
 
     /* 강의 차시정보 저장 */
-    @PostMapping("/api/lectNth")
+    @PutMapping("/api/lectNth/save")
     @ResponseBody
-    public ResponseEntity<LectNth> addLectNth(@RequestBody LmsContsRequestDto request) {
-        LectNth savedLectNth = lectNthService.save(request);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(savedLectNth);
+    public ResponseEntity<?> createLectNth(@RequestBody LmsContsRequestDto lmsContsRequestDto) {
+        if(lmsContsRequestDto.getNthId() == null) {
+            lectNthService.createLectNth(lmsContsRequestDto);
+            log.info("saveNthId :" + lmsContsRequestDto.getNthId());
+        }else {
+            lectNthService.updateLectNth(lmsContsRequestDto);
+            log.info("updateLectNth : " + lmsContsRequestDto.getNthId());
+        }
+        List<LmsContsRequestDto> lcr = lectNthService.getLectNth();
+        return ResponseEntity.ok(lcr);
     }
 }
-
-
-
-

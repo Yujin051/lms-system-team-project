@@ -29,18 +29,7 @@
                     <div class="input-group-prepend">
                         <span class="m-3 p-5">강의운영상태</span>
                     </div>
-                    <!--<div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">
-                            전체
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><a class="dropdown-item" id="item-all" href="#">(전체)</a></li>
-                            <li><a class="dropdown-item" id="item-ready" href="#">준비중</a></li>
-                            <li><a class="dropdown-item" id="item-running" href="#">운영중</a></li>
-                            <li><a class="dropdown-item" id="item-closed" href="#">종료</a></li>
-                        </ul>
-                    </div>-->
+
                     <select class="box" id="dropdown-menu">
                         <option id="item-all" value="">(전체)</option>
                         <option id="item-running" value="운영중">운영중</option>
@@ -66,7 +55,7 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button id="createBtn" type="button" class="me-md-1 btn btn-secondary">신규</button>
                 <button type="button" class="me-md-1 btn btn-secondary" id="saveButton">저장</button>
-                <button type="button" class="btn btn-secondary">삭제</button>
+                <button type="button" class="btn btn-secondary" id="deleteBtn">삭제</button>
             </div>
         </div>
 
@@ -109,9 +98,9 @@
                 </td>
             </tr>
             <tr>
-                <th class="border border-1 wider-th">차시 학습시간(초)</th>
+                <th class="border border-1 wider-th">차시명</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input id="contsTimeInput" class="form-control" type="text" aria-label="Search">
+                    <input id="nthNameInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             <tr>
@@ -121,9 +110,9 @@
                 </td>
             </tr>
             <tr>
-                <th class="border border-1 wider-th">차시 추가설명</th>
+                <th class="border border-1 wider-th">차시 학습시간(초)</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input id="contsDetailInput" class="form-control" type="text" aria-label="Search">
+                    <input id="contsTimeInput" class="form-control" type="text" aria-label="Search">
                 </td>
             </tr>
             </tbody>

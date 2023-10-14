@@ -16,21 +16,20 @@ public class LmsContsRequestDto {
     private Long contsNo;
     private Long nthSequence;
     private String contsName;
-    private int contsTime;
     private String contsYout;
     private String contsDetail;
     private String nthName;
     private LectInfo lectInfo;
     private LmsConts lmsConts;
-
+    private int contsTime;
 
 
     public LectNth toEntity() {
         return LectNth.builder()
                 .lectInfo(lectInfo)
                 .lmsConts(lmsConts)
-                .nthName(nthName)
                 .nthSequence(nthSequence)
+                .nthName(nthName)
                 .build();
     }
 }

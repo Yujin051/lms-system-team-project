@@ -323,7 +323,7 @@ const resultElement = document.querySelector('.result2');
 const searchSelect = document.querySelector('.box');
 
 /* 온라인강좌명 검색 */
-searchBtn.addEventListener('click', async () => {
+saveButton.addEventListener('click', async () => {
     try {
         const searchInputValue = searchInput.value;
         const searchSelectValue = searchSelect.value;
@@ -382,6 +382,23 @@ grid.on('click', async (ev) => {
     }
 });
 
+// HTML 요소를 선택합니다.
+var contsNthIdInput = document.getElementById("contsNthIdInput");
+
+// 입력 요소를 읽기 전용으로 설정합니다.
+contsNthIdInput.readOnly = true;
+
+var contsNoInput = document.getElementById("contsNoInput");
+
+// 입력 요소를 읽기 전용으로 설정합니다.
+contsNoInput.readOnly = true;
+
+
+var contsYoutInput = document.getElementById("contsYoutInput");
+
+// 입력 요소를 읽기 전용으로 설정합니다.
+contsYoutInput.readOnly = true;
+
 /* 강의 차시정보 신규/저장/삭제 */
 grid2.on('click', async (ev) => {
     const rowKey = ev.rowKey;
@@ -390,9 +407,9 @@ grid2.on('click', async (ev) => {
     const nthId = rowData.nthId;
     const nthSequence = rowData.nthSequence;
     const contsName = rowData.contsName;
-    const contsTime = rowData.contsTime;
+    const nthName = rowData.nthName;
     const contsYout = rowData.contsYout;
-    const contsDetail = rowData.contsDetail;
+    const contsTime = rowData.contsTime;
     console.log("contsNo : " + contsNo)
     console.log("nthId : " + nthId)
 
@@ -404,9 +421,9 @@ grid2.on('click', async (ev) => {
         document.getElementById('contsNoInput').value = contsNo;
         document.getElementById('contsSequenceInput').value = nthSequence;
         document.getElementById('contsNameInput').value = contsName;
-        document.getElementById('contsTimeInput').value = contsTime;
+        document.getElementById('nthNameInput').value = nthName;
         document.getElementById('contsYoutInput').value = contsYout;
-        document.getElementById('contsDetailInput').value = contsDetail;
+        document.getElementById('contsTimeInput').value = contsTime;
         // console.log("nthId : " + lectureData.nthId)
         // console.log("nthSequence : " + lectureData.nthSequence)
 });
@@ -421,9 +438,9 @@ createButton.addEventListener('click', () => {
         contsNo: '',
         nthSequence: '',
         contsName: '',
-        contsTime: '',
+        nthName: '',
         contsYout: '',
-        contsDetail: ''
+        contsTime: ''
     };
     grid2.appendRow(newEmptyRow);
 });
@@ -431,28 +448,32 @@ createButton.addEventListener('click', () => {
 // 저장 버튼 클릭 이벤트 처리
 // 저장 버튼 클릭 이벤트 핸들러
 $("#saveButton").click(function() {
-    // tb1의 입력 필드에서 데이터 가져오기
     var nthSequence = $("#nthSequence").val();
     var nthName = $("#nthName").val();
     var contsTime = $("#contsTime").val();
 
-    // 서버로 데이터를 보내는 AJAX 요청
+    // 데이터를 JSON 형식으로 변환
+    var requestData = JSON.stringify({
+        nthSequence: nthSequence,
+        nthName: nthName,
+        contsTime: contsTime
+    });
+
     $.ajax({
         type: "POST",
-        url: "/admin/api/lectNth", // Spring Boot Controller의 엔드포인트 경로
-        data: {
-            nthSequence: nthSequence,
-            nthName: nthName,
-            contsTime: contsTime
-        },
+        url: "/admin/api/lectNth",
+        data: requestData,
+        contentType: "application/json", // JSON 데이터를 전송
         dataType: "json",
         success: function(data) {
             // 데이터를 grid2에 표시
-            grid2.resetData(data);
+            grid2.tb1(data);
         },
-        error: function() {
-            // 오류 처리
+        error: function(xhr, status, error) {
+            // 에러 처리
+            console.error("오류 발생:", error);
             alert("데이터를 불러오는 중에 오류가 발생했습니다.");
         }
     });
 });
+

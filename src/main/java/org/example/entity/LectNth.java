@@ -27,6 +27,7 @@ public class LectNth {
     private LmsConts lmsConts;
 
 
+
     @Column(name = "nth_name")
     private String nthName;
 
@@ -43,5 +44,7 @@ public class LectNth {
         this.lmsConts = lmsConts;
         this.nthName = nthName;
         this.nthSequence = nthSequence;
+
+
     }
 }
