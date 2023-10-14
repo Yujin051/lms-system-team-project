@@ -4,7 +4,9 @@ import lombok.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-
+/**
+ * @author 임승범
+ */
 @Setter
 @Getter
 @ToString

@@ -6,14 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <!-- bootstrap cdn -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- bootstrap icon cdn -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <!-- fontawesome cdn -->
     <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
-    <!-- jquery cdn -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <!-- header css -->
     <link rel="stylesheet" href="/css/header.css">
     <!-- footer css -->
@@ -133,7 +133,8 @@
 
                 <!-- 댓글 목록 -->
                 <th:block th:if="${comnts != null && comnts.size() > 0}">
-                <div class="comment_list" th:each="comnt : ${comnts}">
+                <div class="comment_list" th:each="comnt : ${comnts}" th:id="${comnt.id}">
+                    <input type="hidden" th:value="${comnt.id}">
                     <!-- 댓글 프로필 사진 -->
                     <div class="comment_img">
                         <img th:src="@{'/img/profile/' + ${member.getImgSaved()}}" src="/img/logo_640x320.png" alt="프로필 사진">
@@ -151,24 +152,24 @@
                             
                             <!-- 댓글 기능 -->
                             <!-- th:if로 작성자 아니면 안보이도록 -->
-                            <div class="dropdown">
+                            <div class="dropdown" th:id="'dropdownMenu' + ${comnt.id}">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     메뉴
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <li><a href="" class="dropdown-item">댓글 수정</a></li>
-                                    <li><a href="" class="dropdown-item">댓글 삭제</a></li>
+                                <ul class="dropdown-menu comment_menu">
+                                    <li><a class="dropdown-item" th:onclick="'commentModify(' + ${comnt.id} +');'">댓글 수정</a></li>
+                                    <li><a class="dropdown-item">댓글 삭제</a></li>
                                 </ul>
                             </div>
                         </div>
                         <!-- 댓글 내용 -->
                         <!-- 위의 메뉴 > 댓글 수정 클릭할 경우 readonly를 풀어준다. -->
                         <div class="comment_text">
-                            <textarea name="reply" class="reply" rows="3" readonly th:utext="${comnt.getComntCont()}">
+                            <textarea name="reply" class="reply" rows="3" readonly th:utext="${comnt.getComntCont()}" th:id="'textarea' + ${comnt.id}">
                                 썸 바리 헬미~</textarea>
-                            <div class="mt-2 comment_btnBox">
-                                <button class="btn btn-dark">등록</button>
-                                <button class="btn btn-dark">취소</button>
+                            <div class="mt-2 comment_btnBox" th:id="'comment_btnBox' + ${comnt.id}">
+                                <button class="btn btn-dark" th:onclick="'commentUpdate(' + ${comnt.id} + ');'">수정</button>
+                                <button class="btn btn-dark" onclick='commentCancel()'>취소</button>
                             </div>
                         </div>
                     </div>
@@ -179,13 +180,13 @@
         </div>
     </section>
 </section>
-    <!-- bootstrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- summernote js -->
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <!-- header js -->
-    <script src="/js/header.js"></script>
-    <!-- article js -->
-    <script src="/js/community/article.js"></script>
+<!-- summernote js -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<!-- bootstrap js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- header js -->
+<script src="/js/header.js"></script>
+<!-- article js -->
+<script src="/js/community/article.js"></script>
 </body>
 </html>

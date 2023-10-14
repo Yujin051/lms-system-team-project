@@ -1,3 +1,6 @@
+/**
+ * @author 임승범
+ */
 
 let modifyBtn = document.getElementById('modifyBtn');
 let deleteBtn = document.getElementById('deleteBtn');
@@ -108,6 +111,57 @@ if(commentBtn){
 // str = str.replaceAll("<br/>", "\r\n");
 // document.getElementById("textarea").value = str;
 
+// 댓글 메뉴 드롭다운 수정 버튼
+function commentModify(id){
+    // 메뉴버튼
+    let dropdownMenu = document.getElementById('dropdownMenu' + id);
+    dropdownMenu.style.display = 'none'; // 메뉴버튼 사라지도록.
+    // 글 작성 textarea
+    let textareaId = document.getElementById('textarea' + id);
+    textareaId.removeAttribute('readonly'); // 읽기전용 해제
+    // 글 등록/취소 기능 버튼 박스
+    let commentBtnBox = document.getElementById('comment_btnBox' + id);
+    commentBtnBox.style.display = 'block';
+}
+
+// 댓글 내용 수정 등록 버튼
+function commentUpdate(id){
+    //
+    // 글 작성 textarea
+    let textareaId = document.getElementById('textarea' + id).value;
+    console.log(textareaId);
+    let str = textareaId.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+    console.log(str);
+
+    let data = {
+        commentText : str,
+        boardArticleId : articleId
+    };
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST' , '/comment/modify' , true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+    xhr.onreadystatechange = function (){
+        if(xhr.readyState === 4){
+            if(xhr.status === 201){
+                alert('성공');
+                location.reload();
+            }
+            else {
+                alert('실패 : firetrap5319@gmail.com로 문의 바랍니다.');
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+}
+
+
+
+
+// 댓글 내용 수정 취소
+function commentCancel(){
+    window.location.reload();
+}
 
 
 

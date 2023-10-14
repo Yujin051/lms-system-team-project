@@ -4,6 +4,9 @@ import lombok.*;
 import org.example.entity.BoardArticle;
 import org.springframework.data.domain.Page;
 
+/**
+ * @author 임승범
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

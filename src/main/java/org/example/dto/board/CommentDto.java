@@ -20,6 +20,8 @@ import java.time.LocalDateTime;
 //  새로운 댓글 요청 DTO
 public class CommentDto {
 
+    // 댓글 id
+    private Long id;
     // 소속되는 게시글 id v
     private Long boardArticleId;
     // 소속되는 게시글

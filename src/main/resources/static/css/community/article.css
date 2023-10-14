@@ -252,3 +252,11 @@ section {
 .comment_btnBox {
     display: none;
 }
+.drop {
+    /*display: none;*/
+}
+/*.comment_menu {*/
+/*    z-index: 1;*/
+/*    position: relative;*/
+/*    border: 1px solid black;*/
+/*}*/

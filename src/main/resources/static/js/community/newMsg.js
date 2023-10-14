@@ -1,4 +1,6 @@
-
+/**
+ * @author 임승범
+ */
 // 모달창 토글 display
 const modalOpen = document.getElementById('modalOpenBtn');
 const modalClose = document.getElementById('modalCloseBtn');

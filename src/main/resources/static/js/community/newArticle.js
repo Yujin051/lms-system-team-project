@@ -1,3 +1,7 @@
+/**
+ * @author 임승범
+ */
+
 // 파일목록 추가 생성
 function addFileInput() {
     // ul 태그 가져오기

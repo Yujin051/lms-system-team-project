@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+/**
+ * @author 임승범
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

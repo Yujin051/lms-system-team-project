@@ -24,6 +24,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.security.Principal;
 import java.util.Map;
 
+/**
+ * @author 임승범
+ */
+
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/board")

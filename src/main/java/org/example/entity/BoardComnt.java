@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.board.ArticleDto;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -49,12 +50,21 @@ public class BoardComnt {
     @ColumnDefault("false")
     private Boolean isDeleted;
 
+    // entity 생성
     @Builder
     public BoardComnt (BoardArticle boardArticle , String comntWriter , String comntCont , Boolean isDeleted){
         this.boardArticle = boardArticle;
         this.comntWriter = comntWriter;
         this.comntCont = comntCont;
         this.isDeleted = isDeleted;
+    }
+    // 내용 수정
+    public void update(ArticleDto articleDto){
+        this.comntCont = articleDto.getContent();
+    }
+    // 논리 삭제
+    public void delete(){
+        this.isDeleted = true;
     }
 
 }

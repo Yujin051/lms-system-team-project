@@ -76,7 +76,7 @@ public class BoardArticle {
     @ColumnDefault("0")
     private Long articleFileNum;
 
-
+    // entity 생성
     @Builder
     public BoardArticle(
             BoardInfo boardInfo , String articleTitle , String articleContent , Long articleView,
@@ -90,7 +90,7 @@ public class BoardArticle {
         this.memberId = memberId;
         this.articleFileNum = articleFileNum;
     }
-
+    // 수정
     public void update(ArticleDto articleDto){
         this.articleTitle = articleDto.getTitle();
         this.articleContent = articleDto.getContent();
@@ -99,7 +99,7 @@ public class BoardArticle {
                 articleDto.getFileNo() != null && articleDto.getFileNo() != 0L && this.articleFileNum == 0L?
                         articleDto.getFileNo() : this.articleFileNum;
     }
-
+    // 논리 삭제
     public void delete(){
         this.isDeleted = true;
     }

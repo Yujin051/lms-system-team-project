@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.entity.BoardInfo;
 import org.example.repository.BoardInfoRepository;
 import org.springframework.stereotype.Service;
-
+/**
+ * @author 임승범
+ */
 @RequiredArgsConstructor
 @Slf4j
 @Service

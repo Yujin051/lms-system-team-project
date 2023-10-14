@@ -178,7 +178,7 @@ public class BoardController {
             articles = boardService.searchByContent(value , id , pageable);
         }
         else if(searchType.equals("writer")){
-            log.info("writer sql 검색 들어간다");
+            log.info("<< writer 검색 >>");
             articles = boardService.searchByWriter(value , id , pageable);
         }
 

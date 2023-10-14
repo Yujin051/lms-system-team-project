@@ -11,10 +11,7 @@ import org.example.service.CommentService;
 import org.example.service.MemberService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -38,7 +35,7 @@ public class CommentRestController {
 
         log.info("POST요청 /comment/write >>> addCommentArticle()실행됨.");
         log.info("commentDto::{}",commentDto);
-
+        // 소속된 게시글 가져오기
         BoardArticle boardArticle =boardService.findById(commentDto.getBoardArticleId());
         Member member = memberService.memberView(principal.getName());
 
@@ -51,6 +48,15 @@ public class CommentRestController {
     }
 
     // 댓글 수정
+    @PutMapping("/modify")
+    public ResponseEntity<BoardComnt> updateCommentArticle(@RequestBody CommentDto commentDto){
+
+        log.info("Put요청 /comment/modify >>> updateCommentArticle()실행됨.");
+        log.info("commentDto::{}",commentDto);
+
+
+        return null;
+    }
 
     // 댓글 삭제
 

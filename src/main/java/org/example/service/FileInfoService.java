@@ -7,7 +7,9 @@ import org.example.repository.FileInfoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * @author 임승범
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Service

@@ -1,3 +1,7 @@
+/**
+ * @author 임승범
+ */
+
 // 제목길이 제한 20자
 document.addEventListener('DOMContentLoaded', function() {
     // 모든 title a 태그 가져오고

@@ -69,4 +69,5 @@ public class DirectMsg {
     @ColumnDefault("false")
     private Boolean recvDelYn;
 
+
 }
