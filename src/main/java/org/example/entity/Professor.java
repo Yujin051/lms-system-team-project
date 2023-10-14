@@ -10,7 +10,7 @@ import javax.swing.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name= "teacher")
+@Table(name= "Professor")
 @Getter
 @Setter
 @Entity

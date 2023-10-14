@@ -1,6 +1,7 @@
 package org.example.dto;
 
 import lombok.Getter;
+import org.example.entity.GradeInfo;
 
 @Getter
 public class CheckGradeDto {
@@ -17,4 +18,5 @@ public class CheckGradeDto {
         this.userName = userName;
         this.grade = grade;
     }
+
 }
