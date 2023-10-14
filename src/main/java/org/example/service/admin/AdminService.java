@@ -293,19 +293,5 @@ public class AdminService {
         return lectInfoRepository.totalCompletionStatus(lectId);
     }
 
-//    ------------------------------ 유튜브 ------------------------------------
-
-    public StudLectProgDto getFindMagId() {
-        return studLectProgRepository.findMagId();
-    }
-    // 마지막 재생 위치의 시간 데이터베이스에 저장
-    public void getSaveLastPlayTime(Long magId, int lastPlayTime) {
-        StudLectProg studLectProg = studLectProgRepository.findById(magId)
-                .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
-        if (studLectProg != null) {
-            studLectProg.setFnlPosi(lastPlayTime);
-            studLectProgRepository.save(studLectProg);
-        }
-    }
 
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -38,23 +39,25 @@ public class StudLectProg {
 
     /* 최종재생위치 */
     @Column(name = "fnl_posi")
-    private Integer fnlPosi;
+    private double fnlPosi;
 
     /* 최대재생위치 */
     @Column(name = "max_posi")
-    private Integer maxPosi = 0;
+    private double maxPosi;
 
     /* 출석 상태 */
     @Column(name = "is_checked")
-    private boolean isChecked = false;
+    private Boolean isChecked = false;
 
     /* 출석 날짜 */
     @Column(name = "check_date")
-    private LocalDateTime checkDate;
+    private LocalDate checkDate;
 
     @Builder
-    public StudLectProg(int fnlPosi, int maxPosi) {
+    public StudLectProg(double fnlPosi, double maxPosi, Boolean isChecked, LocalDate checkDate) {
         this.fnlPosi = fnlPosi;
         this.maxPosi = maxPosi;
+        this.isChecked = isChecked;
+        this.checkDate = checkDate;
     }
 }

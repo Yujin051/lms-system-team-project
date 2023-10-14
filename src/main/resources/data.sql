@@ -135,6 +135,6 @@ INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_sc
 values (4, 4, 4, 'B', 80, 81, 82, true);
 
 
-INSERT INTO stud_lect_prog(fnl_posi, is_checked)
-values (3, true);
+INSERT INTO stud_lect_prog(fnl_posi, max_posi, is_checked)
+values (0, 0, true);
 

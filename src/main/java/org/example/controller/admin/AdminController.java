@@ -9,6 +9,7 @@ import org.example.dto.admin.PostDto;
 import org.example.dto.admin.StudLectProgDto;
 import org.example.entity.BoardArticle;
 import org.example.service.admin.AdminService;
+import org.example.service.admin.YoutubeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import static org.example.constant.RoleType.ADMIN;
 public class AdminController {
 
     private final AdminService adminService;
+    private final YoutubeService youtubeService;
 
     // 어드민 메인페이지
     @GetMapping("")
@@ -586,29 +588,12 @@ public class AdminController {
     //온라인강의콘텐츠관리
     @GetMapping("/ytr")
     public String youTubeRegistration(Model model) {
-        StudLectProgDto dto = adminService.getFindMagId();
+        StudLectProgDto dto = youtubeService.getFindMagId();
         model.addAttribute("magId", dto.getMagId());
         log.info("magId : " + dto);
         return "/admin/youTube_registration";
     }
 
-
-
-    /**
-     * 관리자 - 온라인강의콘텐츠관리 : 유튜브 마지막 재생 위치의 시간 디비에 저장
-     * @author 임휘재
-     */
-    @PutMapping("/api/fnlPosi/save")
-    @ResponseBody
-    public ResponseEntity<?> saveLastPlayTime(@RequestParam Long magId,
-                                              @RequestParam int lastPlayTime,
-                                              Principal principal) {
-        log.info("magId : " + magId);
-        log.info("last : " + lastPlayTime);
-        log.info("principal : " + principal.getName());
-        adminService.getSaveLastPlayTime(magId, lastPlayTime);
-        return ResponseEntity.ok("마지막 재생 위치의 시간 저장 성공.");
-    }
 
 
 }
