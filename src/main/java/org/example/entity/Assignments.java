@@ -1,10 +1,17 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.example.repository.AssignmentsRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name="assign_info")
 public class Assignments {
 
@@ -28,11 +35,11 @@ public class Assignments {
 
     // 과제 시작 일시
     @Column(name="assign_start")
-    private LocalDateTime start;
+    private LocalDate start;
 
     // 과제 마감 일시
     @Column(name="assign_end")
-    private LocalDateTime end;
+    private LocalDate end;
 
     // 과제가 현재 진행중인지
     @Column(name="is_active")
@@ -42,4 +49,16 @@ public class Assignments {
     @Column(name="is_submit")
     private boolean isSubmit;
 
+
+    @Builder
+    public Assignments(long id, LectInfo lectInfo, String name, String detail, LocalDate start, LocalDate end, boolean isActive, boolean isSubmit) {
+        this.id = id;
+        this. lectInfo = lectInfo;
+        this.name = name;
+        this. detail = detail;
+        this.start = start;
+        this.end = end;
+        this.isActive = isActive;
+        this.isSubmit = isSubmit;
+    }
 }

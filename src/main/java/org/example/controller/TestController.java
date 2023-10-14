@@ -37,4 +37,10 @@ public class TestController {
     public String test2() {
         return "/student/lecturemain";
     }
+
+    @GetMapping("/test3")
+    public String test3() { return "/student/assiView";}
+
+    @GetMapping("/test4")
+    public String test4() { return "/student/my_classroom";}
 }

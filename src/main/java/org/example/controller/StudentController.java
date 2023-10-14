@@ -6,7 +6,9 @@ import org.example.constant.Gender;
 import org.example.dto.LectInfoDTO;
 import org.example.entity.LectInfo;
 import org.example.entity.Member;
+import org.example.repository.AssignmentsRepository;
 import org.example.repository.MemberRepository;
+import org.example.service.AssignmentsService;
 import org.example.service.LectureService;
 import org.example.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,12 @@ public class StudentController {
     @Autowired
     private LectureService lectureService;
 
+    @Autowired
+    private final AssignmentsRepository assignmentsRepository;
+
     private final MemberService memberService;
     private final MemberRepository memberRepository;
+    private final AssignmentsService assignmentsService;
     // 학생 메인 페이지
     @GetMapping("")
     public String stuMain(Principal principal, Model model) {
@@ -75,6 +81,13 @@ public class StudentController {
             lectInfoDTOList.add(LectInfoDTO.fromLectInfo(lectInfo));
         }
         return lectInfoDTOList;
+    }
+
+    @GetMapping("/lecture/view/{id}")
+    public String lectureView(Model model, @PathVariable("id")long id) {
+        System.out.println(lectureService.lectureView(id));
+        model.addAttribute("lectinfo", lectureService.lectureView(id));
+        return "/student/lecturemain";
     }
 
     // 학생 강의계획서 보기
@@ -124,8 +137,17 @@ public class StudentController {
      * 학생 : 과제출제
      * @author 임휘재
      */
-    @GetMapping("/assi")
-    public String assiView(){
+    @GetMapping("/lecture/view/{lectId}/assignments/{assiId}")
+    public String assiView(@PathVariable("lectId")long lectId, @PathVariable("assiId")long assiId, Model model, Principal principal){
+        Member member = memberRepository.findByUserId(principal.getName());
+        String name = (member != null) ? member.getUserName() : "Unknown";
+
+        model.addAttribute("assignments",assignmentsRepository.findAssignmentByLectIdAndAssignId(lectId, assiId));
+        model.addAttribute("membername", name);
+
+        System.out.println("name is "+name);
+        System.out.println("컨트롤러테스트 "+List.of(assignmentsRepository.findAssignmentByLectIdAndAssignId(lectId, assiId)));
+        System.out.println("lectId :"+ lectId + "assiId : "+ assiId);
         return "/student/assiView";
     }
 

@@ -28,7 +28,7 @@
                         <span>과제명</span>
                     </div>
                     <div class="assi_info_assi_name_input">
-                        <input type="text" id="assiName" placeholder="과제명"/>
+                        <input  th:field="${assignments.name}" type="text" id="assiName"/>
                     </div>
                 </div>
                 <div class="assi_info_stud_name">
@@ -36,7 +36,7 @@
                         <span>참여자</span>
                     </div>
                     <div class="assi_info_assi_stud_input">
-                        <input type="text" id="stud_id" placeholder="스폰지밥"/>
+                        <div th:text="${membername}" type="text" id="stud_id" style="width: 90%;"></div>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                         <span>평가마감일</span>
                     </div>
                     <div class="assi_info_assi_end_input">
-                        <input type="text" id="assignEnd" placeholder="2023-09-30"/>
+                        <input th:field="${assignments.end}" type="text" id="assignEnd" placeholder="2023-09-30"/>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="assi_info_assi_detail_content_box">
                         <div class="assi_info_assi_detail">
-                            <textarea></textarea>
+                            <div th:text="${assignments.detail}"></div>
                         </div>
                     </div>
                 </div>

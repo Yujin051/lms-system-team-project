@@ -45,7 +45,7 @@
                         var courseResult = $('#courseResult');
                         courseResult.empty();
                         $.each(data, function (index, lectinfo) {
-                            courseResult.append('<a style="display: block; text-decoration: none; color: black; width: 200px;" href="/student/lecture/' + lectinfo.lectId + '">' + lectinfo.lectName +'</a>');
+                            courseResult.append('<a style="display: block; text-decoration: none; color: black; width: 200px;" href="/student/lecture/view/' + lectinfo.lectId + '">' + lectinfo.lectName +'</a>');
                         });
 
                         var courseSubResult = $('#courseSubResult');

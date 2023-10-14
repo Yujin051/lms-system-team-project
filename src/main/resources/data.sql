@@ -1,10 +1,10 @@
-insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role) values
-                                                                                                                                                        ('admin1' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '관리자1','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN'),
-                                                                                                                                                        ('student1' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '김학생','01022225555' , '2023-1-1' , '학생1집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'USER'),
-                                                                                                                                                        ('student2' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '이학생','01021225555' , '2023-1-1' , '학생2집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'USER'),
-                                                                                                                                                        ('prof1' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '김선생','01023225555' , '2023-1-1' , '선생1집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'TEACHER'),
-                                                                                                                                                        ('prof2' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '이선생','01024225555' , '2023-1-1' , '선생2집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'TEACHER'),
-                                                                                                                                                        ('prof3' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '신선생','01024225555' , '2023-1-1' , '선생2집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'TEACHER');
+insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role, img_original, img_saved) values
+                                                                                                                                                        ('admin1' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '관리자1','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png', 'noimg2.png'),
+                                                                                                                                                        ('student1' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '김학생','01022225555' , '2023-1-1' , '학생1집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'USER','noimg2.png', 'noimg2.png'),
+                                                                                                                                                        ('student2' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '이학생','01021225555' , '2023-1-1' , '학생2집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'USER','noimg2.png', 'noimg2.png'),
+                                                                                                                                                        ('prof1' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '김선생','01023225555' , '2023-1-1' , '선생1집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'TEACHER','noimg2.png', 'noimg2.png'),
+                                                                                                                                                        ('prof2' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '이선생','01024225555' , '2023-1-1' , '선생2집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'TEACHER','noimg2.png', 'noimg2.png'),
+                                                                                                                                                        ('prof3' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '신선생','01024225555' , '2023-1-1' , '선생2집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'TEACHER','noimg2.png', 'noimg2.png');
 
 insert into student(member_id, stud_grade, stud_maxcr, stud_nowcr, stud_crecpl) values
                                                                                     (2, 2, 18, 13, 11),
@@ -59,3 +59,16 @@ insert into sem_grade(stud_id, sem_year, sem_sem) values
                                                       (1, '2022', '1학기'),
                                                       (2, '2023', '2학기'),
                                                       (2, '2023', '1학기');
+
+insert into lect_plan(plan_id, lect_id, plan_des, plan_book) values
+                                                                 (1, 1, '1번 강의에 대한 설명', '교재 1번'),
+                                                                 (2, 2, '2번 강의에 대한 설명', '교재 2번'),
+                                                                 (3, 3, '3번 강의에 대한 설명', '교재 3번'),
+                                                                 (4, 4, '4번 강의에 대한 설명', '교재 4번'),
+                                                                 (5, 5, '5번 강의에 대한 설명', '교재 5번');
+
+insert into assign_info(assign_id, lect_id, assign_name, assign_detail, assign_start, assign_end, is_active, is_submit) values
+                                                                                                                            (1, 1, '과제1', '과제 1 설명', NOW(), NOW(), true, false),
+                                                                                                                            (2, 1, '과제2', '과제 2 설명', NOW(), NOW(), true, false),
+                                                                                                                            (3, 2, '과제3', '과제 3 설명', NOW(), NOW(), true, false),
+                                                                                                                            (4, 3, '과제4', '과제 4 설명', NOW(), NOW(), true, false);

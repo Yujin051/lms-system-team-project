@@ -28,23 +28,14 @@ public class LectPlan {
     @Column(name="plan_book")
     private String planBook;
 
-    @Column(name="check_score")
-    private long checkScore;
 
-    @Column(name="assign_score")
-    private long assignScore;
-
-    @Column(name="test_score")
-    private long testScore;
 
     @Builder
-    public LectPlan(LectInfo lect, String planDes, String planBook, long checkScore, long assignScore, long testScore) {
+    public LectPlan(LectInfo lect, String planDes, String planBook) {
         this.lect = lect;
         this.planDes = planDes;
         this.planBook = planBook;
-        this. checkScore = checkScore;
-        this.assignScore = assignScore;
-        this.testScore = testScore;
+
     }
 }
 
