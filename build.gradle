@@ -37,8 +37,6 @@ dependencies {
     implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-
-
     //@Notblank 어노테이션 사용용
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
@@ -56,8 +54,9 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
 
-    // 유튜브용 구글 api
+    // 유튜브 구글 api
     compileOnly 'com.google.api-client:google-api-client:1.32.1'
+    compileOnly 'com.google.apis:google-api-services-youtube:v3-rev222-1.25.0'
 }
 
 test {
