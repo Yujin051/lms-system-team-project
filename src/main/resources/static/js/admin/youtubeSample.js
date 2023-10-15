@@ -1,4 +1,6 @@
 //player라는 id를 가진 div에 플레이어 호출
+
+const YTB_URL = 'oWBUxUArj6U';
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         width: '900',
@@ -21,8 +23,8 @@ function onPlayerReady(event) {
     event.target.loadVideoById(YTB_URL, FNL_POSI);
     event.target.playVideo();
 
-    RUN_TM = event.target.getDuration()-5;
-    PROG_RT = (MAX_POSI / RUN_TM) * 100;
+    RUN_TM = event.target.getDuration()-5; //현재 재생위치에서 -5초뺀값
+    PROG_RT = (MAX_POSI / RUN_TM) * 100; //진행률
 
     updatePosition();
 }

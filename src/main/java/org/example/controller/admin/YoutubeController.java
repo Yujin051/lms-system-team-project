@@ -2,6 +2,7 @@ package org.example.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.dto.admin.MemberDto;
 import org.example.dto.admin.StudLectProgDto;
 import org.example.service.admin.YoutubeService;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,13 +41,22 @@ public class YoutubeController {
      * @author 임휘재
      */
     @PutMapping("/api/savePlayTime")
-    public ResponseEntity<?> savePlayTime(@RequestParam Long magId) {
+    public ResponseEntity<?> savePlayTime(@RequestParam Long magId,
+                                          @RequestParam double fnlPosi,
+                                          @RequestParam double maxPosi) {
         log.info("magId: " + magId);
-//        log.info("maxPlayTime: " + maxPlayTime);
-//        log.info("lastPlayTime: " + lastPlayTime);
+        log.info("fnlPosi : " + fnlPosi);
+        log.info("maxPosi : " + maxPosi);
 
-        youtubeService.savePlayTime(magId);
+        youtubeService.savePlayTime(magId, fnlPosi, maxPosi);
         return ResponseEntity.ok("재생 위치 저장 성공.");
+    }
+
+
+    @GetMapping("/api/getMaxPlayTime")
+    public ResponseEntity<List<StudLectProgDto>> adminGradeStudInfo() {
+        List<StudLectProgDto> dtos = youtubeService.getFindStudLectProg();
+        return ResponseEntity.ok(dtos);
     }
 
 

@@ -7,6 +7,8 @@ import org.example.entity.StudLectProg;
 import org.example.repository.admin.StudLectProgRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -28,28 +30,24 @@ public class YoutubeService {
 //        }
 //    }
 
+    public List<StudLectProgDto> getFindStudLectProg() {
+        return studLectProgRepository.findStudLectProg();
+    }
+
     // 최종재생위치(fnlPosi)와 최대재생위치(maxPosi)를 5초마다 데이터베이스에 저장
-    public void savePlayTime(Long magId) {
+    public void savePlayTime(Long magId, double fnlPosi, double maxPosi) {
         StudLectProg studLectProg = studLectProgRepository.findById(magId)
                 .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
-        StudLectProg studLectProg2 = studLectProgRepository.findProg(magId).toEntity();
-
-        double fnlPosi = studLectProg2.getFnlPosi();
-        double maxPosi = studLectProg2.getMaxPosi();
-
-        if (fnlPosi > maxPosi) {
-            fnlPosi = maxPosi;
-        }
 
         if (studLectProg != null) {
-            log.info("maxPosi : " + studLectProg2.getMaxPosi());
-            studLectProg.setMaxPosi(maxPosi); // 최대재생위치 업데이트
-            studLectProg.setFnlPosi(fnlPosi); // 최종재생위치 업데이트
+            if (fnlPosi > maxPosi) {
+                fnlPosi = maxPosi;
+            }
+
+            studLectProg.setMaxPosi(maxPosi); // 최대 재생 위치 업데이트
+            studLectProg.setFnlPosi(fnlPosi); // 최종 재생 위치 업데이트
             studLectProgRepository.save(studLectProg); // 업데이트된 객체를 저장
         }
     }
-
-
-
 
 }

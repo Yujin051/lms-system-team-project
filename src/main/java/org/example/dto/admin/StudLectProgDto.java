@@ -2,11 +2,13 @@ package org.example.dto.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.example.entity.StudLectProg;
 
 import java.time.LocalDate;
 
-@Data
+@Getter @Setter
 @AllArgsConstructor
 public class StudLectProgDto {
 
@@ -20,6 +22,7 @@ public class StudLectProgDto {
     public StudLectProgDto(Long magId) {
         this.magId = magId;
     }
+
 
     // 최종재생위치 저장
     public StudLectProg toEntity() {

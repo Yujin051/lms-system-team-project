@@ -45,6 +45,10 @@ public class StudLectProg {
     @Column(name = "max_posi")
     private double maxPosi;
 
+    /* 현재재생위치 */
+//    @Column(name = "curr_posi")
+//    private double currPosi;
+
     /* 출석 상태 */
     @Column(name = "is_checked")
     private Boolean isChecked = false;
