@@ -2,15 +2,13 @@ package org.example.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.dto.AddLmsContsRequestDto;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
-import org.example.dto.LmsContsRequestDto;
 import org.example.entity.LectNth;
 import org.example.repository.AdminThisTimeRegisTration;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -61,24 +59,30 @@ public class LectNthService {
 
     /* 하단 우측 3번째 테이블 update (저장) */
     @Transactional
-    public LectNth createLectNth(LmsContsRequestDto lmsContsRequestDto) {
-        LectNth lectNth = adminThisTimeRegisTration.findById(1L)
+    public LectNth createLectNth(AddLmsContsRequestDto addLmsContsRequestDto) {
+        LectNth nthName = adminThisTimeRegisTration.findById(1L)
                 .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
-        lmsContsRequestDto.setLectNth(lectNth);
-        return adminThisTimeRegisTration.save(lmsContsRequestDto.toEntity());
-
+        addLmsContsRequestDto.setLectNth(LectNth);
+        return adminThisTimeRegisTration.save(addLmsContsRequestDto.lectNthtoEntity());
 
     }
+//    public LectNth save(AddLmsContsRequestDto request) {
+//        return adminThisTimeRegisTration.save(request.toEntity());
+//    }
+
+
 
     /* 하단 우측 3번째 테이블 update (수정) */
     @Transactional
-    public LectNth updateLectNth(LmsContsRequestDto lmsContsRequestDto) {
-        LectNth lectNth = adminThisTimeRegisTration.findById(lmsContsRequestDto.getNthId())
+    public LectNth updateLectNth(AddLmsContsRequestDto addLmsContsRequestDto) {
+        LectNth nthName = adminThisTimeRegisTration.findById(addLmsContsRequestDto.getLectNth())
                 .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없어"));
         /* 수정 필드 업뎃*/
-        lectNth.setNthSequence(lmsContsRequestDto.getNthSequence());
-        lectNth.setNthName(lmsContsRequestDto.getNthName());
-        lectNth.setLmsConts(lmsContsRequestDto.getLmsConts());
-        return lmsContsRequestDto.save(lectNth);
+        LectNth.setNthSequence(addLmsContsRequestDto.getNthSequence());
+        LectNth.setNthName(addLmsContsRequestDto.getNthName());
+//        LectNth.setContsName(addLmsContsRequestDto.getLmsConts());
+        return adminThisTimeRegisTration.save(lectNth);
     }
+
+
 }

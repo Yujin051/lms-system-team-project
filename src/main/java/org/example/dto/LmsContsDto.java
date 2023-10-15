@@ -1,10 +1,10 @@
 package org.example.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class LmsContsDto {
@@ -16,6 +16,7 @@ public class LmsContsDto {
         private String nthName;
         private String contsYout;
         private int contsTime;
+
 
 
 }

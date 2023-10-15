@@ -447,6 +447,36 @@ createButton.addEventListener('click', () => {
 
 // 저장 버튼 클릭 이벤트 처리
 // 저장 버튼 클릭 이벤트 핸들러
+// $("#saveButton").click(function() {
+//     var nthSequence = $("#nthSequence").val();
+//     var nthName = $("#nthName").val();
+//     var contsTime = $("#contsTime").val();
+//
+//     // 데이터를 JSON 형식으로 변환
+//     var requestData = JSON.stringify({
+//         nthSequence: nthSequence,
+//         nthName: nthName,
+//         contsTime: contsTime
+//     });
+//
+//     $.ajax({
+//         type: "POST",
+//         url: "/api/lmsconts/save",
+//         data: request,
+//         contentType: "application/json", // JSON 데이터를 전송
+//         dataType: "json",
+//         success: function(data) {
+//             // 데이터를 grid2에 표시
+//             grid2.tb1(data);
+//         },
+//         error: function(xhr, status, error) {
+//             // 에러 처리
+//             console.error("오류 발생:", error);
+//             alert("데이터를 불러오는 중에 오류가 발생했습니다.");
+//         }
+//     });
+// });
+
 $("#saveButton").click(function() {
     var nthSequence = $("#nthSequence").val();
     var nthName = $("#nthName").val();
@@ -461,13 +491,14 @@ $("#saveButton").click(function() {
 
     $.ajax({
         type: "POST",
-        url: "/admin/api/lectNth",
-        data: requestData,
+        url: "/admin/api/lmsconts/save",
+        data: requestData, // 수정: 변수명을 requestData로 변경
         contentType: "application/json", // JSON 데이터를 전송
         dataType: "json",
         success: function(data) {
-            // 데이터를 grid2에 표시
-            grid2.tb1(data);
+            // var nthSequence = data.nthSequence;
+            // var nthName = data.nthName;
+            // var contsTime = data.contsTime;
         },
         error: function(xhr, status, error) {
             // 에러 처리
@@ -476,4 +507,5 @@ $("#saveButton").click(function() {
         }
     });
 });
+
 

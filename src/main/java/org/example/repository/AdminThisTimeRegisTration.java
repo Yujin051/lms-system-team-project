@@ -76,14 +76,14 @@ public interface AdminThisTimeRegisTration extends JpaRepository<LectNth, Long> 
 
 
     /* 강의 차시정보 (저장) */
-  /*  @Query("SELECT NEW org.example.dto.LectNthDto(lif.lectId, lif.lectName, lif.lectSem, lif.enrollStart, lif.enrollEnd, " +
-            "lif.lectStart, lif.lectEnd, lif.isActive, nth.nthSequence, nth.nthName, cs.contsTime, cs.contsNo, " +
-            "nth.nthId, cs.contsName, cs.contsYout, cs.contsDetail) " +
-            "FROM LectNth nth " +
-            "join nth.lectInfo lif on lif.lectId = nth.lectInfo.lectId " +
-            "join nth.lmsConts cs on nth.lmsConts.contsNo = cs.contsNo " +
-            "where lif.lectId = :lectId")
-    List<LmsContsRequestDto> Save(@Param("lectId") Long lectId);*/
+//    @Query("SELECT NEW org.example.dto.LectNthDto(lif.lectId, lif.lectName, lif.lectSem, lif.enrollStart, lif.enrollEnd, " +
+//            "lif.lectStart, lif.lectEnd, lif.isActive, nth.nthSequence, nth.nthName, cs.contsTime, cs.contsNo, " +
+//            "nth.nthId, cs.contsName, cs.contsYout, cs.contsDetail) " +
+//            "FROM LectNth nth " +
+//            "join nth.lectInfo lif on lif.lectId = nth.lectInfo.lectId " +
+//            "join nth.lmsConts cs on nth.lmsConts.contsNo = cs.contsNo " +
+//            "where lif.lectId = :lectId")
+//    List<LmsContsRequestDto> Save(@Param("lectId") Long lectId);
 
 }
 

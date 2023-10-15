@@ -10,7 +10,7 @@ import org.example.entity.LmsConts;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class LmsContsRequestDto {
+public class AddLmsContsRequestDto {
 
     private Long nthId;
     private Long contsNo;
@@ -24,7 +24,7 @@ public class LmsContsRequestDto {
     private int contsTime;
 
 
-    public LectNth toEntity() {
+    public  LectNth toEntity() {
         return LectNth.builder()
                 .lectInfo(lectInfo)
                 .lmsConts(lmsConts)

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
-import org.example.dto.LmsContsRequestDto;
+import org.example.dto.AddLmsContsRequestDto;
 import org.example.entity.LectNth;
 import org.example.service.LectNthService;
 import org.springframework.http.HttpStatus;
@@ -54,28 +54,31 @@ public class AdminController {
 
     /**
      * 관리자 : 전체관리성적
+     *
      * @author 임휘재
      */
     @GetMapping("/grade")
-    public String grade(){
+    public String grade() {
         return "/admin/gradeManagement";
     }
 
     /**
      * 관리자 : 게시글 관리(담당용)
+     *
      * @author 임휘재
      */
     @GetMapping("/postWrite")
-    public String postWrite(){
+    public String postWrite() {
         return "/admin/postWrite";
     }
 
     /**
      * 관리자 : 게시글 정보관리
+     *
      * @author 임휘재
      */
     @GetMapping("/postInfo")
-    public String postInfo(){
+    public String postInfo() {
         return "/admin/postInfo";
     }
 
@@ -106,7 +109,6 @@ public class AdminController {
     }
 
 
-
     /* 온라인 차시정보 데이터 값 테이블에 불러오기  */
     @GetMapping("/ttr/search")
     @ResponseBody
@@ -115,6 +117,7 @@ public class AdminController {
 //        log.info(lectNthDtos.toString());
         return ResponseEntity.ok(lectNthDtos);
     }
+
     /* 운영 상태 드롭박스 검색 */
     @GetMapping("/api/ttr/isActive/search")
     @ResponseBody
@@ -122,6 +125,7 @@ public class AdminController {
         log.info("isAc : " + isActive);
         return lectNthService.getFindLectNthBox(isActive);
     }
+
     /* 강좌명 검색 */
     @GetMapping("/api/ttr/lectName/search")
     @ResponseBody
@@ -129,8 +133,6 @@ public class AdminController {
         log.info("isAc : " + lectName);
         return lectNthService.getFindLectName(lectName);
     }
-
-
 
 
     //온라인강의콘텐츠관리
@@ -143,10 +145,9 @@ public class AdminController {
     @GetMapping("/api/lectName/search")
     @ResponseBody
     public List<LectNthDto> lectNameSearch(@RequestParam(value = "lectName") String lectName,
-                                              @RequestParam(value = "isActive") Boolean isActive) {
+                                           @RequestParam(value = "isActive") Boolean isActive) {
         return lectNthService.getFindLectNthSearch(lectName, isActive);
     }
-
 
 
     /* 강의 차시정보 하단 왼쪽 첫번째 테이블 비동기 처리 */
@@ -163,24 +164,39 @@ public class AdminController {
         log.info("contsNo : " + contsNo);
         List<LmsContsDto> dtos = lectNthService.getFindContsNo(contsNo);
         log.info("dtos : " + dtos);
-        for(int i = 0; i < dtos.size(); i++) {
+        for (int i = 0; i < dtos.size(); i++) {
 
         }
         return dtos;
     }
 
     /* 강의 차시정보 저장 */
-    @PutMapping("/api/lectNth/save")
+//    @PutMapping("/api/lectNth/save")
+//    @ResponseBody
+//    public ResponseEntity<?> createLectNth(@RequestBody AddLmsContsRequestDto addLmsContsRequestDto) {
+//        if(addLmsContsRequestDto.getNthId() == null) {
+//            lectNthService.createLectNth(addLmsContsRequestDto);
+//            log.info("saveNthId :" + addLmsContsRequestDto.getNthId());
+//        }else {
+//            lectNthService.updateLectNth(addLmsContsRequestDto);
+//            log.info("updateLectNth : " + addLmsContsRequestDto.getNthId());
+//        }
+//        List<AddLmsContsRequestDto> lcr = lectNthService.getLectNth();
+//        return ResponseEntity.ok(lcr);
+//    }
+
+    @PutMapping("/api/lmsconts/save")
     @ResponseBody
-    public ResponseEntity<?> createLectNth(@RequestBody LmsContsRequestDto lmsContsRequestDto) {
-        if(lmsContsRequestDto.getNthId() == null) {
-            lectNthService.createLectNth(lmsContsRequestDto);
-            log.info("saveNthId :" + lmsContsRequestDto.getNthId());
-        }else {
-            lectNthService.updateLectNth(lmsContsRequestDto);
-            log.info("updateLectNth : " + lmsContsRequestDto.getNthId());
+    public ResponseEntity<?> addLmsConts(@RequestBody AddLmsContsRequestDto addLmsContsRequestDto) {
+        if(addLmsContsRequestDto.getNthName() == null) {
+            lectNthService.createLectNth(addLmsContsRequestDto);
+            log.info("saveNthName :" +addLmsContsRequestDto.getNthName());
+        } else {
+            lectNthService.updateLectNth(addLmsContsRequestDto);
+
         }
-        List<LmsContsRequestDto> lcr = lectNthService.getLectNth();
-        return ResponseEntity.ok(lcr);
+        List<AddLmsContsRequestDto> dtos = lectNthService.getLectNth();
+        return ResponseEntity.ok(dtos);
+
     }
 }
