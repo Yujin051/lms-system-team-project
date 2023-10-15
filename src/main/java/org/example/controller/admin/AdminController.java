@@ -590,7 +590,7 @@ public class AdminController {
     public String youTubeRegistration(Model model) {
         StudLectProgDto dto = youtubeService.getFindMagId();
         model.addAttribute("magId", dto.getMagId());
-        log.info("magId : " + dto);
+        log.info("magId : " + dto.getMagId());
         return "/admin/youTube_registration";
     }
 

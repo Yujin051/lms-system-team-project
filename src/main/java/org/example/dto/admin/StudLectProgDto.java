@@ -19,10 +19,10 @@ public class StudLectProgDto {
     private Boolean isChecked;
     private LocalDate checkDate;
 
-    public StudLectProgDto(Long magId) {
+    public StudLectProgDto(Long magId, double maxPosi) {
         this.magId = magId;
+        this.maxPosi = maxPosi;
     }
-
 
     // 최종재생위치 저장
     public StudLectProg toEntity() {

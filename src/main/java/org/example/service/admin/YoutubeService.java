@@ -50,4 +50,22 @@ public class YoutubeService {
         }
     }
 
+    // 최종재생위치만 데이터베이스에 저장
+    public void saveFnlPosi(Long magId, double fnlPosi) {
+        StudLectProg studLectProg = studLectProgRepository.findById(magId)
+                .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
+
+        studLectProg.setFnlPosi(fnlPosi);
+        studLectProgRepository.save(studLectProg);
+    }
+
+    // 최종재생위치만 데이터베이스에 저장
+    public void saveMaxPosi(Long magId, double maxPosi) {
+        StudLectProg studLectProg = studLectProgRepository.findById(magId)
+                .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
+
+        studLectProg.setMaxPosi(maxPosi);
+        studLectProgRepository.save(studLectProg);
+    }
+
 }

@@ -2,17 +2,12 @@ package org.example.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.admin.MemberDto;
 import org.example.dto.admin.StudLectProgDto;
 import org.example.service.admin.YoutubeService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,6 +31,28 @@ public class YoutubeController {
 //        youtubeService.getSaveLastPlayTime(magId, lastPlayTime);
 //        return ResponseEntity.ok("마지막 재생 위치의 시간 저장 성공.");
 //    }
+
+    /**
+     * 관리자 - 온라인강의콘텐츠관리 : 컬럼 모두 조회
+     * @author 임휘재
+     */
+    @GetMapping("/api/studLectProg")
+    public List<StudLectProgDto> adminGradeStudInfo() {
+        List<StudLectProgDto> dtos = youtubeService.getFindStudLectProg();
+        return dtos;
+    }
+
+    /**
+     * 관리자 - 온라인강의콘텐츠관리 : 최대 재생 시간 조회
+     * @author 임휘재
+     */
+    @GetMapping("/api/getMaxPosi")
+    public double findMaxPosi() {
+        StudLectProgDto dto = youtubeService.getFindMagId();
+        log.info("maxPosi : " + dto.getMaxPosi());
+        return dto.getMaxPosi();
+    }
+
     /**
      * 관리자 - 온라인강의콘텐츠관리 : 5초마다 저장
      * @author 임휘재
@@ -44,7 +61,7 @@ public class YoutubeController {
     public ResponseEntity<?> savePlayTime(@RequestParam Long magId,
                                           @RequestParam double fnlPosi,
                                           @RequestParam double maxPosi) {
-        log.info("magId: " + magId);
+        log.info("savePlayTime magId: " + magId);
         log.info("fnlPosi : " + fnlPosi);
         log.info("maxPosi : " + maxPosi);
 
@@ -52,12 +69,32 @@ public class YoutubeController {
         return ResponseEntity.ok("재생 위치 저장 성공.");
     }
 
+    /**
+     * 관리자 - 온라인강의콘텐츠관리 : fnl만 따로 저장
+     * @author 임휘재
+     */
+    @PutMapping("/api/saveFnlPosi")
+    public ResponseEntity<?> saveFnlPosi(@RequestParam Long magId,
+                                          @RequestParam double fnlPosi) {
+        log.info("magId: " + magId);
+        log.info("fnlPosi : " + fnlPosi);
 
-    @GetMapping("/api/getMaxPlayTime")
-    public ResponseEntity<List<StudLectProgDto>> adminGradeStudInfo() {
-        List<StudLectProgDto> dtos = youtubeService.getFindStudLectProg();
-        return ResponseEntity.ok(dtos);
+        youtubeService.saveFnlPosi(magId, fnlPosi);
+        return ResponseEntity.ok("최종 재생 위치 저장 성공.");
     }
 
+    /**
+     * 관리자 - 온라인강의콘텐츠관리 : max만 따로 저장
+     * @author 임휘재
+     */
+    @PutMapping("/api/saveMaxPosi")
+    public ResponseEntity<?> saveMaxPosi(@RequestParam Long magId,
+                                         @RequestParam double maxPosi) {
+        log.info("magId: " + magId);
+        log.info("fnlPosi : " + maxPosi);
+
+        youtubeService.saveMaxPosi(magId, maxPosi);
+        return ResponseEntity.ok("최종 재생 위치 저장 성공.");
+    }
 
 }
