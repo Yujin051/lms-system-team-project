@@ -1,9 +1,12 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.dto.board.ArticleDto;
+import org.example.dto.board.CommentDto;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -30,6 +33,7 @@ public class BoardComnt {
     //  게시글(article) id (외래키)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id" , updatable = false , nullable = false)
+    @JsonIgnore
     private BoardArticle boardArticle;
 
     // 댓글 작성일시
@@ -59,8 +63,8 @@ public class BoardComnt {
         this.isDeleted = isDeleted;
     }
     // 내용 수정
-    public void update(ArticleDto articleDto){
-        this.comntCont = articleDto.getContent();
+    public void update(String commentText){
+        this.comntCont = commentText;
     }
     // 논리 삭제
     public void delete(){

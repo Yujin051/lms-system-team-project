@@ -96,7 +96,7 @@ public class BoardArticle {
         this.articleContent = articleDto.getContent();
         this.isLocked = articleDto.getIsLocked();
         this.articleFileNum =
-                articleDto.getFileNo() != null && articleDto.getFileNo() != 0L && this.articleFileNum == 0L?
+                articleDto.getFileNo() != null && articleDto.getFileNo() != 0L?
                         articleDto.getFileNo() : this.articleFileNum;
     }
     // 논리 삭제

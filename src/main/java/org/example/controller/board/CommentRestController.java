@@ -52,10 +52,12 @@ public class CommentRestController {
     public ResponseEntity<BoardComnt> updateCommentArticle(@RequestBody CommentDto commentDto){
 
         log.info("Put요청 /comment/modify >>> updateCommentArticle()실행됨.");
-        log.info("commentDto::{}",commentDto);
+        log.info("업데이트 내용 commentDto::{}",commentDto);
 
+        BoardComnt comnt = commentService.update(commentDto);
+        log.info("comnt 업데이트 받고 온 상태::{}",comnt);
 
-        return null;
+        return ResponseEntity.status(HttpStatus.CREATED).body(comnt);
     }
 
     // 댓글 삭제

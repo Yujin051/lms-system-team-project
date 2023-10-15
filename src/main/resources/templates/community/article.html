@@ -165,8 +165,8 @@
                         <!-- 댓글 내용 -->
                         <!-- 위의 메뉴 > 댓글 수정 클릭할 경우 readonly를 풀어준다. -->
                         <div class="comment_text">
-                            <textarea name="reply" class="reply" rows="3" readonly th:utext="${comnt.getComntCont()}" th:id="'textarea' + ${comnt.id}">
-                                썸 바리 헬미~</textarea>
+                            <textarea name="reply" class="reply" rows="3" readonly th:text="${#strings.replace(comnt.getComntCont(), '\n' , '<br>')}"
+                                      th:id="'textarea' + ${comnt.id}">썸 바리 헬미~</textarea>
                             <div class="mt-2 comment_btnBox" th:id="'comment_btnBox' + ${comnt.id}">
                                 <button class="btn btn-dark" th:onclick="'commentUpdate(' + ${comnt.id} + ');'">수정</button>
                                 <button class="btn btn-dark" onclick='commentCancel()'>취소</button>

@@ -1,10 +1,12 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.dto.board.CommentDto;
 import org.example.entity.BoardComnt;
 import org.example.repository.CommentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Service
+@Slf4j
+@Transactional
 public class CommentService {
 
     private final CommentRepository commentRepository;
@@ -30,6 +34,21 @@ public class CommentService {
     public List<BoardComnt> findAll(Long articleId){
         List<BoardComnt> comnts = commentRepository.findByBoardArticle_Id(articleId);
         return comnts;
+    }
+
+    // 댓글 수정
+    public BoardComnt update(CommentDto commentDto){
+
+        log.info("업데이트하려는 dto = " + commentDto.toString());
+
+        BoardComnt comnt = commentRepository.findById(commentDto.getId())
+                .orElseThrow(()-> new IllegalArgumentException("Not found : " + commentDto.getId() + " 로 Entity 찾지 못함."));
+
+        log.info("comnt::{}",comnt);
+
+        comnt.update(commentDto.getCommentText());
+
+        return comnt;
     }
 
 }

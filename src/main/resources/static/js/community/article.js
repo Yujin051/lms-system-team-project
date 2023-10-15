@@ -81,11 +81,11 @@ if(commentBtn){
 
         let commentText = document.getElementById('write_comment').value;
         console.log(commentText);
-        let str = commentText.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-        console.log(str);
+        // let str = commentText.replace(/(?:\r\n|\r|\n)/g, '<br/>');
+        // console.log(str);
 
         let data = {
-            commentText : str,
+            commentText : commentText,
             boardArticleId : articleId
         };
 
@@ -130,16 +130,17 @@ function commentUpdate(id){
     // 글 작성 textarea
     let textareaId = document.getElementById('textarea' + id).value;
     console.log(textareaId);
-    let str = textareaId.replace(/(?:\r\n|\r|\n)/g, '<br/>');
-    console.log(str);
+    // let str = textareaId.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    // console.log(str);
 
     let data = {
-        commentText : str,
-        boardArticleId : articleId
+        commentText : textareaId,
+        boardArticleId : articleId,
+        id : id
     };
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST' , '/comment/modify' , true);
+    xhr.open('PUT' , '/comment/modify' , true);
     xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
     xhr.onreadystatechange = function (){
         if(xhr.readyState === 4){
@@ -154,9 +155,6 @@ function commentUpdate(id){
     };
     xhr.send(JSON.stringify(data));
 }
-
-
-
 
 // 댓글 내용 수정 취소
 function commentCancel(){
