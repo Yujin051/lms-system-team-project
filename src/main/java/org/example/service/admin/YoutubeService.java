@@ -20,16 +20,8 @@ public class YoutubeService {
     public StudLectProgDto getFindMagId() {
         return studLectProgRepository.findMagId();
     }
-//    // 마지막 재생 위치의 시간만 데이터베이스에 저장
-//    public void getSaveLastPlayTime(Long magId, int lastPlayTime) {
-//        StudLectProg studLectProg = studLectProgRepository.findById(magId)
-//                .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
-//        if (studLectProg != null) {
-//            studLectProg.setFnlPosi(lastPlayTime);
-//            studLectProgRepository.save(studLectProg);
-//        }
-//    }
 
+    // 수강생차시진도 모두 조회
     public List<StudLectProgDto> getFindStudLectProg() {
         return studLectProgRepository.findStudLectProg();
     }
@@ -42,7 +34,6 @@ public class YoutubeService {
         log.info("sermaxPosi : " + maxPosi);
         if (maxPosi >= studLectProg.getMaxPosi()) {
             studLectProg.setMaxPosi(maxPosi);
-//            studLectProgRepository.save()
         }
         studLectProg.setFnlPosi(fnlPosi); // 최종 재생 위치 업데이트
 

@@ -23,7 +23,8 @@ function onYouTubeIframeAPIReady() {
         },
         events: {
             'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+            'onPlaybackRateChange' : onPlayerPlaybackRateChange
         }
     });
 }
@@ -33,12 +34,15 @@ function onPlayerReady(event) {
     // 비디오를 로드하고 재생
     event.target.loadVideoById(videoId);
     event.target.playVideo();
+    if (event.target.getCurrentTime() > Number(maxPosition) + 1) {
+        player.seekTo(lastFinalPosition, true);
+        console.log("lastFinalPosition : " + lastFinalPosition)
+    }
 }
 
 let maxPosition = 0; // 초기값 설정
 let fnlPosition = 0;
 function onPlayerStateChange(event) {
-    const currentTime = player.getCurrentTime(); // 현재 비디오 위치 가져오기
     if (event.data === YT.PlayerState.PLAYING) {
         intervalId = setInterval(() => {
             fnlPosition = player.getCurrentTime();
@@ -47,21 +51,28 @@ function onPlayerStateChange(event) {
             updateVideoPosition();
         }, 3000); // 5초마다 실행
 
+        const currentTime = player.getCurrentTime(); // 현재 비디오 위치 가져오기
+
+
         fnlPosition = player.getCurrentTime();
         maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
         // fnlPosition = loadFnlPositionFromServer(); // 서버에서 최종 재생 위치 가져오기
 
         saveFinalPositionToServer(fnlPosition);
         saveMaxPositionToServer(fnlPosition);
+
+
     } else if(event.data === YT.PlayerState.PAUSED) {
         // 재생 중이 아니면 interval을 해제하여 업데이트를 중지
         clearInterval(intervalId);
         // 만약 최종 재생 위치가 최대 재생 위치보다 앞서있으면 최대 재생 위치를 조정
-        if (fnlPosition > maxPosition) {
-            event.data(1);
-            // fnlPosition = currentTime; // 최대 재생 위치 업데이트
-            player.seekTo(maxPosition)
-        }
+    }
+}
+
+//재생속도가 변경될 때 1을 초과하면 1로 변경
+function onPlayerPlaybackRateChange(event){
+    if (event.target.getPlaybackRate() > 1){
+        event.target.setPlaybackRate(1);
     }
 }
 
@@ -169,15 +180,3 @@ function saveMaxPositionToServer(maxPosition) {
             console.error('오류 발생:', error);
         });
 }
-
-
-// function startAutoSave() {
-//     intervalId = setInterval(() => {
-//         const currentTime = player.getCurrentTime(); // 현재 비디오 위치 가져오기
-//         const maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
-//         saveFinalPositionToServer(currentTime); // 최종 재생 위치 저장
-//         if (currentTime > maxPosition) {
-//             saveMaxPositionToServer(currentTime); // 최대 재생 위치 저장
-//         }
-//     }, 5000); // 5초마다 실행
-// }
