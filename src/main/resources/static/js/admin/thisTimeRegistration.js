@@ -376,19 +376,19 @@ createButton.addEventListener('click', () => {
 
 const saveButton2 = document.querySelector('#saveButton');
 saveButton2.addEventListener('click', async () => {
-    const nthSequenceInput = document.getElementById('nthSequenceInput').value;
-    const nthNameInput = document.getElementById('nthNameInput').value;
-    const contsTimeInput = document.getElementById('contsTimeInput').value;
+    const nthSequence = document.getElementById('nthSequenceInput').value;
+    const nthName = document.getElementById('nthNameInput').value;
+    const contsTime = document.getElementById('contsTimeInput').value;
 
 
     const data = {
-        nthSequenceInput: nthSequenceInput,
-        nthNameInput: nthNameInput,
-        contsTimeInput: contsTimeInput
+        nthSequence: nthSequence,
+        nthName: nthName,
+        contsTime: contsTime
     };
-    console.log("nthSequenceInput : " + data.nthSequenceInput);
-    console.log("nthNameInput : " + data.nthNameInput);
-    console.log("contsTimeInput : " + data.contsTimeInput);
+    console.log("nthSequenceInput : " + data.nthSequence);
+    console.log("nthNameInput : " + data.nthName);
+    console.log("contsTimeInput : " + data.contsTime);
 
     try {
         const response = await fetch('/admin/api/lectnth/save', {

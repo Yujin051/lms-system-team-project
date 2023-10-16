@@ -29,12 +29,12 @@ public class LectNthDto {
 
     /* lectNth 테이블 컬럼 */
     private Long nthId;
-    private Long nthSequence;
-    private String nthName;
+    private Long nthSequence; //v
+    private String nthName; //v
 
     /* lmsConts 테이블 컬럼 */
     private Long contsNo;
-    private int contsTime;
+    private int contsTime; //v
     private String contsName;
     private String contsYout;
     private String contsDetail;

@@ -162,6 +162,9 @@ public class AdminController {
     @PutMapping("/api/lectnth/save")
     @ResponseBody
     public ResponseEntity<?> createLectNth(@RequestBody LectNthDto lectNthDto) {
+
+        log.info("LectNthDto::{}",lectNthDto);
+
         if(lectNthDto.getLectInfo() == null) {
             lectNthService.createLectNth(lectNthDto);
             log.info("getNthName1 : " + lectNthDto.getNthName());
