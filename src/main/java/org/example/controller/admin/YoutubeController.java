@@ -49,8 +49,19 @@ public class YoutubeController {
     @GetMapping("/api/getMaxPosi")
     public double findMaxPosi() {
         StudLectProgDto dto = youtubeService.getFindMagId();
-        log.info("maxPosi : " + dto.getMaxPosi());
+        log.info("ConmaxPosi : " + dto.getMaxPosi());
         return dto.getMaxPosi();
+    }
+
+    /**
+     * 관리자 - 온라인강의콘텐츠관리 : 최종 재생 시간 조회
+     * @author 임휘재
+     */
+    @GetMapping("/api/getFnlPosi")
+    public double findFnlPosi() {
+        StudLectProgDto dto = youtubeService.getFindMagId();
+        log.info("ConfnlPosi : " + dto.getFnlPosi());
+        return dto.getFnlPosi();
     }
 
     /**

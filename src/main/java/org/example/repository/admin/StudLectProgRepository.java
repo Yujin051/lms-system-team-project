@@ -14,7 +14,7 @@ public interface StudLectProgRepository extends JpaRepository<StudLectProg, Long
 
     // 수강생차시진도 PK조회
     @Query("SELECT NEW org.example.dto.admin.StudLectProgDto " +
-            "(sp.magId, sp.maxPosi) " +
+            "(sp.magId, sp.maxPosi, sp.fnlPosi) " +
             "FROM StudLectProg sp")
     StudLectProgDto findMagId();
 

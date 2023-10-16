@@ -38,16 +38,16 @@ public class YoutubeService {
     public void savePlayTime(Long magId, double fnlPosi, double maxPosi) {
         StudLectProg studLectProg = studLectProgRepository.findById(magId)
                 .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
-
-        if (studLectProg != null) {
-            if (fnlPosi > maxPosi) {
-                fnlPosi = maxPosi;
-            }
-
-            studLectProg.setMaxPosi(maxPosi); // 최대 재생 위치 업데이트
-            studLectProg.setFnlPosi(fnlPosi); // 최종 재생 위치 업데이트
-            studLectProgRepository.save(studLectProg); // 업데이트된 객체를 저장
+        log.info("serfnlPosi : " + fnlPosi);
+        log.info("sermaxPosi : " + maxPosi);
+        if (maxPosi >= studLectProg.getMaxPosi()) {
+            studLectProg.setMaxPosi(maxPosi);
+//            studLectProgRepository.save()
         }
+        studLectProg.setFnlPosi(fnlPosi); // 최종 재생 위치 업데이트
+
+        studLectProgRepository.save(studLectProg);
+
     }
 
     // 최종재생위치만 데이터베이스에 저장
@@ -56,16 +56,17 @@ public class YoutubeService {
                 .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
 
         studLectProg.setFnlPosi(fnlPosi);
-        studLectProgRepository.save(studLectProg);
     }
 
-    // 최종재생위치만 데이터베이스에 저장
+    // 최대재생위치만 데이터베이스에 저장
     public void saveMaxPosi(Long magId, double maxPosi) {
         StudLectProg studLectProg = studLectProgRepository.findById(magId)
                 .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
 
-        studLectProg.setMaxPosi(maxPosi);
-        studLectProgRepository.save(studLectProg);
+        if (maxPosi >= studLectProg.getMaxPosi()) {
+            studLectProg.setMaxPosi(maxPosi);
+//            studLectProgRepository.save()
+        }
     }
 
 }
