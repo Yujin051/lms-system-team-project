@@ -70,7 +70,7 @@ public class YoutubeController {
     }
 
     /**
-     * 관리자 - 온라인강의콘텐츠관리 : fnl만 따로 저장
+     * 관리자 - 온라인강의콘텐츠관리 : fnl만 업데이트
      * @author 임휘재
      */
     @PutMapping("/api/saveFnlPosi")
@@ -84,7 +84,7 @@ public class YoutubeController {
     }
 
     /**
-     * 관리자 - 온라인강의콘텐츠관리 : max만 따로 저장
+     * 관리자 - 온라인강의콘텐츠관리 : max만 업데이트
      * @author 임휘재
      */
     @PutMapping("/api/saveMaxPosi")

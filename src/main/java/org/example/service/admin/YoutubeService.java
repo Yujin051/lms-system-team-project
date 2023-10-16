@@ -16,7 +16,7 @@ public class YoutubeService {
 
     private final StudLectProgRepository studLectProgRepository;
 
-    // 수강생차시진도 기본키
+    // 수강생차시진도 기본키 조회
     public StudLectProgDto getFindMagId() {
         return studLectProgRepository.findMagId();
     }
