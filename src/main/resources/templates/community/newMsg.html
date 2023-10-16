@@ -52,9 +52,9 @@
                             <li><a href="">보낸쪽지</a></li>
                             <li><a href="">휴지통</a></li>
                         </ul>
-                        <div>
-                            <button class="btn btn-dark">쪽지쓰기</button>
-                        </div>
+<!--                        <div>-->
+<!--                            <button class="btn btn-dark">쪽지쓰기</button>-->
+<!--                        </div>-->
                     </div>
                     
                     <div class="col-md-8 msg_write">
@@ -70,14 +70,9 @@
                                     <span>받는사람</span>
                                 </div>
                                 <div class="col-md-7">
+                                <!--th 조건 반복 처리 필요-->
                                     <ul>
-                                        <li>권혁인<span>X</span></li>
-                                        <li>신동은<span>X</span></li>
-                                        <li>이현석<span>X</span></li>
-                                        <li>신민기<span>X</span></li>
-                                        <li>임휘재<span>X</span></li>
-                                        <li>임승범<span>X</span></li>
-                                        
+<!--                                        <li>임승범<span>X</span></li>-->
                                     </ul>
                                 </div>
                                 <div class="col-md-2">
@@ -126,12 +121,10 @@
                     <div><span>수업</span></div>
                     <ul class="classtype_list">
                         <!-- 수업 목록 출력 -->
-                        <li>자바의 정석</li>
-                        <li>시나공 정보처리기사</li>
-                        <li>혼자 공부하는 자바</li>
-                        <li>자기주도 c언어 프로그래밍</li>
-                        <li>새 행정학 2.0</li>
-                        <li>자바의 정석</li>
+                        <th:block th:if="${classList.size() > 0}" th:each="class : ${classList}">
+                            <li th:text="${class.getLectInfo().getLectName()}"
+                                th:onclick="'getClassMate(' + ${class.getLectInfo().getLectId()} + ');'"></li>
+                        </th:block>
                     </ul>
                 </div>
     

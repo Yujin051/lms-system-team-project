@@ -21,11 +21,11 @@ public interface BoardArticleRepository extends JpaRepository<BoardArticle , Lon
 
 
      // 다음 게시글 가져오기
-    @Query("SELECT ba FROM BoardArticle ba WHERE ba.Id > :nowArticleId AND ba.boardInfo.Id = :boardId ORDER BY ba.Id ASC")
+    @Query("SELECT ba FROM BoardArticle ba WHERE ba.Id > :nowArticleId AND ba.boardInfo.Id = :boardId AND ba.isLocked = false AND ba.isDeleted = false ORDER BY ba.Id ASC")
      Page<BoardArticle> findNextBoardArticle(@Param("nowArticleId")Long nowArticleId , @Param("boardId")Long boardId , Pageable pageable);
 
     // 이전 게시글 가져오기
-    @Query("SELECT ba FROM BoardArticle ba WHERE ba.Id < :nowArticleId AND ba.boardInfo.Id = :boardId ORDER BY ba.Id DESC")
+    @Query("SELECT ba FROM BoardArticle ba WHERE ba.Id < :nowArticleId AND ba.boardInfo.Id = :boardId AND ba.isLocked = false AND ba.isDeleted = false ORDER BY ba.Id DESC")
     Page<BoardArticle> findBeforeBoardArticle(@Param("nowArticleId")Long nowArticleId , @Param("boardId") Long boardId , Pageable pageable);
 
 

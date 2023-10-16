@@ -5,6 +5,13 @@ import lombok.*;
 import org.example.dto.board.FileInfoId;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+/**
+ * (수정사항)
+ *  복합키 사용을 위하여 @idClass를 사용.
+ *  FileInfoId 클래스를 사용하고 있습니다.
+ * @author  임승범
+ */
+
 @NoArgsConstructor
 @Table(name="file_info")
 @Getter

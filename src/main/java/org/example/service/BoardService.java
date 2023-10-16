@@ -1,6 +1,7 @@
 package org.example.service;
 
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.board.ArticleDto;
@@ -8,11 +9,13 @@ import org.example.entity.BoardArticle;
 import org.example.repository.BoardArticleRepository;
 import org.example.repository.BoardInfoRepository;
 import org.example.repository.BoardPagingRepository;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -112,6 +115,36 @@ public class BoardService {
         return articles.get(0);
     }
 
+    // 조회수 증가 , 중복방지
+    public BoardArticle updateView(Long id , HttpSession httpSession){
+        // 게시글 가져오면서 안되면 예외 던지기.
+        BoardArticle article = boardRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("Not found : " + id + "로 entity 찾기 불가."));
+
+        // 세션에서 지금까지 본 게시글 리스트 가져오기
+        Object sessionItem = httpSession.getAttribute("viewedArticleIds");
+        // 변환 가능한지 확인하고 맞다면 타입변환
+        if(sessionItem instanceof ArrayList<?>){
+            List<Long> viewedArticleIds = (ArrayList<Long>)sessionItem;
+
+            // 방문게시글 목록에 현재 게시글 id가 포함되는가?
+            if(viewedArticleIds.contains(article.getId()) == false ){
+                viewedArticleIds.add(id); // 세션에 방문한 게시글 담아서 보내주기
+                httpSession.setAttribute("viewedArticleIds" , viewedArticleIds);
+                article.updateView(); // 조회수 증가
+                return article;
+            }
+            // 포함되어 있다면 그냥 게시글 돌려주기
+            else {
+                return article;
+            }
+
+        }
+        // 아니라면 일단 증가로직 없이 게시글 돌려준다.
+        else {
+            return article;
+        }
+    }
 
 
 

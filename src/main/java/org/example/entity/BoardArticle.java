@@ -104,5 +104,10 @@ public class BoardArticle {
         this.isDeleted = true;
     }
 
+    // 게시글 조회수 증가
+    public void updateView(){
+        this.articleView = articleView+1;
+    }
+
 
 }

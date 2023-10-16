@@ -37,10 +37,11 @@ public class CommentRestController {
         log.info("commentDto::{}",commentDto);
         // 소속된 게시글 가져오기
         BoardArticle boardArticle =boardService.findById(commentDto.getBoardArticleId());
+        // 사용자 정보 가져오기
         Member member = memberService.memberView(principal.getName());
 
         commentDto.setBoardArticle(boardArticle);
-        commentDto.setCommentWriter(member.getUserName());
+        commentDto.setMember(member);
 
         BoardComnt comnt = commentService.save(commentDto);
 
@@ -61,6 +62,21 @@ public class CommentRestController {
     }
 
     // 댓글 삭제
+    @PostMapping("/delete")
+    public ResponseEntity<String> deleteComment(@RequestBody CommentDto commentDto){
+
+        log.info("Post요청 /comment/delete >>> deleteComment()실행됨.");
+        log.info("commentDto::{}",commentDto);
+
+        BoardComnt comnt = commentService.delete(commentDto);
+
+        if(comnt.getIsDeleted()){
+            return ResponseEntity.status(HttpStatus.OK).body("성공");
+        } else{
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("실패");
+        }
+
+    }
 
 
 }

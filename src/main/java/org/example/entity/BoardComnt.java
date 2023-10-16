@@ -42,8 +42,10 @@ public class BoardComnt {
     private LocalDateTime comntAt;
 
     // 댓글 작성자
-    @Column(name = "comnt_writer" , nullable = false)
-    private String comntWriter;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id" , updatable = false , nullable = false)
+    @JsonIgnore
+    private Member memberId;
 
     // 댓글 내용
     @Column(name = "comnt_cont" , nullable = false)
@@ -56,9 +58,9 @@ public class BoardComnt {
 
     // entity 생성
     @Builder
-    public BoardComnt (BoardArticle boardArticle , String comntWriter , String comntCont , Boolean isDeleted){
+    public BoardComnt (BoardArticle boardArticle , Member member , String comntCont , Boolean isDeleted){
         this.boardArticle = boardArticle;
-        this.comntWriter = comntWriter;
+        this.memberId = member;
         this.comntCont = comntCont;
         this.isDeleted = isDeleted;
     }

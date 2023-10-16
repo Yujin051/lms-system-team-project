@@ -26,10 +26,10 @@ public class CommentDto {
     private Long boardArticleId;
     // 소속되는 게시글
     private BoardArticle boardArticle;
-    // 댓글 작성자 text
-    private String commentWriter;
     // 댓글 작성자 id v
     private Long commentWriterId;
+    // 댓글 작성자 id
+    private Member member;
     // 댓글 내용 v
     private String commentText;
     // 댓글 작성일시
@@ -39,7 +39,7 @@ public class CommentDto {
         return BoardComnt.builder()
                 .boardArticle(boardArticle)
                 .comntCont(commentText)
-                .comntWriter(commentWriter)
+                .member(member)
                 .isDeleted(false)
                 .build();
     }

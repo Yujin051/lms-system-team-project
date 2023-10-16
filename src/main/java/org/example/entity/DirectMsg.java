@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.board.DirectMsgDto;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.data.annotation.CreatedDate;
@@ -68,6 +69,16 @@ public class DirectMsg {
     @Column(name = "recv_del_yn" , nullable = false)
     @ColumnDefault("false")
     private Boolean recvDelYn;
+
+    @Builder
+    public DirectMsg(DirectMsgDto directMsgDto){
+
+        this.orgMsg = directMsgDto.getOrgMsg() != null? directMsgDto.getOrgMsg() : null;
+        this.sendId = directMsgDto.getSendId();
+        this.recvId = directMsgDto.getRecvId();
+        this.msgTitle = directMsgDto.getMsgTitle();
+        this.msgCont = directMsgDto.getMsgCont();
+    }
 
 
 }

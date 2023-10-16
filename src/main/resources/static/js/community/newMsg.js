@@ -26,62 +26,117 @@ function selectAll(selectAll){
         item.checked = selectAll.checked;
     });
     
-};
+}
 
+// 수업 클래스 li 요소를 클릭할 때 이벤트 리스너 등록
+function getClassMate(id){
 
-// li 요소를 클릭할 때 이벤트 리스너 등록
-const classItems = document.querySelectorAll('.classtype li');
-classItems.forEach(classItem => {
-    classItem.addEventListener('click', () => {
-        const className = classItem.textContent; // 수업 이름 가져오기
+    console.log("id = " + id);
 
-        const classmateUl = document.querySelector('.classmate');
-        
-        if(classmateUl.children.length != 0){
-            while (classmateUl.firstChild) {
-                classmateUl.removeChild(classmateUl.firstChild);
-            }   
+    let data = {
+        classId : id
+    };
+
+    // 참가자ul 태그 가져오기
+    const classmateUl = document.querySelector('.classmate');
+    // 참가자 자리 비우기(li가 없어질때까지 삭제해라)
+    if(classmateUl.children.length !== 0){
+        while (classmateUl.firstChild) {
+            classmateUl.removeChild(classmateUl.firstChild);
         }
-        
-        // 서버로 요청을 보내고 참가자 목록을 가져오는 함수 호출
-        // fetchDataFromClass(className);
-    });
-});
+    }
 
-// function fetchDataFromClass(className) {
-//     // XMLHttpRequest 객체 생성
-//     const xhr = new XMLHttpRequest();
-    
-//     // post 요청 설정
-//     xhr.open('post', '#', true);
-
-//     // 응답을 받았을 때 처리할 콜백 함수 등록
-//     xhr.onload = function() {
-//         if (xhr.status >= 200 && xhr.status < 300) {
-//             // 성공적으로 데이터를 받았을 때 처리할 코드
-            
-//             // 수업 참가자 이름이 배열로 들어있을 것.
-//             const response = xhr.responseText;
-//             const classmateUl = document.getElementsByClassName('classmate');
-
-            
-//             response.forEach(name => {
-//                 // 이름 갯수만큼 li만들어서 안에 넣어주기
-//                 const li = document.createElement('li');
-//                 li.innerHTML = '<input type="checkbox" name="classmate">' + name;
-//                 classmateUl.appendChild(li);
-//             });
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/board/msg/getClassMate', true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+    xhr.onreadystatechange = function (){
+        if(xhr.readyState === 4){
+            if(xhr.status >= 200 && xhr.status < 300){
+                alert('성공');
+            }
+            else {
+                alert('실패');
+            }
+        }
+    }
+    xhr.send(JSON.stringify(data));
 
 
-//         } else {
-//             // 요청이 실패했을 때 처리할 코드
-//             console.error('Request failed with status:', xhr.status);
+}
+
+
+
+// 수업 클래스 li 요소를 클릭할 때 이벤트 리스너 등록
+// const classItems = document.querySelectorAll('.classtype li');
+// classItems.forEach(classItem => {
+//     classItem.addEventListener('click', () => {
+//         const className = classItem.textContent; // 수업 이름 가져오기
+//         console.log("수업명 = " + className);
+//
+//         // 수업 값 가져오기
+//         let classId = document.getElementById(className).value;
+//         console.log("수업id = " + classId);
+//
+//         // 참가자ul 태그 가져오기
+//         const classmateUl = document.querySelector('.classmate');
+//         // 참가자 자리 비우기
+//         if(classmateUl.children.length != 0){
+//             while (classmateUl.firstChild) {
+//                 classmateUl.removeChild(classmateUl.firstChild);
+//             }
 //         }
-//     };
+//
+//        // 서버로 요청을 보내고 참가자 목록을 가져오는 함수 호출
+//         getClassData(className , classId);
+//     });
+// });
 
-//     // 요청 보내기
-//     xhr.send();
-// }
+function getClassData(className , classId) {
+
+    let data = {
+        className : className,
+        classId : classId
+    };
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', '/board/msg/getClassMate', true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+    xhr.onreadystatechange = function (){
+        if(xhr.readyState === 4){
+            if(xhr.status >= 200 && xhr.status < 300){
+                alert('성공');
+            }
+            else {
+                alert('실패');
+            }
+        }
+    }
+    xhr.send(JSON.stringify(data));
+    // {
+    //     if (xhr.status >= 200 && xhr.status < 300) {
+    //         // 성공적으로 데이터를 받았을 때 처리할 코드
+    //
+    //         // 수업 참가자 이름이 배열로 들어있을 것.
+    //         const response = xhr.responseText;
+    //         const classmateUl = document.getElementsByClassName('classmate');
+    //
+    //
+    //         response.forEach(name => {
+    //             // 이름 갯수만큼 li만들어서 안에 넣어주기
+    //             const li = document.createElement('li');
+    //             li.innerHTML = '<input type="checkbox" name="classmate">' + name;
+    //             classmateUl.appendChild(li);
+    //         });
+    //
+    //
+    //     } else {
+    //         // 요청이 실패했을 때 처리할 코드
+    //         console.error('Request failed with status:', xhr.status);
+    //     }
+    // };
+
+
+}
 
 
 

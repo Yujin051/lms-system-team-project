@@ -84,6 +84,11 @@ if(commentBtn){
         // let str = commentText.replace(/(?:\r\n|\r|\n)/g, '<br/>');
         // console.log(str);
 
+        if(commentText == null || commentText === ""){
+            alert('내용을 입력해주세요');
+            return ;
+        }
+
         let data = {
             commentText : commentText,
             boardArticleId : articleId
@@ -95,7 +100,7 @@ if(commentBtn){
         xhr.onreadystatechange = function (){
             if(xhr.readyState === 4){
                 if(xhr.status === 201){
-                    alert('성공');
+                    // alert('성공');
                     location.reload();
                 }
                 else {
@@ -110,6 +115,11 @@ if(commentBtn){
 // var str = document.getElementById("textarea").value;
 // str = str.replaceAll("<br/>", "\r\n");
 // document.getElementById("textarea").value = str;
+
+/********************************************************************
+ **********************************댓글******************************
+ ********************************************************************/
+
 
 // 댓글 메뉴 드롭다운 수정 버튼
 function commentModify(id){
@@ -133,6 +143,11 @@ function commentUpdate(id){
     // let str = textareaId.replace(/(?:\r\n|\r|\n)/g, '<br>');
     // console.log(str);
 
+    if(textareaId == null || textareaId === ""){
+        alert('내용을 입력해주세요');
+        return ;
+    }
+
     let data = {
         commentText : textareaId,
         boardArticleId : articleId,
@@ -145,7 +160,7 @@ function commentUpdate(id){
     xhr.onreadystatechange = function (){
         if(xhr.readyState === 4){
             if(xhr.status === 201){
-                alert('성공');
+                alert('댓글이 수정 되었습니다.');
                 location.reload();
             }
             else {
@@ -161,6 +176,30 @@ function commentCancel(){
     window.location.reload();
 }
 
+// 댓글 삭제
+function deleteComment(id) {
+
+    let data = {
+        id : id
+    }
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST' , '/comment/delete' , true);
+    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+    xhr.onreadystatechange = function (){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                alert('댓글 삭제되었습니다.');
+                window.location.reload();
+            }
+            else{
+                alert('실패 : firetrap5319@gmail.com으로 문의 바랍니다.');
+            }
+        }
+    };
+    xhr.send(JSON.stringify(data));
+
+}
 
 
 

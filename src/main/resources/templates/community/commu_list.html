@@ -71,37 +71,45 @@
                         <th:block th:each="article : ${pageDto.articles}">
                             <tr>
                                 <td>
-                                   <a th:text="${article.getId()}"
+                                   <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getId()}"
                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getId()}"></a>
                                 </td>
 
                                 <td>
-                                    <a th:text="${article.getBoardInfo().getBoardType()}"
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getBoardInfo().getBoardName()}"
                                        th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getBoardInfo().getBoardName()}"></a>
                                 </td>
 
                                 <td class="articleTitle" >
 <!--                                    <a th:if="${article.getIsLocked() == true && article.getMemberId().getUserId() != userName}" th:text="${'비밀글입니다.'}"-->
 <!--                                       th:href="@{/board/view/{id}(id=${article.getId()})}">-->
 <!--                                    </a>-->
-                                    <a th:text="${article.getArticleTitle()}"
+
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getArticleTitle()}"
                                        th:href="@{/board/view/{id}(id=${article.getId()})}">
                                     </a>
+                                    <!-- 비공개글 작성자와 사용자가 다를때 -->
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${'비공개 글입니다.'}"></a>
                                 </td>
 
                                 <td>
-                                    <a th:text="${article.getMemberId().getUserName()}"
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getMemberId().getUserName()}"
                                        th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getMemberId().getUserName()}"></a>
                                 </td>
 
                                 <td>
-                                    <a th:text="${article.getArticleView()}"
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getArticleView()}"
                                        th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getArticleView()}"></a>
                                 </td>
 
                                 <td>
-                                    <a th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:mm')}"
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:mm')}"
                                        th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:mm')}"></a>
                                 </td>
                             </tr>
                         </th:block>

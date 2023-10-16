@@ -1,10 +1,12 @@
 package org.example.controller.board;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.constant.RoleType;
 import org.example.dto.board.ArticleDto;
+import org.example.dto.board.DirectMsgDto;
 import org.example.dto.board.PageDto;
 import org.example.entity.BoardArticle;
 import org.example.entity.BoardComnt;
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author 임승범
@@ -43,13 +47,18 @@ public class BoardController {
             Model model ,
             @PathVariable(name = "id") Long boardId,
             @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC) Pageable pageable ,
-            Principal principal) {
+            Principal principal ,
+            HttpSession httpSession) {
 
         log.info("Get요청 /board/list/{" + boardId + "} >>> getBoardList() 실행됨. ");
 
         // principal로 사용자 권한 가져오기
         Member member = memberService.memberView(principal.getName());
         RoleType roleType = member.getUserRole();
+
+        if(httpSession.getAttribute("viewedArticleIds") == null){
+            httpSession.setAttribute("viewedArticleIds" , new ArrayList<>());
+        }
 
         // jpa PagingAndSortRepository 이용
         Page<BoardArticle> articles = boardService.getArticlesByBoardId(boardId , pageable);
@@ -58,6 +67,7 @@ public class BoardController {
         // model에 담기
         model.addAttribute("pageDto" , pageDto);
         model.addAttribute("id" , boardId);
+        model.addAttribute("member" , member);
         model.addAttribute("roleType" , roleType);  // USER , TEACHER , ADMIN
         model.addAttribute("userName" , principal.getName());
 
@@ -70,16 +80,16 @@ public class BoardController {
             Model model ,
             @PathVariable(name = "id" , required = false) Long id,
             Principal principal,
-            Pageable pageable) {
+            Pageable pageable ,
+            HttpSession httpSession) {
 
         log.info("Get요청 /board/view/{" + id + "} >>> getboardView() 실행됨.");
 
-        // id 해당하는 boardArticle 레코드 가져옴.
-        BoardArticle article = boardService.findById(id);
+        // 게시글 가져오면서 조회수 증가로직 작동
+        BoardArticle article = boardService.updateView(id , httpSession);
 
         List<FileInfo> files = new ArrayList<>();
-        // 첨부파일 번호
-        Long fileNo = article.getArticleFileNum();
+        Long fileNo = article.getArticleFileNum(); // 첨부파일 번호
 
         if(fileNo != null && fileNo != 0L){
             files = fileInfoService.findFileInfoList(fileNo);
@@ -202,22 +212,4 @@ public class BoardController {
         return "/community/search_list";
     }
 
-
-    // 쪽지 전체 보기
-    @GetMapping("/msg/all")
-    public String msgList() {
-        return "/community/msg_list";
-    }
-
-    // 특정 쪽지 내용 보기
-    @GetMapping("/msg/article")
-    public String msgView() {
-        return "/community/msg_view";
-    }
-
-    // 새 쪽지 작성하기(PostMapping 필요)
-    @GetMapping("/msg/article_write")
-    public String test6() {
-        return "/community/newMsg";
-    }
 }

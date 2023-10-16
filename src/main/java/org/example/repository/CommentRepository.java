@@ -13,6 +13,6 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<BoardComnt , Long> {
 
     // 게시글 번호로 댓글 리스트 가져오기
-    public List<BoardComnt> findByBoardArticle_Id(Long BoardarticleId);
+    public List<BoardComnt> findByBoardArticle_IdAndIsDeletedFalse(Long BoardarticleId);
 
 }

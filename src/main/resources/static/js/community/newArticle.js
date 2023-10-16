@@ -122,10 +122,17 @@ if(saveBtn){
         const title = document.getElementById('title').value;
         // 서머 노트 입력값 가져오기
         const content = $('#summernote').summernote('code');
+
         // 비공개 글 여부 체크 값 가져오기
         let privateCk = false;
-        if(document.getElementById('private_ck').checked == true){
+        if(document.getElementById('private_ck').checked === true){
             privateCk = true;
+        }
+
+        // 게시판 유효성 검사
+        if(content == null || content === "" || title == null || title === ""){
+            alert('내용을 입력해주세요');
+            return ;
         }
 
         console.log("privateCk : " + privateCk);

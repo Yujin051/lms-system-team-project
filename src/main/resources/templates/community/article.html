@@ -144,7 +144,7 @@
                         <div>
                             <div>
                                 <!-- 댓글 작성자 -->
-                                <span th:text="${comnt.getComntWriter()}">Denma</span>
+                                <span th:text="${comnt.getMemberId().getUserName()}">Denma</span>
                                 <span>|</span>
                                 <!-- 댓글 작성일시 -->
                                 <span th:text="${#temporals.format(comnt.getComntAt() , 'yy.MM.dd-HH:mm')}">2023.10.02</span>
@@ -152,13 +152,13 @@
                             
                             <!-- 댓글 기능 -->
                             <!-- th:if로 작성자 아니면 안보이도록 -->
-                            <div class="dropdown" th:id="'dropdownMenu' + ${comnt.id}">
+                            <div class="dropdown" th:id="'dropdownMenu' + ${comnt.id}" th:if="${comnt.memberId.id == member.id}">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     메뉴
                                 </button>
                                 <ul class="dropdown-menu comment_menu">
                                     <li><a class="dropdown-item" th:onclick="'commentModify(' + ${comnt.id} +');'">댓글 수정</a></li>
-                                    <li><a class="dropdown-item">댓글 삭제</a></li>
+                                    <li><a class="dropdown-item" th:onclick="'deleteComment(' + ${comnt.id} +');'">댓글 삭제</a></li>
                                 </ul>
                             </div>
                         </div>

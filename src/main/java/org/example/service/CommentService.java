@@ -32,7 +32,7 @@ public class CommentService {
 
     // 게시글 번호로 소속된 댓글 리스트 가져오기
     public List<BoardComnt> findAll(Long articleId){
-        List<BoardComnt> comnts = commentRepository.findByBoardArticle_Id(articleId);
+        List<BoardComnt> comnts = commentRepository.findByBoardArticle_IdAndIsDeletedFalse(articleId);
         return comnts;
     }
 
@@ -47,6 +47,17 @@ public class CommentService {
         log.info("comnt::{}",comnt);
 
         comnt.update(commentDto.getCommentText());
+
+        return comnt;
+    }
+
+    // 댓글 삭제
+    public BoardComnt delete(CommentDto commentDto){
+
+        BoardComnt comnt = commentRepository.findById(commentDto.getId())
+                .orElseThrow(()-> new IllegalArgumentException("Not found : " + commentDto.getId() + "로 Entity 찾지 못함."));
+
+        comnt.delete();
 
         return comnt;
     }
