@@ -53,11 +53,6 @@ public class ProfessorController {
         return "/prof/prof_main";
     }
 
-    // 강사 나의 강의목록
-    @GetMapping("/lecture")
-    public String profLecture() {
-        return "/prof/myLecture";
-    }
 
     // 강사 강의계획서
     @GetMapping("/lecture번호/lectureplan")
@@ -108,20 +103,22 @@ public class ProfessorController {
     @GetMapping("/lecture")
     public String studentLecture(Principal principal, Model model) {
         Member member = memberRepository.findByUserId(principal.getName());
-        Long id =  member.getId();
-        model.addAttribute("memberId", id);
+
+        Professor professor = professorService.ProfessorView(member.getId());
+        Long id = professor.getProfId();
+        model.addAttribute("professorId", id);
 
         List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기");
         model.addAttribute("lectInfoList", lectInfoList);
 
-        return "/student/myLecture";
+        return "/prof/myLecture";
     }
 
     // 학생 나의 강의현황 > 강좌검색
     @RequestMapping(value = "/lecture/find", method = RequestMethod.GET)
     @ResponseBody
-    public List<LectInfoDTO> findCoursesByMemberAndSemester(@RequestParam Long memberId, @RequestParam String year, @RequestParam String semester) {
-        List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(memberId, year, semester);
+    public List<LectInfoDTO> findCoursesByProfessorAndSemester(@RequestParam Long professorId, @RequestParam String year, @RequestParam String semester) {
+        List<LectInfo> lectInfoList = lectureService.findCoursesByProfessorAndSemester(professorId, year, semester);
 
         List<LectInfoDTO> lectInfoDTOList = new ArrayList<>();
         for (LectInfo lectInfo : lectInfoList) {

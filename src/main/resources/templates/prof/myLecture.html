@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/profDefault}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/profDefault}">
 <head>
     <meta charset="UTF-8">
     <title>나의 강의실</title>
@@ -13,7 +10,7 @@
             $('#courseForm').submit(function (event) {
                 event.preventDefault();
 
-                var memberId = $('#memberId').val();
+                var professorId = $('#professorId').val();
                 var year = $('#year').val();
                 var semester = $('#semester').val();
 
@@ -22,9 +19,9 @@
 
                 $.ajax({
                     type: 'GET',
-                    url: '/student/lecture/find',
+                    url: '/prof/lecture/find',
                     data: {
-                        memberId: memberId,
+                        professorId: professorId,
                         year: year,
                         semester: semester
                     },
@@ -37,14 +34,6 @@
 
                         var courseSubResult = $('#courseSubResult');
                         courseSubResult.empty();
-                        // $.each(data, function(index, lectinfo) {
-                        //     courseSubResult.append('<div class="lectureClick'+index+'">');
-                        //     courseSubResult.append('<a href="/lecture/'+ lectinfo.lectId +'"><div class="lecMenu">강의 계획서</div></a>');
-                        //     courseSubResult.append('<a href="#"><div class="lecMenu">출결 조회</div></a>');
-                        //     courseSubResult.append('<a href="#"><div class="lecMenu">과제 제출</div></a>');
-                        //     courseSubResult.append('<a href="#"><div class="lecMenu">수업 게시판</div></a>');
-                        //     courseSubResult.append('</div>');
-                        // });
                     },
                     error: function () {
                         alert('Error fetching courses.');
@@ -64,7 +53,7 @@
                 <div>
                     <div>
                         <span>년도</span>
-                        <input type="hidden" id="memberId" th:value="${memberId}">
+                        <input type="hidden" id="professorId" th:value="${professorId}">
                         <select id="year" class="selector">
                             <option value="2020">2020</option>
                             <option value="2021">2021</option>
@@ -86,7 +75,6 @@
             <button type="submit">조회</button>
         </form>
 
-        <!-- 학기 정보는 위의 현황 테이블에서 받아서 적용되도록. 타임리프 사용? -->
         <h4 id="yearAndSemester">2020년도 1학기</h4>
         <div>
             <div class="lectureContainer">
@@ -98,7 +86,5 @@
     </article>
     <script src="/js/stud/stu_lecture.js"></script>
 </section>
-
-
 </body>
 </html>

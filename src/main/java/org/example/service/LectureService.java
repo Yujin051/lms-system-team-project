@@ -40,5 +40,10 @@ public class LectureService {
         return lectInfoRepository.findById(id).get();
     }
 
+    public List<LectInfo> findCoursesByProfessorAndSemester(Long professorId, String year, String semester) {
+        // LectInfoRepository를 사용하여 강사가 개설한 강좌를 조회
+        List<LectInfo> lectInfoList = lectInfoRepository.findLectInfoByProfessorAndSemester(professorId, year, semester);
+        return lectInfoList;
+    }
 
 }
