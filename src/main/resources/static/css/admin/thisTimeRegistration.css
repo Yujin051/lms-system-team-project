@@ -41,7 +41,21 @@
     padding-top: 15px;
 }
 
+#contsNthIdInput {
+    background: rgb(204,204,204);
+}
 
+#contsNoInput {
+    background: rgb(204,204,204);
+}
+
+#contsNameInput {
+    background: rgb(204,204,204);
+}
+
+#contsYoutInput {
+    background: rgb(204,204,204);
+}
 
 .d1 {
     font-size: 19px;

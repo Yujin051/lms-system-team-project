@@ -89,7 +89,6 @@ const grid = new tui.Grid({
         },
     ],
 });
-console.log(grid)
 //  그리드 요소에 CSS 스타일 적용
 grid.el.style.width = '1500px';
 grid.el.style.marginLeft = '90px';
@@ -183,14 +182,9 @@ nameCells.forEach(cell => {
         ],
     });
 
-
-// grid2 테이블 업데이트 함수
-
-
 //  그리드 요소에 CSS 스타일 적용
 grid2.el.style.width = '700px';
 grid2.el.style.marginLeft = '0px';
-
 
 $(document).ready(function() {
     // 첫 번째 그리드 초기화
@@ -246,84 +240,14 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    let selectedValue = "(전체)";
-
-    $("#dropdown-menu").on("change", function() {
-        selectedValue = $(this).val(); // Get the selected value
-
-        updateData(selectedValue);
-    });
-
-    function updateData(selectedValue) {
-
-        console.log(selectedValue);
-    }
-});
-
-
-    function updateData(selectedValue) {
-    // 선택된 값(selectedValue)을 활용하여 작업을 수행
-    if (selectedValue === "(전체)") {
-        // "(전체)"를 선택한 경우 모든 데이터를 표시하거나 관련 작업 수행
-        // 예: 서버로 데이터 요청
-        console.log("(전체) 선택됨");
-    } else if (selectedValue === "운영중") {
-        // "운영중"을 선택한 경우 해당 데이터만 표시하거나 관련 작업 수행
-        // 예: 서버로 데이터 요청 또는 데이터 필터링
-        console.log("운영중 선택됨");
-    } else if (selectedValue === "종료") {
-        // "종료"를 선택한 경우 해당 데이터만 표시하거나 관련 작업 수행
-        // 예: 서버로 데이터 요청 또는 데이터 필터링
-        console.log("종료 선택됨");
-    }
-    // 다른 드롭다운 항목에 대한 조건을 추가할 수 있습니다.
-}
-
-
-
-/* 체크박스 선택란*/
-const itemAll = document.querySelector('#item-all');
-const itemRunning = document.querySelector('#item-running');
-const itemClosed = document.querySelector('#item-closed');
-
-itemAll.addEventListener('change', function() {
-    // "(전체)" 체크박스 항목 상태 변경
-    // 원하는 동작을 수행
-    if (itemAll.checked) {
-        console.log("(전체) 체크됨");
-    } else {
-        console.log("(전체) 체크 해제됨");
-    }
-});
-
-itemRunning.addEventListener('change', function() {
-    // "운영중" 체크박스 항목 상태 변경
-    // 원하는 동작을 수행
-    if (itemRunning.checked) {
-        console.log("운영중 체크됨");
-    } else {
-        console.log("운영중 체크 해제됨");
-    }
-});
-
-itemClosed.addEventListener('change', function() {
-    // "종료" 체크박스 항목 상태 변경
-    // 원하는 동작을 수행
-    if (itemClosed.checked) {
-        console.log("종료 체크됨");
-    } else {
-        console.log("종료 체크 해제됨");
-    }
-});
 /* 여기까지 */
 const searchBtn = document.querySelector('#search-button');
 const searchInput = document.querySelector('#search-input');
 const resultElement = document.querySelector('.result2');
 const searchSelect = document.querySelector('.box');
 
-/* 온라인강좌명 검색 */
-saveButton.addEventListener('click', async () => {
+/* 온라인강좌명 선택박스 운영중/ 종료 / 전체 - 검색 */
+searchBtn.addEventListener('click', async () => {
     try {
         const searchInputValue = searchInput.value;
         const searchSelectValue = searchSelect.value;
@@ -341,14 +265,15 @@ saveButton.addEventListener('click', async () => {
         console.log("searchInputValue : " + searchInputValue)
         console.log("searchSelectValue : " + searchSelectValue)
 
-        if(searchInputValue && (isActiveValue !== undefined && isActiveValue !== "")) {
-            apiUrl = `/admin/api/lectName/search?lectName=${searchInputValue}&isActive=${isActiveValue}`
-        }else if (searchInputValue) {
-            // 게시판 종류 검색어만 입력한 경우
-            console.log("searchSelectValue : " + searchSelectValue)
+        if (searchInputValue && isActiveValue !== "") {
+            apiUrl = `/admin/api/lectName/search?lectName=${searchInputValue}&isActive=${isActiveValue}`;
+        } else if (searchInputValue) {
+            console.log("searchSelectValue: " + searchSelectValue);
             apiUrl = `/admin/api/ttr/lectName/search?lectName=${searchInputValue}`;
-        }else if (isActiveValue !== undefined) {
+        } else if (isActiveValue !== "") {
             apiUrl = `/admin/api/ttr/isActive/search?isActive=${isActiveValue}`;
+        } else {
+            apiUrl = '/admin/ttr/search';
         }
 
         const response = await fetch(apiUrl);
@@ -399,6 +324,12 @@ var contsYoutInput = document.getElementById("contsYoutInput");
 // 입력 요소를 읽기 전용으로 설정합니다.
 contsYoutInput.readOnly = true;
 
+
+var contsNameInput = document.getElementById("contsNameInput");
+
+// 입력 요소를 읽기 전용으로 설정합니다.
+contsNameInput.readOnly = true;
+
 /* 강의 차시정보 신규/저장/삭제 */
 grid2.on('click', async (ev) => {
     const rowKey = ev.rowKey;
@@ -417,17 +348,15 @@ grid2.on('click', async (ev) => {
 
 
         // 테이블(`tb1`)의 각 입력 필드에 값을 설정
+
         document.getElementById('contsNthIdInput').value = nthId;
         document.getElementById('contsNoInput').value = contsNo;
-        document.getElementById('contsSequenceInput').value = nthSequence;
+        document.getElementById('nthSequenceInput').value = nthSequence;
         document.getElementById('contsNameInput').value = contsName;
         document.getElementById('nthNameInput').value = nthName;
         document.getElementById('contsYoutInput').value = contsYout;
         document.getElementById('contsTimeInput').value = contsTime;
-        // console.log("nthId : " + lectureData.nthId)
-        // console.log("nthSequence : " + lectureData.nthSequence)
 });
-
 
 /* 신규 버튼을 눌렀을 때 강의 차시정보 생성*/
 const createButton = document.querySelector('#createBtn');
@@ -435,77 +364,49 @@ createButton.addEventListener('click', () => {
     // 새로운 빈 행 생성
     const newEmptyRow = {
         nthId: '',
-        contsNo: '',
+        // contsNo: '',
         nthSequence: '',
-        contsName: '',
+        // contsName: '',
         nthName: '',
-        contsYout: '',
+        // contsYout: '',
         contsTime: ''
     };
     grid2.appendRow(newEmptyRow);
 });
 
-// 저장 버튼 클릭 이벤트 처리
-// 저장 버튼 클릭 이벤트 핸들러
-// $("#saveButton").click(function() {
-//     var nthSequence = $("#nthSequence").val();
-//     var nthName = $("#nthName").val();
-//     var contsTime = $("#contsTime").val();
-//
-//     // 데이터를 JSON 형식으로 변환
-//     var requestData = JSON.stringify({
-//         nthSequence: nthSequence,
-//         nthName: nthName,
-//         contsTime: contsTime
-//     });
-//
-//     $.ajax({
-//         type: "POST",
-//         url: "/api/lmsconts/save",
-//         data: request,
-//         contentType: "application/json", // JSON 데이터를 전송
-//         dataType: "json",
-//         success: function(data) {
-//             // 데이터를 grid2에 표시
-//             grid2.tb1(data);
-//         },
-//         error: function(xhr, status, error) {
-//             // 에러 처리
-//             console.error("오류 발생:", error);
-//             alert("데이터를 불러오는 중에 오류가 발생했습니다.");
-//         }
-//     });
-// });
+const saveButton2 = document.querySelector('#saveButton');
+saveButton2.addEventListener('click', async () => {
+    const nthSequenceInput = document.getElementById('nthSequenceInput').value;
+    const nthNameInput = document.getElementById('nthNameInput').value;
+    const contsTimeInput = document.getElementById('contsTimeInput').value;
 
-$("#saveButton").click(function() {
-    var nthSequence = $("#nthSequence").val();
-    var nthName = $("#nthName").val();
-    var contsTime = $("#contsTime").val();
 
-    // 데이터를 JSON 형식으로 변환
-    var requestData = JSON.stringify({
-        nthSequence: nthSequence,
-        nthName: nthName,
-        contsTime: contsTime
-    });
+    const data = {
+        nthSequenceInput: nthSequenceInput,
+        nthNameInput: nthNameInput,
+        contsTimeInput: contsTimeInput
+    };
+    console.log("nthSequenceInput : " + data.nthSequenceInput);
+    console.log("nthNameInput : " + data.nthNameInput);
+    console.log("contsTimeInput : " + data.contsTimeInput);
 
-    $.ajax({
-        type: "POST",
-        url: "/admin/api/lmsconts/save",
-        data: requestData, // 수정: 변수명을 requestData로 변경
-        contentType: "application/json", // JSON 데이터를 전송
-        dataType: "json",
-        success: function(data) {
-            // var nthSequence = data.nthSequence;
-            // var nthName = data.nthName;
-            // var contsTime = data.contsTime;
-        },
-        error: function(xhr, status, error) {
-            // 에러 처리
-            console.error("오류 발생:", error);
-            alert("데이터를 불러오는 중에 오류가 발생했습니다.");
+    try {
+        const response = await fetch('/admin/api/lectnth/save', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            alert('게시물이 성공적으로 저장되었습니다.');
+        } else {
+            alert('게시물 저장에 실패했습니다.');
         }
-    });
+    } catch (error) {
+        console.error('저장 중 오류 발생:', error);
+    }
 });
 
 

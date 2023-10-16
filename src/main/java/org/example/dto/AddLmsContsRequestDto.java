@@ -24,6 +24,7 @@ public class AddLmsContsRequestDto {
     private int contsTime;
 
 
+
     public  LectNth toEntity() {
         return LectNth.builder()
                 .lectInfo(lectInfo)

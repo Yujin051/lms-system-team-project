@@ -97,18 +97,6 @@ public class AdminController {
         return "/admin/thisTime_registration";
     }
 
-    /* 온라인 차시정보 데이터 값 다른 테이블에 불러오기  */
-    @GetMapping("/ttr/api")
-    @ResponseBody
-    public ResponseEntity<List<LectNthDto>> findLectNthDtos(String searchType, Boolean nthKeyword) {
-        List<LectNthDto> lectNthData = lectNthService.getLectNthData(searchType, nthKeyword);
-
-        log.info(lectNthData.toString());
-
-        return ResponseEntity.ok(lectNthData);
-    }
-
-
     /* 온라인 차시정보 데이터 값 테이블에 불러오기  */
     @GetMapping("/ttr/search")
     @ResponseBody
@@ -150,7 +138,7 @@ public class AdminController {
     }
 
 
-    /* 강의 차시정보 하단 왼쪽 첫번째 테이블 비동기 처리 */
+    /* 강의 차시정보 하단 왼쪽 첫번째 테이블 비동기 처리 (grid 클릭했을 때 grid2 에 표시하게 하는 Controller)*/
     @GetMapping("/api/nthName/search")
     @ResponseBody
     public List<LectNthDto> lectIdSearch(@RequestParam(value = "lectId") Long lectId) {
@@ -171,32 +159,21 @@ public class AdminController {
     }
 
     /* 강의 차시정보 저장 */
-//    @PutMapping("/api/lectNth/save")
-//    @ResponseBody
-//    public ResponseEntity<?> createLectNth(@RequestBody AddLmsContsRequestDto addLmsContsRequestDto) {
-//        if(addLmsContsRequestDto.getNthId() == null) {
-//            lectNthService.createLectNth(addLmsContsRequestDto);
-//            log.info("saveNthId :" + addLmsContsRequestDto.getNthId());
-//        }else {
-//            lectNthService.updateLectNth(addLmsContsRequestDto);
-//            log.info("updateLectNth : " + addLmsContsRequestDto.getNthId());
-//        }
-//        List<AddLmsContsRequestDto> lcr = lectNthService.getLectNth();
-//        return ResponseEntity.ok(lcr);
-//    }
-
-    @PutMapping("/api/lmsconts/save")
+    @PutMapping("/api/lectnth/save")
     @ResponseBody
-    public ResponseEntity<?> addLmsConts(@RequestBody AddLmsContsRequestDto addLmsContsRequestDto) {
-        if(addLmsContsRequestDto.getNthName() == null) {
-            lectNthService.createLectNth(addLmsContsRequestDto);
-            log.info("saveNthName :" +addLmsContsRequestDto.getNthName());
+    public ResponseEntity<?> createLectNth(@RequestBody LectNthDto lectNthDto) {
+        if(lectNthDto.getLectInfo() == null) {
+            lectNthService.createLectNth(lectNthDto);
+            log.info("getNthName1 : " + lectNthDto.getNthName());
         } else {
-            lectNthService.updateLectNth(addLmsContsRequestDto);
-
+            lectNthService.updateLectNth(lectNthDto);
+            log.info("getNthName2 : " + lectNthDto.getNthName());
         }
-        List<AddLmsContsRequestDto> dtos = lectNthService.getLectNth();
+        List<LectNthDto> dtos = lectNthService.getFindLectInfo();
+
         return ResponseEntity.ok(dtos);
 
+
     }
+
 }
