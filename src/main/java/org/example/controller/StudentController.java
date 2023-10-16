@@ -71,6 +71,7 @@ public class StudentController {
         return "/student/myLecture";
     }
 
+    // 학생 나의 강의현황 > 강좌검색
     @RequestMapping(value = "/lecture/find", method = RequestMethod.GET)
     @ResponseBody
     public List<LectInfoDTO> findCoursesByMemberAndSemester(@RequestParam Long memberId, @RequestParam String year, @RequestParam String semester) {
@@ -83,18 +84,11 @@ public class StudentController {
         return lectInfoDTOList;
     }
 
+    // 학생 나의 강의실(특정 강좌)
     @GetMapping("/lecture/view/{id}")
     public String lectureView(Model model, @PathVariable("id")long id) {
-        System.out.println(lectureService.lectureView(id));
         model.addAttribute("lectinfo", lectureService.lectureView(id));
         return "/student/lecturemain";
-    }
-
-    // 학생 강의계획서 보기
-    // 수정필요
-    @GetMapping("/lectureplan")
-    public String studentPlan() {
-        return "/student/lecturePlan";
     }
 
     // 학생 마이페이지

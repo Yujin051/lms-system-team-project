@@ -3,13 +3,18 @@ package org.example.controller;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.example.dto.LectInfoDTO;
 import org.example.dto.ProfessorDto;
+import org.example.entity.LectInfo;
 import org.example.entity.Member;
 import org.example.entity.Professor;
+import org.example.repository.AssignmentsRepository;
 import org.example.repository.MemberRepository;
 import org.example.repository.ProfessorRepository;
+import org.example.service.LectureService;
 import org.example.service.MemberService;
 import org.example.service.ProfessorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,6 +36,9 @@ public class ProfessorController {
     private final ProfessorRepository professorRepository;
     private final ProfessorService professorService;
     private final MemberService memberService;
+    @Autowired
+    private final AssignmentsRepository assignmentsRepository;
+    private final LectureService lectureService;
 
     // 강사 메인페이지
     @GetMapping("")
@@ -70,12 +79,9 @@ public class ProfessorController {
         return "/prof/prof_my_page";
     }
 
-
     @PostMapping("/mypage/modify")
     public String profUpdate(Professor professor, Member member, Principal principal, Model model, @RequestPart MultipartFile file) throws Exception {
         Member memberT = memberService.memberView(principal.getName());
-        log.info("1차 memberT : "+ memberT.getUserName());
-        log.info("1차 memberT : "+ memberT.getUserId());
         memberT.setUserName(member.getUserName());
         memberT.setUserBirthday(member.getUserBirthday());
         memberT.setUserPhoneNum(member.getUserPhoneNum());
@@ -83,10 +89,6 @@ public class ProfessorController {
         memberT.setUserAddr(member.getUserAddr());
 
         memberService.updateMember(memberT, file);
-
-        System.out.println("pm : "+professor);
-        System.out.println("member"+ member);
-
 
         Professor professorT = professorService.ProfessorView(memberT.getId());
 
@@ -97,44 +99,37 @@ public class ProfessorController {
 
         professorService.professorUpdate(professorT);
 
-
-
-        log.info("memberT : "+ memberT.getUserId() +"유저이름 : "+ memberT.getUserName());
-        log.info("멤버아이디는 "+principal.getName());
-        log.info("프로페서T"+professorT);
-
         model.addAttribute("message", "정보가 수정되었습니다.");
         model.addAttribute("SearchUrl", "/prof");
         return "/student/message";
     }
 
+    // 학생 나의 강의현황
+    @GetMapping("/lecture")
+    public String studentLecture(Principal principal, Model model) {
+        Member member = memberRepository.findByUserId(principal.getName());
+        Long id =  member.getId();
+        model.addAttribute("memberId", id);
 
-//  실험중인것
-//    Professor professorT = new Professor();
-//    professorT.setProfBank(professor.getProfBank());
-//    professorT.setProfWork(professor.getProfWork());
-//    professorT.setProfAccount(professor.getProfAccount());
-//    professorT.setProfAgency(professor.getProfAgency());
-//    professorT.setActive(professor.isActive());
-//
-//    // memberT의 ID를 사용하여 professorT를 조회
-//    Professor existingProfessor = professorService.ProfessorView(memberT.getId());
-//    
-//    if (existingProfessor != null) {
-//        // existingProfessor가 존재할 경우, 데이터를 업데이트
-//        existingProfessor.setProfBank(professorT.getProfBank());
-//        existingProfessor.setProfWork(professorT.getProfWork());
-//        existingProfessor.setProfAccount(professorT.getProfAccount());
-//        existingProfessor.setProfAgency(professorT.getProfAgency());
-//        existingProfessor.setActive(professorT.isActive());
-//
-//        professorService.professorUpdate(existingProfessor);
-//        model.addAttribute("message", "정보가 수정되었습니다.");
-//    } else {
-//        // existingProfessor가 존재하지 않을 경우, 에러 메시지를 추가
-//        model.addAttribute("errorMessage", "강사 정보를 찾을 수 없습니다.");
-//    }
-    
+        List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기");
+        model.addAttribute("lectInfoList", lectInfoList);
+
+        return "/student/myLecture";
+    }
+
+    // 학생 나의 강의현황 > 강좌검색
+    @RequestMapping(value = "/lecture/find", method = RequestMethod.GET)
+    @ResponseBody
+    public List<LectInfoDTO> findCoursesByMemberAndSemester(@RequestParam Long memberId, @RequestParam String year, @RequestParam String semester) {
+        List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(memberId, year, semester);
+
+        List<LectInfoDTO> lectInfoDTOList = new ArrayList<>();
+        for (LectInfo lectInfo : lectInfoList) {
+            lectInfoDTOList.add(LectInfoDTO.fromLectInfo(lectInfo));
+        }
+        return lectInfoDTOList;
+    }
+
     @GetMapping("/history")
     public String lectureHistory() {
         return "/prof/prof_class";
@@ -163,10 +158,6 @@ public class ProfessorController {
      * 강사 : 나의강의실 - 과제제출정보
      * @author 임휘재
      */
-    @GetMapping("/assiInfo")
-    public String assiSmInfo(){
-        return "/prof/assiSmInfo";
-    }
 
     //강사 : 나의강의실 - 과제정보쓰기
     @GetMapping("/assiWrite")
@@ -180,6 +171,12 @@ public class ProfessorController {
         return "/prof/assiGrade";
     }
 
+    @GetMapping("/lecture/view/{lectId}/assignments/add")
+    public String addAssignment(@PathVariable("lectId") Long lectId, Model model) {
+        model.addAttribute("lectId", lectId);
+        return "prof/assiSmInfo";
+    }
+
     @GetMapping("/test")
     public String proftest(Authentication auth) {
         UserDetails userDetails = (UserDetails) auth.getPrincipal();
@@ -188,4 +185,6 @@ public class ProfessorController {
 
         return "";
     }
+
+
 }

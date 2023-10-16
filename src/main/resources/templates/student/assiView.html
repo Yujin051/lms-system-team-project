@@ -47,10 +47,10 @@
                     </div>
                     <div class="assi_info_sub_file_download">
                         <div class="assi_info_sub_file_input">
-                            <input type="text" id="assiName2" placeholder="과제명" readonly/>
+                            <input th:field="${assignments.originFilename}" type="text" id="assiName2" placeholder="과제명" readonly/>
                         </div>
                         <div class="assi_info_download_btn">
-                            <button type="button" class="download_btn">다운로드</button>
+                            <a th:href="@{'/download/' + ${assignments.savedFilename}}" download class="download_btn">다운로드</a>
                         </div>
                     </div>
                 </div>

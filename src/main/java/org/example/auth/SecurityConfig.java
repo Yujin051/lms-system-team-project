@@ -59,6 +59,7 @@ public class SecurityConfig {
                         .permitAll()    //로그인 페이지 접근 허용
                         .failureUrl("/member/login/error")) // 로그인 실패 페이지
 
+
                 // 로그아웃
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 페이지
@@ -66,6 +67,11 @@ public class SecurityConfig {
 
                 .exceptionHandling().accessDeniedPage("/denied");
 
+
+        http.sessionManagement() // 세션 관리 (동시 로그인 제한)
+                .maximumSessions(1) // 최대 허용 가능 세션 수 (-1 : 무제한)
+                .maxSessionsPreventsLogin(true) // true : 로그인 제한 false(default) : 기존 세션 만료
+                .expiredUrl("/login"); // 세션 만료시 이동 페이지
 
         return http.build();
 

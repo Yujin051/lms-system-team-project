@@ -42,4 +42,6 @@ public interface StudLectApplyRepository extends JpaRepository<StudLectApply, Lo
             "AND li.lectYear = :year " +
             "AND li.lectSem = :semester")
     List<LectInfo> findCoursesByMemberAndSemester(@Param("memberId") Long memberId, @Param("year") String year, @Param("semester") String semester);
+
+
 }

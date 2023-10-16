@@ -120,7 +120,7 @@
                     </div>
                     <div class="photo_right">
                        <p class="img">
-                           <img id = "preView" src = "#" alt="이미지가 없습니다.">
+                           <img id = "preView" th:src = "${member.imgSaved}" alt="이미지가 없습니다.">
                        </p>
                         <input name = "file" type = "file" accept = "image/*" class = "select_img">
                         <div style="border: 1px solid black; border-radius:5px; position: absolute; margin-top: -28px; margin-left: 300px;" class="delete_img">삭제</div>

@@ -67,8 +67,8 @@ insert into lect_plan(plan_id, lect_id, plan_des, plan_book) values
                                                                  (4, 4, '4번 강의에 대한 설명', '교재 4번'),
                                                                  (5, 5, '5번 강의에 대한 설명', '교재 5번');
 
-insert into assign_info(assign_id, lect_id, assign_name, assign_detail, assign_start, assign_end, is_active, is_submit) values
-                                                                                                                            (1, 1, '과제1', '과제 1 설명', NOW(), NOW(), true, false),
-                                                                                                                            (2, 1, '과제2', '과제 2 설명', NOW(), NOW(), true, false),
-                                                                                                                            (3, 2, '과제3', '과제 3 설명', NOW(), NOW(), true, false),
-                                                                                                                            (4, 3, '과제4', '과제 4 설명', NOW(), NOW(), true, false);
+insert into assign_info(assign_id, lect_id, assign_name, assign_detail, assign_start, assign_end, is_active, is_submit, origin_filename, saved_filename) values
+                                                                                                                            (1, 1, '과제1', '과제 1 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+                                                                                                                            (2, 1, '과제2', '과제 2 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+                                                                                                                            (3, 2, '과제3', '과제 3 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+                                                                                                                            (4, 3, '과제4', '과제 4 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt');
