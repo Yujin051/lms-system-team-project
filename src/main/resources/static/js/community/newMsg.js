@@ -51,8 +51,10 @@ function getClassMate(id){
     xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
     xhr.onreadystatechange = function (){
         if(xhr.readyState === 4){
-            if(xhr.status >= 200 && xhr.status < 300){
+            if(xhr.status === 200){
                 alert('성공');
+                let classmates = xhr.response;
+                console.log(xhr.response);
             }
             else {
                 alert('실패');
@@ -66,52 +68,6 @@ function getClassMate(id){
 
 
 
-// 수업 클래스 li 요소를 클릭할 때 이벤트 리스너 등록
-// const classItems = document.querySelectorAll('.classtype li');
-// classItems.forEach(classItem => {
-//     classItem.addEventListener('click', () => {
-//         const className = classItem.textContent; // 수업 이름 가져오기
-//         console.log("수업명 = " + className);
-//
-//         // 수업 값 가져오기
-//         let classId = document.getElementById(className).value;
-//         console.log("수업id = " + classId);
-//
-//         // 참가자ul 태그 가져오기
-//         const classmateUl = document.querySelector('.classmate');
-//         // 참가자 자리 비우기
-//         if(classmateUl.children.length != 0){
-//             while (classmateUl.firstChild) {
-//                 classmateUl.removeChild(classmateUl.firstChild);
-//             }
-//         }
-//
-//        // 서버로 요청을 보내고 참가자 목록을 가져오는 함수 호출
-//         getClassData(className , classId);
-//     });
-// });
-
-function getClassData(className , classId) {
-
-    let data = {
-        className : className,
-        classId : classId
-    };
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/board/msg/getClassMate', true);
-    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
-    xhr.onreadystatechange = function (){
-        if(xhr.readyState === 4){
-            if(xhr.status >= 200 && xhr.status < 300){
-                alert('성공');
-            }
-            else {
-                alert('실패');
-            }
-        }
-    }
-    xhr.send(JSON.stringify(data));
     // {
     //     if (xhr.status >= 200 && xhr.status < 300) {
     //         // 성공적으로 데이터를 받았을 때 처리할 코드
@@ -136,46 +92,46 @@ function getClassData(className , classId) {
     // };
 
 
-}
+// }
 
 
 
 
-// 참가자 추가 버튼 클릭시 이벤트
-// document.getElementById('selectBtn').addEventListener('click', () => {
-//     const classmateCheckboxes = document.querySelectorAll('.classmate input[type="checkbox"]:checked');
-//     const msgToUl = document.querySelector('.msgTo');
+//참가자 추가 버튼 클릭시 이벤트
+document.getElementById('selectBtn').addEventListener('click', () => {
+    const classmateCheckboxes = document.querySelectorAll('.classmate input[type="checkbox"]:checked');
+    const msgToUl = document.querySelector('.msgTo');
 
-//     classmateCheckboxes.forEach(checkbox => {
-//         const classmateName = checkbox.parentNode.textContent.trim(); // li 요소의 텍스트 값 가져오기
+    classmateCheckboxes.forEach(checkbox => {
+        const classmateName = checkbox.parentNode.textContent.trim(); // li 요소의 텍스트 값 가져오기
 
-//         const li = document.createElement('li');
-//         li.innerHTML = `${classmateName}<span>X</span>`;
+        const li = document.createElement('li');
+        li.innerHTML = `${classmateName}<span>X</span>`;
 
-//         // 받는사람 li 갯수 제한
-//         if(msgToUl.children.length < 10){
-//             msgToUl.appendChild(li);
-//         }
-//         else {
-//             alert('최대 10명까지에게만 보낼 수 있습니다.');
-//         }
+        // 받는사람 li 갯수 제한
+        if(msgToUl.children.length < 10){
+            msgToUl.appendChild(li);
+        }
+        else {
+            alert('최대 10명까지에게만 보낼 수 있습니다.');
+        }
         
-//         // 받는 사람 목록의 X 버튼에 클릭 이벤트 추가 (삭제 기능)
-//         const removeBtn = li.querySelector('span');
-//         removeBtn.addEventListener('click', () => {
-//             // li 요소 삭제
-//             msgToUl.removeChild(li);
-//             // 업데이트된 받는 사람의 숫자 표시
-//             const toNum = document.getElementById('toNum');
-//             toNum.textContent = msgToUl.children.length;
-//         });
-//     });
+        // 받는 사람 목록의 X 버튼에 클릭 이벤트 추가 (삭제 기능)
+        const removeBtn = li.querySelector('span');
+        removeBtn.addEventListener('click', () => {
+            // li 요소 삭제
+            msgToUl.removeChild(li);
+            // 업데이트된 받는 사람의 숫자 표시
+            const toNum = document.getElementById('toNum');
+            toNum.textContent = msgToUl.children.length;
+        });
+    });
 
-//     // 업데이트된 받는 사람의 숫자 표시
-//     const toNum = document.getElementById('toNum');
-//     toNum.textContent = msgToUl.children.length;
+    // 업데이트된 받는 사람의 숫자 표시
+    const toNum = document.getElementById('toNum');
+    toNum.textContent = msgToUl.children.length;
 
-// });
+});
 
 document.getElementById('selectBtn').addEventListener('click', () => {
     const classmateCheckboxes = document.querySelectorAll('.classmate input[type="checkbox"]:checked');

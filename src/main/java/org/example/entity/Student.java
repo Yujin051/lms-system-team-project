@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -20,6 +21,7 @@ public class Student {
 
     //회원ID
     @OneToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Member member;
 
     //수강생 학년
