@@ -85,3 +85,15 @@ auth.addEventListener('click', () => {
     location.href='/youtubeAPIAuth'
 })
 
+// 업로드 버튼 -> 모달창
+const upload = document.querySelector("#upload")
+upload.addEventListener('click', () => {
+    const modal = document.querySelector(".modal")
+    const modalWrap = document.querySelector(".modalWrap")
+    const isModalVisible = modal.style.display !== 'none'
+
+    modalWrap.style.display = isModalVisible ? 'none' : 'block'
+    modal.style.display = isModalVisible ? 'none' : 'block'
+
+})
+
