@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.entity.LmsConts;
+import org.example.repository.LmsContsRepository;
 import org.example.service.admin.YoutubeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +27,7 @@ import java.security.Principal;
 public class YoutubeController {
 
     private final YoutubeService youtubeService;
-    private final HttpSession httpSession;
-    private final HttpServletRequest request;
+    private final LmsContsRepository lmsContsRepository;
 
     // 버튼 눌렀을 때 인증 토큰 얻어오는 컨트롤러
     @GetMapping("/youtubeAPIAuth")
@@ -44,7 +45,7 @@ public class YoutubeController {
     @GetMapping("/youtubeAuthToken")
     public String youtubeToken(@RequestParam(name= "code") String code, Principal principal) {
 
-        // api에서 응답받은 코드로 세션에 credential 저장
+        // api에서 응답받은 코드로 세션에 유저 인증 정보 credential 저장
         youtubeService.createAndStoreCredential(code, principal);
 
         return "redirect:/setYoutubeApi";
@@ -62,14 +63,19 @@ public class YoutubeController {
     @PostMapping("/youtubeUpload")
     @ResponseBody
     public void upload(@RequestParam(name="file") MultipartFile file,
-                         @RequestParam(name="title") String title,
-                         @RequestParam(name="detail") String detail) throws IOException {
-        // 직접 서버 쪽에 파일을 업로드하진 않고 콘텐츠 번호, 제목, 설명만 등록
-        // 동영상 업로드는 유튜브 API를 통해 유튜브로 직접 업로드
-        // 업로드 성공 후 받아온 유튜브 동영상 ID를 등록
-        // 유튜브 측 인코딩이 완료되면 총 재생 시간을 갱신
+                       @RequestParam(name="title") String title,
+                       @RequestParam(name="detail") String detail) throws IOException {
 
+        // API 통해 비디오 업로드, 업로드된 정보를 가진 video 객체 반환받음
         Video video = youtubeService.uploadVideo(title, detail, file);
+
+        // 이름, 설명, 유튜브 비디오 ID로 DB에 새 컨텐츠 저장
+        LmsConts lmsConts = LmsConts.builder()
+                .contsName(title)
+                .contsDetail(detail)
+                .contsYout(video.getId())
+                .build();
+        lmsContsRepository.save(lmsConts);
 
         // 테스트용 로그
         log.info("\n================== Returned Video ==================\n");

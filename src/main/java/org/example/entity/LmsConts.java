@@ -1,7 +1,11 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 강의콘텐츠정보 엔티티
@@ -10,6 +14,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "lms_conts")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class LmsConts {
 
     @Id
