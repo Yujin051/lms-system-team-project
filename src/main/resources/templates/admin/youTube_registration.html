@@ -110,19 +110,29 @@
         <div class="modalWrap" style="display: none;">
             <div class="modal" style="display: none;">
                 <div>업로드</div>
-                <form enctype="multipart/form-data">
+
                 <div>총 레이아웃 창
-                    <div>제목</div><div><input type="text" placeholder="제목 넣어요"></div>
-                    <div>설명</div><div><input type="text" placeholder="설명 넣어요"></div>
-                    <div>파일</div><div>파일 업로드에요<input type="file"></div>
-                    <button type="submit">이건 업로드 버튼이에요</button>
+                    <form id="videoUpload" method="post" enctype="multipart/form-data">
+                    <div>제목</div>
+                    <div>
+                        <input type="text" name="title" placeholder="제목 넣어요">
+                    </div>
+                    <div>설명</div>
+                    <div>
+                        <textarea name="detail"></textarea>
+                    </div>
+                    <div>파일</div>
+                    <div>
+                        파일 업로드에요
+                        <input type="file" name="file">
+                    </div>
+                    <button id="upClose" type="button">이건 업로드 버튼이에요</button>
+                    </form>
                 </div>
-                </form>
+
             </div>
         </div>
     </div>
-
-
 
         <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
         <script src="/js/youTube_registration.js"></script>

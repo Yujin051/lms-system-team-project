@@ -1,16 +1,27 @@
 package org.example.service.admin;
 
+import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
 import com.google.api.client.googleapis.json.GoogleJsonResponseException;
 import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.InputStreamContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.youtube.YouTube;
+import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoSnippet;
+import com.google.api.services.youtube.model.VideoStatus;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotNull;
 import jdk.jfr.Frequency;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +31,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.security.Principal;
@@ -29,14 +42,17 @@ import java.util.Objects;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class YoutubeService {
+
+    // JWT
+    private final JwtService jwtService;
 
     // 사용자 상수들
     private static final String REDIRECT_URI = "http://localhost/youtubeAuthToken"; // 등록한 리디렉션 URI
     private static final List<String> SCOPES = Arrays.asList("https://www.googleapis.com/auth/youtube",
             "https://www.googleapis.com/auth/youtube.upload"); // 필요한 스코프, 유튜브 계정과 업로드 권한
     private static final String FILE_DIRECTORY = "C:\\app\\java\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\AccessToken";
-
     private static final GsonFactory GSON_FACTORY = new GsonFactory();
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
@@ -46,6 +62,7 @@ public class YoutubeService {
     // 인증 코드 기반 액세스 토큰 얻는 서비스
     // 스코프 용도에 따라서 분리해서 동작하게 만들어야 될 것 같은데 일단은 하나로 통합(2개 스코프)
     public Credential createAndStoreCredential(String authCode, Principal principal) {
+        final HttpSession session = (HttpSession) RequestContextHolder.currentRequestAttributes().resolveReference("session");
 
         log.info("code : {}", authCode);
         File dataDir = new File(FILE_DIRECTORY);
@@ -75,22 +92,96 @@ public class YoutubeService {
 
             Credential credential = flow.createAndStoreCredential(tokenResponse, principal.getName());
 
+            session.setAttribute("userCredential", credential);
+
             return credential;
         } catch (GoogleJsonResponseException e) {
             // Google API 서버에서 오류 응답을 받을 때의 처리
             e.printStackTrace();
             e.getDetails();
-        } catch (Exception e) {
+        } catch (IOException e) {
             // 예외 처리
+            log.info("credential 저장 실패");
             e.printStackTrace();
         }
         return null;
     }
 
-    public void uploadVideo() {
-        
+//    // 인증된 유저를 통해서 API 액세스 토큰 가져오는 서비스
+//    public String getUserAccessToken(HttpServletRequest request) {
+//        HttpSession session = request.getSession();
+//        String jwt = (String) session.getAttribute("googleAccessToken");
+//
+//        if (jwt != null) {
+//            // JWT 디코드
+//            String secret = jwtService.getSecret(); // JWT를 생성할 때 사용한 시크릿 키
+//            byte[] secretKeyBytes = secret.getBytes();
+//
+//            // 세션에 저장된 jwt 사용해서 access token 가져오기
+//            Claims claims = Jwts.parserBuilder()
+//                    .setSigningKey(secretKeyBytes)
+//                    .build()
+//                    .parseClaimsJws(jwt)
+//                    .getBody();
+//
+//            // JWT 내용 확인
+//            String accessToken = claims.get("accessToken", String.class);
+//            log.info("accessToken = {}", accessToken);
+//
+//            return accessToken;
+//        } else {
+//            return "액세스 토큰 취득에 실패했습니다.";
+//        }
+//    }
+
+    // 사용자 credential 얻기
+    public Credential getUserCredential() {
+        final HttpSession session = (HttpSession) RequestContextHolder.currentRequestAttributes().resolveReference("session");
+        return (Credential) session.getAttribute("userCredential");
     }
 
+    // API 접근 로직
+    public Video uploadVideo(String title, String detail, @NotNull MultipartFile content)
+            throws IOException, GoogleJsonResponseException{
+        Credential credential = getUserCredential();
+
+        try {
+            // 유저 인증 정보 credential 이 없다면 에러
+            Objects.requireNonNull(credential, "먼저 API 인증을 진행해주세요.");
+
+            // youtube 객체 생성
+            YouTube youtube = new YouTube.Builder(HTTP_TRANSPORT, GSON_FACTORY, credential)
+                    .setApplicationName("lmsapp")
+                    .build();
+
+            // youtube 에 업로드 할 비디오 객체 생성
+            Video video = new Video();
+
+            // 업로드한 비디오의 공개 범위, 제목, 설명
+            video.setStatus(new VideoStatus().setPrivacyStatus("unlisted"));
+            video.setSnippet(new VideoSnippet().setTitle(title).setDescription(detail));
+
+            // 입력받은 비디오를 youtube 객체로 사용할 수 있도록 InputStreamContent로 변환
+            InputStreamContent uploadContent =
+                    new InputStreamContent(content.getContentType(), content.getInputStream());
+
+            // API 통해서 유튜브에 업로드 시작
+            YouTube.Videos.Insert videoInsert = youtube.videos().insert("snippet,status", video, uploadContent);
+            Video returnedVideo = videoInsert.execute();
+
+            // 업로드 요청이 성공했다면 해당 비디오 객체 반환
+            return returnedVideo;
+
+        } catch (GoogleJsonResponseException e) {
+            log.info("구글 API 에러");
+            log.info("에러 메세지 : {}", e.getMessage());
+            log.info("에러 디테일 : {}", e.getDetails());
+            throw e;
+        } catch (IOException e) {
+            log.info("비디오 업로드 실패");
+            throw new RuntimeException(e);
+        }
+    }
 
 
     // 기본 설정 초기화
@@ -102,20 +193,19 @@ public class YoutubeService {
         // 경로에 파일이 없다면 에러메세지 출력?
         Objects.requireNonNull(clientSecretUrl, "classpath:OAuthClientSecret/client_secrets.json 파일이 없습니다.");
 
-        try(Reader reader = new FileReader(clientSecretUrl)){
+        try (Reader reader = new FileReader(clientSecretUrl)) {
             // Client secret 가져오기
             this.clientSecrets = GoogleClientSecrets.load(GSON_FACTORY, reader);
 
             // client_secrets.json 내부에 필요한 값이 존재하지 않는다면 예외처리
             if (clientSecrets.getDetails().getClientId().startsWith("Enter")
                     || clientSecrets.getDetails().getClientSecret().startsWith("Enter")) {
-                String msg =  "https://console.developers.google.com/project/_/apiui/credential 에서 Client ID와 secret를 찾아서"
+                String msg = "https://console.developers.google.com/project/_/apiui/credential 에서 Client ID와 secret를 찾아서"
                         + "src/main/resources/OAuthClientSecret/client_secrets.json 에 넣어주세요";
                 log.error(msg);
                 throw new IOException(msg);
             }
-
-        } catch(IOException e) {
+        } catch (IOException e) {
             // 이 값 없이 API는 동작할 수 없으므로 RuntimeException
             throw new RuntimeException(e);
         }

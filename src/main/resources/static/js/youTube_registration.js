@@ -85,15 +85,65 @@ auth.addEventListener('click', () => {
     location.href='/youtubeAPIAuth'
 })
 
-// 업로드 버튼 -> 모달창
+// 신규 버튼 -> 모달창
+// 모달창 외부 클릭하면 닫기
 const upload = document.querySelector("#upload")
+const mWrap = document.querySelector(".modalWrap")
+const modal = document.querySelector(".modal")
+
+
 upload.addEventListener('click', () => {
-    const modal = document.querySelector(".modal")
-    const modalWrap = document.querySelector(".modalWrap")
-    const isModalVisible = modal.style.display !== 'none'
+    const isModalVisible = modal.style.display === 'none'
+    if(isModalVisible) {
+        modal.style.display = 'block'
+        mWrap.style.display = 'block'
+    }
+})
+mWrap.addEventListener('click', (e) => {
+    if(e.target === mWrap){
+        mWrap.style.display = 'none'
+        modal.style.display = 'none'
+    }
+})
 
-    modalWrap.style.display = isModalVisible ? 'none' : 'block'
-    modal.style.display = isModalVisible ? 'none' : 'block'
+// ajax로 비디오 업로드 처리
+const uploadBtn = document.querySelector("#upClose")
+const vidUpload = document.querySelector("#videoUpload")
+const url = "/youtubeUpload"
+uploadBtn.addEventListener('click', () => {
+    let formData = new FormData(vidUpload)
+    console.log(formData)
 
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: formData,
+        processData: false, // multiPartFile 전송할 때 사용하는 ajax 옵션
+        contentType: false,
+        success: function(response) {
+            alert(response.toString())
+            // 모달 창 닫기
+            const isModalVisible = modal.style.display !== 'none'
+            if(isModalVisible) {
+                mWrap.style.display = 'none'
+                modal.style.display = 'none'
+            }
+
+            // 성공 후 폼 내부 데이터 초기화
+            vidUpload.reset()
+        },
+        error: function() {
+            alert("업로드 에러")
+            // 모달 창 닫기
+            const isModalVisible = modal.style.display !== 'none'
+            if(isModalVisible) {
+                mWrap.style.display = 'none'
+                modal.style.display = 'none'
+            }
+
+            // 폼 초기화
+            vidUpload.reset()
+        }
+    })
 })
 
