@@ -1,6 +1,4 @@
 //player라는 id를 가진 div에 플레이어 호출
-
-const YTB_URL = 'oWBUxUArj6U';
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         width: '900',

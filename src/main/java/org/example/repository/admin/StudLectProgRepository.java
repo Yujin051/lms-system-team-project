@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface StudLectProgRepository extends JpaRepository<StudLectProg, Long> {
 
-    // 수강생차시진도 PK조회
+    // 수강생차시진도 기본키, 최대재생시간, 최종재생시간 조회
     @Query("SELECT NEW org.example.dto.admin.StudLectProgDto " +
             "(sp.magId, sp.maxPosi, sp.fnlPosi) " +
             "FROM StudLectProg sp")
@@ -23,12 +23,4 @@ public interface StudLectProgRepository extends JpaRepository<StudLectProg, Long
             "(sp.magId, sp.fnlPosi, sp.maxPosi, sp.isChecked, sp.checkDate) " +
             "FROM StudLectProg sp")
     List<StudLectProgDto> findStudLectProg();
-
-    // 수강생차시진도 최대 재생 위치 조회
-
-    @Query("SELECT NEW org.example.dto.admin.StudLectProgDto " +
-            "(sp.magId, sp.fnlPosi, sp.maxPosi, sp.isChecked, sp.checkDate) " +
-            "FROM StudLectProg sp " +
-            "WHERE sp.magId = :magId")
-    StudLectProgDto findProg(@Param("magId") Long magId);
 }

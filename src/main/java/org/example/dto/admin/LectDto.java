@@ -38,15 +38,13 @@ public class LectDto {
 
     // 온라인수강현황 : 학습강좌 조회
     public LectDto(Long lectId, String lectName, String lectSubject,
-                   LocalDate lectStart, LocalDate lectEnd, boolean isActive,
-                   Long studId) {
+                   LocalDate lectStart, LocalDate lectEnd, boolean isActive) {
         this.lectId = lectId;
         this.lectName = lectName;
         this.lectSubject = lectSubject;
         this.lectStart = lectStart;
         this.lectEnd = lectEnd;
         this.isActive = isActive;
-        this.studId = studId;
     }
 
     // 온라인수강현황 : 전체이수현황

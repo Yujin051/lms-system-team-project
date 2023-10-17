@@ -1,14 +1,16 @@
-const videoId = 'FXoPu6PqPH4';
+const videoId = 'eQNHDV7lKgE';
 const tag = document.createElement('script');
 tag.src = 'https://www.youtube.com/iframe_api';
 const firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 const magId = document.querySelector('.magId').value;
+
 // YouTube API 로드 후 실행될 함수 정의
 let player;
 let intervalId;
-let lastFinalPosition = 0; // 마지막으로 저장한 최종 재생 위치를 추적
+let maxPosition = 0; // 최대 재생 위치 초기화
+let fnlPosition = 0; // 최종 재생 위치 초기화
 function onYouTubeIframeAPIReady() {
     // 플레이어 생성 및 옵션 설정
     player = new YT.Player('player', {
@@ -30,53 +32,54 @@ function onYouTubeIframeAPIReady() {
 
 // 비디오를 로드하고 재생
 function onPlayerReady(event) {
-    event.target.loadVideoById(videoId, fnlPosition);
-    event.target.playVideo();
-    player.getDurationAsync().then(duration => {
-        const runTime = duration - 5;
-        console.log("runTime : " + runTime);
-        const progress = (maxPosition / runTime) * 100; // 진행률
-        console.log("진행률 : " + progress);
+    // 영상이 시작될 때 최종재생시간부터 이어서 재생
+    loadFnlPositionFromServer().then((serverFnlPosition) => {
+        fnlPosition = serverFnlPosition;
+        console.log("onPlayerReady fnl : " + fnlPosition);
+
+        if (fnlPosition > 0) {
+            event.target.seekTo(fnlPosition);
+        } else {
+            event.target.loadVideoById(videoId, fnlPosition);
+            event.target.stopVideo();
+        }
     });
 }
 
-let maxPosition = 0; // 최대 재생 위치 초기화
-let fnlPosition = 0; // 최종 재생 위치 초기화
 function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) {
-        let runTime = player.getDuration() - 5;
         fnlPosition = player.getCurrentTime(); // 현재 재생 위치 가져오기
         maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
         clearInterval(intervalId);
-        console.log("Loaded maxPosition from server: " + maxPosition);
-        console.log("bottomseekToFnl4 : " + fnlPosition);
         intervalId = setInterval(() => {
             fnlPosition = player.getCurrentTime();
+            updateVideoPosition();
             console.log("5secondFnlPosi : " + fnlPosition);
             console.log("5secondMaxPosi : " + maxPosition);
-            updateVideoPosition();
-        }, 3000); // 5초마다 실행
+            sendProgressToServer();
+        }, 5000); // 5초마다 실행
 
-
+        // 현재재생위치가 최대재생위치를 초과하면 현재재생위치로 되돌림
         loadMaxPositionFromServer().then((serverMaxPosition) => {
             maxPosition = serverMaxPosition;
-            if(event.target.getCurrentTime() > Number(maxPosition) + 1){
+            if (event.target.getCurrentTime() > Number(maxPosition) + 1) {
                 event.target.seekTo(maxPosition);
             }
-            if(event.target.getCurrentTime() >= runTime ){
-                player.pauseVideo();
-                player.seekTo(fnlPosition);
-            }
-            console.log("playingRunTime : " + runTime);
         });
 
-    } else if(event.data === YT.PlayerState.PAUSED) {
+    } else if (event.data === YT.PlayerState.PAUSED) {
         // 재생 중이 아니면 interval을 해제하여 업데이트를 중지
         clearInterval(intervalId);
         //일시정지한 시간을 기록하고 다시 재생했을때 일시정지된 시간부터 재생
-        if(event.target.getCurrentTime() <= maxPosition + 5){
+        fnlPosition = player.getCurrentTime();
+        if (event.target.getCurrentTime() <= maxPosition + 5) {
             updateVideoPosition();
         }
+        //영상이 끝나더라도 이전으로 되돌려서 일시정지
+    } else if (event.data === YT.PlayerState.ENDED) {
+        console.log("영상이 끝나기 -1초 전의 시간 : " + maxPosition);
+        event.target.seekTo(event.target.getDuration() - 1);
+        event.target.pauseVideo();
     }
 }
 
@@ -86,6 +89,7 @@ function onPlayerPlaybackRateChange(event){
         event.target.setPlaybackRate(1);
     }
 }
+
 
 // 최종 재생 위치와 최대 재생 위치를 같이 업데이트(5초마다 저장되어야 함.)
 function updateVideoPosition() {
@@ -132,11 +136,62 @@ function loadMaxPositionFromServer() {
         });
 }
 
+// 서버에서 최종 재생 위치를 불러옴
+function loadFnlPositionFromServer() {
+    return fetch(`/youtube/api/getFnlPosi`)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                console.error('최대 재생 위치 불러오기에 실패했습니다.');
+                return 0; // 기본값 반환
+            }
+        })
+        .catch(error => {
+            console.error('오류 발생:', error);
+            return 0; // 기본값 반환
+        });
+}
+
+// 진행률 서버에 저장
+function sendProgressToServer() {
+    const runTime = player.getDuration();
+    const currentTime = player.getCurrentTime();
+    const progress = ((currentTime / runTime) * 100).toFixed(2);
+    console.log("진행률 : " + progress + '%');
+
+    // 진행률 정보를 서버로 전송
+    fetch(`/youtube/api/saveProgress?magId=${magId}&progress=${progress}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ progress }),
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log('진행률 정보 서버에 전송 성공');
+            } else {
+                console.error('진행률 정보 서버에 전송 실패');
+            }
+        })
+        .catch(error => {
+            console.error('오류 발생:', error);
+        });
+}
+
+
 // 스페이스바를 눌렀을 때 비디오 재생 또는 일시정지
 document.addEventListener('keydown', function(event) {
     if (event.code === 'Space' && event.target === document.body) {
         event.preventDefault(); // 페이지 스크롤 방지
         togglePlayPause(); // 비디오 재생/일시정지 토글 함수 호출
+    } else if (event.code === 'ArrowLeft' && event.target === document.body) {
+        event.preventDefault(); // 페이지 스크롤 방지
+        rewindVideo(); // 비디오 되감기 함수 호출
+    } else if (event.code === 'ArrowRight' && event.target === document.body) {
+        event.preventDefault(); // 페이지 스크롤 방지
+        fastForwardVideo(); // 비디오 빨리감기 함수 호출
     }
 });
 
@@ -146,5 +201,28 @@ function togglePlayPause() {
         player.pauseVideo(); // 일시정지
     } else if (player.getPlayerState() === 2) { // 일시정지 중
         player.playVideo(); // 재생
+    }
+}
+
+// 비디오 되감기 함수
+function rewindVideo() {
+    const currentTime = player.getCurrentTime();
+    const newTime = currentTime - 5; // 10초 뒤로 이동 (조절 가능)
+    if (newTime < 0) {
+        player.seekTo(0);
+    } else {
+        player.seekTo(newTime);
+    }
+}
+
+// 비디오 빨리감기 함수
+function fastForwardVideo() {
+    const currentTime = player.getCurrentTime();
+    const duration = player.getDuration();
+    const newTime = currentTime + 5; // 10초 앞으로 이동 (조절 가능)
+    if (newTime > duration) {
+        player.seekTo(duration);
+    } else {
+        player.seekTo(newTime);
     }
 }

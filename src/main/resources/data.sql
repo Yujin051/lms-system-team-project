@@ -123,7 +123,11 @@ values (5, 5);
 INSERT INTO stud_lect_apply(stud_id, lect_id)
 values (6, 6);
 INSERT INTO stud_lect_apply(stud_id, lect_id)
-values (7, 7);
+values (3, 4);
+INSERT INTO stud_lect_apply(stud_id, lect_id)
+values (3, 5);
+INSERT INTO stud_lect_apply(stud_id, lect_id)
+values (3, 6);
 
 INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
 values (1, 1, 1, 'A', 95, 95, 89, true);
@@ -135,6 +139,8 @@ INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_sc
 values (4, 4, 4, 'B', 80, 81, 82, true);
 
 
-INSERT INTO stud_lect_prog(fnl_posi, max_posi, is_checked)
-values (0, 0, true);
+INSERT INTO stud_lect_prog(fnl_posi, max_posi, is_checked, progress, check_date)
+values (0, 0, false, 0, '2000-01-01');
+
+
 

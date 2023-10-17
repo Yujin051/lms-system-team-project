@@ -45,23 +45,25 @@ public class StudLectProg {
     @Column(name = "max_posi")
     private double maxPosi;
 
-    /* 현재재생위치 */
-//    @Column(name = "curr_posi")
-//    private double currPosi;
-
     /* 출석 상태 */
     @Column(name = "is_checked")
     private Boolean isChecked = false;
 
     /* 출석 날짜 */
     @Column(name = "check_date")
-    private LocalDate checkDate;
+    private LocalDateTime checkDate;
+
+    /* 진행률 */
+    @Column(name = "progress")
+    private double progress;
 
     @Builder
-    public StudLectProg(double fnlPosi, double maxPosi, Boolean isChecked, LocalDate checkDate) {
+    public StudLectProg(double fnlPosi, double maxPosi, Boolean isChecked,
+                        LocalDateTime checkDate, double progress) {
         this.fnlPosi = fnlPosi;
         this.maxPosi = maxPosi;
         this.isChecked = isChecked;
         this.checkDate = checkDate;
+        this.progress = progress;
     }
 }

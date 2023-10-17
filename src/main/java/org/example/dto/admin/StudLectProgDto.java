@@ -1,37 +1,23 @@
 package org.example.dto.admin;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.example.entity.StudLectProg;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter @Setter
 @AllArgsConstructor
 public class StudLectProgDto {
 
     private Long magId; //수강생차시진도 기본키
-    // 최종재생위치와 최대재생위치를 둘다 5초마다 저장하는데
     private double fnlPosi; //최종재생위치(마지막 재생 시간을 초로)
-    private double maxPosi; //최대재생위치(영상을 본 시간을 5초마다 저장해야함.)
-    private Boolean isChecked;
-    private LocalDate checkDate;
+    private double maxPosi; //최대재생위치
+    private Boolean isChecked; //출석상태
+    private LocalDateTime checkDate; //출석날짜(출석상태가 true된 시점의 날짜 및 시간)
 
     public StudLectProgDto(Long magId, double maxPosi, double fnlPosi) {
         this.magId = magId;
         this.maxPosi = maxPosi;
         this.fnlPosi = fnlPosi;
-    }
-
-    // 최종재생위치 저장
-    public StudLectProg toEntity() {
-        return StudLectProg.builder()
-                .fnlPosi(fnlPosi)
-                .maxPosi(maxPosi)
-                .isChecked(isChecked)
-                .checkDate(checkDate)
-                .build();
     }
 }
