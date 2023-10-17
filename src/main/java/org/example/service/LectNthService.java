@@ -3,14 +3,14 @@ package org.example.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.AddLmsContsRequestDto;
+import org.example.dto.LectInfoDto;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
 import org.example.entity.LectInfo;
 import org.example.entity.LectNth;
 import org.example.entity.LmsConts;
-import org.example.repository.AdminAttendanceStatus;
-import org.example.repository.AdminThisTimeRegisTration;
+import org.example.repository.LectInfoRepository;
+import org.example.repository.LectNthRepository;
 import org.example.repository.LmsContsRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,75 +21,79 @@ import java.util.List;
 @Slf4j
 public class LectNthService {
 
-    private final AdminThisTimeRegisTration adminThisTimeRegisTration;
+    private final LectNthRepository lectNthRepository;
     private final LmsContsRepository lmsContsRepository;
-    private final AdminAttendanceStatus adminAttendanceStatus;
+    private final LectInfoRepository lectInfoRepository;
 
     public List<LectNthDto> lectNthList(String searchType, Boolean nthKeyword) {
-        return adminThisTimeRegisTration.findLectNthDtos(searchType, nthKeyword);
+        return lectNthRepository.findLectNthDtos(searchType, nthKeyword);
     }
 
     /* search */
     @Transactional
     public List<LectNth> search(String keyword) {
-        return adminThisTimeRegisTration.findByNthIdContaining(keyword);
+        return lectNthRepository.findByNthIdContaining(keyword);
     }
 
     public List<LectNthDto> getLectNthData(String searchType, Boolean nthKeyword) {
-        return adminThisTimeRegisTration.findLectNthDtos(searchType, nthKeyword);
+        return lectNthRepository.findLectNthDtos(searchType, nthKeyword);
     }
 
     // 온라인 강좌명 조회기능
     public List<LectNthDto> getFindLectNthSearch(String lectName, Boolean isActive) {
-        return adminThisTimeRegisTration.findLectNthSearch(lectName, isActive);
+        return lectNthRepository.findLectNthSearch(lectName, isActive);
     }
 
     public List<LectNthDto> getFindLectNthBox(Boolean isActive) {
-        return adminThisTimeRegisTration.findLectNthBox(isActive);
+        return lectNthRepository.findLectNthBox(isActive);
     }
 
     public List<LectNthDto> getFindLectName(String lectName) {
-        return adminThisTimeRegisTration.findLectName(lectName);
+        return lectNthRepository.findLectName(lectName);
     }
     /* 강의 차시정보 하단테이블 비동기 처리*/
     public List<LectNthDto> getFindLectId(Long lectId) {
-        return adminThisTimeRegisTration.findLectIdInfo(lectId);
+        return lectNthRepository.findLectIdInfo(lectId);
     }
-
+            //
     public List<LectNthDto> getFindLectInfo() {
-        return adminThisTimeRegisTration.findLectInfo();
+        return lectNthRepository.findLectInfo();
     }
 
 
     /* 강의 차시정보 하단 우측 3번째 테이블  */
-    public List<LmsContsDto> getFindContsNo(Long contsNo) {
-        return adminThisTimeRegisTration.findContsNo(contsNo);
+    public List<LmsContsDto> getFindContsNo(Long nthId) {
+        return lectNthRepository.findContsNo(nthId);
     }
-
+                                    //contsNo nthId 로바꿈
     public List<LectNthDto> getFindNthId() {
-        return adminThisTimeRegisTration.findNthId();
+        return lectNthRepository.findNthId();
+    }
+
+    // 온라인 강의 조회
+    public List<LectNthDto> getFindLectInfo2() {
+        return lectInfoRepository.findLectInfo2();
     }
 
 
 
-    /* 하단 우측 3번째 테이블 update (저장) */
+    /* 하단 우측 3번째 테이블 create (저장) */
     @Transactional
     public void createLectNth(LectNthDto lectNthDto) {
-
-        LectNth lectNth = adminThisTimeRegisTration.findById(1L)
+        log.info("getLectId : " + lectNthDto.getLectId());
+        LectInfo lectInfo = lectInfoRepository.findById(lectNthDto.getLectId())
                 .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
+        log.info("lectinfo : {}", lectInfo.toString());
 
-        LectInfo lectInfo = adminAttendanceStatus.findById(1L)
-                .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
-        log.info("serLectId : " + lectInfo.getLectId());
 
         LmsConts lmsConts = lmsContsRepository.findById(1L)
                 .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
 
-        lectNthDto.setLectNth(lectNth);
+        lectNthDto.setNthName(lectNthDto.getNthName());
+        lectNthDto.setNthSequence(lectNthDto.getNthSequence());
         lectNthDto.setLectInfo(lectInfo);
         lectNthDto.setLmsConts(lmsConts);
-        adminThisTimeRegisTration.save(lectNthDto.toEntity());
+        lectNthRepository.save(lectNthDto.toEntity());
 
 
     }
@@ -98,16 +102,25 @@ public class LectNthService {
     @Transactional
     public void updateLectNth(LectNthDto lectNthDto) {
 
-        LectNth existingLectNth = adminThisTimeRegisTration.findById(1L)
-                .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
 
+        LectInfo lectInfo = lectInfoRepository.findById(lectNthDto.getLectId())
+                .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
+        log.info("lectInfo : " + lectInfo.getLectName());
+
+        LectNth existingLectNth = lectNthRepository.findById(lectNthDto.getNthId())
+                .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
 
         existingLectNth.setNthName(lectNthDto.getNthName());
         existingLectNth.setNthSequence(lectNthDto.getNthSequence());
         existingLectNth.setLmsConts(lectNthDto.getLmsConts());
-        adminThisTimeRegisTration.save(existingLectNth); // 혹은 수정된 엔티티를 반환하거나 원하는 반환값으로 수정
     }
 
+
+    /* 삭제 기능 구현 */
+
+/*    public List<LectNthDto> getFindLectInfoDelete() {
+        return lectInfoRepository.findLectInfo2();
+    }*/
 
 
 }
