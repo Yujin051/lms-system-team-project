@@ -2,14 +2,17 @@ package org.example.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.dto.LectInfoDto;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
 import org.example.dto.AddLmsContsRequestDto;
+import org.example.entity.LectInfo;
 import org.example.entity.LectNth;
 import org.example.service.LectNthService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -92,8 +95,9 @@ public class AdminController {
 
     //온라인강의정보관리
     @GetMapping("/ttr")
-    public String thisTime(String searchType, Boolean nthKeyword) {
-        List<LectNthDto> nthList = lectNthService.lectNthList(searchType, nthKeyword);
+    public String thisTime(Model model) {
+        List<LectNthDto> lectNthDto = lectNthService.getFindLectInfo2();
+        model.addAttribute("lectId", lectNthDto);
         return "/admin/thisTime_registration";
     }
 
@@ -122,6 +126,14 @@ public class AdminController {
         return lectNthService.getFindLectName(lectName);
     }
 
+    @GetMapping("/api/ttr/lectInfo")
+    @ResponseBody
+    public ResponseEntity<List<LectNthDto>> getFindLectInfo2() {
+        List<LectNthDto> lectInfoDtos = lectNthService.getFindLectInfo2();
+        return ResponseEntity.ok(lectInfoDtos);
+    }
+
+
 
     //온라인강의콘텐츠관리
     @GetMapping("/ytr")
@@ -148,9 +160,10 @@ public class AdminController {
     /* 강의 차시정보 하단 우측 세번째 테이블 */
     @GetMapping("/api/contsName/search")
     @ResponseBody
-    public List<LmsContsDto> contsNameSearch(@RequestParam(value = "contsNo") Long contsNo) {
-        log.info("contsNo : " + contsNo);
-        List<LmsContsDto> dtos = lectNthService.getFindContsNo(contsNo);
+    public List<LmsContsDto> contsNameSearch(@RequestParam(value = "nthId") Long nthId) {
+                                                     // 오전 10시에 contsNo를 nthId 로 변경함
+        log.info("contsNo : " + nthId);
+        List<LmsContsDto> dtos = lectNthService.getFindContsNo(nthId);
         log.info("dtos : " + dtos);
         for (int i = 0; i < dtos.size(); i++) {
 
@@ -164,19 +177,45 @@ public class AdminController {
     public ResponseEntity<?> createLectNth(@RequestBody LectNthDto lectNthDto) {
 
         log.info("LectNthDto::{}",lectNthDto);
+        log.info("lectNthDtoId : {}", lectNthDto.getLectId());
 
-        if(lectNthDto.getLectInfo() == null) {
+        if(lectNthDto.getNthId() == null) {
             lectNthService.createLectNth(lectNthDto);
             log.info("getNthName1 : " + lectNthDto.getNthName());
         } else {
             lectNthService.updateLectNth(lectNthDto);
             log.info("getNthName2 : " + lectNthDto.getNthName());
         }
-        List<LectNthDto> dtos = lectNthService.getFindLectInfo();
+        List<LectNthDto> dtos = lectNthService.getFindLectInfo2();
 
         return ResponseEntity.ok(dtos);
 
-
     }
+
+
+
+    /* 삭제 기능 구현 */
+
+/*    @PostMapping("/delete")
+    public ResponseEntity<List<LectNthDto>> getFindLectInfoDelete() {
+        List<LectNthDto> de = lectNthService.getFindLectInfoDelete();
+        return ResponseEntity.ok(de);
+    }*/
+/*    @PostMapping("/delete")
+    public ResponseEntity<List<LectNthDto>> getFindLectInfoDelete() {
+        List<LectNthDto> de = lectNthService.getFindLectInfoDelete();
+        // 여기에서 선택한 ID 목록에 해당하는 열만 삭제하는 작업 수행
+        // 예를 들어, lectNthService.deleteRows(idsToDelete);
+        return ResponseEntity.ok(de);
+    }*/
+
+    @PostMapping("/delete")
+    public ResponseEntity<String> delete(@RequestBody List<Long> idsToDelete) {
+        // 여기에서 선택한 ID 목록에 해당하는 열만 삭제하는 작업 수행
+        // 예를 들어, lectNthService.deleteRows(idsToDelete);
+        return ResponseEntity.ok("선택한 항목을 삭제했습니다.");
+    }
+
+
 
 }

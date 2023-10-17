@@ -45,12 +45,30 @@ public class LectNthDto {
     private LmsConts lmsConts;
 
 
+    // 온라인강의 조회
+    public LectNthDto(Long lectId, String lectName, String lectSubject,
+                      LocalDateTime lectStart, LocalDateTime lectEnd,
+                      boolean isActive) {
+        this.lectId = lectId;
+        this.lectName = lectName;
+        this.lectSubject = lectSubject;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+    }
+
+    // 해당 lectId에 대한 강의 차시정보 조회
 
 
-
-
-
-
+    public LectNthDto(Long lectId, Long nthId, Long nthSequence,
+                      String nthName, Long contsNo, int contsTime) {
+        this.lectId = lectId;
+        this.nthId = nthId;
+        this.nthSequence = nthSequence;
+        this.nthName = nthName;
+        this.contsNo = contsNo;
+        this.contsTime = contsTime;
+    }
 
     public LectNthDto(Long lectId, String lectName, String lectSubject,
                       LocalDateTime enrollStart, LocalDateTime enrollEnd,
@@ -109,8 +127,8 @@ public class LectNthDto {
 
     public LectNth toEntity() {
         return LectNth.builder()
-                .nthId(nthId)
                 .lmsConts(lmsConts)
+                .lectInfo(lectInfo)
                 .nthSequence(nthSequence)
                 .nthName(nthName)
                 .build();
@@ -125,6 +143,7 @@ public class LectNthDto {
         this.nthName = nthName;
         this.contsTime = contsTime;
     }
+
 
 
 }

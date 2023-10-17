@@ -1,18 +1,14 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.AttendanceStatusDto;
-import org.example.entity.LectInfo;
-import org.example.repository.AdminAttendanceStatus;
+import org.example.repository.LectInfoRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class AdminAttendanceStatusService {
 
-    private final AdminAttendanceStatus adminAttendanceStatus;
+    private final LectInfoRepository lectInfoRepository;
 
 
  /*   public List<AttendanceStatusDto> attendanceStatusList() {

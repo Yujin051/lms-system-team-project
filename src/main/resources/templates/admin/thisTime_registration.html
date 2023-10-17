@@ -46,7 +46,7 @@
         </div>
 
 
-        <form method="post" th:action="@{/api/edit/{id}(id=${id})}">
+
         <div class="table-button-container border border-0">
 
 
@@ -54,9 +54,9 @@
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button id="createBtn" type="button" class="me-md-1 btn btn-secondary">신규</button>
-                <button type="button" class="me-md-1 btn btn-secondary" id="saveButton">저장</button>
-                <button type="button" class="btn btn-secondary" id="deleteBtn">삭제</button>
-            </div>
+            <button type="button" class="me-md-1 btn btn-secondary" id="saveButton">저장</button>
+            <button type="button" class="btn btn-secondary" id="deleteBtn">삭제</button>
+        </div>
         </div>
 
         <div class="tbl1">
@@ -65,7 +65,7 @@
 
 
 
-
+        <input type="hidden" class="lectIdInput" th:value="${lectId}"/>
 
 
         <table class="right-align" id="tb1">

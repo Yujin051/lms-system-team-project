@@ -11,12 +11,12 @@ values ('5sadasd', '1234','TEACHER');
 insert into  member (user_id, user_pw, user_role)
 values ('ssss6', '1234','TEACHER');
 
-insert into teacher (member_id) values(1);
-insert into teacher (member_id) values(2);
-insert into teacher (member_id) values(3);
-insert into teacher (member_id) values(4);
-insert into teacher (member_id) values(5);
-insert into teacher (member_id) values(6);
+insert into teacher (member_id, is_active) values(1, true);
+insert into teacher (member_id, is_active) values(2, true);
+insert into teacher (member_id, is_active) values(3, true);
+insert into teacher (member_id, is_active) values(4, true);
+insert into teacher (member_id, is_active) values(5, true);
+insert into teacher (member_id, is_active) values(6, true);
 
 insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('asd', 'bbsa1', 1, 'asds');
 insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout) values ('qwdqd', '2as', 2, 'xzv');
@@ -65,3 +65,5 @@ values (5, 5, '마', 5);
 insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
 values (6, 6, '바', 6);
 
+insert into lms_conts(conts_name, conts_detail, conts_time)
+values ('자바', '자바입니다.', 1123);

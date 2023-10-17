@@ -3,16 +3,17 @@ package org.example.repository;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
 import org.example.entity.LectNth;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /* 온라인 강의수강현황 LectNth*/
-public interface AdminThisTimeRegisTration extends JpaRepository<LectNth, Long> {
+@Repository
+public interface LectNthRepository extends JpaRepository<LectNth, Long> {
+
 
     /* 검색 조회기능 */
     @Query("select new org.example.dto.LectNthDto(lif.lectId, lif.lectName, lif.lectSubject, lif.enrollStart, lif.enrollEnd, "
@@ -53,22 +54,23 @@ public interface AdminThisTimeRegisTration extends JpaRepository<LectNth, Long> 
 
 
     /* 강의 차시정보 하단테이블 비동기 처리*/
-    @Query("SELECT NEW org.example.dto.LectNthDto(lif.lectId, lif.lectName, lif.lectSubject, lif.enrollStart, lif.enrollEnd," +
-            "lif.lectStart, lif.lectEnd, lif.isActive, nth.nthSequence, nth.nthName, cs.contsTime, cs.contsNo, " +
-            "nth.nthId, cs.contsName, cs.contsYout, cs.contsDetail) " +
-            "FROM LectNth nth" +
-            " join nth.lectInfo lif on lif.lectId = nth.lectInfo.lectId" +
-            " join nth.lmsConts cs on nth.lmsConts.contsNo = cs.contsNo" +
+    @Query("SELECT NEW org.example.dto.LectNthDto" +
+            "(lif.lectId, nth.nthId, nth.nthSequence, nth.nthName,cs.contsNo, cs.contsTime) " +
+            "FROM LectNth nth " +
+            "JOIN LectInfo lif on lif.lectId = nth.lectInfo.lectId " +
+            "JOIN LmsConts cs ON cs.contsNo = nth.lmsConts.contsNo" +
             " where lif.lectId = :lectId")
     List<LectNthDto> findLectIdInfo(@Param("lectId") Long lectId);
 
 
-    @Query("SELECT NEW org.example.dto.LectNthDto(lif.lectId, lif.lectName, lif.lectSubject, lif.enrollStart, lif.enrollEnd," +
+    // grid2 조회
+    @Query("SELECT NEW org.example.dto.LectNthDto" +
+            "(lif.lectId, lif.lectName, lif.lectSubject, lif.enrollStart, lif.enrollEnd," +
             "lif.lectStart, lif.lectEnd, lif.isActive, nth.nthSequence, nth.nthName, cs.contsTime, cs.contsNo, " +
             "nth.nthId, cs.contsName, cs.contsYout, cs.contsDetail) " +
             "FROM LectNth nth" +
-            " join nth.lectInfo lif on lif.lectId = nth.lectInfo.lectId" +
-            " join nth.lmsConts cs on nth.lmsConts.contsNo = cs.contsNo")
+            " join LectInfo lif on lif.lectId = nth.lectInfo.lectId" +
+            " join LmsConts cs on nth.lmsConts.contsNo = cs.contsNo")
     List<LectNthDto> findLectInfo();
 
 
@@ -79,8 +81,8 @@ public interface AdminThisTimeRegisTration extends JpaRepository<LectNth, Long> 
             "FROM LectNth nth " +
             " join nth.lectInfo lif on lif.lectId = nth.lectInfo.lectId" +
             " join nth.lmsConts cs on nth.lmsConts.contsNo = cs.contsNo" +
-            " where cs.contsNo = :contsNo")
-    List<LmsContsDto> findContsNo(@Param("contsNo") Long contsNo);
+            " where nth.nthId = :nthId")        // conts 를 nthId로바꿈
+    List<LmsContsDto> findContsNo(@Param("nthId") Long nthId);
 
     @Query("SELECT NEW org.example.dto.LectNthDto(nth.nthId, nth.nthSequence, nth.nthName," +
             "cs.contsTime) " +
