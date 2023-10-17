@@ -43,8 +43,8 @@
                     <tr th:each="semGradeInfo : ${list2}"> <!-- 해당 자료만큼 반복됩니다. -->
                         <td class="semYear" th:text="${semGradeInfo.semYear}" th:name="semYear" ></td>
                         <td class="semSem" th:text="${semGradeInfo.semSem}" th:name="semSem" ></td>
-                        <td></td>
-                        <td></td>
+                        <td class="semCrecpl" th:text="${semGradeInfo.semCrecpl}" th:name="semCrecpl" ></td>
+                        <td class="semAvgCrecpl" th:text="${semGradeInfo.semAvgCrecpl}" th:name="semAvgCrecpl" ></td>
                         <td>
                             <button class="ajax_button" th:attr="data-sem-year = ${semGradeInfo.semYear}, data-sem-sem = ${semGradeInfo.semSem}" >상세</button>
                         </td>
@@ -54,7 +54,7 @@
 
             <!-- 자바스크립트 통해 조절. ajax 비동기로 값 전달받아서 처리? -->
             <div class="detail" id="detail">
-                <h4 id="yearAndSem">밸류값 학기 과목별 성적 - 타임리프로 자동 처리합니다.</h4>
+                <h4 id="yearAndSem"></h4>
                 <table class="subGrade2">
                     <tr>
                         <th style="width: 15%" >강좌 번호</th>

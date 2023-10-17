@@ -118,13 +118,16 @@ public class StudentController {
         String loginId = principal.getName();
         // 사용자 정보 가져오기(member)
         Member member = memberService.memberView(loginId);
+        Student student = studentRepository.findByMember(member);
+
         model.addAttribute("list", studentService.lectInfoList());
         model.addAttribute("list1", studentService.studLectApplyCheckList(member.getId()));
+        model.addAttribute("student", student);
         return "/student/course_registeration";
     }
 
     @PostMapping("/scr/my")
-    public String courseRegisterationMy(Model model, Principal principal, @RequestParam("lectId") Long lectId) {
+    public String courseRegisterationMy(Model model, Principal principal, @RequestParam("lectId") Long lectId, @RequestParam("lectCredit") Long lectCredit) {
         // 사용자 로그인 아이디 가져오기
         String loginId = principal.getName();
         // 사용자 정보 가져오기(member)
@@ -133,31 +136,72 @@ public class StudentController {
         Student student = studentRepository.findByMember(member);
         LectInfo lectInfo = lectInfoRepository.findById(lectId).orElseThrow();
 
-        StudLectApply studLectApply = new StudLectApply(student, lectInfo);
-
-        studLectApplyRepository.save(studLectApply);
-
-        model.addAttribute("list", studentService.lectInfoList());
-        model.addAttribute("list1", studentService.studLectApplyCheckList(member.getId()));
-        log.info("model list : {}, lectId : {}", studentService.studLectApplyCheckList(member.getId()));
+        boolean alreadyRegistered = studLectApplyRepository.existsByStudentAndLectInfo(student, lectInfo);
 
 
-        return "/student/course_registeration";
-    }
+        if (!alreadyRegistered) {
+            if (lectInfo.getLectNownum() < lectInfo.getLectMaxnum()) {
+                if (student.getStudNowCr() + lectCredit <= student.getStudMaxCr()) {
+                    lectInfo.Plus(); // 강좌에 신청학생수 1증가
+                    student.setStudNowCr(student.getStudNowCr() + lectCredit);
+
+                    StudLectApply studLectApply = new StudLectApply(student, lectInfo);
+
+                    studLectApplyRepository.save(studLectApply);
+
+                    model.addAttribute("message", "신청되었습니다.");
+                    model.addAttribute("SearchUrl", "/student/scr");
+                    model.addAttribute("list", studentService.lectInfoList());
+                    model.addAttribute("list1", studentService.studLectApplyCheckList(member.getId()));
+
+
+                    return "Message";
+
+                } else {
+                    model.addAttribute("message", "들을수있는 학점을 넘으셨습니다.");
+                    model.addAttribute("SearchUrl", "/student/scr");
+                    return "Message";
+                }
+                } else {
+                    model.addAttribute("message", "제한신청수를 넘었습니다.");
+                    model.addAttribute("SearchUrl", "/student/scr");
+                    return "Message";
+                }
+            } else {
+                model.addAttribute("message", "이미 수강신청한 강좌입니다.");
+                model.addAttribute("SearchUrl", "/student/scr");
+                return "Message";
+            }
+
+        }
+
+
+
 
     @PostMapping("/scr/myDelete")
-    public String courseRegisterationMyDelete(Model model, Principal principal, @RequestParam("applyId") Long applyId) {
+    public String courseRegisterationMyDelete(Model model, Principal principal,  @RequestParam("lectId") Long lectId, @RequestParam("applyId") Long applyId, @RequestParam("lectCredit") Long lectCredit) {
         // 사용자 로그인 아이디 가져오기
         String loginId = principal.getName();
         // 사용자 정보 가져오기(member)
         Member member = memberService.memberView(loginId);
+        Student student = studentRepository.findByMember(member);
+        LectInfo lectInfo = lectInfoRepository.findById(lectId).orElseThrow();
+
+
+        lectInfo.minus();
+        student.setStudNowCr(student.getStudNowCr() - lectCredit);
 
         studLectApplyRepository.deleteById(applyId);
 
+
+
+
+        model.addAttribute("message", "취소되었습니다.");
+        model.addAttribute("SearchUrl", "/student/scr");
         model.addAttribute("list", studentService.lectInfoList());
         model.addAttribute("list1", studentService.studLectApplyCheckList(member.getId()));
 
-        return "/student/course_registeration";
+        return "Message";
     }
 
 

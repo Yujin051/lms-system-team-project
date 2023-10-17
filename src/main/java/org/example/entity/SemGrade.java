@@ -36,6 +36,14 @@ public class SemGrade {
     @Column(name = "sem_sem")
     private String semSem;
 
+    // 학기별 이수학점
+    @Column(name = "sem_crecpl")
+    private Long semCrecpl;
+
+    // 학기별 평균학점
+    @Column(name = "sem_avg_crecpl")
+    private Long semAvgCrecpl;
+
     @Builder
     public SemGrade(Student student, String semYear, String semSem) {
         this.student = student;

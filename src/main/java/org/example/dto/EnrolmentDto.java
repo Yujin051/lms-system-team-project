@@ -21,6 +21,7 @@ public class EnrolmentDto {
     // 최대 수강자수
     private Long lectMaxnum;
 
+
     public EnrolmentDto(String userName, Long lectId, String lectName, Long lectCredit, Long lectNownum, Long lectMaxnum) {
         this.userName = userName;
         this.lectId = lectId;

@@ -12,6 +12,8 @@ import lombok.ToString;
 public class CheckSemGradeDto {
     private String semYear;
     private String semSem;
+    private Long semCrecpl;
+    private Long semAvgCrecpl;
 //    private String grade;
 //    private Long lectCredit;
 

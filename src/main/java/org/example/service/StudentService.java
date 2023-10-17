@@ -7,6 +7,8 @@ import org.example.dto.CheckSemGradeDto;
 import org.example.dto.EnrolmentDto;
 import org.example.entity.GradeInfo;
 import org.example.entity.LectInfo;
+import org.example.entity.StudLectApply;
+import org.example.entity.Student;
 import org.example.repository.*;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ public class StudentService {
     private final GradeInfoRepository gradeInfoRepository;
     private final SemGradeRepository semGradeRepository;
     private final StudLectApplyRepository studLectApplyRepository;
+    private final StudentRepository studentRepository;
     public List<EnrolmentDto> lectInfoList() {
         return lectInfoRepository.findEnrolmentDto();
     }

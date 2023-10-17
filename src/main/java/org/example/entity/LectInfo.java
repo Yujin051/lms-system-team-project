@@ -114,4 +114,11 @@ public class LectInfo {
         this.lectTest = lectTest;
     }
 
+    public void Plus(){
+        this.lectNownum = this.lectNownum +1;
+    }
+    public void minus(){
+        this.lectNownum = this.lectNownum -1;
+    }
+
 }

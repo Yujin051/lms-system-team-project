@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface SemGradeRepository extends JpaRepository <SemGrade, Long> {
 
-    @Query("select new org.example.dto.CheckSemGradeDto(sg.semYear, sg.semSem) from SemGrade sg  join Member m join Student s where sg.student.studId = s.studId and s.member.id = m.id and m.id = :memberId")
+    @Query("select new org.example.dto.CheckSemGradeDto(sg.semYear, sg.semSem, sg.semCrecpl, sg.semAvgCrecpl) from SemGrade sg  join Member m join Student s where sg.student.studId = s.studId and s.member.id = m.id and m.id = :memberId")
     List<CheckSemGradeDto> findCheckSemGradeDto(@Param("memberId") Long memberId);
 }
