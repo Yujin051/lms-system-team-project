@@ -5,6 +5,8 @@ import org.example.entity.DirectMsg;
 import org.example.entity.Member;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 임승범
@@ -25,6 +27,8 @@ public class DirectMsgDto {
     private Member sendId;
     // 수신자 id
     private Member recvId;
+    // 수신자 리스트
+    private List<String> toSome;
     // 작성일시
     private LocalDateTime sendAt;
     // 수신자 읽은날짜
@@ -37,6 +41,18 @@ public class DirectMsgDto {
     private Boolean sendDelYn;
     // 수신자 쪽지 삭제여부
     private Boolean recvDelYn;
+
+    public DirectMsg toEntity(){
+        return DirectMsg.builder()
+                .sendId(sendId)
+                .recvId(recvId)
+                .msgTitle(msgTitle)
+                .msgCont(msgCont)
+                .orgMsg(orgMsg)
+                .sendDelYn(sendDelYn == null || sendDelYn == false? false : true)
+                .recvDelYn(recvDelYn == null || recvDelYn == false? false : true)
+                .build();
+    }
 
 
 }

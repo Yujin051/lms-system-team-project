@@ -35,7 +35,7 @@
 
                     <!-- 우측 상단 메뉴 -->
                     <div class="col-md-8 msg_right">
-                        
+
                     </div>
 
                 </div>
@@ -71,7 +71,7 @@
                                 </div>
                                 <div class="col-md-7">
                                 <!--th 조건 반복 처리 필요-->
-                                    <ul>
+                                    <ul id="toUl">
 <!--                                        <li>임승범<span>X</span></li>-->
                                     </ul>
                                 </div>
@@ -100,8 +100,8 @@
                         </form>
 
                         <div class="board_nav">
-                            <button class="btn btn-dark">답장</button>
-                            <button class="btn btn-dark">취소</button>
+                            <button class="btn btn-dark" id="writeMsgBtn">전송</button>
+                            <button class="btn btn-dark" id="cancelBtn">취소</button>
                         </div>
                     </div>
 
@@ -140,24 +140,24 @@
                     </div>
                     <ul class="classmate">
                         <!-- 참여자 이름 출력 -->
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        -->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
                         
                     </ul>
                 </div>
     
-                <div class="col-md-4 to">
+                <div class="col-md-4 msgToBox">
                     <div>
                         <span>받는사람</span>
                         <!-- 인원수 -->
@@ -177,7 +177,7 @@
                 </div>
     
                 <div id="modalSeletedBtn">
-                    <button class="btn btn-dark mb-3">선택완료</button>
+                    <button class="btn btn-dark mb-3" id="modelSelBtn">선택완료</button>
                 </div>
             </div>
     
