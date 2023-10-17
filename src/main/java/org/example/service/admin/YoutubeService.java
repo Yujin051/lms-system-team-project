@@ -36,9 +36,7 @@ public class YoutubeService {
             studLectProg.setMaxPosi(maxPosi);
         }
         studLectProg.setFnlPosi(fnlPosi); // 최종 재생 위치 업데이트
-
         studLectProgRepository.save(studLectProg);
-
     }
 
     // 최종재생위치만 데이터베이스에 저장

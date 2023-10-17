@@ -49,7 +49,7 @@ public class YoutubeController {
     @GetMapping("/api/getMaxPosi")
     public double findMaxPosi() {
         StudLectProgDto dto = youtubeService.getFindMagId();
-        log.info("ConmaxPosi : " + dto.getMaxPosi());
+        log.info("최대재생시간 : " + dto.getMaxPosi());
         return dto.getMaxPosi();
     }
 
@@ -60,7 +60,7 @@ public class YoutubeController {
     @GetMapping("/api/getFnlPosi")
     public double findFnlPosi() {
         StudLectProgDto dto = youtubeService.getFindMagId();
-        log.info("ConfnlPosi : " + dto.getFnlPosi());
+        log.info("최종재생시간 : " + dto.getFnlPosi());
         return dto.getFnlPosi();
     }
 

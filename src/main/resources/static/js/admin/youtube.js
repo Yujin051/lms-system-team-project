@@ -1,5 +1,4 @@
 const videoId = 'FXoPu6PqPH4';
-
 const tag = document.createElement('script');
 tag.src = 'https://www.youtube.com/iframe_api';
 const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -29,43 +28,55 @@ function onYouTubeIframeAPIReady() {
     });
 }
 
-// 플레이어가 준비되었을 때 호출될 함수
+// 비디오를 로드하고 재생
 function onPlayerReady(event) {
-    // 비디오를 로드하고 재생
-    event.target.loadVideoById(videoId);
+    event.target.loadVideoById(videoId, fnlPosition);
     event.target.playVideo();
-    if (event.target.getCurrentTime() > Number(maxPosition) + 1) {
-        player.seekTo(lastFinalPosition, true);
-        console.log("lastFinalPosition : " + lastFinalPosition)
-    }
+    player.getDurationAsync().then(duration => {
+        const runTime = duration - 5;
+        console.log("runTime : " + runTime);
+        const progress = (maxPosition / runTime) * 100; // 진행률
+        console.log("진행률 : " + progress);
+    });
 }
 
-let maxPosition = 0; // 초기값 설정
-let fnlPosition = 0;
+let maxPosition = 0; // 최대 재생 위치 초기화
+let fnlPosition = 0; // 최종 재생 위치 초기화
 function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) {
+        let runTime = player.getDuration() - 5;
+        fnlPosition = player.getCurrentTime(); // 현재 재생 위치 가져오기
+        maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
+        clearInterval(intervalId);
+        console.log("Loaded maxPosition from server: " + maxPosition);
+        console.log("bottomseekToFnl4 : " + fnlPosition);
         intervalId = setInterval(() => {
             fnlPosition = player.getCurrentTime();
-            console.log("fnlPosi : " + fnlPosition);
-            console.log("maxPosi : " + maxPosition);
+            console.log("5secondFnlPosi : " + fnlPosition);
+            console.log("5secondMaxPosi : " + maxPosition);
             updateVideoPosition();
         }, 3000); // 5초마다 실행
 
-        const currentTime = player.getCurrentTime(); // 현재 비디오 위치 가져오기
 
-
-        fnlPosition = player.getCurrentTime();
-        maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
-        // fnlPosition = loadFnlPositionFromServer(); // 서버에서 최종 재생 위치 가져오기
-
-        saveFinalPositionToServer(fnlPosition);
-        saveMaxPositionToServer(fnlPosition);
-
+        loadMaxPositionFromServer().then((serverMaxPosition) => {
+            maxPosition = serverMaxPosition;
+            if(event.target.getCurrentTime() > Number(maxPosition) + 1){
+                event.target.seekTo(maxPosition);
+            }
+            if(event.target.getCurrentTime() >= runTime ){
+                player.pauseVideo();
+                player.seekTo(fnlPosition);
+            }
+            console.log("playingRunTime : " + runTime);
+        });
 
     } else if(event.data === YT.PlayerState.PAUSED) {
         // 재생 중이 아니면 interval을 해제하여 업데이트를 중지
         clearInterval(intervalId);
-        // 만약 최종 재생 위치가 최대 재생 위치보다 앞서있으면 최대 재생 위치를 조정
+        //일시정지한 시간을 기록하고 다시 재생했을때 일시정지된 시간부터 재생
+        if(event.target.getCurrentTime() <= maxPosition + 5){
+            updateVideoPosition();
+        }
     }
 }
 
@@ -78,12 +89,12 @@ function onPlayerPlaybackRateChange(event){
 
 // 최종 재생 위치와 최대 재생 위치를 같이 업데이트(5초마다 저장되어야 함.)
 function updateVideoPosition() {
+    // clearInterval(intervalId);
     // 현재 비디오 위치 가져오기
     const currentTime = player.getCurrentTime();
     const maxPosition = currentTime;
     // 최종 재생 위치 업데이트
     const finalPosition = currentTime;
-
 
     // 서버에 최종 재생 위치 및 최대 재생 위치를 보내서 업데이트
     fetch(`/youtube/api/savePlayTime?magId=${magId}&fnlPosi=${finalPosition}&maxPosi=${maxPosition}`, {
@@ -100,28 +111,6 @@ function updateVideoPosition() {
                 console.error('비디오 위치 업데이트 실패');
             }
         })
-        .catch(error => {
-            console.error('오류 발생:', error);
-        });
-}
-
-// 최종 재생 위치만 저장
-function saveFinalPositionToServer(finalPosition) {
-    fetch(`/youtube/api/saveFnlPosi?magId=${magId}&fnlPosi=${finalPosition}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ finalPosition }),
-    })
-        .then(response => {
-            if (response.ok) {
-                console.log('최종 재생 위치가 서버에 성공적으로 저장되었습니다.');
-            } else {
-                console.error('최종 재생 위치 저장에 실패했습니다.');
-            }
-        })
-
         .catch(error => {
             console.error('오류 발생:', error);
         });
@@ -143,40 +132,19 @@ function loadMaxPositionFromServer() {
         });
 }
 
-// 서버에서 최종 재생 위치를 불러옴
-function loadFnlPositionFromServer() {
-    return fetch(`/youtube/api/getFnlPosi`)
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                console.error('최대 재생 위치 불러오기에 실패했습니다.');
-                return 0; // 기본값 반환
-            }
-        })
-        .catch(error => {
-            console.error('오류 발생:', error);
-            return 0; // 기본값 반환
-        });
-}
+// 스페이스바를 눌렀을 때 비디오 재생 또는 일시정지
+document.addEventListener('keydown', function(event) {
+    if (event.code === 'Space' && event.target === document.body) {
+        event.preventDefault(); // 페이지 스크롤 방지
+        togglePlayPause(); // 비디오 재생/일시정지 토글 함수 호출
+    }
+});
 
-// 최대 재생 위치를 서버에 저장
-function saveMaxPositionToServer(maxPosition) {
-    fetch(`/youtube/api/saveMaxPosi?magId=${magId}&maxPosi=${maxPosition}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ maxPosition }),
-    })
-        .then(response => {
-            if (response.ok) {
-                console.log('최대 재생 위치가 서버에 성공적으로 저장되었습니다.');
-            } else {
-                console.error('최대 재생 위치 저장에 실패했습니다.');
-            }
-        })
-        .catch(error => {
-            console.error('오류 발생:', error);
-        });
+// 비디오 재생/일시정지 토글 함수
+function togglePlayPause() {
+    if (player.getPlayerState() === 1) { // 재생 중
+        player.pauseVideo(); // 일시정지
+    } else if (player.getPlayerState() === 2) { // 일시정지 중
+        player.playVideo(); // 재생
+    }
 }
