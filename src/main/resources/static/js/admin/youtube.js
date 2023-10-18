@@ -13,8 +13,8 @@ let maxPosition = 0; // 최대 재생 위치 초기화
 let fnlPosition = 0; // 최종 재생 위치 초기화
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
-        height: '360',
-        width: '640',
+        height: '500',
+        width: '900',
         videoId: videoId,
         playerVars: {
             controls: 1,
@@ -53,11 +53,11 @@ function onPlayerStateChange(event) {
         maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
         clearInterval(intervalId);
         intervalId = setInterval(() => {
-            sendProgressToServer();
             fnlPosition = player.getCurrentTime();
             updateVideoPosition();
-            console.log("5secondFnlPosi : " + fnlPosition);
-            console.log("5secondMaxPosi : " + maxPosition);
+            console.log("최종재생시간 : " + fnlPosition);
+            console.log("최대재생시간 : " + maxPosition);
+            sendProgressToServer();
         }, 5000); // 5초마다 실행
 
         // 현재재생위치가 최대재생위치를 초과하면 현재재생위치로 되돌림
@@ -75,6 +75,7 @@ function onPlayerStateChange(event) {
         fnlPosition = player.getCurrentTime();
         if (event.target.getCurrentTime() <= maxPosition + 5) {
             updateVideoPosition();
+            console.log("일시정지 시 최종재생시간 : " + fnlPosition);
         }
         //영상이 끝나더라도 이전으로 되돌려서 일시정지
     } else if (event.data === YT.PlayerState.ENDED) {
