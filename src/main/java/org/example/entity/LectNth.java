@@ -1,7 +1,10 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 강의차시정보 엔티티
@@ -10,6 +13,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "lect_nth")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class LectNth {
 
     @Id

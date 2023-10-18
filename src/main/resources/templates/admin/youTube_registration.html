@@ -11,10 +11,10 @@
 <div id="mainFrame" layout:fragment="content">
     <div class="">
         <form class="d-flex justify-content-end m-2">
-            <button type="button" class="me-md-1 btn btn-secondary">조회</button>
+            <button type="button" id="search" class="me-md-1 btn btn-secondary">조회</button>
             <button type="button" id="upload" class="me-md-1 btn btn-secondary">신규</button>
-            <button type="button" class="me-md-1 btn btn-secondary">저장</button>
-            <button type="button" class="btn btn-secondary">삭제</button>
+            <button type="button" id="save" class="me-md-1 btn btn-secondary">저장</button>
+            <button type="button" id="delete" class="btn btn-secondary">삭제</button>
         </form>
 
         <div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
@@ -40,7 +40,8 @@
         <div class="table-button-container border border-0">
             <div class="d2 border border-0">온라인콘텐츠 검색결과</div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="me-md-1 btn btn-secondary">업로드 인증</button>
+                <button type="button" id="getDuration" class="me-md-1 btn btn-secondary">시간 갱신</button>
+                <button type="button" id="checkVid" class="me-md-1 btn btn-secondary">업로드 인증</button>
                 <button type="button" id="api-auth" class="btn btn-secondary">API 인증</button>
             </div>
         </div>
@@ -75,33 +76,33 @@
             <tbody class="tbl2 border border-1">
 
             <tr>
-                <th class="border border-1 wider-th">콘텐츠괸리번호</th>
+                <th class="border border-1 wider-th">콘텐츠관리번호</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsNo" class="sfc form-control" type="search" aria-label="Search" readonly>
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">콘텐츠명*</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsName" class="sfc form-control" type="search" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">콘텐츠설명</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsDetail" class="sfc form-control" type="search" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">YouTube연동번호*</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsYout" class="sfc form-control" type="reed" aria-label="Search" readonly>
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">차시 학습시간(초)</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsTime" class="sfc form-control" type="search" aria-label="Search" readonly>
                 </td>
             </tr>
             </tbody>

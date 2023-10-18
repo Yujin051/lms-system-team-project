@@ -26,6 +26,8 @@ public class Main implements CommandLineRunner {
     private final ProfessorRepository professorRepository;
     private final LectureRepository lectureRepository;
     private final LectApplyRepository lectApplyRepository;
+    private final LmsContsRepository lmsContsRepository;
+    private final LectNthRepository lectNthRepository;
     private final PasswordEncoder PasswordEncoder;
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
@@ -68,6 +70,13 @@ public class Main implements CommandLineRunner {
         lectApplyRepository.save(new StudLectApply(1L, student, lectInfo));
         lectApplyRepository.save(new StudLectApply(2L, student1, lectInfo));
         lectApplyRepository.save(new StudLectApply(3L, student2, lectInfo));
+
+        // 컨텐츠 객체
+        LmsConts lmsConts = lmsContsRepository.save(new LmsConts(1L, "테스트1", "1111", 130, "ivg3aqwQbus"));
+        lmsContsRepository.save(new LmsConts(2L, "테스트2", "두번째업로드", 130, "4Nd4sDZZS6k"));
+
+        // 강좌 차시 객체
+        lectNthRepository.save(new LectNth(1L, lectInfo, lmsConts, "강좌3 차시1", 1L));
 
     }
 

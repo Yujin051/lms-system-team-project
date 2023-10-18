@@ -41,7 +41,9 @@ dependencies {
     //@Notblank 어노테이션 사용용
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    runtimeOnly 'com.h2database:h2'
+//    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
 
     // JSON 오브젝트 사용
     implementation 'org.json:json:20230618'

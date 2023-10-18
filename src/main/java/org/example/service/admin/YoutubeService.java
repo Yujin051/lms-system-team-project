@@ -1,6 +1,5 @@
 package org.example.service.admin;
 
-import com.google.api.client.auth.oauth2.AuthorizationCodeFlow;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
@@ -13,29 +12,22 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Video;
+import com.google.api.services.youtube.model.VideoListResponse;
 import com.google.api.services.youtube.model.VideoSnippet;
 import com.google.api.services.youtube.model.VideoStatus;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+
 import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
-import jdk.jfr.Frequency;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.service.JwtService;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.security.Principal;
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -44,9 +36,6 @@ import java.util.Objects;
 @Slf4j
 @RequiredArgsConstructor
 public class YoutubeService {
-
-    // JWT
-    private final JwtService jwtService;
 
     // 사용자 상수들
     private static final String REDIRECT_URI = "http://localhost/youtubeAuthToken"; // 등록한 리디렉션 URI
@@ -134,7 +123,7 @@ public class YoutubeService {
 //        }
 //    }
 
-    // 사용자 credential 얻기
+    // 사용자 인증정보 credential 얻기
     public Credential getUserCredential() {
         final HttpSession session = (HttpSession) RequestContextHolder.currentRequestAttributes().resolveReference("session");
         return (Credential) session.getAttribute("userCredential");
@@ -144,10 +133,11 @@ public class YoutubeService {
     public Video uploadVideo(String title, String detail, @NotNull MultipartFile content)
             throws IOException, GoogleJsonResponseException{
         Credential credential = getUserCredential();
+        // 유저 인증 정보 credential 이 없다면 에러
+        Objects.requireNonNull(credential, "먼저 API 인증을 진행해주세요.");
 
         try {
-            // 유저 인증 정보 credential 이 없다면 에러
-            Objects.requireNonNull(credential, "먼저 API 인증을 진행해주세요.");
+
 
             // youtube 객체 생성
             YouTube youtube = new YouTube.Builder(HTTP_TRANSPORT, GSON_FACTORY, credential)
@@ -183,6 +173,76 @@ public class YoutubeService {
         }
     }
 
+    // 비디오 정보 수정(업데이트)
+    public Video updateVideo(String videoId, String title, String detail)
+            throws GoogleJsonResponseException, IOException {
+        Credential credential = getUserCredential();
+        Objects.requireNonNull(credential, "먼저 API 인증을 진행해주세요.");
+
+        try {
+            // youtube 객체 생성
+            YouTube youtube = new YouTube.Builder(HTTP_TRANSPORT, GSON_FACTORY, credential)
+                    .setApplicationName("lmsapp")
+                    .build();
+
+            // 새 비디오 객체를 생성하고 수정하기 위해 원하는 비디오 아이디 설정
+            Video video = new Video();
+            video.setId(videoId);
+
+            // 수정할 내용을 담은 비디오 스니펫 생성, 설정
+            VideoSnippet videoSnippet = new VideoSnippet();
+            videoSnippet.setCategoryId("27"); // 카테고리 id 설정 -> 교육은 27. 없으면 에러남...
+            videoSnippet.setTitle(title);
+            videoSnippet.setDescription(detail);
+            video.setSnippet(videoSnippet);
+
+            YouTube.Videos.Update request = youtube.videos().update("snippet", video);
+
+            Video response = request.execute();
+            return response;
+
+        } catch (GoogleJsonResponseException e) {
+            throw e;
+        } catch (IOException e) {
+            log.error("수정할 비디오 정보를 가져올 수 없습니다", e);
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    // 총 재생 시간 갱신
+    public int getVideoTime(String videoId) throws GoogleJsonResponseException, IOException {
+        try{
+            // 인증정보 가져오기
+            Credential credential = getUserCredential();
+            Objects.requireNonNull(credential, "먼저 API 인증을 진행해주세요.");
+
+            // 유튜브 객체 생성
+            YouTube youtube = new YouTube.Builder(HTTP_TRANSPORT, GSON_FACTORY, credential)
+                    .setApplicationName("lmsapp")
+                    .build();
+
+            // 인증된 계정의 전체 리스트 요청
+            YouTube.Videos.List request = youtube.videos().list("contentDetails");
+
+            // 리스트 중에서 얻어올 비디오 하나 선택
+            VideoListResponse response = request.setId(videoId).execute();
+            List<Video> videos = response.getItems();
+            Video returnedVideo = videos.size() != 0 ? videos.get(0) : null;
+
+            // 가져온 비디오에서 총 재생시간을 초 형식으로 파싱하여 리턴
+            String duration = returnedVideo.getContentDetails().getDuration();
+            log.info(duration);
+            Duration vidDuration = Duration.parse(duration);
+            return (int) vidDuration.getSeconds();
+
+        } catch (GoogleJsonResponseException e) {
+            throw e;
+        } catch (IOException e) {
+            log.error("비디오 길이 정보를 가져올 수 없습니다", e);
+            throw new RuntimeException(e);
+        }
+    }
 
     // 기본 설정 초기화
     // @PostCostruct는 의존성 주입이 완료된 후 한 번 실행됨.
