@@ -4,10 +4,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/studentDefault}">
 <head>
-
     <th:block layout:fragment="script">
         <script th:inline="javascript">
-            // 무슨 이유인지는 모르겠는데 처음 보기 버튼을 클릭했을 땐 글자의 내용은 바뀌는데 차시 내용이 나오지 않아서 기본값을 접기로 설정해놓은 상태
             window.onload = function(){
                 // 모든 .viewbutton 클래스를 가진 td 요소를 선택
                 const viewButtons = document.querySelectorAll('.viewbutton');

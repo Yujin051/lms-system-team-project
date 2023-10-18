@@ -36,37 +36,41 @@ public class AssignmentsService {
     private final LectInfoRepository lectInfoRepository;
 
 
+    public void saveAssignment(Assignments assignments) {
+        assignmentsRepository.save(assignments);
+    }
 
-    // 파일 업로드 관련 메소드
+    public void saveAssignment(Assignments assignments, MultipartFile file) throws Exception {
+        if (file != null) {
+            // 원본 파일명
+            String originalFilename = file.getOriginalFilename();
+
+            // 서버에 저장된 파일명
+            // 파일명이 중복될 수 있으므로 UUID로 설정
+            String savedFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
+
+            // 파일 저장
+            file.transferTo(new File(getFullPath(savedFilename)));
+
+            // 파일 정보를 엔티티에 설정
+            assignments.setOriginFilename(originalFilename);
+            assignments.setSavedFilename(savedFilename);
+        }
+
+        // Assignments 엔티티 저장
+        assignmentsRepository.save(assignments);
+    }
+
     public String getFullPath(String filename) {
         return filePath + filename;
     }
+
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
     }
 
-    public List<Assignments> assignmentViewByLectId(long id) {
-        return assignmentsRepository.findByLectInfoLectId(id);
-    }
-
-    public void saveAssignment(Assignments assignments, MultipartFile file) throws Exception {
-        // 원본 파일명
-        String originalFilename = file.getOriginalFilename();
-
-        // 서버에 저장된 파일명
-        // 파일명이 중복될 수 있으므로 UUID로 설정
-        String savedFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
-
-        // 파일 저장
-        file.transferTo(new File(getFullPath(savedFilename)));
-
-        // 오리지널 이미지 이름 저장
-        assignments.setOriginFilename(originalFilename);
-
-        // DB 이미지 이름 저장
-        assignments.setSavedFilename(savedFilename);
-
-        assignmentsRepository.save(assignments);
-    }
+//    public List<Assignments> assignmentViewByLectId(long id) {
+//        return assignmentsRepository.findByLectInfoLectId(id);
+//    }
 }

@@ -18,27 +18,42 @@ insert into professor(member_id, prof_agency, prof_work, prof_bank, prof_account
 insert into lect_info(prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum, lect_maxnum, enroll_start, enroll_end, lect_start,  lect_end, is_active, lect_assign, lect_check, lect_test) values
                                                                                                                                                                                                                         (1, '미분적분학', '필수과목', '2023', '2학기', 2, 15, 30, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
                                                                                                                                                                                                                         (1, '미분기하학', '필수과목', '2023', '2학기', 3, 17, 25, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
-                                                                                                                                                                                                                        (1, '암호학', '필수과목', '2023', '2학기', 1, 13, 20, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
+                                                                                                                                                                                                                        (1, '암호학', '필수과목', '2023', '2학기', 2, 13, 20, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
                                                                                                                                                                                                                         (1, '해석학', '필수과목', '2023', '2학기', 2, 13, 25, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
                                                                                                                                                                                                                         (2, '기계학', '필수과목', '2023', '2학기', 3, 10, 20, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
                                                                                                                                                                                                                         (2, '동물학', '필수과목', '2023', '2학기', 3, 13, 20, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
-                                                                                                                                                                                                                        (2, '몰라학', '필수과목', '2023', '2학기', 1, 11, 25, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
+                                                                                                                                                                                                                        (2, '몰라학', '필수과목', '2023', '2학기', 2, 11, 25, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
                                                                                                                                                                                                                         (2, '화학', '필수과목', '2023', '2학기', 2, 12, 20, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
-                                                                                                                                                                                                                        (2, '화학2', '필수과목', '2023', '2학기', 1, 15, 20, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
+                                                                                                                                                                                                                        (2, '화학2', '필수과목', '2023', '2학기', 3, 15, 20, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
                                                                                                                                                                                                                         (3, '물리학', '필수과목', '2023', '2학기', 3, 13, 20, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
-                                                                                                                                                                                                                        (3, '양자학', '필수과목', '2023', '2학기', 2, 23, 30, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30);
+                                                                                                                                                                                                                        (3, '양자학', '필수과목', '2023', '2학기', 2, 29, 30, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
+                                                                                                                                                                                                                        (3, '부력학', '필수과목', '2023', '2학기', 2, 30, 30, NOW(), NOW(), NOW(), NOW(), true, 35, 35, 30),
+                                                                                                                                                                                                                        (3, '표면장력학', '필수과목', '2023', '1학기', 2, 23, 30, NOW(), NOW(), NOW(), NOW(), false, 35, 35, 30),
+                                                                                                                                                                                                                        (3, '유력학', '필수과목', '2022', '2학기', 2, 23, 30, NOW(), NOW(), NOW(), NOW(), false, 35, 35, 30),
+                                                                                                                                                                                                                        (3, '우주학', '필수과목', '2021', '2학기', 2, 29, 30, NOW(), NOW(), NOW(), NOW(), false, 35, 35, 30),
+                                                                                                                                                                                                                        (3, '종이학', '필수과목', '2022', '1학기', 2, 30, 30, NOW(), NOW(), NOW(), NOW(), false, 35, 35, 30);
 
-insert into stud_lect_apply(apply_id, stud_id, lect_id) values
-                                                            (1, 1, 1),
-                                                            (2, 1, 2),
-                                                            (3, 1, 3),
-                                                            (4, 1, 4),
-                                                            (5, 1, 5),
-                                                            (6, 1, 6),
-                                                            (7, 1, 8),
-                                                            (8, 2, 1),
-                                                            (9, 2, 2),
-                                                            (10, 2, 3);
+insert into stud_lect_apply(lect_id, stud_id) VALUES
+                                                  (1, 1),
+                                                  (2, 2),
+                                                  (3, 1),
+                                                  (4, 2),
+                                                  (5, 1),
+                                                  (6, 1),
+                                                  (7, 2),
+                                                  (8, 1),
+                                                  (9, 2),
+                                                  (10, 2),
+                                                  (11, 1),
+                                                  (12, 1),
+                                                  (13, 1),
+                                                  (13, 2),
+                                                  (14, 1),
+                                                  (14, 2),
+                                                  (15, 1),
+                                                  (15, 2),
+                                                  (16, 1);
+
 
 insert into grade_info(lect_id, stud_id, grade, check_score, assign_score, test_score, is_record) values
                                                                                                       (1, 1, 'D', 25, 33, 20, true),
@@ -67,8 +82,8 @@ insert into lect_plan(plan_id, lect_id, plan_des, plan_book) values
                                                                  (4, 4, '4번 강의에 대한 설명', '교재 4번'),
                                                                  (5, 5, '5번 강의에 대한 설명', '교재 5번');
 
-insert into assign_info(assign_id, lect_id, assign_name, assign_detail, assign_start, assign_end, is_active, is_submit, origin_filename, saved_filename) values
-                                                                                                                            (1, 1, '과제1', '과제 1 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
-                                                                                                                            (2, 1, '과제2', '과제 2 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
-                                                                                                                            (3, 2, '과제3', '과제 3 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
-                                                                                                                            (4, 3, '과제4', '과제 4 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt');
+insert into assign_info(lect_id, assign_name, assign_detail, assign_start, assign_end, is_active, is_submit, origin_filename, saved_filename) values
+                                                                                                                            (1, '과제1', '과제 1 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+                                                                                                                            (1, '과제2', '과제 2 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+                                                                                                                            (2, '과제3', '과제 3 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+                                                                                                                            (3, '과제4', '과제 4 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt');

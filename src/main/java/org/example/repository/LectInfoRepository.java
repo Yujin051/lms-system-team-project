@@ -13,4 +13,6 @@ public interface LectInfoRepository extends JpaRepository<LectInfo, Long> {
             "AND li.lectYear = :year " +
             "AND li.lectSem = :semester")
     List<LectInfo> findLectInfoByProfessorAndSemester(@Param("professorId") Long professorId, @Param("year") String year, @Param("semester") String semester);
+
+    LectInfo findByLectId(Long lectId);
 }

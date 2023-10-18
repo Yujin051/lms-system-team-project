@@ -46,4 +46,7 @@ public class TestController {
 
     @GetMapping("/test5")
     public String test5() { return "/prof/assiSmInfo";}
+
+    @GetMapping("/test6")
+    public String test6() { return "/student/onlineclass";}
 }

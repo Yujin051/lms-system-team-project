@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.AssignmentsDto;
 import org.example.repository.AssignmentsRepository;
 
 import java.time.LocalDate;
@@ -69,5 +70,20 @@ public class Assignments {
         this.isSubmit = isSubmit;
         this.originFilename = originFilename;
         this.savedFilename = savedFilename;
+    }
+
+    public static Assignments createAssignments(Assignments assignmentsDto) {
+        Assignments assignments = Assignments.builder()
+                .lectInfo(assignmentsDto.getLectInfo())
+                .name(assignmentsDto.getName())
+                .detail(assignmentsDto.getDetail())
+                .start(assignmentsDto.getStart())
+                .end(assignmentsDto.getEnd())
+                .isActive(assignmentsDto.isActive())
+                .isSubmit(assignmentsDto.isSubmit())
+                .originFilename(assignmentsDto.getOriginFilename())
+                .savedFilename(assignmentsDto.getSavedFilename())
+                .build();
+        return assignments;
     }
 }

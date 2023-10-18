@@ -3,22 +3,21 @@ package org.example.controller;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.example.dto.AssignmentsDto;
 import org.example.dto.LectInfoDTO;
 import org.example.dto.ProfessorDto;
-import org.example.entity.LectInfo;
-import org.example.entity.Member;
-import org.example.entity.Professor;
+import org.example.entity.*;
 import org.example.repository.AssignmentsRepository;
+import org.example.repository.LectInfoRepository;
 import org.example.repository.MemberRepository;
 import org.example.repository.ProfessorRepository;
-import org.example.service.LectureService;
-import org.example.service.MemberService;
-import org.example.service.ProfessorService;
+import org.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,6 +38,11 @@ public class ProfessorController {
     @Autowired
     private final AssignmentsRepository assignmentsRepository;
     private final LectureService lectureService;
+    @Autowired
+    private final LectInfoRepository lectInfoRepository;
+    private final AssignSubmitService assignSubmitService;
+    private final StudentService studentService;
+    private final AssignmentsService assignmentsService;
 
     // 강사 메인페이지
     @GetMapping("")
@@ -108,7 +112,12 @@ public class ProfessorController {
         Long id = professor.getProfId();
         model.addAttribute("professorId", id);
 
-        List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기");
+        String year = "2023"; // 년도 값 설정
+        String semester = "2학기"; // 학기 값 설정
+        model.addAttribute("year", year);
+        model.addAttribute("semester", semester);
+
+        List<LectInfo> lectInfoList = lectureService.findCoursesByProfessorAndSemester(id, year, semester);
         model.addAttribute("lectInfoList", lectInfoList);
 
         return "/prof/myLecture";
@@ -128,60 +137,113 @@ public class ProfessorController {
     }
 
     @GetMapping("/history")
-    public String lectureHistory() {
+    public String lectureHistory(Principal principal, Model model) {
+        Member member = memberRepository.findByUserId(principal.getName());
+
+        Professor professor = professorService.ProfessorView(member.getId());
+        Long id = professor.getProfId();
+        model.addAttribute("professorId", id);
+
+        List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기");
+        model.addAttribute("lectInfoList", lectInfoList);
         return "/prof/prof_class";
     }
 
+    @RequestMapping(value = "/history/find", method = RequestMethod.GET)
+    @ResponseBody
+    public List<LectInfoDTO> findCoursesByProfessorAndSemesterinHistory(@RequestParam Long professorId, @RequestParam String year, @RequestParam String semester) {
+        List<LectInfo> lectInfoList = lectureService.findCoursesByProfessorAndSemester(professorId, year, semester);
 
-    /**
-     * 강사 : 나의강의실 - 출결조회
-     * @author 임휘재
-     */
+        List<LectInfoDTO> lectInfoDTOList = new ArrayList<>();
+        for (LectInfo lectInfo : lectInfoList) {
+            lectInfoDTOList.add(LectInfoDTO.fromLectInfo(lectInfo));
+        }
+        return lectInfoDTOList;
+    }
+
+    @GetMapping("/lecture/view/{id}")
+    public String lectureView(Model model, @PathVariable("id") long id) {
+        model.addAttribute("lectinfo", lectureService.lectureView(id));
+        return "/prof/lecturemain";
+    }
+
+
     @GetMapping("/att")
-    public String AttendanceCheck(){
+    public String AttendanceCheck() {
         return "/prof/attendanceCheck";
     }
 
-    /**
-     * 강사 : 나의강의실 - 과제출제
-     * @author 임휘재
-     */
-    @GetMapping("/assi")
-    public String assignment() {
-        return "/prof/assignment";
-    }
 
-    /**
-     * 강사 : 나의강의실 - 과제제출정보
-     * @author 임휘재
-     */
+    @GetMapping("/lecture/view/{lectId}/assignments")
+    public String assignment(@PathVariable("lectId") Long lectId, Model model) {
+        model.addAttribute("lectId", lectId);
+        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
+        List<Assignments> assignmentsList = assignmentsRepository.findByLectInfoLectId(lectId);
 
-    //강사 : 나의강의실 - 과제정보쓰기
-    @GetMapping("/assiWrite")
-    public String assiWrite(){
-        return "/prof/assiWrite";
-    }
-
-    //강사 : 나의강의실 - 성적입력
-    @GetMapping("/assiGrade")
-    public String assiGrade(){
-        return "/prof/assiGrade";
+//        List<AssignSubmit> submissions = assignSubmitService.getSubmissionsByLectId(lectId);
+        model.addAttribute("lectInfo", lectInfo);
+        model.addAttribute("assignmentsList", assignmentsList);
+//        model.addAttribute("submissions", submissions);
+        return "prof/assignment"; // Thymeleaf 템플릿 경로 수정
     }
 
     @GetMapping("/lecture/view/{lectId}/assignments/add")
-    public String addAssignment(@PathVariable("lectId") Long lectId, Model model) {
+    public String addAssignment2(@PathVariable("lectId") Long lectId, Model model, Assignments assignments) {
         model.addAttribute("lectId", lectId);
-        return "prof/assiSmInfo";
+        model.addAttribute("assignment", assignments);
+        return "prof/assiWrite";
     }
 
-    @GetMapping("/test")
-    public String proftest(Authentication auth) {
-        UserDetails userDetails = (UserDetails) auth.getPrincipal();
-        Member member = memberRepository.findByUserId(userDetails.getUsername());
-        System.out.println(professorRepository.findByProfessorId(member.getId()));
-
-        return "";
+    @PostMapping("/lecture/view/{lectId}/assignments/add/add")
+    public String studentUpdate(@PathVariable("lectId") Long lectId, @Validated Assignments assignment, @RequestPart MultipartFile file, Model model) throws Exception {
+        try {
+            Assignments assignments = Assignments.createAssignments(assignment);
+            assignmentsService.saveAssignment(assignments, file);
+            model.addAttribute("message", "과제가 추가되었습니다.");
+        } catch (Exception e) {
+            model.addAttribute("error", "과제 추가 중 오류가 발생했습니다.");
+        }
+        return "prof/assignment";
     }
 
+//    @GetMapping("/findStudentInfo")
+//    public List<Student> findStudentInfo(@RequestParam(name = "lectId") String lectId,
+//                                         @RequestParam(name = "assiId") Long assiId) {
+//        List<Student> studentInfoList = studentService.findStudentInfoByLectIdAndAssiId(lectId, assiId);
+//        return studentInfoList;
+//    }
+        /**
+         * 강사 : 나의강의실 - 과제제출정보
+         * @author 임휘재
+         */
 
-}
+        //강사 : 나의강의실 - 과제정보쓰기
+        @GetMapping("/assiWrite")
+        public String assiWrite () {
+            return "/prof/assiWrite";
+        }
+
+        //강사 : 나의강의실 - 성적입력
+        @GetMapping("/assiGrade")
+        public String assiGrade () {
+            return "/prof/assiGrade";
+        }
+
+//    @GetMapping("/lecture/view/{lectId}/assignments/add")
+//    public String addAssignment(@PathVariable("lectId") Long lectId, Model model) {
+//        model.addAttribute("lectId", lectId);
+//        return "prof/assiSmInfo";
+//    }
+
+        @GetMapping("/test")
+        public String proftest (Authentication auth){
+            UserDetails userDetails = (UserDetails) auth.getPrincipal();
+            Member member = memberRepository.findByUserId(userDetails.getUsername());
+            System.out.println(professorRepository.findByProfessorId(member.getId()));
+
+            return "";
+        }
+
+
+    }
+

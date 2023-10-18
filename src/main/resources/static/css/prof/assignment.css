@@ -106,7 +106,7 @@
     border: 0px solid black; width: 50%; height: 50px; display: flex;
     justify-content: center; align-items: center; font-size: 1.1rem;
 }
-.assi_search_box > .assi_search_bottom_box > .assi_ch_lect_name > .assi_search_lect_name input{
+.assi_search_box > .assi_search_bottom_box > .assi_ch_lect_name > .assi_search_lect_name > input{
     width: 351px; height: 35px; border-radius: 5px;
     border: 1px solid #cccccc; outline: none; text-indent: 5px;
 }

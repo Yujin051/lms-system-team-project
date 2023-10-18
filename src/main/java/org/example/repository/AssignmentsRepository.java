@@ -29,4 +29,6 @@ public interface AssignmentsRepository extends JpaRepository<Assignments, Long> 
                              @Param("isSubmit") boolean isSubmit,
                              @Param("originFilename") String originFilename,
                              @Param("savedFilename") String savedFilename);
+
+
 }
