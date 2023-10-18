@@ -36,4 +36,5 @@ public class LectNth {
 
     @Column(name = "nth_sequence")
     private Long nthSequence;
+
 }

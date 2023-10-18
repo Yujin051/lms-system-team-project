@@ -1,3 +1,7 @@
+/*그리드 폰트 변경*/
+.tui-grid-container{
+    font-family: 'SUIT-Regular';
+}
 /* 전체 섹션 */
 #mainFrame {
     border: 0;
@@ -59,12 +63,15 @@
 }
 
 /* 강좌명 검색 인풋 */
-.lName {
+.lName, .lNum {
     position: absolute;
     top: 20px;
     left: 230px;
     width: 250px;
     height: 30px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
 }
 
 /* 그리드 영역 */
@@ -80,6 +87,9 @@
     left: 200px;
     width: 300px;
     height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
 }
 
 /* 그리드 */

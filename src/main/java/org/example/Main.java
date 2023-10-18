@@ -78,6 +78,5 @@ public class Main implements CommandLineRunner {
         // 강좌 차시 객체
         lectNthRepository.save(new LectNth(1L, lectInfo, lmsConts, "강좌3 차시1", 1L));
 
-    }
 
 }

@@ -35,8 +35,7 @@
                 </div>
             </div>
         </div>
-
-
+        <div id="player"></div>
         <div class="table-button-container border border-0">
             <div class="d2 border border-0">온라인콘텐츠 검색결과</div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -65,12 +64,7 @@
                 </ul>
             </nav>
         </div>
-
-
-
-
-
-
+        <input type="hidden" class="magId" th:value="${magId}"/>
         <table class="right-align">
 
             <tbody class="tbl2 border border-1">
@@ -134,9 +128,10 @@
             </div>
         </div>
     </div>
-
-        <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-        <script src="/js/youTube_registration.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <script src="/js/youTube_registration.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="/js/admin/youtube.js"></script>
 </div>
 
 </body>

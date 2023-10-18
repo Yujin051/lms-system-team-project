@@ -1,16 +1,15 @@
 package org.example.repository;
 
-import jakarta.persistence.NamedStoredProcedureQuery;
 import org.example.dto.ProfessorDto;
-import org.example.entity.Member;
 import org.example.entity.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
     // 강사정보 전체 조회

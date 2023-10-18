@@ -16,13 +16,14 @@ import javax.swing.*;
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Professor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prof_id", updatable = false)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name= "member_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name= "id")
     private Member member;
 
     @Column(name= "prof_agency")

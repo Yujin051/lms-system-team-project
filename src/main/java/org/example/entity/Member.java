@@ -27,11 +27,13 @@ public class Member {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @OneToOne(mappedBy = "member")
-    private Professor professor;
-
+    //양방향 추가
     @OneToOne(mappedBy = "member")
     private Student student;
+
+
+    @OneToOne(mappedBy = "member")
+    private Professor professor;
 
     @Column(name= "user_id", nullable = false, unique = true)
     private String userId;

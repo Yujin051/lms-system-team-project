@@ -28,6 +28,11 @@ public class GradeInfo {
     @JoinColumn(name = "stud_id")
     private Student student;
 
+    //강의수강신청ID
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "apply_id")
+    private StudLectApply studLectApply;
+
     //평가등급
     @Column(name = "grade")
     private String grade;

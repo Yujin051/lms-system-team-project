@@ -8,13 +8,6 @@ spring:
       name: user
       password: 1234
 
-  # 파일 크기 제한
-  servlet:
-    multipart:
-      max-file-size: 100MB
-      max-request-size: 100MB
-
-
 #  h2:
 #    console:
 #      enabled: true

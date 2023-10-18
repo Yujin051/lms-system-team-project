@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -55,11 +56,11 @@ public class LectInfo {
 
     //현재 수강자 수
     @Column(name = "lect_nownum")
-    private Long lectNowNum;
+    private Long lectNownum;
 
     //최대 수강자 수
     @Column(name = "lect_maxnum")
-    private Long lectMaxNum;
+    private Long lectMaxnum;
 
     //수강신청 시작일정
     @Column(name = "enroll_start")
@@ -96,4 +97,26 @@ public class LectInfo {
     // 수강 대상 학년
     @Column(name="lect_elem")
     private int lectElem;
+
+    @Builder
+    public LectInfo(Long lectId, String lectName, String lectSubject, String lectYear,
+                    String lectSem, Long lectCredit, Long lectMaxnum, Long lectNownum,
+                    LocalDateTime lectStart, LocalDateTime lectEnd, Boolean isActive,
+                    Long lectAssign, Long lectCheck, Long lectTest) {
+        this.lectId = lectId;
+        this.lectName = lectName;
+        this.lectSubject = lectSubject;
+        this.lectYear = lectYear;
+        this.lectSem = lectSem;
+        this.lectCredit = lectCredit;
+        this.lectMaxnum = lectMaxnum;
+        this.lectNownum = lectNownum;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+        this.lectAssign = lectAssign;
+        this.lectCheck = lectCheck;
+        this.lectTest = lectTest;
+    }
+
 }

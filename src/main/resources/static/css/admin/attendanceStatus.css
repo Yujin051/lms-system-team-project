@@ -1,0 +1,99 @@
+/*그리드 폰트 변경*/
+.tui-grid-container{
+    font-family: 'SUIT-Regular';
+}
+/*화면 전체*/
+.mainFrame {
+    width: 1903px; display: flex; justify-content: center;
+}
+.as_body {
+    width: 1500px;
+}
+.as_body > .as_select_btn_box{
+    width: 1500px; border: 0px solid black; display: flex; justify-content: end;
+    align-items: center; height: 50px;
+}
+.as_body > .as_select_btn_box button{
+    background: #6b6b6b; color: white; border: none; width: 50px; height: 30px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 30px;
+    margin-left: 4px;
+}
+.as_body > .as_select_btn_box button:hover{
+    opacity: 0.9;
+}
+
+/*검색조건 부분*/
+.as_search_body {
+    border: 0px solid black; width: 1500px; height: 100px;
+    display: flex; justify-content: center; align-items: center;
+}
+.as_search_body > .as_search_box {
+    border: 1px solid #cccccc; width: 1600px; height: 100px; display: flex;
+    border-radius: 10px;
+}
+.as_search_body > .as_search_box input {
+    width: 400px; height: 30px; outline: none; border: 1px solid #245396;
+    border-radius: 5px;
+}
+.as_search_body > .as_search_box select{
+    width: 197px; height: 30px; outline: none; border: 1px solid #245396;
+    border-radius: 5px;
+}
+
+/*강좌명 검색조건*/
+.as_search_body > .as_search_box > .as_is_active_box{
+    width: 50%; height: 100px; border: 0px solid black; display: flex;
+    justify-content: center; align-items: center;
+}
+.as_search_body > .as_search_box > .as_is_active_box span{
+    margin-right: 10px;
+}
+
+/* 검색조건*/
+.as_search_body > .as_search_box > .as_board_id_box2{
+    width: 50%; height: 100px; border: 0px solid black; display: flex;
+    justify-content: center; align-items: center;
+}
+.as_search_body > .as_search_box > .as_board_id_box2 span{
+    margin-right: 10px;
+}
+
+/*학습강좌 텍스트 부분*/
+.as_lect_learn_text_box {
+    border: 0px solid black; width: 1500px; height: 40px;
+    display: flex; align-items: center; font-size: 1.1rem;
+}
+.as_lect_learn_text_box > .as_lect_learn_text {
+    border: 0px solid black; width: 1600px; height: 40px; line-height: 40px;
+    display: flex; align-items: center;
+}
+
+/*검색결과*/
+.result4 {
+    font-size: 0.85rem; margin-left: 15px; height: 15px; line-height: 20px;
+}
+
+/*전체이수현황 텍스트 부분*/
+.as_completion_status_text_box {
+    border: 0px solid black; width: 1500px; height: 40px;
+    display: flex; align-items: center; font-size: 1.1rem;
+}
+.as_completion_status_text_box > .as_completion_status_text {
+    border: 0px solid black; width: 1600px; height: 40px; line-height: 40px;
+}
+
+/*전체이수현황 테이블*/
+.as_tb {
+    width: 1500px; border: 0px solid black; text-align: center;
+    font-size: 0.9rem;
+}
+.as_tb thead {
+    height: 40px; border-bottom: 1px solid #cccccc; background: #E0E3E7;
+    font-weight: bold;
+}
+.as_tb thead tr td {
+    width: 20%;
+}
+table tbody tr{
+    height: 40px; border-bottom: 1px solid #cccccc;
+}
