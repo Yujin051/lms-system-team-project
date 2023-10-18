@@ -50,7 +50,7 @@
                             <li><a href="/board/msg/all">전체</a></li>
                             <li><a href="/board/msg/recv">받은쪽지</a></li>
                             <li><a href="/board/msg/send">보낸쪽지</a></li>
-                            <li><a href="">휴지통</a></li>
+                            <li><a href="/board/msg/trash">휴지통</a></li>
                         </ul>
                         <div>
                             <a href="/board/msg/write"><button class="btn btn-dark">쪽지쓰기</button></a>
@@ -72,7 +72,10 @@
                                 <span>|</span>
                                 <!-- 작성일 -->
                                 <span class="article_at" th:text="${#temporals.format(msg.getSendAt() , 'yy.MM.dd HH:mm')}">2023.10.01 18:32</span>
-                                
+                                <span>|</span>
+                                <span>받는이</span>
+                                <span class="article_writer" th:text="${msg.getRecvId().getUserName()}">Denma</span>
+
                             </div>
                         </div>
                         
@@ -90,7 +93,7 @@
                         </div>
 
                         <div class="board_nav">
-                            <button class="btn btn-dark">답장</button>
+                            <a th:href="@{'/board/msg/write?to=' + ${msg.getSendId().getUserId()}}"><button class="btn btn-dark">답장</button></a>
                             <button class="btn btn-dark" th:onclick="'deleteMsg(' + ${msg.getId()} + ');'">삭제</button>
                             <button class="btn btn-dark" id="backBtn">돌아가기</button>
                         </div>

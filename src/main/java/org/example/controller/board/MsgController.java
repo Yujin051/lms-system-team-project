@@ -6,15 +6,9 @@ import org.example.constant.RoleType;
 import org.example.dto.board.DirectMsgDto;
 import org.example.dto.board.MsgPageDto;
 import org.example.dto.board.PageDto;
-import org.example.entity.DirectMsg;
-import org.example.entity.Member;
-import org.example.entity.StudLectApply;
-import org.example.entity.Student;
+import org.example.entity.*;
 import org.example.repository.StudentRepository;
-import org.example.service.DirectMsgService;
-import org.example.service.MemberService;
-import org.example.service.StudLectApplyService;
-import org.example.service.StudentService;
+import org.example.service.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -44,6 +38,8 @@ public class MsgController {
     private final MemberService memberService;
     private final StudentService studentService;
     private final DirectMsgService directMsgService;
+    private final ProfessorService professorService;
+    private final LectInfoService lectInfoService;
 
     // 쪽지 전체 보기
     @GetMapping("/msg/all")
@@ -133,7 +129,7 @@ public class MsgController {
 
         // 권한이 없어서 null인 msg 전달받은 경우.
         if(msg == null){
-            return "/community/msg_list"; // 포비든 페이지 403 으로 바꿀 것.
+            return "redirect:/board/msg/all"; // 포비든 페이지 403 으로 바꿀 것.
         }
 
         Member member = memberService.memberView(principal.getName());
@@ -147,7 +143,7 @@ public class MsgController {
     // 새 쪽지 작성하기
     @GetMapping("/msg/write")
     public String writeMsg(
-            @RequestParam(value = "to" , required = false) Long memberId,
+            @RequestParam(value = "to" , required = false) String recvLoginId,
             Model model ,
             DirectMsgDto directMsgDto ,
             Principal principal) {
@@ -164,12 +160,20 @@ public class MsgController {
             // 수강리스트 모델에 추가
             model.addAttribute("classList" , classList);
         }
-        else if(member.getUserRole().getTitle().equals("강사")){
-
-        }
+//        else if(member.getUserRole().getTitle().equals("강사")){
+//            Professor professor = professorService.findByMember(member);    // 강사 정보 찾아오기
+//            List<LectInfo> lectInfoList = lectInfoService.getLectInfoList(professor); // 강사 정보로 강사참여 수업 가져오기
+//            List<StudLectApply> classList = studLectApplyService.getStudLectApply()
+//        }
 //        else if(member.getUserRole().getTitle().equals("관리자")){
 //
 //        }
+
+        // 만약 답장하는 경우, 수신자 값이 있다면 넣어준다.
+        if(recvLoginId != null){
+            Member recvMember = memberService.memberView(recvLoginId);
+            directMsgDto.setRecvId(recvMember);
+        }
 
         model.addAttribute("msg" , directMsgDto);
 

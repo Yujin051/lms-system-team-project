@@ -11,6 +11,7 @@ import org.example.repository.MemberRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -119,13 +120,15 @@ public class DirectMsgService {
         Member member = memberRepository.findByUserId(principal.getName());
 
         if(msg.getRecvId() != member && msg.getSendId() != member){
-            msg = null;
+            return null;
         }
-
-        return msg;
+        else{
+            return msg;
+        }
     }
 
     // 메시지 논리 삭제하기
+    @Transactional
     public Boolean deleteMsg(Long id , Principal principal){
 
         DirectMsg msg = directMsgRepository.findById(id)

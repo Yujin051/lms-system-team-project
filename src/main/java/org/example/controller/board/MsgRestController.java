@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.naming.Name;
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author 임승범
@@ -65,10 +67,10 @@ public class MsgRestController {
 
     // 메시지 삭제
     @PostMapping("/msg/delete")
-    public ResponseEntity<String> deleteMsg(@RequestBody Long id , Principal principal){
+    public ResponseEntity<String> deleteMsg(@RequestBody DirectMsgDto directMsgDto , Principal principal){
         log.info("Post요청 /board/msg/delete >>> deleteMsg()실행됨.");
 
-        Boolean flag = directMsgService.deleteMsg(id , principal);
+        Boolean flag = directMsgService.deleteMsg(directMsgDto.getId() , principal);
 
         if(flag){
             return ResponseEntity.status(HttpStatus.OK).body("삭제 처리 완료.");

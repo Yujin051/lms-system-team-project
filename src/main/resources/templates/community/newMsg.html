@@ -72,7 +72,10 @@
                                 <div class="col-md-7">
                                 <!--th 조건 반복 처리 필요-->
                                     <ul id="toUl">
-<!--                                        <li>임승범<span>X</span></li>-->
+                                        <li th:if="${msg.getRecvId() != null}"
+                                            th:text="${msg.getRecvId().getUserName()} + '(' + ${msg.getRecvId().getUserId()} + ')'">
+                                            임승범(dlatmdqja)
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="col-md-2">

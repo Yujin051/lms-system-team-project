@@ -174,6 +174,14 @@ writeMsgBtn.addEventListener('click' , ()=>{
         alert('받을 사람을 입력해주세요.');
         return; // 종료시킴.
     }
+    else if(msgTitle == null || msgTitle === ""){
+        alert('제목을 입력해주세요');
+        return;
+    }
+    else if(msgCont == null || msgCont === ""){
+        alert("내용을 입력해주세요");
+        return;
+    }
 
     // 받는 사람 목록의 각 li 요소에서 로그인 아이디 추출하여 배열에 저장
     const loginIds = Array.from(toUl.children).map(li => {

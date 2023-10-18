@@ -132,8 +132,9 @@ if(saveBtn){
         // 게시판 유효성 검사
         if(content == null || content === "" || title == null || title === ""){
             alert('내용을 입력해주세요');
-            return ;
+            return ;    // 종료
         }
+
 
         console.log("privateCk : " + privateCk);
         console.log("boardType : " + boardType);
