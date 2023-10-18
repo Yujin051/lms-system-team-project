@@ -12,7 +12,6 @@ let intervalId;
 let maxPosition = 0; // 최대 재생 위치 초기화
 let fnlPosition = 0; // 최종 재생 위치 초기화
 function onYouTubeIframeAPIReady() {
-    // 플레이어 생성 및 옵션 설정
     player = new YT.Player('player', {
         height: '360',
         width: '640',
@@ -32,14 +31,16 @@ function onYouTubeIframeAPIReady() {
 
 // 비디오를 로드하고 재생
 function onPlayerReady(event) {
-    // 영상이 시작될 때 최종재생시간부터 이어서 재생
+    // 최종재생시간을 서버에서 가져옴
     loadFnlPositionFromServer().then((serverFnlPosition) => {
         fnlPosition = serverFnlPosition;
-        console.log("onPlayerReady fnl : " + fnlPosition);
-
+        console.log("마지막으로 재생된 시간 : " + fnlPosition);
+        // 비디오가 시작될 때 최종재생시간부터 이어서 재생
         if (fnlPosition > 0) {
-            event.target.seekTo(fnlPosition);
+            // 비디오는 로드하지만 재생시키지 않음
+            event.target.cueVideoById(videoId, fnlPosition);
         } else {
+            // 최종재생시간이 이면 비디오 로드
             event.target.loadVideoById(videoId, fnlPosition);
             event.target.stopVideo();
         }
@@ -52,11 +53,11 @@ function onPlayerStateChange(event) {
         maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
         clearInterval(intervalId);
         intervalId = setInterval(() => {
+            sendProgressToServer();
             fnlPosition = player.getCurrentTime();
             updateVideoPosition();
             console.log("5secondFnlPosi : " + fnlPosition);
             console.log("5secondMaxPosi : " + maxPosition);
-            sendProgressToServer();
         }, 5000); // 5초마다 실행
 
         // 현재재생위치가 최대재생위치를 초과하면 현재재생위치로 되돌림
@@ -80,6 +81,7 @@ function onPlayerStateChange(event) {
         console.log("영상이 끝나기 -1초 전의 시간 : " + maxPosition);
         event.target.seekTo(event.target.getDuration() - 1);
         event.target.pauseVideo();
+        sendProgressToServer();
     }
 }
 
@@ -89,7 +91,6 @@ function onPlayerPlaybackRateChange(event){
         event.target.setPlaybackRate(1);
     }
 }
-
 
 // 최종 재생 위치와 최대 재생 위치를 같이 업데이트(5초마다 저장되어야 함.)
 function updateVideoPosition() {
@@ -119,6 +120,7 @@ function updateVideoPosition() {
             console.error('오류 발생:', error);
         });
 }
+
 // 서버에서 최대 재생 위치를 불러옴
 function loadMaxPositionFromServer() {
     return fetch(`/youtube/api/getMaxPosi`)
@@ -154,30 +156,30 @@ function loadFnlPositionFromServer() {
 }
 
 // 진행률 서버에 저장
-function sendProgressToServer() {
-    const runTime = player.getDuration();
-    const currentTime = player.getCurrentTime();
-    const progress = ((currentTime / runTime) * 100).toFixed(2);
-    console.log("진행률 : " + progress + '%');
+async function sendProgressToServer() {
+    try {
+        const runTime = player.getDuration(); // 전체 재생 시간
+        const maxPosition = await loadMaxPositionFromServer(); // 사용자가 최대로 본 시간
+        const progress = ((maxPosition / runTime) * 100).toFixed(2);
+        console.log("진행률 : " + progress + '%');
 
-    // 진행률 정보를 서버로 전송
-    fetch(`/youtube/api/saveProgress?magId=${magId}&progress=${progress}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ progress }),
-    })
-        .then(response => {
-            if (response.ok) {
-                console.log('진행률 정보 서버에 전송 성공');
-            } else {
-                console.error('진행률 정보 서버에 전송 실패');
-            }
-        })
-        .catch(error => {
-            console.error('오류 발생:', error);
+        // 진행률 정보를 서버로 전송
+        const response = await fetch(`/youtube/api/saveProgress?magId=${magId}&progress=${progress}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ progress }),
         });
+
+        if (response.ok) {
+            console.log('진행률 정보 서버에 전송 성공');
+        } else {
+            console.error('진행률 정보 서버에 전송 실패');
+        }
+    } catch (error) {
+        console.error('오류 발생:', error);
+    }
 }
 
 
