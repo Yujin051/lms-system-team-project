@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
  * @author 임휘재
  */
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name = "lect_info")

@@ -1,5 +1,6 @@
 package org.example.repository.admin;
 
+import org.example.dto.LectNthDto;
 import org.example.dto.admin.LectDto;
 import org.example.entity.LectInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -54,4 +55,8 @@ public interface LectInfoRepository extends JpaRepository<LectInfo, Long> {
             "WHERE li.lectId = :lectId")
     List<LectDto> totalCompletionStatus(@Param("lectId") Long lectId);
 
+    @Query("SELECT NEW org.example.dto.LectNthDto " +
+            "(lif.lectId, lif.lectName, lif.lectSubject, lif.lectStart, lif.lectEnd, lif.isActive) " +
+            "FROM LectInfo lif")
+    List<LectNthDto> findLectInfo2();
 }

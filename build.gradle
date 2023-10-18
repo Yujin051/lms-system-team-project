@@ -30,12 +30,13 @@ dependencies {
 
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
     implementation 'org.projectlombok:lombok:1.18.28'
-    implementation 'org.jetbrains:annotations:24.0.0'
     annotationProcessor 'org.projectlombok:lombok'
 
     // 타임리프
     implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+
 
     //@Notblank 어노테이션 사용용
     implementation 'org.springframework.boot:spring-boot-starter-validation'
@@ -65,6 +66,7 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
     implementation 'io.jsonwebtoken:jjwt-gson:0.11.5'
+
 }
 
 test {

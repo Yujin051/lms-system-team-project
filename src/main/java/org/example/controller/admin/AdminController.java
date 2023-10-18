@@ -3,11 +3,14 @@ package org.example.controller.admin;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.constant.RoleType;
+import org.example.dto.LectNthDto;
+import org.example.dto.LmsContsDto;
 import org.example.dto.admin.LectDto;
 import org.example.dto.admin.MemberDto;
 import org.example.dto.admin.PostDto;
 import org.example.dto.admin.StudLectProgDto;
 import org.example.entity.BoardArticle;
+import org.example.service.LectNthService;
 import org.example.service.admin.AdminService;
 import org.example.service.admin.YoutubeService;
 import org.springframework.http.HttpStatus;
@@ -30,6 +33,7 @@ public class AdminController {
 
     private final AdminService adminService;
     private final YoutubeService youtubeService;
+    private final LectNthService lectNthService;
 
     // 어드민 메인페이지
     @GetMapping("")
@@ -579,11 +583,6 @@ public class AdminController {
         return ResponseEntity.ok(dtos);
     }
 
-    //온라인강의정보관리
-    @GetMapping("/ttr")
-    public String thisTime() {
-        return "/admin/thisTime_registration";
-    }
 
     //온라인강의콘텐츠관리
     @GetMapping("/ytr")
@@ -594,6 +593,108 @@ public class AdminController {
         return "/admin/youTube_registration";
     }
 
+    //온라인강의정보관리
+    @GetMapping("/ttr")
+    public String thisTime(Model model) {
+        List<LectNthDto> lectNthDto = lectNthService.getFindLectInfo2();
+        model.addAttribute("lectId", lectNthDto);
+        return "/admin/thisTime_registration";
+    }
 
+    /* 온라인 차시정보 데이터 값 테이블에 불러오기  */
+    @GetMapping("/ttr/search")
+    @ResponseBody
+    public ResponseEntity<List<LectNthDto>> adminLectNth(String searchType, Boolean nthKeyword) {
+        List<LectNthDto> lectNthDtos = lectNthService.lectNthList(searchType, nthKeyword);
+//        log.info(lectNthDtos.toString());
+        return ResponseEntity.ok(lectNthDtos);
+    }
+
+    /* 운영 상태 드롭박스 검색 */
+    @GetMapping("/api/ttr/isActive/search")
+    @ResponseBody
+    public List<LectNthDto> findLectNthBox(@RequestParam(value = "isActive", required = false) Boolean isActive) {
+        log.info("isAc : " + isActive);
+        return lectNthService.getFindLectNthBox(isActive);
+    }
+
+    /* 강좌명 검색 */
+    @GetMapping("/api/ttr/lectName/search")
+    @ResponseBody
+    public List<LectNthDto> findLectName(@RequestParam(value = "lectName") String lectName) {
+        log.info("isAc : " + lectName);
+        return lectNthService.getFindLectName(lectName);
+    }
+
+    @GetMapping("/api/ttr/lectInfo")
+    @ResponseBody
+    public ResponseEntity<List<LectNthDto>> getFindLectInfo2() {
+        List<LectNthDto> lectInfoDtos = lectNthService.getFindLectInfo2();
+        return ResponseEntity.ok(lectInfoDtos);
+    }
+
+    //lectSubject 검색
+    @GetMapping("/api/lectName/search")
+    @ResponseBody
+    public List<LectNthDto> lectNameSearch(@RequestParam(value = "lectName") String lectName,
+                                           @RequestParam(value = "isActive") Boolean isActive) {
+        return lectNthService.getFindLectNthSearch(lectName, isActive);
+    }
+
+    /* 강의 차시정보 하단 왼쪽 첫번째 테이블 비동기 처리 (grid 클릭했을 때 grid2 에 표시하게 하는 Controller)*/
+    @GetMapping("/api/nthName/search")
+    @ResponseBody
+    public List<LectNthDto> lectIdSearch(@RequestParam(value = "lectId") Long lectId) {
+        return lectNthService.getFindLectId(lectId);
+    }
+
+    /* 강의 차시정보 하단 우측 세번째 테이블 */
+    @GetMapping("/api/contsName/search")
+    @ResponseBody
+    public List<LmsContsDto> contsNameSearch(@RequestParam(value = "nthId") Long nthId) {
+        // 오전 10시에 contsNo를 nthId 로 변경함
+        log.info("contsNo : " + nthId);
+        List<LmsContsDto> dtos = lectNthService.getFindContsNo(nthId);
+        log.info("dtos : " + dtos);
+        for (int i = 0; i < dtos.size(); i++) {
+
+        }
+        return dtos;
+    }
+
+    /* 강의 차시정보 저장 */
+    @PutMapping("/api/lectnth/save")
+    @ResponseBody
+    public ResponseEntity<?> createLectNth(@RequestBody LectNthDto lectNthDto) {
+
+        log.info("LectNthDto::{}", lectNthDto);
+        log.info("lectNthDtoId : {}", lectNthDto.getLectId());
+
+        if (lectNthDto.getNthId() == null) {
+            lectNthService.createLectNth(lectNthDto);
+            log.info("getNthName1 : " + lectNthDto.getNthName());
+        } else {
+            lectNthService.updateLectNth(lectNthDto);
+            log.info("getNthName2 : " + lectNthDto.getNthName());
+        }
+        List<LectNthDto> dtos = lectNthService.getFindLectInfo2();
+
+        return ResponseEntity.ok(dtos);
+
+    }
+
+    /* 삭제 기능 구현 */
+    @DeleteMapping("/api/lectnth/delete")
+    @ResponseBody
+    public ResponseEntity<?> deleteLectNth(@RequestParam(value = "nthId") Long nthId) {
+        try {
+            lectNthService.deleteLectNth(nthId);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("게시물 삭제 성공");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("게시물 삭제 중 오류 발생: " + e.getMessage());
+        }
+    }
 
 }
