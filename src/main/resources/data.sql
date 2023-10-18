@@ -44,6 +44,7 @@ values (28, 6, 2, 20, 34);
 INSERT INTO student (stud_crecpl, id, stud_grade, stud_nowcr, stud_maxcr)
 values (5, 7, 1, 22, 34);
 
+
 INSERT INTO sem_grade(stud_id, sem_year, sem_sem, sem_rating)
 values (1, '2023', '1학기', 'A');
 INSERT INTO sem_grade(stud_id, sem_year, sem_sem, sem_rating)
@@ -62,20 +63,27 @@ values (7, '2023', '1학기', 'D');
 INSERT INTO teacher(id)
 values (8);
 
-INSERT INTO lect_info(prof_id, lect_name, lect_start, lect_end, lect_credit, is_active, lect_subject)
-values (1, '자바를 배우자', '2023-10-01', '2023-10-24', 3, true, '자바');
-INSERT INTO lect_info(prof_id, lect_name, lect_start, lect_end, lect_credit, is_active, lect_subject)
-values (1, '자바스크립트를 배우자', '2023-10-01', '2023-10-24', 4, false, '자바스크립트');
-INSERT INTO lect_info(prof_id, lect_name, lect_start, lect_end, lect_credit, is_active, lect_subject)
-values (1, '스프링 프레임워크를 배우자', '2023-10-01', '2023-10-24', 4, true, '스프링 프레임워크');
-INSERT INTO lect_info(prof_id, lect_name, lect_start, lect_end, lect_credit, is_active, lect_subject)
-values (1, '스프링부트를 배우자', '2023-10-01', '2023-10-24', 4, false, '스프링부트');
-INSERT INTO lect_info(prof_id, lect_name, lect_start, lect_end, lect_credit, is_active, lect_subject)
-values (1, 'mybatis를 배우자', '2023-10-01', '2023-10-24', 3, true, 'mybatis');
-INSERT INTO lect_info(prof_id, lect_name, lect_start, lect_end, lect_credit, is_active, lect_subject)
-values (1, 'jpa를 배우자', '2023-10-01', '2023-10-24', 2, false, 'jpa');
-INSERT INTO lect_info(prof_id, lect_name, lect_start, lect_end, lect_credit, is_active, lect_subject)
-values (1, 'sql을 배우자', '2023-10-01', '2023-10-24', 4, true, 'sql');
+insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+                       lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+VALUES (1, '자바를 배우자', '자바', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+                       lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+VALUES (1, '자바스크립트를 배우자', '자바스크립트', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+                       lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+VALUES (1, '스프링 프레임워크를 배우자', '스프링 프레임워크', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+                       lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+VALUES (1, '스프링부트를 배우자', '스프링부트', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+                       lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+VALUES (1, 'mybatis를 배우자', 'mybatis', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+                       lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+VALUES (1, 'jpa를 배우자', 'jpa', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+                       lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+VALUES (1, 'sql을 배우자', 'sql', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
 
 
 INSERT INTO board_info(board_name, board_type)
@@ -129,6 +137,7 @@ values (3, 5);
 INSERT INTO stud_lect_apply(stud_id, lect_id)
 values (3, 6);
 
+/* 수강생차시진도 */
 INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
 values (1, 1, 1, 'A', 95, 95, 89, true);
 INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
@@ -139,8 +148,42 @@ INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_sc
 values (4, 4, 4, 'B', 80, 81, 82, true);
 
 
+/* 수강생차시진도 */
 INSERT INTO stud_lect_prog(fnl_posi, max_posi, is_checked, progress, check_date)
 values (0, 0, false, 0, '2000-01-01');
 
 
+/* 강의콘텐츠 정보 */
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+values ('asd', 'bbsa1', 1, 'asds');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+values ('qwdqd', '2as', 2, 'xzv');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+values ('qgfada', 'ds3', 3, 'xzc');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+values ('4qqdqw', 'dasd4', 4, '4wq');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+values ('qgq', '5ssdasda', 5, '5wqe');
+insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+values ('fgqwdqwd', '6sad', 6, '6sad');
+insert into lms_conts(conts_name, conts_detail, conts_time)
+values ('자바', '자바입니다.', 1123);
 
+/* 강의 차시 정보 */
+insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+values (1, 1, 'html/css', 1);
+
+insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+values (2, 2, 'javascript', 2);
+
+insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+values (3, 3, 'java', 3);
+
+insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+values (4, 4, 'sql', 4);
+
+insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+values (5, 5, 'spring boot', 5);
+
+insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+values (6, 6, 'jpa', 6);
