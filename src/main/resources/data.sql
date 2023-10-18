@@ -507,3 +507,8 @@ insert into assign_info(lect_id, assign_name, assign_detail, assign_start, assig
                                                                                                                                                   (1, '과제2', '과제 2 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
                                                                                                                                                   (2, '과제3', '과제 3 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
                                                                                                                                                   (3, '과제4', '과제 4 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt');
+
+insert into board_info (board_type , board_name) values ('학생' , '학생');
+insert into board_info (board_type , board_name) values ('질문건의' , '질문건의');
+insert into board_info (board_type , board_name) values ('공지사항' , '공지사항');
+insert into board_info (board_type , board_name) values ('교원' , '교원');
