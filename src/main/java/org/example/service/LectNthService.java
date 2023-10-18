@@ -9,7 +9,7 @@ import org.example.dto.LmsContsDto;
 import org.example.entity.LectInfo;
 import org.example.entity.LectNth;
 import org.example.entity.LmsConts;
-import org.example.repository.LectInfoRepository;
+import org.example.repository.admin.LectInfoRepository;
 import org.example.repository.LectNthRepository;
 import org.example.repository.LmsContsRepository;
 import org.springframework.stereotype.Service;

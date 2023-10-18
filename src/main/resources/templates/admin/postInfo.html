@@ -8,48 +8,45 @@
     <div class="post_info_body">
         <div class="post_info_title_box">
             <div class="title">
-                <span>게시글 정보관리</span>
+                <span>게시판 정보관리</span>
             </div>
             <div class="post_info_btn_box">
-                <form>
+                <div>
                     <button type="submit" name="" class="post_info_select_btn">조회</button>
                     <button type="submit" name="" class="post_info_create_btn">신규</button>
                     <button type="submit" name="" class="post_info_save_btn">저장</button>
                     <button type="submit" name="" class="post_info_delete_btn">삭제</button>
-                </form>
+                </div>
             </div>
         </div>
         <div class="post_info_search_body">
             <div class="post_info_search_box">
+                <div class="post_info_board_id_box2">
+                    <span>게시판 번호</span>
+                    <input type="text" class="post_info_board_id2" placeholder="게시판 번호"/>
+                </div>
                 <div class="post_info_board_name_box">
                     <span>게시판 이름</span>
-                    <input type="text" id="boardName" placeholder="게시판명"/>
+                    <input type="text" id="boardName" class="post_info_board_name" placeholder="게시판명"/>
                 </div>
                 <div class="post_info_board_type_box">
                     <span>게시판 종류</span>
                     <select class="post_info_board_type">
-                        <option>(전체)</option>
+                        <option value="">(전체)</option>
                         <option value="공지사항">공지사항</option>
-                        <option value="자유게시판">자유게시판</option>
                         <option value="건의사항">건의사항</option>
-                        <option value="과제게시판">과제게시판</option>
-                        <option value="학생게시판">학생게시판</option>
-                    </select>
-                </div>
-                <div class="post_info_board_sec_box">
-                    <span>운영단위</span>
-                    <select class="post_info_board_sec">
-                        <option>(전체)</option>
-                        <option value="전체">전체</option>
-                        <option value="과정단위">과정단위</option>
-                        <option value="수업">수업</option>
+                        <option value="학생">학생</option>
+                        <option value="과정">과정</option>
+                        <option value="교원">교원</option>
+                        <option value="수업게시판">수업게시판</option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="post_info_list_text_box">
             <div class="post_info_list_text">
-                <span>📚&nbsp 게시글 정보 목록</span>
+                <span>📚&nbsp 게시판 정보 목록</span>
+                <div class="result3"></div>
             </div>
         </div>
         <div class="post_info_list_box">
@@ -59,7 +56,7 @@
         </div>
         <div class="post_info_text_box">
             <div class="post_info_text">
-                <span>📄&nbsp 게시글 정보</span>
+                <span>📄&nbsp 게시판 정보</span>
             </div>
         </div>
         <div class="post_info_big_box">
@@ -70,7 +67,7 @@
                             <span>게시판 번호</span>
                         </div>
                         <div class="post_info_board_id">
-                            <input type="text" id="boardId" placeholder="2" readonly/>
+                            <input type="text" id="boardId" readonly/>
                         </div>
                     </div>
                     <div class="post_info_board_type_box">
@@ -78,7 +75,7 @@
                             <span>게시판 종류</span>
                         </div>
                         <div class="post_info_board_type">
-                            <input type="text" id="boardType" placeholder="건의사항"/>
+                            <input type="text" id="boardType"/>
                         </div>
                     </div>
                 </div>
@@ -88,15 +85,7 @@
                             <span>게시판 명</span>
                         </div>
                         <div class="post_info_board_name">
-                            <input type="text" id="boardName2" placeholder="건의사항입니다."/>
-                        </div>
-                    </div>
-                    <div class="post_info_board_comm_box">
-                        <div class="post_info_board_comm_text_box">
-                            <span>답변필요여부</span>
-                        </div>
-                        <div class="post_info_board_comm">
-                            <input type="checkbox" id="boardComm"/>
+                            <input type="text" id="boardName2"/>
                         </div>
                     </div>
                 </div>

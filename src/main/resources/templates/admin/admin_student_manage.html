@@ -13,95 +13,94 @@
     <!-- 검색 조건 설정, 조회 등 버튼 위치 구역 -->
     <article class="searchFrame">
         <div class="buttonGroup">
-            <div>조회</div>
+            <div class="stud_select_btn" style="cursor: pointer">조회</div>
         </div>
         <div class="searchBox">
             <div>
                 <div class="searchContainer">
                     <span>이름</span>
-                    <input class="lName" type="text" placeholder="검색할 학생 이름을 적어주세요.">
+                    <input class="lName" type="text" placeholder="이름검색">
                 </div>
             </div>
             <div>
                 <div class="searchContainer">
                     <span>학번</span>
-                    <input class="lName" type="text" placeholder="검색할 학생 학번을 적어주세요.">
+                    <input class="lNum" type="text" placeholder="학번검색">
                 </div>
             </div>
         </div>
     </article>
 
-    <div class="result">검색 결과 : value건</div>
+    <div class="result"></div>
     <h4 class="list">학생 정보</h4>
     <div id="grid"></div>
-
     <h4 class="list">기본 정보</h4>
     <article class="table">
         <table class="detail">
             <tr>
                 <th>학번</th>
                 <td>
-                    <div>학번이 옵니다.</div>
+                    <div><span class="user_id" style="display:none;">학번이 옵니다.</span></div>
                 </td>
             </tr>
             <tr>
                 <th>성명</th>
                 <td>
-                    <div>이름이 옵니다.</div>
+                    <div><span class="user_name" style="display:none;">이름이 옵니다.</span></div>
                 </td>
             </tr>
             <tr>
                 <th>생년월일</th>
                 <td>
-                    <div>생일이 옵니다.</div>
+                    <div><span class="user_birthday" style="display: none;">생일이 옵니다.</span></div>
                 </td>
             </tr>
             <tr>
                 <th>성별</th>
                 <td>
-                    <div>성별이 옵니다.</div>
+                    <div><span class="user_gender" style="display: none">성별이 옵니다.</span></div>
                 </td>
             </tr>
             <tr>
                 <th>전화번호</th>
                 <td>
-                    <div>전화번호가 옵니다.</div>
+                    <div><span class="user_phonenum" style="display: none;">전화번호가 옵니다.</span></div>
                 </td>
             </tr>
             <tr>
                 <th>주소</th>
                 <td>
-                    <div>주소가 옵니다.</div>
+                    <div><span class="user_addr" style="display: none">주소가 옵니다.</span></div>
                 </td>
             </tr>
             <tr>
                 <th>수강생 번호</th>
                 <td>
-                    <div>수강생 번호가 옵니다.</div>
+                    <div><span class="user_stud_id" style="display: none">수강생번호가 옵니다.</span></div>
                 </td>
             </tr>
             <tr>
                 <th>이메일</th>
                 <td>
-                    <div>이메일이 옵니다.</div>
+                    <div><span class="user_email" style="display: none">이메일이 옵니다.</span></div>
                 </td>
             </tr>
             <tr>
                 <th>학점</th>
                 <td>
-                    <div>평균 학점이 옵니다.</div>
+                    <div><span class="user_stud_now_cr" style="display: none">평균 학점이 옵니다.</span></div>
                 </td>
             </tr>
         </table>
         <div class="imageContainer">
             <div class="img">
-                이미지가 옵니다.
+                <p style="display: none">이미지가 옵니다.</p>
             </div>
         </div>
     </article>
 </section>
 </body>
 <th:block layout:fragment="script">
-    <script src="/js/admin/admin_studene_manage.js"></script>
+    <script src="/js/admin/admin_studene_manage.js" th:inline="javascript"></script>
 </th:block>
 </html>

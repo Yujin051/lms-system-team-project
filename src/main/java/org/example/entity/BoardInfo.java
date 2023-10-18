@@ -4,11 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-
+/**
+ * @author 임승범
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "board_info")
 @Getter
+@Setter
 @Entity
 @ToString
 public class BoardInfo {
@@ -24,12 +27,20 @@ public class BoardInfo {
     private String boardName;
 
     // 게시판 응답여부
-    @Column(name = "board_resp" , nullable = false)
+    @Column(name = "board_resp")
     @ColumnDefault("false")
     private Boolean boardResp;
 
     // 게시판 종류
     @Column(name = "board_type" , nullable = false)
     private String boardType;
+
+        
+    @Builder
+    public BoardInfo(String boardName , Boolean boardResp , String boardType){
+        this.boardName = boardName;
+        this.boardResp = boardResp;
+        this.boardType = boardType;
+    }
 
 }

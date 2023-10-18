@@ -2,8 +2,6 @@ server:
   port: 80
 
 
-
-
 spring:
   security:
     user:
@@ -32,3 +30,5 @@ spring:
         format_sql: true
 
     defer-datasource-initialization: true
+
+

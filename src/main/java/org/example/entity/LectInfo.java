@@ -1,8 +1,12 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -10,8 +14,8 @@ import java.time.LocalDateTime;
  * @author 임휘재
  */
 @Entity
-//@AllArgsConstructor
-//@NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Table(name = "lect_info")
 public class LectInfo {
@@ -73,7 +77,7 @@ public class LectInfo {
 
     //강좌 운영상태
     @Column(name = "is_active")
-    private boolean isActive;
+    private Boolean isActive;
 
     //과제 배점
     @Column(name = "lect_assign")
@@ -86,5 +90,26 @@ public class LectInfo {
     //시험 배점
     @Column(name = "lect_test")
     private Long lectTest;
+
+    @Builder
+    public LectInfo(Long lectId, String lectName, String lectSubject, String lectYear,
+                    String lectSem, Long lectCredit, Long lectMaxnum, Long lectNownum,
+                    LocalDateTime lectStart, LocalDateTime lectEnd, Boolean isActive,
+                    Long lectAssign, Long lectCheck, Long lectTest) {
+        this.lectId = lectId;
+        this.lectName = lectName;
+        this.lectSubject = lectSubject;
+        this.lectYear = lectYear;
+        this.lectSem = lectSem;
+        this.lectCredit = lectCredit;
+        this.lectMaxnum = lectMaxnum;
+        this.lectNownum = lectNownum;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+        this.lectAssign = lectAssign;
+        this.lectCheck = lectCheck;
+        this.lectTest = lectTest;
+    }
 
 }
