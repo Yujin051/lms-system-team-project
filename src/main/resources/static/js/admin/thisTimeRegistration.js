@@ -183,12 +183,11 @@ nameCells.forEach(cell => {
 /*----------------하단 첫번째 테이블-----------------*/
 
 
-
 //  그리드 요소에 CSS 스타일 적용
 grid2.el.style.width = '700px';
 grid2.el.style.marginLeft = '0px';
 
-$(document).ready(function() {
+$(document).ready(function () {
     // 첫 번째 그리드 초기화
     const container1 = document.getElementById("grid");
     const options1 = {
@@ -204,17 +203,17 @@ $(document).ready(function() {
     const grid2 = new tui.Grid(container2, options2);
 
     // 조회 버튼 클릭 이벤트 처리
-    $("#search-button").click(function() {
+    $("#search-button").click(function () {
         // 서버로 데이터 요청
         $.ajax({
             type: "GET",
             url: "/admin/ttr/api", // Spring Boot Controller의 엔드포인트 경로
             dataType: "json",
-            success: function(data) {
+            success: function (data) {
                 // 데이터를 첫 번째 그리드에 표시
                 grid.resetData(data);
             },
-            error: function() {
+            error: function () {
                 // 오류 처리
                 alert("데이터를 불러오는 중에 오류가 발생했습니다.");
             }
@@ -222,19 +221,19 @@ $(document).ready(function() {
     });
 
     // 검색 버튼 클릭 이벤트 처리
-    $("#search-input").on('input', function() {
+    $("#search-input").on('input', function () {
         const keyword = $(this).val();
         // 서버로 검색 데이터 요청
         $.ajax({
             type: "GET",
             url: "/admin/ttr/search", // 검색을 처리하는 엔드포인트 경로
-            data: { keyword: keyword },
+            data: {keyword: keyword},
             dataType: "json",
-            success: function(data) {
+            success: function (data) {
                 // 검색 결과를 첫 번째 그리드에 표시
-               const formControl1 = document.querySelector('lectId')
+                const formControl1 = document.querySelector('lectId')
             },
-            error: function() {
+            error: function () {
                 // 오류 처리
                 alert("데이터 검색 중에 오류가 발생했습니다.");
             }
@@ -292,13 +291,15 @@ searchBtn.addEventListener('click', async () => {
 /* 강의 차시정보 하단테이블 비동기 처리*/
 grid2.resetData([]);
 
-let saveButton2EventHandlerRegistered = false; // 이벤트 핸들러 등록 상태 플래그
 
 grid.on('click', async (ev) => {
     let rowKey = ev.rowKey;
     let rowData = grid.getRow(rowKey);
     let lectId = rowData.lectId;
+    let lectIdinput = document.querySelector("#lectIdInput")
     console.log("grid1LectId : " + lectId);
+
+    lectIdinput.value = lectId
 
     try {
         // lectId를 사용하여 해당 강좌의 데이터를 가져오는 API 호출
@@ -311,50 +312,47 @@ grid.on('click', async (ev) => {
         console.error('An error occurred:', error);
     }
 
-    const saveButton2 = document.querySelector('#saveButton');
-    if(!saveButton2EventHandlerRegistered) {
-    saveButton2.addEventListener('click', async () => {
+});
+
+const saveButton2 = document.querySelector('#saveButton');
+saveButton2.addEventListener('click', async () => {
 
 
+    let lectId = document.querySelector("#lectIdInput").value
+    const nthId = document.querySelector("#contsNthIdInput").value
+    const nthSequence = document.getElementById('nthSequenceInput').value;
+    const nthName = document.getElementById('nthNameInput').value;
+    const contsTime = document.getElementById('contsTimeInput').value;
 
-        const nthId = document.querySelector("#contsNthIdInput").value
-        const nthSequence = document.getElementById('nthSequenceInput').value;
-        const nthName = document.getElementById('nthNameInput').value;
-        const contsTime = document.getElementById('contsTimeInput').value;
 
+    const data = {
+        nthId: nthId,
+        lectId: lectId,
+        nthSequence: nthSequence,
+        nthName: nthName,
+        contsTime: contsTime,
+    };
+    console.log("lectId2222 : " + lectId);
+    console.log("nthSequenceInput : " + data.nthSequence);
+    console.log("nthNameInput : " + data.nthName);
+    console.log("contsTimeInput : " + data.contsTime);
 
-        const data = {
-            nthId: nthId,
-            lectId: lectId,
-            nthSequence: nthSequence,
-            nthName: nthName,
-            contsTime: contsTime,
-        };
-        console.log("lectId2222 : " + lectId);
-        console.log("nthSequenceInput : " + data.nthSequence);
-        console.log("nthNameInput : " + data.nthName);
-        console.log("contsTimeInput : " + data.contsTime);
+    try {
+        const response = await fetch('/admin/api/lectnth/save', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
 
-        try {
-            const response = await fetch('/admin/api/lectnth/save', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-
-            if (response.ok) {
-                alert('게시물이 성공적으로 저장되었습니다.');
-            } else {
-                alert('게시물 저장에 실패했습니다.');
-            }
-        } catch (error) {
-            console.error('저장 중 오류 발생:', error);
+        if (response.ok) {
+            alert('게시물이 성공적으로 저장되었습니다.');
+        } else {
+            alert('게시물 저장에 실패했습니다.');
         }
-    });
-
-        saveButton2EventHandlerRegistered = true;
+    } catch (error) {
+        console.error('저장 중 오류 발생:', error);
     }
 });
 
@@ -387,7 +385,6 @@ var contsNameInput = document.getElementById("contsNameInput");
 contsNameInput.readOnly = true;
 
 
-
 /* 강의 차시정보 신규/저장/삭제 */
 grid2.on('click', async (ev) => {
     const rowKey = ev.rowKey;
@@ -403,16 +400,15 @@ grid2.on('click', async (ev) => {
     console.log("nthId : " + nthId)
 
 
+    // 테이블(`tb1`)의 각 입력 필드에 값을 설정
 
-        // 테이블(`tb1`)의 각 입력 필드에 값을 설정
-
-        document.getElementById('contsNthIdInput').value = nthId;
-        document.getElementById('contsNoInput').value = contsNo;
-        document.getElementById('nthSequenceInput').value = nthSequence;
-        document.getElementById('contsNameInput').value = contsName;
-        document.getElementById('nthNameInput').value = nthName;
-        document.getElementById('contsYoutInput').value = contsYout;
-        document.getElementById('contsTimeInput').value = contsTime;
+    document.getElementById('contsNthIdInput').value = nthId;
+    document.getElementById('contsNoInput').value = contsNo;
+    document.getElementById('nthSequenceInput').value = nthSequence;
+    document.getElementById('contsNameInput').value = contsName;
+    document.getElementById('nthNameInput').value = nthName;
+    document.getElementById('contsYoutInput').value = contsYout;
+    document.getElementById('contsTimeInput').value = contsTime;
 });
 
 /* 신규 버튼을 눌렀을 때 강의 차시정보 생성*/
@@ -435,52 +431,39 @@ createButton.addEventListener('click', () => {
 /* 삭제기능 구현하기 */
 
 const deleteButton = document.querySelector('#deleteBtn');
-deleteButton.addEventListener('click', () => {
-    const selectedRows = grid2.getCheckedRows(); // 선택한 행의 데이터 가져오기
-    if (selectedRows.length === 0) {
-        alert('삭제할 항목을 선택하세요.');
-    } else {
-        if (confirm('선택한 항목을 삭제하시겠습니까?')) {
-            const idsToDelete = selectedRows.map(row => row.nthId); // 선택한 행의 nthId 추출
+deleteButton.addEventListener('click', async () => {
+    // 체크박스를 누른 행의 데이터 가져오기
+    const checkedRows = grid2.getCheckedRows();
+    console.log("check : " + checkedRows);
 
-            // `grid2`에서 선택한 행 삭제
-            grid2.removeCheckedRows();
+    if (checkedRows.length === 0) {
+        alert('삭제할 행을 선택해주세요.');
+        return;
+    }
 
-            // `grid`에서도 해당 ID에 해당하는 행 삭제
-            idsToDelete.forEach(id => {
-                const row = grid.getData().find(item => item.nthId === id);
-                if (row) {
-                    const index = grid.getData().indexOf(row);
-                    if (index > -1) {
-                        grid.removeRow(index);
-                    }
-                }
-            });
 
-            // 선택한 항목의 ID를 서버로 전송하여 서버에서 삭제
-            fetch('/admin/delete', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(idsToDelete),
-            })
-                .then(response => {
-                    if (response.ok) {
-                        alert('선택한 항목을 삭제했습니다.');
-                    } else {
-                        alert('삭제 중 오류가 발생했습니다.');
-                    }
-                })
-                .catch(error => {
-                    console.error('오류 발생:', error);
+    const confirmDelete = confirm('선택한 행을 삭제하시겠습니까?');
+
+    if (confirmDelete) {
+        // 선택한 행을 삭제하기 위한 로직 추가
+        for (const row of checkedRows) {
+            const nthId = row.nthId;
+
+            try {
+                const response = await fetch(`/admin/api/lectnth/delete?nthId=${nthId}`, {
+                    method: 'DELETE',
                 });
+
+                if (response.ok) {
+                    alert("삭제했어");
+                    // 선택한 행을 그리드에서 제거
+                    grid2.removeRow(row._attributes.rowKey);
+                } else {
+                    alert("삭제 되지 않았습니다.");
+                }
+            } catch (error) {
+                console.error("게시물 삭제 중 오류 발생: ", error);
+            }
         }
     }
 });
-
-
-
-
-
-

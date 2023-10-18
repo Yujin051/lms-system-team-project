@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin_default}">
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css"/>
     <link rel="stylesheet" href="/css/admin/thisTimeRegistration.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -21,7 +21,8 @@
                     <div class="input-group-prepend mt-2">
                         <span class="s1">온라인강좌명</span>
                     </div>
-                    <input class="form-control mt-1" type="text" id="search-input" placeholder="강좌 검색" aria-label="Search">
+                    <input class="form-control mt-1" type="text" id="search-input" placeholder="강좌 검색"
+                           aria-label="Search">
                 </div>
             </div>
             <div class="col mt-2">
@@ -41,10 +42,10 @@
 
 
         <div id="grid">
-            <div class="d1 mt-3">온라인강의</div><div class="result2"></div>
+            <div class="d1 mt-3">온라인강의</div>
+            <div class="result2"></div>
 
         </div>
-
 
 
         <div class="table-button-container border border-0">
@@ -54,9 +55,9 @@
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button id="createBtn" type="button" class="me-md-1 btn btn-secondary">신규</button>
-            <button type="button" class="me-md-1 btn btn-secondary" id="saveButton">저장</button>
-            <button type="button" class="btn btn-secondary" id="deleteBtn">삭제</button>
-        </div>
+                <button type="button" class="me-md-1 btn btn-secondary" id="saveButton">저장</button>
+                <button type="button" class="btn btn-secondary" id="deleteBtn">삭제</button>
+            </div>
         </div>
 
         <div class="tbl1">
@@ -64,14 +65,13 @@
         </div>
 
 
-
-        <input type="hidden" class="lectIdInput" th:value="${lectId}"/>
+        <input type="hidden" id="lectIdInput" th:value="${lectId}"/>
 
 
         <table class="right-align" id="tb1">
 
 
-             <tbody class="tbl2 border border-1">
+            <tbody class="tbl2 border border-1">
 
             <tr>
                 <th class="border border-1 wider-th">차시관리번호</th>

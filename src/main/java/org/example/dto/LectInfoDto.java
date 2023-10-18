@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class LectInfoDto {
-
+    /* lectInfo 테이블 Dto*/
     private LectInfo lectInfo;
     private Long lectId;
     private String lectName;
@@ -19,8 +19,6 @@ public class LectInfoDto {
     private boolean isActive;
 
     // 온라인 강의 조회
-
-
     public LectInfoDto(Long lectId, String lectName, String lectSubject,
                        LocalDateTime enrollStart, LocalDateTime enrollEnd,
                        boolean isActive) {

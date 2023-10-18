@@ -26,7 +26,6 @@ public class AdminController {
 
     private final LectNthService lectNthService;
 
-
     // 어드민 메인페이지
     @GetMapping("")
     public String adminMain() {
@@ -53,7 +52,6 @@ public class AdminController {
     public String adminProf() {
         return "/admin/admin_prof_manage";
     }
-
 
     /**
      * 관리자 : 전체관리성적
@@ -133,8 +131,6 @@ public class AdminController {
         return ResponseEntity.ok(lectInfoDtos);
     }
 
-
-
     //온라인강의콘텐츠관리
     @GetMapping("/ytr")
     public String youTubeRegistration() {
@@ -149,7 +145,6 @@ public class AdminController {
         return lectNthService.getFindLectNthSearch(lectName, isActive);
     }
 
-
     /* 강의 차시정보 하단 왼쪽 첫번째 테이블 비동기 처리 (grid 클릭했을 때 grid2 에 표시하게 하는 Controller)*/
     @GetMapping("/api/nthName/search")
     @ResponseBody
@@ -161,7 +156,7 @@ public class AdminController {
     @GetMapping("/api/contsName/search")
     @ResponseBody
     public List<LmsContsDto> contsNameSearch(@RequestParam(value = "nthId") Long nthId) {
-                                                     // 오전 10시에 contsNo를 nthId 로 변경함
+        // 오전 10시에 contsNo를 nthId 로 변경함
         log.info("contsNo : " + nthId);
         List<LmsContsDto> dtos = lectNthService.getFindContsNo(nthId);
         log.info("dtos : " + dtos);
@@ -176,10 +171,10 @@ public class AdminController {
     @ResponseBody
     public ResponseEntity<?> createLectNth(@RequestBody LectNthDto lectNthDto) {
 
-        log.info("LectNthDto::{}",lectNthDto);
+        log.info("LectNthDto::{}", lectNthDto);
         log.info("lectNthDtoId : {}", lectNthDto.getLectId());
 
-        if(lectNthDto.getNthId() == null) {
+        if (lectNthDto.getNthId() == null) {
             lectNthService.createLectNth(lectNthDto);
             log.info("getNthName1 : " + lectNthDto.getNthName());
         } else {
@@ -192,30 +187,17 @@ public class AdminController {
 
     }
 
-
-
     /* 삭제 기능 구현 */
-
-/*    @PostMapping("/delete")
-    public ResponseEntity<List<LectNthDto>> getFindLectInfoDelete() {
-        List<LectNthDto> de = lectNthService.getFindLectInfoDelete();
-        return ResponseEntity.ok(de);
-    }*/
-/*    @PostMapping("/delete")
-    public ResponseEntity<List<LectNthDto>> getFindLectInfoDelete() {
-        List<LectNthDto> de = lectNthService.getFindLectInfoDelete();
-        // 여기에서 선택한 ID 목록에 해당하는 열만 삭제하는 작업 수행
-        // 예를 들어, lectNthService.deleteRows(idsToDelete);
-        return ResponseEntity.ok(de);
-    }*/
-
-    @PostMapping("/delete")
-    public ResponseEntity<String> delete(@RequestBody List<Long> idsToDelete) {
-        // 여기에서 선택한 ID 목록에 해당하는 열만 삭제하는 작업 수행
-        // 예를 들어, lectNthService.deleteRows(idsToDelete);
-        return ResponseEntity.ok("선택한 항목을 삭제했습니다.");
+    @DeleteMapping("/api/lectnth/delete")
+    @ResponseBody
+    public ResponseEntity<?> deleteLectNth(@RequestParam(value = "nthId") Long nthId) {
+        try {
+            lectNthService.deleteLectNth(nthId);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("게시물 삭제 성공");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("게시물 삭제 중 오류 발생: " + e.getMessage());
+        }
     }
-
-
-
 }

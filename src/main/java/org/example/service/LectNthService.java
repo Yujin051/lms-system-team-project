@@ -51,31 +51,20 @@ public class LectNthService {
     public List<LectNthDto> getFindLectName(String lectName) {
         return lectNthRepository.findLectName(lectName);
     }
+
     /* 강의 차시정보 하단테이블 비동기 처리*/
     public List<LectNthDto> getFindLectId(Long lectId) {
         return lectNthRepository.findLectIdInfo(lectId);
     }
-            //
-    public List<LectNthDto> getFindLectInfo() {
-        return lectNthRepository.findLectInfo();
-    }
-
 
     /* 강의 차시정보 하단 우측 3번째 테이블  */
     public List<LmsContsDto> getFindContsNo(Long nthId) {
         return lectNthRepository.findContsNo(nthId);
     }
-                                    //contsNo nthId 로바꿈
-    public List<LectNthDto> getFindNthId() {
-        return lectNthRepository.findNthId();
-    }
-
     // 온라인 강의 조회
     public List<LectNthDto> getFindLectInfo2() {
         return lectInfoRepository.findLectInfo2();
     }
-
-
 
     /* 하단 우측 3번째 테이블 create (저장) */
     @Transactional
@@ -94,14 +83,11 @@ public class LectNthService {
         lectNthDto.setLectInfo(lectInfo);
         lectNthDto.setLmsConts(lmsConts);
         lectNthRepository.save(lectNthDto.toEntity());
-
-
     }
 
     /* 하단 우측 3번째 테이블 update (수정) */
     @Transactional
     public void updateLectNth(LectNthDto lectNthDto) {
-
 
         LectInfo lectInfo = lectInfoRepository.findById(lectNthDto.getLectId())
                 .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
@@ -115,12 +101,12 @@ public class LectNthService {
         existingLectNth.setLmsConts(lectNthDto.getLmsConts());
     }
 
-
     /* 삭제 기능 구현 */
+    @Transactional
+    public void deleteLectNth(Long nthId) {
+        LectNth lectNth = lectNthRepository.findById(nthId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
 
-/*    public List<LectNthDto> getFindLectInfoDelete() {
-        return lectInfoRepository.findLectInfo2();
-    }*/
-
-
+        lectNthRepository.delete(lectNth);
+    }
 }
