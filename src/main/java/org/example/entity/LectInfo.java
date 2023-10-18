@@ -59,19 +59,19 @@ public class LectInfo {
 
     //수강신청 시작일정
     @Column(name = "enroll_start")
-    private LocalDate enrollStart;
+    private LocalDateTime enrollStart;
 
     //수강신청 종료일정
     @Column(name = "enroll_end")
-    private LocalDate enrollEnd;
+    private LocalDateTime enrollEnd;
 
     //강좌 시작일시
     @Column(name = "lect_start")
-    private LocalDate lectStart;
+    private LocalDateTime lectStart;
 
     //강좌 종료일시
     @Column(name = "lect_end")
-    private LocalDate lectEnd;
+    private LocalDateTime lectEnd;
 
     //강좌 운영상태
     @Column(name = "is_active")
@@ -92,7 +92,7 @@ public class LectInfo {
     @Builder
     public LectInfo(Long lectId, String lectName, String lectSubject, String lectYear,
                     String lectSem, Long lectCredit, Long lectMaxnum, Long lectNownum,
-                    LocalDate lectStart, LocalDate lectEnd, Boolean isActive,
+                    LocalDateTime lectStart, LocalDateTime lectEnd, Boolean isActive,
                     Long lectAssign, Long lectCheck, Long lectTest) {
         this.lectId = lectId;
         this.lectName = lectName;
