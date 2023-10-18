@@ -25,11 +25,12 @@ public class StudentService {
     private final StudLectApplyRepository studLectApplyRepository;
     private final StudentRepository studentRepository;
 
-    public Student findByMember(Member member){
+    public Student findByMember(Member member) {
 
         Student student = studentRepository.findByMember(member);
 
         return student;
+    }
     public List<EnrolmentDto> lectInfoList() {
         return lectInfoRepository.findEnrolmentDto();
     }

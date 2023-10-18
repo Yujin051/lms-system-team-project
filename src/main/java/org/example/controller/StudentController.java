@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import groovy.util.logging.Log4j2;
 import groovy.util.logging.Slf4j;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.example.dto.CheckGradeDto;
 import org.example.dto.CheckSemGradeDto;
 import org.example.entity.*;
@@ -43,26 +43,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Slf4j
 @Controller
+@Log4j2
 @RequestMapping("/student")
-@AllArgsConstructor
 @RequiredArgsConstructor
 public class StudentController {
 
 
-    @Autowired
-    private LectureService lectureService;
-
-    @Autowired
+    private final LectureService lectureService;
     private final AssignmentsRepository assignmentsRepository;
-
     private final MemberService memberService;
     private final MemberRepository memberRepository;
     private final AssignmentsService assignmentsService;
-//    private LectInfoRepository lectInfoRepository;
-
-    private final MemberService memberService;
     private final StudentService studentService;
     private final StudLectApplyRepository studLectApplyRepository;
     private final StudentRepository studentRepository;
@@ -119,6 +111,7 @@ public class StudentController {
         Long id =  member.getId();
         model.addAttribute("memberId", id);
 
+        System.out.println(lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기"));
         List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기");
         model.addAttribute("lectInfoList", lectInfoList);
 

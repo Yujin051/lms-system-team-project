@@ -45,7 +45,6 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping("/prof")
-@AllArgsConstructor
 @Log4j2
 @RequiredArgsConstructor
 public class ProfessorController {
@@ -54,10 +53,10 @@ public class ProfessorController {
     private final ProfessorRepository professorRepository;
     private final ProfessorService professorService;
     private final MemberService memberService;
-    @Autowired
+
     private final AssignmentsRepository assignmentsRepository;
     private final LectureService lectureService;
-    @Autowired
+
     private final LectInfoRepository lectInfoRepository;
     private final AssignSubmitService assignSubmitService;
     private final StudentService studentService;
@@ -77,12 +76,6 @@ public class ProfessorController {
         model.addAttribute("name", name);
         model.addAttribute("profileImg", savedProfile);
         return "/prof/prof_main";
-    }
-
-    // 강사 나의 강의실
-    @GetMapping("/lecture")
-    public String profLecture() {
-        return "/prof/myLecture";
     }
 
     // 강사 강의계획서
