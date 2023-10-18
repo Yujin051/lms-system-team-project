@@ -45,7 +45,7 @@ public class MsgRestController {
     }
 
     // 메시지 작성
-    @PostMapping("/msg/article_write")
+    @PostMapping("/msg/write")
     public ResponseEntity<?> sendMsg(@RequestBody DirectMsgDto directMsgDto , Principal principal){
         log.info("Post요청 /board/msg/article_write >>> sendMsg()실행됨.");
         log.info("directMsgDto::{}" , directMsgDto);
@@ -60,6 +60,21 @@ public class MsgRestController {
             DirectMsg msg = directMsgService.save(directMsgDto , principal);
             log.info("msg::{}",msg);
             return ResponseEntity.status(HttpStatus.CREATED).body(msg);
+        }
+    }
+
+    // 메시지 삭제
+    @PostMapping("/msg/delete")
+    public ResponseEntity<String> deleteMsg(@RequestBody Long id , Principal principal){
+        log.info("Post요청 /board/msg/delete >>> deleteMsg()실행됨.");
+
+        Boolean flag = directMsgService.deleteMsg(id , principal);
+
+        if(flag){
+            return ResponseEntity.status(HttpStatus.OK).body("삭제 처리 완료.");
+        }
+        else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("삭제 처리 실패");
         }
     }
 

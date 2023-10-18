@@ -282,6 +282,11 @@ INSERT INTO direct_msg(msg_org_id , send_id , recv_id , msg_title , msg_cont , s
 (null , 6 , 34 , '더미 데이터를 넣는 신나는 시간!' , '구름과자 먹고싶네...' , now()),
 (null , 9 , 34 , '억울하면 어찌하겠나? 내가 걷어찰 수 있는 컴퓨터의 부분은 비싼 본체인걸...' , '너무 신나!' , now());
 
+INSERT INTO direct_msg(msg_org_id , send_id , recv_id , msg_title , msg_cont , send_at , send_del_yn , recv_del_yn) VALUES
+(null , 31 , 34 , '대학원에 오지 않겠나? 자네 같은 노..련한 인재를 기다렸네!' , '지금 대학원 무료! 대박 행사!' , now() , true , true),
+(null , 34 , 22 , '대학원에 오지 않겠나? 자네 같은 노..련한 인재를 기다렸네!' , '지금 대학원 무료! 대박 행사!' , now() , true , false),
+(null , 31 , 34 , '대학원에 오지 않겠나? 자네 같은 노..련한 인재를 기다렸네!' , '지금 대학원 무료! 대박 행사!' , now() , true , true);
+
 
 --
 -- insert into direct_msg(msg_org_id , send_id , recvId , msg_title , msg_cont) values

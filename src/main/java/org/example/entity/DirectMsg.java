@@ -58,7 +58,7 @@ public class DirectMsg {
     private String msgTitle;
 
     // 쪽지 내용
-    @Column(name = "msg_cont" , nullable = false)
+    @Column(name = "msg_cont" , nullable = false , columnDefinition = "TEXT")
     private String msgCont;
 
     // 발신자 쪽지 삭제여부
@@ -82,6 +82,16 @@ public class DirectMsg {
         this.msgCont = msgCont;
         this.sendDelYn = sendDelYn;
         this.recvDelYn = recvDelYn;
+    }
+
+    // 발신자 쪽 메시지 논리삭제
+    public void deleteSend(){
+        this.sendDelYn = true;
+    }
+
+    // 수신자 쪽 메시지 논리삭제
+    public void deleteRecv(){
+        this.recvDelYn = true;
     }
 
 

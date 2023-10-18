@@ -85,14 +85,14 @@ function getClassMate(id){
     xhr.onreadystatechange = function (){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
-                alert('성공');
+                // alert('성공');
                 let classmates = JSON.parse(xhr.response);
                 console.log("response = " + xhr.response);
                 console.log("classmates = " + classmates);
                 addClassmate(classmates);
             }
             else {
-                alert('실패');
+                alert('실패 : firetrap5319@gmail.com 으로 문의 바랍니다.');
             }
         }
     };
@@ -197,13 +197,13 @@ writeMsgBtn.addEventListener('click' , ()=>{
     };
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST' , '' , true);
+    xhr.open('POST' , '/board/msg/write' , true);
     xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
 
     xhr.onreadystatechange = function () {
         if(xhr.readyState === 4){
             if(xhr.status === 201){
-                alert('성공');
+                // alert('성공');
                 window.location = '/board/msg/all';
             }
             else {

@@ -83,5 +83,68 @@ public class DirectMsgService {
         return msgPages;
     }
 
+    // 보낸 쪽지 페이지 가져오기
+    public Page<DirectMsg> getSendMsg(Principal principal , Pageable pageable){
+
+        Member myMember = memberRepository.findByUserId(principal.getName());
+        Page<DirectMsg> msgPages = directMsgPagingRepository.findMySendPage(myMember , pageable);
+
+        return msgPages;
+    }
+
+    // 받은 쪽지 페이지 가져오기
+    public Page<DirectMsg> getRecvMsg(Principal principal , Pageable pageable){
+
+        Member myMember = memberRepository.findByUserId(principal.getName());
+        Page<DirectMsg> msgPages = directMsgPagingRepository.findMyRecvPage(myMember , pageable);
+
+        return msgPages;
+    }
+
+    // 휴지통 페이지 가져오기
+    public Page<DirectMsg> getTrashMsg(Principal principal , Pageable pageable){
+
+        Member myMember = memberRepository.findByUserId(principal.getName());
+        Page<DirectMsg> msgPages = directMsgPagingRepository.findMyTrashPage(myMember , pageable);
+
+        return msgPages;
+    }
+
+    // 메시지 하나 가져오기
+    public DirectMsg findById(Long id , Principal principal){
+
+        DirectMsg msg = directMsgRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Not Found : " + id + "로 DirectMsg 찾기 불가."));
+
+        Member member = memberRepository.findByUserId(principal.getName());
+
+        if(msg.getRecvId() != member && msg.getSendId() != member){
+            msg = null;
+        }
+
+        return msg;
+    }
+
+    // 메시지 논리 삭제하기
+    public Boolean deleteMsg(Long id , Principal principal){
+
+        DirectMsg msg = directMsgRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Not Found : " + id + "로 DirectMsg 찾기 불가."));
+
+        Member member = memberRepository.findByUserId(principal.getName());
+
+        if(msg.getSendId() == member){
+            msg.deleteSend();
+            return true;
+        }
+        else if(msg.getRecvId() == member){
+            msg.deleteRecv();
+            return true;
+        }
+        else {
+            return false;
+        }
+
+    }
 
 }

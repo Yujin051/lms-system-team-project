@@ -67,12 +67,12 @@
                     <div class="col-md-4 msg_side">
                         <ul>
                             <li><a href="/board/msg/all">전체</a></li>
-                            <li><a href="">받은쪽지</a></li>
-                            <li><a href="">보낸쪽지</a></li>
-                            <li><a href="">휴지통</a></li>
+                            <li><a href="/board/msg/recv">받은쪽지</a></li>
+                            <li><a href="/board/msg/send">보낸쪽지</a></li>
+                            <li><a href="/board/msg/trash">휴지통</a></li>
                         </ul>
                         <div>
-                            <a href="/board/msg/article_write"><button class="btn btn-dark">쪽지쓰기</button></a>
+                            <a href="/board/msg/write"><button class="btn btn-dark">쪽지쓰기</button></a>
                         </div>
                     </div>
                     
@@ -80,7 +80,7 @@
                         <div>
                             <!-- 아래 a 링크를 th:each로 반복시켜 출력하도록 -->
                             <th:block th:each="msg : ${pageDto.msgs}">
-                                <a href="">
+                                <a th:href="@{/board/msg/view/{id}(id=${msg.getId()})}">
                                     <div>
                                         <!-- 번호 -->
                                         <p th:text="${msg.id}">6</p>
@@ -113,20 +113,73 @@
                             </div>
 
                             <ul class="pageing">
-                                <li th:if="${pageDto.getNowPage() != 1}">
-                                    <a th:href="@{/board/msg/all(page=${pageDto.getStartPage() -1})}"><i class="bi bi-caret-left-fill"></i></a>
-                                </li>
-                                <th:block th:each="page : ${#numbers.sequence(pageDto.getStartPage() , pageDto.getEndPage())}">
-                                    <li th:if="${page == pageDto.getNowPage()}" th:classappend="${page == pageDto.getNowPage()}? 'page_active' : '' ">
-                                        <a th:if="${page == pageDto.getNowPage()}" th:text="${page}" >1</a>
+                                <th:block th:if="${list == 1}">
+                                    <li th:if="${pageDto.getNowPage() != 1}">
+                                        <a th:href="@{/board/msg/all(page=${pageDto.getStartPage() -1})}"><i class="bi bi-caret-left-fill"></i></a>
                                     </li>
-                                    <li th:if="${page != pageDto.getNowPage() && page >= pageDto.getStartPage()}">
-                                        <a th:if="${page != pageDto.getNowPage()}" th:href="@{/board/msg/all(page = ${page -1})}" th:text="${page}">2</a>
+                                    <th:block th:each="page : ${#numbers.sequence(pageDto.getStartPage() , pageDto.getEndPage())}">
+                                        <li th:if="${page == pageDto.getNowPage()}" th:classappend="${page == pageDto.getNowPage()}? 'page_active' : '' ">
+                                            <a th:if="${page == pageDto.getNowPage()}" th:text="${page}" >1</a>
+                                        </li>
+                                        <li th:if="${page != pageDto.getNowPage() && page >= pageDto.getStartPage()}">
+                                            <a th:if="${page != pageDto.getNowPage()}" th:href="@{/board/msg/all(page = ${page -1})}" th:text="${page}">2</a>
+                                        </li>
+                                    </th:block>
+                                    <li th:if="${pageDto.getNowPage() != pageDto.getEndPage()}">
+                                        <a th:href="@{/board/msg/all(page=${pageDto.getEndPage() -1 })}"><i class="bi bi-caret-right-fill"></i></a>
                                     </li>
                                 </th:block>
-                                <li th:if="${pageDto.getNowPage() != pageDto.getEndPage()}">
-                                    <a th:href="@{/board/msg/all(page=${pageDto.getEndPage() -1 })}"><i class="bi bi-caret-right-fill"></i></a>
-                                </li>
+
+                                <th:block th:if="${list == 2}">
+                                    <li th:if="${pageDto.getNowPage() != 1}">
+                                        <a th:href="@{/board/msg/send(page=${pageDto.getStartPage() -1})}"><i class="bi bi-caret-left-fill"></i></a>
+                                    </li>
+                                    <th:block th:each="page : ${#numbers.sequence(pageDto.getStartPage() , pageDto.getEndPage())}">
+                                        <li th:if="${page == pageDto.getNowPage()}" th:classappend="${page == pageDto.getNowPage()}? 'page_active' : '' ">
+                                            <a th:if="${page == pageDto.getNowPage()}" th:text="${page}" >1</a>
+                                        </li>
+                                        <li th:if="${page != pageDto.getNowPage() && page >= pageDto.getStartPage()}">
+                                            <a th:if="${page != pageDto.getNowPage()}" th:href="@{/board/msg/send(page = ${page -1})}" th:text="${page}">2</a>
+                                        </li>
+                                    </th:block>
+                                    <li th:if="${pageDto.getNowPage() != pageDto.getEndPage()}">
+                                        <a th:href="@{/board/msg/send(page=${pageDto.getEndPage() -1 })}"><i class="bi bi-caret-right-fill"></i></a>
+                                    </li>
+                                </th:block>
+
+                                <th:block th:if="${list == 3}">
+                                    <li th:if="${pageDto.getNowPage() != 1}">
+                                        <a th:href="@{/board/msg/recv(page=${pageDto.getStartPage() -1})}"><i class="bi bi-caret-left-fill"></i></a>
+                                    </li>
+                                    <th:block th:each="page : ${#numbers.sequence(pageDto.getStartPage() , pageDto.getEndPage())}">
+                                        <li th:if="${page == pageDto.getNowPage()}" th:classappend="${page == pageDto.getNowPage()}? 'page_active' : '' ">
+                                            <a th:if="${page == pageDto.getNowPage()}" th:text="${page}" >1</a>
+                                        </li>
+                                        <li th:if="${page != pageDto.getNowPage() && page >= pageDto.getStartPage()}">
+                                            <a th:if="${page != pageDto.getNowPage()}" th:href="@{/board/msg/recv(page = ${page -1})}" th:text="${page}">2</a>
+                                        </li>
+                                    </th:block>
+                                    <li th:if="${pageDto.getNowPage() != pageDto.getEndPage()}">
+                                        <a th:href="@{/board/msg/recv(page=${pageDto.getEndPage() -1 })}"><i class="bi bi-caret-right-fill"></i></a>
+                                    </li>
+                                </th:block>
+
+                                <th:block th:if="${list == 4}">
+                                    <li th:if="${pageDto.getNowPage() != 1}">
+                                        <a th:href="@{/board/msg/recv(page=${pageDto.getStartPage() -1})}"><i class="bi bi-caret-left-fill"></i></a>
+                                    </li>
+                                    <th:block th:each="page : ${#numbers.sequence(pageDto.getStartPage() , pageDto.getEndPage())}">
+                                        <li th:if="${page == pageDto.getNowPage()}" th:classappend="${page == pageDto.getNowPage()}? 'page_active' : '' ">
+                                            <a th:if="${page == pageDto.getNowPage()}" th:text="${page}" >1</a>
+                                        </li>
+                                        <li th:if="${page != pageDto.getNowPage() && page >= pageDto.getStartPage()}">
+                                            <a th:if="${page != pageDto.getNowPage()}" th:href="@{/board/msg/recv(page = ${page -1})}" th:text="${page}">2</a>
+                                        </li>
+                                    </th:block>
+                                    <li th:if="${pageDto.getNowPage() != pageDto.getEndPage()}">
+                                        <a th:href="@{/board/msg/recv(page=${pageDto.getEndPage() -1 })}"><i class="bi bi-caret-right-fill"></i></a>
+                                    </li>
+                                </th:block>
                             </ul>
                             
                         </div>

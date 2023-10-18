@@ -41,7 +41,7 @@ public class StudLectApplyService {
 
         // 수업 참가 학생 리스트 가져오기
         List<Student> students = studLectApplyRepository.findClassMate(id);
-        log.info("students::{}" , students);
+//        log.info("students::{}" , students);
         // 회원 리스트에 각 학생들 회원정보 찾아 담기.
         List<Member> memberList = new ArrayList<>();
         for (Student student : students) {
@@ -52,21 +52,21 @@ public class StudLectApplyService {
                 memberList.add(member);
             }
         }
-        log.info("memberList::{}" , memberList);
+//        log.info("memberList::{}" , memberList);
         // 수업 정보 가져오기
         LectInfo lectInfo = lectInfoRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("Not found : " + id + " 로 LectInfo 가져오기 불가"));
-        log.info("lectInfo::{}",lectInfo);
+//        log.info("lectInfo::{}",lectInfo);
 
         // 수업정보의 강사id 외래키를 이용하여 회원정보를 찾아 가져오기
         Long profMemberId = lectInfo.getProfessor().getMember().getId();
         Member prof = memberRepository.findById(profMemberId)
                 .orElseThrow(()-> new IllegalArgumentException("Not found : " + profMemberId + "로 Member 가져오기 불가"));
 
-        log.info("prof::{}",prof);
+//        log.info("prof::{}",prof);
         memberList.add(prof);
 
-        log.info("서비스 마지막 memberList = " + memberList);
+//        log.info("서비스 마지막 memberList = " + memberList);
 
         List<ClassMateDto> classmates = new ArrayList<>();
         // 생성자를 이용하여 필요한 데이터만 dto에 넣어주고 반환시킨다.
