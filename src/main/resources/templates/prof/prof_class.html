@@ -97,16 +97,18 @@
         <div class="find">
             <input type="hidden" id="professorId" th:value="${professorId}">
             <p class="year">년도</p>
-            <select id="year" class="year_select" name="years" required>
+            <select class="year_select"  name="years" required>
+                <option value="">년도를 선택해주세요</option>
                 <option>2023</option>
                 <option>2022</option>
                 <option>2021</option>
                 <option>2020</option>
             </select>
             <p class="semester">학기</p>
-            <select id="semester" class="semester_select" name="semesters" required>
-                <option>2학기</option>
+            <select class="semester_select"  name="semesters" required>
+                <option value="">학기를 선택해주세요</option>
                 <option>1학기</option>
+                <option>2학기</option>
             </select>
         </div>
         <h4 id="yearAndSemester">2023년도 2학기</h4>

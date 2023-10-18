@@ -44,5 +44,13 @@
     font-size: 19px;
     font-weight: bold;
     margin-top: 23px;
+    display: flex;
+    justify-content: space-between;
 }
+
+.d1:nth-child(2) {
+    margin-left: 300px;
+}
+
+
 

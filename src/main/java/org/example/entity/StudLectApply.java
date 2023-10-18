@@ -1,7 +1,11 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * 강의수강신청 엔티티
@@ -10,6 +14,8 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "stud_lect_apply")
+@AllArgsConstructor
+@NoArgsConstructor
 public class StudLectApply {
 
     //수강강좌ID
@@ -27,4 +33,9 @@ public class StudLectApply {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lect_id")
     private LectInfo lectInfo;
+
+    public StudLectApply(Student student, LectInfo lectInfo) {
+        this.student = student;
+        this.lectInfo = lectInfo;
+    }
 }

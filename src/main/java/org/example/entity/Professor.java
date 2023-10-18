@@ -3,8 +3,11 @@ package org.example.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.MemberFormDto;
 import org.example.dto.ProfessorDto;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.swing.*;
 
 @NoArgsConstructor
 @AllArgsConstructor

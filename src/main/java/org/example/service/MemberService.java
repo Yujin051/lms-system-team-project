@@ -37,62 +37,10 @@ public class MemberService implements UserDetailsService {
         return originalFilename.substring(pos + 1);
     }
 
-    // <<<< 추가함 아래
-    // 테스트용 경로 설정, 후에 전환 필요
-    @Value("C:\\Users\\admin\\IdeaProjects\\lms-system-team-project2\\src\\main\\resources\\static\\img\\profile\\")
-    String imgPath;
-
-    public String getFullPath(String filename) {
-        return imgPath + filename;
-    }
-    private String extractExt(String originalFilename) {
-        int pos = originalFilename.lastIndexOf(".");
-        return originalFilename.substring(pos + 1);
-    }
 
     // 아이디 중복가입 여부 확인 후 중복이 아닐 경우 DB에 저장
-    public void saveMember(Member member, MultipartFile file) throws Exception {
+    public void saveMember(Member member) {
         validateDuplicateMember(member);
-
-        // 원본 파일명
-        String originalFilename = file.getOriginalFilename();
-
-        // 서버에 저장된 파일명
-        // 파일명이 중복될 수 있으므로 UUID로 설정
-        String savedFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
-
-        // 파일 저장
-        file.transferTo(new File(getFullPath(savedFilename)));
-
-        // 오리지널 이미지 이름 저장
-        member.setImgOriginal(originalFilename);
-
-        // DB 이미지 이름 저장
-        member.setImgSaved(savedFilename);
-        memberRepository.save(member);
-    }
-
-    //  >>>> 위 추가됨
-
-    // 아이디 중복가입 여부 확인 후 중복이 아닐 경우 DB에 저장
-    public void saveMember(Member member, MultipartFile file) throws Exception {
-        validateDuplicateMember(member);
-
-        // 원본 파일명
-        String originalFilename = file.getOriginalFilename();
-
-        // 서버에 저장된 파일명
-        // 파일명이 중복될 수 있으므로 UUID로 설정
-        String savedFilename = UUID.randomUUID() + "." + extractExt(originalFilename);
-
-        // 파일 저장
-        file.transferTo(new File(getFullPath(savedFilename)));
-
-        // 오리지널 이미지 이름 저장
-        member.setImgOriginal(originalFilename);
-
-        // DB 이미지 이름 저장
-        member.setImgSaved(savedFilename);
         memberRepository.save(member);
     }
 

@@ -2,6 +2,7 @@ package org.example.controller;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.example.dto.AssignmentsDto;
 import org.example.dto.LectInfoDTO;
@@ -13,8 +14,19 @@ import org.example.repository.MemberRepository;
 import org.example.repository.ProfessorRepository;
 import org.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.dto.EnteringGradeDto;
+import org.example.entity.Member;
+import org.example.service.MemberService;
+import org.example.service.ProfessorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -24,11 +36,18 @@ import org.springframework.web.multipart.MultipartFile;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.List;
+
+@Slf4j
 @Controller
 @RequestMapping("/prof")
 @AllArgsConstructor
 @Log4j2
+@RequiredArgsConstructor
 public class ProfessorController {
 
     private final MemberRepository memberRepository;
@@ -44,6 +63,9 @@ public class ProfessorController {
     private final StudentService studentService;
     private final AssignmentsService assignmentsService;
 
+
+
+
     // 강사 메인페이지
     @GetMapping("")
     public String profMain(Principal principal, Model model) {
@@ -57,6 +79,11 @@ public class ProfessorController {
         return "/prof/prof_main";
     }
 
+    // 강사 나의 강의실
+    @GetMapping("/lecture")
+    public String profLecture() {
+        return "/prof/myLecture";
+    }
 
     // 강사 강의계획서
     @GetMapping("/lecture번호/lectureplan")
@@ -169,7 +196,7 @@ public class ProfessorController {
 
 
     @GetMapping("/att")
-    public String AttendanceCheck() {
+    public String AttendanceCheck(){
         return "/prof/attendanceCheck";
     }
 
@@ -217,33 +244,37 @@ public class ProfessorController {
          * @author 임휘재
          */
 
-        //강사 : 나의강의실 - 과제정보쓰기
-        @GetMapping("/assiWrite")
-        public String assiWrite () {
-            return "/prof/assiWrite";
-        }
-
-        //강사 : 나의강의실 - 성적입력
-        @GetMapping("/assiGrade")
-        public String assiGrade () {
-            return "/prof/assiGrade";
-        }
-
-//    @GetMapping("/lecture/view/{lectId}/assignments/add")
-//    public String addAssignment(@PathVariable("lectId") Long lectId, Model model) {
-//        model.addAttribute("lectId", lectId);
-//        return "prof/assiSmInfo";
-//    }
-
-        @GetMapping("/test")
-        public String proftest (Authentication auth){
-            UserDetails userDetails = (UserDetails) auth.getPrincipal();
-            Member member = memberRepository.findByUserId(userDetails.getUsername());
-            System.out.println(professorRepository.findByProfessorId(member.getId()));
-
-            return "";
-        }
-
-
+    //강사 : 나의강의실 - 과제정보쓰기
+    @GetMapping("/assiWrite")
+    public String assiWrite(){
+        return "/prof/assiWrite";
     }
 
+    //강사 : 나의강의실 - 성적입력
+    @GetMapping("/assiGrade")
+    public String assiGrade(Model model, Principal principal){
+        // 사용자 로그인 아이디 가져오기
+        String loginId = principal.getName();
+        // 사용자 정보 가져오기(member)
+        Member member = memberService.memberView(loginId);
+
+        model.addAttribute("list", professorService.AssiGradeLectInfoCheckList(member.getId()));
+        return "/prof/assiGrade";
+    }
+
+    // 강사 : 성적입력 작성하기
+    @RequestMapping(value = "/assiGrade/write", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> findEnteringGrade(@RequestParam String lectId) {
+        log.info("lect아이디는?", lectId);
+        Long LongLectId = Long.valueOf(lectId);
+        List<EnteringGradeDto> enteringGradeDtoList = professorService.EnteringGradeCheckList(LongLectId);
+        log.info("디티오는?, {}", enteringGradeDtoList.toString());
+        return ResponseEntity.status(HttpStatus.OK).body(enteringGradeDtoList);
+    }
+
+    @GetMapping("/onlineclass")
+    public String test2() {
+        return "/prof/onlineclass";
+    }
+}
