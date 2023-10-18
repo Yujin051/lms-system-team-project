@@ -71,37 +71,5 @@ detailBtn.forEach(function (element){
             }
         })
 
-        //비동기 준비 xmlhttpreq
-        // let xhr = new XMLHttpRequest();
-        // // 어떤 url 어떤 method 쓸지?
-        // xhr.open('POST' , '/student/grade' , true);
-        // // 컨텐츠타입 정해주기
-        // xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
-        //
-        // xhr.onreadystatechange = function (){
-        //     if(xhr.readyState === 4){
-        //         if(xhr.status == 200){
-        //             // 성공했을떼 로직
-        //             let article = JSON.parse(xhr.response);
-        //             console.log(article);
-        //             let newSem = article.semSem;
-        //             let newYear = article.semYear
-        //             alert('성공')
-        //             // 버튼 클릭하면 성적 상세정보 테이블 출력
-        //             gradeDetail.style.display = 'block';
-        //             let className = document.getElementById('className');
-        //             className.innerText = semSem;
-        //         }
-        //         else{ // 실패 로직
-        //             let responseText = xhr.responseText;
-        //             console.log(responseText);
-        //             alert('실패');
-        //         }
-        //     }
-        // }
-        // // 비동기 통신 보내는 곳인데, json으로 바꿔준다. 앞서 키맵 친구를
-        // xhr.send(JSON.stringify(data));
-
-
     }); // addevent end
 }); // foreach end

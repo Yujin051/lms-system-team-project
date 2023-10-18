@@ -91,10 +91,14 @@ public class LectInfo {
     @Column(name = "lect_test")
     private Long lectTest;
 
+    //성적입력여부
+    @Column(name = "is_record")
+    private boolean isRecord;
+
     @Builder
     public LectInfo(Professor professor, String lectName, String lectSubject, String lectYear, String lectSem,
                     Long lectCredit, Long lectNownum, Long lectMaxnum, LocalDate enrollStart, LocalDate enrollEnd,
-                    LocalDate lectStart, LocalDate lectEnd, boolean isActive, Long lectAssign, Long lectCheck, Long lectTest) {
+                    LocalDate lectStart, LocalDate lectEnd, boolean isActive, Long lectAssign, Long lectCheck, Long lectTest, boolean isRecord) {
 
         this.professor = professor;
         this.lectName = lectName;
@@ -112,6 +116,7 @@ public class LectInfo {
         this.lectAssign = lectAssign;
         this.lectCheck = lectCheck;
         this.lectTest = lectTest;
+        this.isRecord = isRecord;
     }
 
     public void Plus(){

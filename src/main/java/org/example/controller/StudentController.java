@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.dto.CheckGradeDto;
 import org.example.dto.CheckSemGradeDto;
 import org.example.entity.*;
+import org.example.repository.GradeInfoRepository;
 import org.example.repository.LectInfoRepository;
 import org.example.repository.StudLectApplyRepository;
 import org.example.repository.StudentRepository;
@@ -35,6 +36,7 @@ public class StudentController {
     private final StudLectApplyRepository studLectApplyRepository;
     private final StudentRepository studentRepository;
     private final LectInfoRepository lectInfoRepository;
+    private final GradeInfoRepository gradeInfoRepository;
 
     // 학생 메인 페이지
     @GetMapping("")
@@ -147,7 +149,18 @@ public class StudentController {
 
                     StudLectApply studLectApply = new StudLectApply(student, lectInfo);
 
-                    studLectApplyRepository.save(studLectApply);
+                    StudLectApply stud1 = studLectApplyRepository.save(studLectApply);
+
+                    GradeInfo gradeInfo = GradeInfo.builder()
+                            .studLectApply(stud1)
+                            .student(student)
+                            .lectInfo(lectInfo)
+                            .build();
+
+                    gradeInfoRepository.save(gradeInfo);
+
+
+
 
                     model.addAttribute("message", "신청되었습니다.");
                     model.addAttribute("SearchUrl", "/student/scr");
