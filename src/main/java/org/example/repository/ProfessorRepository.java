@@ -15,5 +15,7 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
     Professor findByProfessorId(@Param("memberId") Long memberId);
 
 
+    Professor findByMember(Member member);
+
 }
 

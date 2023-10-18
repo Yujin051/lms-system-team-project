@@ -1,16 +1,22 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Fetch;
 
-
+/**
+ * @author 임승범
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "board_info")
 @Getter
 @Entity
 @ToString
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BoardInfo {
 
     // 게시판 id
@@ -30,6 +36,23 @@ public class BoardInfo {
 
     // 게시판 종류
     @Column(name = "board_type" , nullable = false)
+    @JsonIgnore
     private String boardType;
+
+    // 강좌정보
+    @OneToOne
+    @JoinColumn(name = "lect_info" , nullable = true)
+    private LectInfo lectInfo;
+
+    @Builder
+    public BoardInfo(String boardName , Boolean boardResp , String boardType , LectInfo lectInfo){
+        this.boardName = boardName;
+        this.boardResp = boardResp;
+        this.boardType = boardType;
+        this.lectInfo = lectInfo;
+    }
+
+
+
 
 }

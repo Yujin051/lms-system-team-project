@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,6 +26,7 @@ public class LectInfo {
     //강사ID
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prof_id")
+    @JsonIgnore
     private Professor professor;
 
     //강좌명

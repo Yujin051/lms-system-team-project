@@ -127,7 +127,7 @@ section {
 
 /* 쪽지 쓰기 양식 */
 .msg_write {
-    /* border: 1px solid black; */
+     /*border: 1px solid black;*/
 }
 /* 쓰기 상단 디자인 설정 */
 .msg_write_head {
@@ -291,6 +291,10 @@ section {
 }
 
 .classtype , .class , .to {
+    border: 1px solid #ccc;
+}
+
+.msgToBox {
     border: 1px solid #ccc;
 }
 

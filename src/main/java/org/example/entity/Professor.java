@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.dto.ProfessorDto;
@@ -20,6 +21,7 @@ public class Professor {
 
     @OneToOne
     @JoinColumn(name= "member_id")
+    @JsonIgnore
     private Member member;
 
     @Column(name= "prof_agency")

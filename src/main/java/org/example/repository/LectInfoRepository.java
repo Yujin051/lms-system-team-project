@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.entity.LectInfo;
+import org.example.entity.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,4 +16,7 @@ public interface LectInfoRepository extends JpaRepository<LectInfo, Long> {
     List<LectInfo> findLectInfoByProfessorAndSemester(@Param("professorId") Long professorId, @Param("year") String year, @Param("semester") String semester);
 
     LectInfo findByLectId(Long lectId);
+
+    // 강사 id로 수업 리스트 가져오기
+    List<LectInfo> findByProfessor(Professor professor);
 }

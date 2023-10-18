@@ -21,7 +21,8 @@ public class Assignments {
     @Column(name = "assign_id")
     private Long id;
 
-    // 강좌 키
+
+    // 강좌 키 외래키로
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lect_id")
     private LectInfo lectInfo;
