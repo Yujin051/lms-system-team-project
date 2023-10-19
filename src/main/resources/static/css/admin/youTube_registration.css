@@ -3,11 +3,10 @@
     font-family: 'SUIT-Regular';
 }
 #top-table {
-    width: 1522px;
+    width: 1500px;
     margin-left: 90px;
-
+    display: flex;
 }
-
 
 .table {
     margin-left: 90px;
@@ -22,14 +21,9 @@
 .sfc {
     height: 80px;
 }
-
-
 .s1 {
     margin-right: 50px;
 }
-
-
-
 .d1 {
     font-size: 19px;
     font-weight: bold;
@@ -40,14 +34,11 @@
     font-weight: bold;
     margin-top: 30px;
 }
-
-
 .tbl1 {
     margin-left: 90px;
     width: 40%;
     float: left;
 }
-
 .tbl2 .tr {
     height: 1000px;
 }
@@ -80,22 +71,6 @@
     font-size: 14px;
 }
 
-.pg1.pagination li.page-item a.page-link {
-    font-size: 15px; /* 페이지 번호의 폰트 크기 조절 */
-    padding: 5px 13px; /* 페이지 번호의 패딩 조절 */
-    border-color: grey;
-    color: grey;
-}
-
-.pg2.pagination li.page-item a.page-link {
-    font-size: 12px; /* 페이지 번호의 폰트 크기 조절 */
-    padding: 5px 10px; /* 페이지 번호의 패딩 조절 */
-    border-color: grey;
-    color: grey;
-}
-
-
-
 /* 오른쪽으로 이동시킬 클래스 */
 .right-align {
     float: right;
@@ -120,4 +95,96 @@ table {
 .form-control-2 {
     height: 80px;
 }
+
+/*검색 부분*/
+.contents_name_box {
+    display: flex;
+}
+.contents_name_box > .input-group {
+    display: flex; justify-content: center; align-items: center;
+}
+
+/*업로드 모달 창*/
+.modalWrap {
+    position: absolute; left: 220px; top: 80px; z-index: 20; width: 1700px;
+    height: 1000px; overflow: hidden; background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+.modal {
+    padding-top: 30px; position: relative; left:554px; top: 50px; z-index: 21;
+    width: 600px; height: 700px; color: black; background: white;
+    border-radius: 10px;
+}
+.modal > .upload_text_box {
+    border: 0px solid black; height: 40px; display: flex; justify-content: center;
+    align-items: center;
+}
+.modal > .upload_text_box > .upload_text {
+    border: 0px solid black; width: 150px; height: 40px; font-weight: bold;
+    display: flex; justify-content: center; align-items: center; font-size: 1.2rem;
+}
+.modal > .upload_text_box > .upload_text span{
+    font-size: 4rem;
+}
+
+.upload_main {
+    border: 0px solid black; width: 600px; height: 630px; display: flex;
+    justify-content: center; align-items: center;
+}
+.upload_main form {
+    border: 0px solid black; width: 407px; height: 524px;
+}
+.upload_main form > .upload_title_text,
+.upload_main form > .upload_detail_text,
+.upload_main form > .upload_file_text{
+    border: 0px solid black; width: 400px; height: 50px;  display: flex;
+    align-items: center;
+}
+.upload_main form > .upload_title_text span,
+.upload_main form > .upload_detail_text span,
+.upload_main form > .upload_file_text span{
+    font-size: 1.1rem; font-weight: bold;
+}
+.upload_main form > .upload_title_input_box {
+    width: 400px; height: 40px; border: 0px solid black;
+}
+.upload_main form > .upload_title_input_box input {
+    width: 400px; height: 40px; outline: none; text-decoration: none;
+    border-radius: 5px; border: 1px solid #cccccc;
+}
+.upload_main form > .upload_detail_textarea_box {
+    width: 400px; height: 200px;
+}
+.upload_main form > .upload_detail_textarea_box textarea{
+    width: 400px; height: 200px; resize: none; outline: none; border-radius: 5px;
+    border: 1px solid #cccccc;
+}
+.upload_main form > .upload_file_input {
+    width: 400px; height: 60px;
+}
+input[type=file]::file-selector-button {
+    width: 80px; height: 35px; background: #fff; border: 1px solid rgb(77,77,77);
+    border-radius: 5px; cursor: pointer;
+}
+input[type=file]::file-selector-button:hover {
+    background: rgb(77,77,77); color: #fff;
+}
+.upload_main form > .upload_btn_box {
+    border: 0px solid black; width: 400px; height: 35px; display: flex;
+    justify-content: center; align-items: center;
+}
+.upload_main form > .upload_btn_box > .upload_exit button {
+    width: 60px; height: 35px; border-radius: 5px; font-size: 0.9rem;
+    text-align: center; line-height: 30px; margin-right: 5px; background: white;
+    color: black; border: 1px solid #cccccc;
+}
+.upload_main form > .upload_btn_box > .upload_btn button {
+    background: #6b6b6b; color: white; border: none; width: 60px; height: 35px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 30px;
+    margin-left: 5px;
+}
+
+
+
+
+
 

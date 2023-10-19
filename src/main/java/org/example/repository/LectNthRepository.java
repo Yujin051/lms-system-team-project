@@ -3,12 +3,14 @@ package org.example.repository;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
 import org.example.entity.LectNth;
+import org.example.entity.LmsConts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /* 온라인 강의수강현황 LectNth*/
 @Repository
@@ -84,5 +86,7 @@ public interface LectNthRepository extends JpaRepository<LectNth, Long> {
     // conts 를 nthId로바꿈
     List<LmsContsDto> findContsNo(@Param("nthId") Long nthId);
 
+    // 해당 컨텐츠 정보가 강좌에 등록되어 있는지 확인
+    Optional<LectNth> findByLmsConts(LmsConts lmsConts);
 }
 

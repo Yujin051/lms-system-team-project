@@ -71,7 +71,8 @@ public class PostDto {
     //게시글 내용
     public PostDto(String userName, Long articleId, String articleTitle,
                    LocalDate articleAt, Long articleView, Boolean isLocked,
-                   Boolean isDeleted, String articleContent, String boardType) {
+                   Boolean isDeleted, String articleContent, String boardType,
+                   Long boardId) {
         this.userName = userName;
         this.articleId = articleId;
         this.articleTitle = articleTitle;
@@ -81,6 +82,7 @@ public class PostDto {
         this.isDeleted = isDeleted;
         this.articleContent = articleContent;
         this.boardType = boardType;
+        this.boardId = boardId;
     }
 
     // 게시글 등록

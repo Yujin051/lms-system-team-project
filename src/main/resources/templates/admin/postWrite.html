@@ -118,7 +118,16 @@
                             <span>게시판종류</span>
                         </div>
                         <div class="post_content_board_type">
-                            <input type="text" id="boardType" class="board_type"/>
+                            <select id="boardType" class="board_type">
+                                <option value="">선택</option>
+                                <option value="건의사항">건의사항</option>
+                                <option value="공지사항">공지사항</option>
+                                <option value="학생">학생</option>
+                                <option value="교원">교원</option>
+                                <option value="과정">과정</option>
+                                <option value="수업게시판">수업게시판</option>
+                            </select>
+                            <input type="text" id="boardId" class="board_id" readonly/>
                         </div>
                     </div>
                     <div class="post_content_is_locked_box">

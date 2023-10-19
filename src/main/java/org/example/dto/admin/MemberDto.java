@@ -143,5 +143,15 @@ public class MemberDto {
         this.userId = userId;
     }
 
+    public MemberDto(Long lectId, String lectName, LocalDateTime lectStart, LocalDateTime lectEnd, Long lectCredit, boolean isActive, String userName, Long studId) {
+        this.lectId = lectId;
+        this.lectName = lectName;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.lectCredit = lectCredit;
+        this.isActive = isActive;
+        this.userName = userName;
+        this.studId = studId;
+    }
 
 }

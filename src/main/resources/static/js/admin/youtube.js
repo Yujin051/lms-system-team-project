@@ -48,38 +48,40 @@ function onPlayerReady(event) {
 }
 
 function onPlayerStateChange(event) {
-    if (event.data === YT.PlayerState.PLAYING) {
+    if (event.data === YT.PlayerState.PLAYING) { //비디오가 재생중일때
         fnlPosition = player.getCurrentTime(); // 현재 재생 위치 가져오기
         maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
-        clearInterval(intervalId);
+        clearInterval(intervalId); //setInterval() 실행하기 전 중단
         intervalId = setInterval(() => {
             fnlPosition = player.getCurrentTime();
-            updateVideoPosition();
+            updateVideoPosition(); //최종, 최대재생시간 업데이트
             console.log("최종재생시간 : " + fnlPosition);
             console.log("최대재생시간 : " + maxPosition);
-            sendProgressToServer();
+            sendProgressToServer(); //업데이트 후 진행률 서버로 전송
         }, 5000); // 5초마다 실행
 
         // 현재재생위치가 최대재생위치를 초과하면 현재재생위치로 되돌림
         loadMaxPositionFromServer().then((serverMaxPosition) => {
-            maxPosition = serverMaxPosition;
-            if (event.target.getCurrentTime() > Number(maxPosition) + 1) {
+            maxPosition = serverMaxPosition; //서버에서 최대재생시간 가져옴
+            // 만약, 현재재생시간이 최대재생시간을 넘으면 최대재생시간로 되돌림
+            if (event.target.getCurrentTime() > maxPosition + 1) {
                 event.target.seekTo(maxPosition);
             }
         });
-
-    } else if (event.data === YT.PlayerState.PAUSED) {
+        sendProgressToServer(); //일시정지 후 다시 재생할 때 진행률 전송
+    } else if (event.data === YT.PlayerState.PAUSED) { // 비디오가 일시정지일때
         // 재생 중이 아니면 interval을 해제하여 업데이트를 중지
         clearInterval(intervalId);
-        //일시정지한 시간을 기록하고 다시 재생했을때 일시정지된 시간부터 재생
+        // 일시정지한 시간을 기록하고 다시 재생했을때 일시정지된 시간부터 재생
         fnlPosition = player.getCurrentTime();
+        // 일시정지위치에서 정확한 재생을 위한 약간의 5초 여유 시간 ??
         if (event.target.getCurrentTime() <= maxPosition + 5) {
             sendProgressToServer();
             updateVideoPosition();
             console.log("일시정지 시 최종재생시간 : " + fnlPosition);
         }
-        //영상이 끝나더라도 이전으로 되돌려서 일시정지
-    } else if (event.data === YT.PlayerState.ENDED) {
+        // 비디오가 끝나더라도 1초 이전으로 되돌려서 일시정지(다음 비디오를 안전하게 실행하기 위함)
+    } else if (event.data === YT.PlayerState.ENDED) { //비디오가 끝났을 때
         console.log("영상이 끝나기 -1초 전의 시간 : " + maxPosition);
         event.target.seekTo(event.target.getDuration() - 1);
         event.target.pauseVideo();
@@ -96,14 +98,12 @@ function onPlayerPlaybackRateChange(event){
 
 // 최종 재생 위치와 최대 재생 위치를 같이 업데이트(5초마다 저장되어야 함.)
 function updateVideoPosition() {
-    // clearInterval(intervalId);
     // 현재 비디오 위치 가져오기
     const currentTime = player.getCurrentTime();
-    const maxPosition = currentTime;
+    maxPosition = currentTime;
     // 최종 재생 위치 업데이트
-    const finalPosition = currentTime;
+    finalPosition = currentTime;
 
-    // 서버에 최종 재생 위치 및 최대 재생 위치를 보내서 업데이트
     fetch(`/youtube/api/savePlayTime?magId=${magId}&fnlPosi=${finalPosition}&maxPosi=${maxPosition}`, {
         method: 'PUT',
         headers: {
@@ -208,7 +208,7 @@ function togglePlayPause() {
     }
 }
 
-// 비디오 되감기 함수
+// 비디오 되감기
 function rewindVideo() {
     const currentTime = player.getCurrentTime();
     const newTime = currentTime - 5; // 10초 뒤로 이동 (조절 가능)
@@ -219,7 +219,7 @@ function rewindVideo() {
     }
 }
 
-// 비디오 빨리감기 함수
+// 비디오 빨리감기
 function fastForwardVideo() {
     const currentTime = player.getCurrentTime();
     const duration = player.getDuration();

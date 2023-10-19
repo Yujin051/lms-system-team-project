@@ -11,7 +11,15 @@ public class LectControl {
     @Column(name="ctrl_id")
     private Long id;
 
+    // 차시 외래키
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="nth_id")
+    private LectNth lectNth;
+
     // 강좌 외래키
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="lect_id")
+    private LectInfo lectInfo;
 
     // 영상을 멈춘 시점
     @Column(name="stop_posi")

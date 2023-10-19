@@ -3,6 +3,7 @@ package org.example.entity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 강의차시정보 엔티티
@@ -11,6 +12,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "lect_nth")
+@NoArgsConstructor
 public class LectNth {
 
     @Id
@@ -27,15 +29,11 @@ public class LectNth {
     private LmsConts lmsConts;
 
 
-
     @Column(name = "nth_name")
     private String nthName;
 
     @Column(name = "nth_sequence")
     private Long nthSequence;
-
-    public LectNth() {
-    }
 
     @Builder
     public LectNth(Long nthId, LectInfo lectInfo, LmsConts lmsConts, String nthName, Long nthSequence) {
@@ -45,6 +43,7 @@ public class LectNth {
         this.nthName = nthName;
         this.nthSequence = nthSequence;
     }
+
     public LectNth(LectInfo lectInfo, LmsConts lmsConts,
                    String nthName, Long nthSequence) {
         this.lectInfo = lectInfo;

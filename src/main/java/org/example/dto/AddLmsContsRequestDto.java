@@ -25,12 +25,12 @@ public class AddLmsContsRequestDto {
 
 
 
-    public  LectNth toEntity() {
-        return LectNth.builder()
-                .lectInfo(lectInfo)
-                .lmsConts(lmsConts)
-                .nthSequence(nthSequence)
-                .nthName(nthName)
-                .build();
-    }
+//    public  LectNth toEntity() {
+//        return LectNth.builder()
+//                .lectInfo(lectInfo)
+//                .lmsConts(lmsConts)
+//                .nthSequence(nthSequence)
+//                .nthName(nthName)
+//                .build();
+//    }
 }

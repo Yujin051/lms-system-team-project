@@ -152,38 +152,127 @@ values (4, 4, 4, 'B', 80, 81, 82, true);
 INSERT INTO stud_lect_prog(fnl_posi, max_posi, is_checked, progress, check_date)
 values (0, 0, false, 0, '2000-01-01');
 
-
-/* 강의콘텐츠 정보 */
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
-values ('asd', 'bbsa1', 1, 'asds');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
-values ('qwdqd', '2as', 2, 'xzv');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
-values ('qgfada', 'ds3', 3, 'xzc');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
-values ('4qqdqw', 'dasd4', 4, '4wq');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
-values ('qgq', '5ssdasda', 5, '5wqe');
-insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
-values ('fgqwdqwd', '6sad', 6, '6sad');
-insert into lms_conts(conts_name, conts_detail, conts_time)
-values ('자바', '자바입니다.', 1123);
-
-/* 강의 차시 정보 */
-insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (1, 1, 'html/css', 1);
-
-insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (2, 2, 'javascript', 2);
-
-insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (3, 3, 'java', 3);
-
-insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (4, 4, 'sql', 4);
-
-insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (5, 5, 'spring boot', 5);
-
-insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
-values (6, 6, 'jpa', 6);
+# insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+#                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+# VALUES (1, '자바를 배우자', '자바', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+# insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+#                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+# VALUES (1, '자바스크립트를 배우자', '자바스크립트', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+# insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+#                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+# VALUES (1, '스프링 프레임워크를 배우자', '스프링 프레임워크', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+# insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+#                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+# VALUES (1, '스프링부트를 배우자', '스프링부트', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+# insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+#                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+# VALUES (1, 'mybatis를 배우자', 'mybatis', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+# insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+#                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+# VALUES (1, 'jpa를 배우자', 'jpa', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+# insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
+#                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
+# VALUES (1, 'sql을 배우자', 'sql', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+#
+#
+# INSERT INTO board_info(board_name, board_type)
+# values ('게시판이름1', '건의사항');
+# INSERT INTO board_info(board_name, board_type)
+# values ('게시판이름2', '공지사항');
+# INSERT INTO board_info(board_name, board_type)
+# values ('게시판이름3', '학생');
+# INSERT INTO board_info(board_name, board_type)
+# values ('게시판이름4', '교원');
+# INSERT INTO board_info(board_name, board_type)
+# values ('게시판이름5', '과정');
+# INSERT INTO board_info(board_name, board_type)
+# values ('게시판이름6', '수업게시판');
+#
+# INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
+#                           article_at, is_locked, is_deleted, file_num)
+# values (1, 1, '게시글제목1', '게시글내용11', 10024, now(), false, true, 1);
+# INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
+#                           article_at, is_locked, is_deleted, file_num)
+# values (2, 2, '게시글제목2', '게시글내용22', 5505, now(), true, true, 2);
+# INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
+#                           article_at, is_locked, is_deleted, file_num)
+# values (3, 2, '게시글제목3', '게시글내용3123', 111, now(), true, false, 3);
+# INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
+#                           article_at, is_locked, is_deleted, file_num)
+# values (4, 4, '게시글제목4', '게시글내용sadf', 22, now(), true, false, 4);
+# INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
+#                           article_at, is_locked, is_deleted, file_num)
+# values (5, 4, '게시글제목5', '게시글내용qweqwe1', 1315, now(), true, false, 5);
+# INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
+#                           article_at, is_locked, is_deleted, file_num)
+# values (6, 5, '게시글제목6', '게시글내용aqeqe1', 513, now(), true, false, 6);
+#
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (1, 1);
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (2, 2);
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (3, 3);
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (4, 4);
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (5, 5);
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (6, 6);
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (3, 4);
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (3, 5);
+# INSERT INTO stud_lect_apply(stud_id, lect_id)
+# values (3, 6);
+#
+# /* 수강생차시진도 */
+# INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
+# values (1, 1, 1, 'A', 95, 95, 89, true);
+# INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
+# values (2, 2, 2, 'B', 88, 81, 79, true);
+# INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
+# values (3, 3, 2, 'B', 81, 77, 98, true);
+# INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
+# values (4, 4, 4, 'B', 80, 81, 82, true);
+#
+#
+# /* 수강생차시진도 */
+# INSERT INTO stud_lect_prog(fnl_posi, max_posi, is_checked, progress, check_date)
+# values (0, 0, false, 0, '2000-01-01');
+#
+#
+# /* 강의콘텐츠 정보 */
+# insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+# values ('asd', 'bbsa1', 1, 'asds');
+# insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+# values ('qwdqd', '2as', 2, 'xzv');
+# insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+# values ('qgfada', 'ds3', 3, 'xzc');
+# insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+# values ('4qqdqw', 'dasd4', 4, '4wq');
+# insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+# values ('qgq', '5ssdasda', 5, '5wqe');
+# insert into lms_conts(conts_name, conts_detail, conts_time, conts_yout)
+# values ('fgqwdqwd', '6sad', 6, '6sad');
+# insert into lms_conts(conts_name, conts_detail, conts_time)
+# values ('자바', '자바입니다.', 1123);
+#
+# /* 강의 차시 정보 */
+# insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+# values (1, 1, 'html/css', 1);
+#
+# insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+# values (2, 2, 'javascript', 2);
+#
+# insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+# values (3, 3, 'java', 3);
+#
+# insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+# values (4, 4, 'sql', 4);
+#
+# insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+# values (5, 5, 'spring boot', 5);
+#
+# insert into lect_nth (lect_id, conts_no, nth_name, nth_sequence)
+# values (6, 6, 'jpa', 6);

@@ -2,33 +2,23 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 강좌성적 엔티티
- *
  * @author 임휘재
  */
 @Entity
 @Data
 @Table(name = "grade_info")
+@NoArgsConstructor
 public class GradeInfo {
-
 
     //성적ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "grade_id")
     private Long gradeId;
-
-    //강좌ID
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lect_id")
-    private LectInfo lectInfo;
-
-    //수강생ID
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stud_id")
-    private Student student;
 
     //강의수강신청ID
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,18 +45,9 @@ public class GradeInfo {
     @Column(name = "is_record")
     private boolean isRecord;
 
-
-    public GradeInfo() {
-
-    }
-
-
-    public GradeInfo(LectInfo lectInfo, Student student,
-                     StudLectApply studLectApply, String grade,
+    public GradeInfo(StudLectApply studLectApply, String grade,
                      Long checkScore, Long testScore, Long assignScore,
                      boolean isRecord) {
-        this.lectInfo = lectInfo;
-        this.student = student;
         this.studLectApply = studLectApply;
         this.grade = grade;
         this.checkScore = checkScore;
@@ -74,5 +55,4 @@ public class GradeInfo {
         this.assignScore = assignScore;
         this.isRecord = isRecord;
     }
-
 }

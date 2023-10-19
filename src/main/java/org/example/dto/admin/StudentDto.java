@@ -35,10 +35,10 @@ public class StudentDto {
     private String userEmail; //이메일
 
     //lect_info
+    private String lectYear; //년도
+    private String lectSem; //학기
     private Long lectCredit; //학점
     private Long lectCheck; //출석배점
-
-
 
 
     //전체 학기성적 및 전체 현황
@@ -48,5 +48,14 @@ public class StudentDto {
         this.semYear = semYear;
         this.semSem = semSem;
         this.studNowCr = studNowCr;
+    }
+
+    public StudentDto(String userName, String userId, LocalDate userBirthday, Gender userGender, String userEmail, Long studGrade) {
+        this.userName = userName;
+        this.userId = userId;
+        this.userBirthday = userBirthday;
+        this.userGender = userGender;
+        this.userEmail = userEmail;
+        this.studGrade = studGrade;
     }
 }

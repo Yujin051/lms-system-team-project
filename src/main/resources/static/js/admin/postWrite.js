@@ -38,6 +38,11 @@ const grid1 = new tui.Grid({
                 sortingType: 'asc',
                 name: 'articleView',
                 sortable: true
+            },
+            {
+                header: '게시판 번호',
+                name: 'boardId',
+                hidden: true
             }
         ]
     }],
@@ -84,6 +89,11 @@ const grid1 = new tui.Grid({
             sortingType: 'asc',
             name: 'articleView',
             sortable: true
+        },
+        {
+            header: '게시판 번호',
+            name: 'boardId',
+            hidden: true
         }
     ]
 });
@@ -108,6 +118,7 @@ const postSearchRequirementInput = document.querySelector('.post_search_requirem
 const searchCalenderInput = document.querySelector('.post_reg_date');
 const resultElement = document.querySelector('.result2');
 
+// 게시글 작성(담당용) 게시글 목록 검색 후 조회
 retrieveButton.addEventListener('click', async () => {
     try {
         const boardType = searchBoardTypeInput.value;
@@ -168,6 +179,7 @@ createButton.addEventListener('click', () => {
     grid1.appendRow(newEmptyRow);
 });
 
+// grid1을 클릭 시 게시글 내용 정보 출력
 grid1.on('click', async (ev) => {
     const rowKey = ev.rowKey;
     const rowData = grid1.getRow(rowKey);
@@ -183,6 +195,7 @@ grid1.on('click', async (ev) => {
                 const postData = await response.json();
 
                 // 가져온 데이터를 HTML 요소에 표시
+                const boardIdInput = document.getElementById('boardId');
                 const postIdInput = document.getElementById('articleId');
                 const postContInput = document.getElementById('postContTitle');
                 const postWriterInput = document.getElementById('postWriter');
@@ -192,10 +205,11 @@ grid1.on('click', async (ev) => {
                 const isLockedCheckbox = document.getElementById('isLocked');
                 const isDeletedCheckbox = document.getElementById('isDeleted');
                 const realContent = document.querySelector('.real_content');
-                console.log("postContInput : " + postContInput)
+                console.log("boardIdInput : " + boardIdInput);
 
                 if (postData.length > 0) {
                     const post = postData[0];
+                    boardIdInput.value = post.boardId;
                     postIdInput.value = post.articleId;
                     postContInput.value = post.articleTitle;
                     postWriterInput.value = post.userName;
@@ -211,6 +225,7 @@ grid1.on('click', async (ev) => {
                     console.log('데이터가 없습니다.');
 
                     // HTML 요소 초기화
+                    boardIdInput.value = '';
                     postIdInput.value = '';
                     postContInput.value = '';
                     postWriterInput.value = '';
@@ -230,6 +245,7 @@ grid1.on('click', async (ev) => {
         }
     } else {
         // HTML 요소 초기화
+        const boardIdInput = document.getElementById('boardId');
         const postIdInput = document.getElementById('articleId');
         const postContInput = document.getElementById('postContTitle');
         const postWriterInput = document.getElementById('postWriter');
@@ -240,6 +256,7 @@ grid1.on('click', async (ev) => {
         const isDeletedCheckbox = document.getElementById('isDeleted');
         const realContent = document.querySelector('.real_content');
 
+        boardIdInput.value = '';
         postIdInput.value = '';
         postContInput.value = '';
         postWriterInput.value = '관리자';
@@ -252,8 +269,35 @@ grid1.on('click', async (ev) => {
     }
 });
 
+// 게시판 종류를 선택 시 자동으로 boardId의 번호가 나오게
+document.addEventListener('DOMContentLoaded', function () {
+    const boardTypeSelect = document.getElementById('boardType');
+    const boardIdInput = document.getElementById('boardId');
+
+    boardTypeSelect.addEventListener('change', function () {
+        const selectedValue = boardTypeSelect.value;
+        if (selectedValue === '건의사항') {
+            boardIdInput.value = '1';
+        } else if (selectedValue === '공지사항') {
+            boardIdInput.value = '2';
+        } else if (selectedValue === '학생') {
+            boardIdInput.value = '3';
+        } else if (selectedValue === '교원') {
+            boardIdInput.value = '4';
+        } else if (selectedValue === '과정') {
+            boardIdInput.value = '5';
+        } else if (selectedValue === '수업게시판') {
+            boardIdInput.value = '6';
+        } else {
+            boardIdInput.value = ''; // 선택하지 않은 경우 빈 값으로 설정
+        }
+    });
+});
+
+// 게시글 저장 기능
 const saveButton = document.querySelector('.post_write_save_btn');
 saveButton.addEventListener('click', async () => {
+    const boardIdInput = document.getElementById('boardId').value;
     const postIdInput = document.getElementById('articleId').value;
     const postContInput = document.getElementById('postContTitle').value;
     const postWriterInput = document.getElementById('postWriter').value;
@@ -264,7 +308,14 @@ saveButton.addEventListener('click', async () => {
     const isDeletedCheckbox = document.getElementById('isDeleted').checked;
     const realContent  = document.querySelector('.real_content textarea');
 
+    // 게시판 종류를 선택하지 않았을 시 알림창과 함께 저장이 실행되지 않음.
+    if (!boardTypeInput) {
+        alert('게시판 종류를 선택하세요.');
+        return;
+    }
+
     const data = {
+        boardId: boardIdInput,
         articleId: postIdInput,
         articleTitle: postContInput,
         userName: postWriterInput,
@@ -278,6 +329,7 @@ saveButton.addEventListener('click', async () => {
     console.log("articleTitle : " + data.articleTitle);
     console.log("articleContent : " + data.articleContent);
     console.log("articleId : " + data.articleId);
+    console.log("boardId : " + data.boardId);
 
     try {
         const response = await fetch('/admin/api/postWrite/save', {
@@ -298,6 +350,7 @@ saveButton.addEventListener('click', async () => {
     }
 });
 
+// 게시글 목록 삭제 기능
 const deleteButton = document.querySelector('.post_write_delete_btn');
 deleteButton.addEventListener('click', async () => {
     // 체크박스를 누른 행의 데이터 가져오기
@@ -335,18 +388,3 @@ deleteButton.addEventListener('click', async () => {
         }
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,6 +1,8 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "student")
+@AllArgsConstructor
 @NoArgsConstructor
 public class Student {
 
@@ -26,9 +29,6 @@ public class Student {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     private Member member;
-
-    @OneToMany(mappedBy = "student")
-    private List<SemGrade> semGrade;
 
     //수강생 학년
     @Column(name = "stud_grade")

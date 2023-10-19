@@ -10,8 +10,7 @@ import org.hibernate.annotations.ColumnDefault;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "board_info")
-@Getter
-@Setter
+@Getter @Setter
 @Entity
 @ToString
 public class BoardInfo {

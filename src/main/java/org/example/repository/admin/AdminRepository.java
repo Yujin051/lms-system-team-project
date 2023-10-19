@@ -267,7 +267,7 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 해당 게시글 번호의 게시글 내용 조회
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
-            "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType) " +
+            "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
             "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id " +

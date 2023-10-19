@@ -28,8 +28,8 @@
     align-items: center;
 }
 .post_write_body > .post_write_btn_box > .post_write_box button{
-    background: #6b6b6b; color: white; border: none; width: 50px; height: 30px;
-    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 30px;
+    background: #6b6b6b; color: white; border: none; width: 50px; height: 35px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 35px;
 }
 .post_write_body > .post_write_btn_box > .post_write_box button:hover{
     opacity: 0.9;
@@ -257,9 +257,15 @@
     border-left: 1px solid #cccccc; width: 50%; display: flex; align-items: center;
 }
 .post_content_box > .post_content > .post_content_right_box > .post_content_board_type_box > .post_content_board_type input{
-    margin-left: 10px; width: 351px; height: 35px; border-radius: 5px;
+    margin-left: 10px; width: 171px; height: 35px; border-radius: 5px;
     border: 1px solid #cccccc; outline: none; text-indent: 5px;
+    background: #cccccc;
 }
+.post_content_box > .post_content > .post_content_right_box > .post_content_board_type_box > .post_content_board_type select {
+    width: 171px; height: 35px; border-radius: 5px; outline: none; text-indent: 5px;
+    margin-left: 10px; cursor: pointer;
+}
+
 
 /*공개여부*/
 .post_content_box > .post_content > .post_content_right_box > .post_content_is_locked_box {

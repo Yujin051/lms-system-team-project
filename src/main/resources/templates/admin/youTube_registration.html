@@ -10,15 +10,15 @@
 
 <div id="mainFrame" layout:fragment="content">
     <div class="">
-        <form class="d-flex justify-content-end m-2">
-            <button type="button" class="me-md-1 btn btn-secondary">조회</button>
-            <button type="button" class="me-md-1 btn btn-secondary">신규</button>
-            <button type="button" class="me-md-1 btn btn-secondary">저장</button>
-            <button type="button" class="btn btn-secondary">삭제</button>
+        <form class="d-flex justify-content-end m-2 btns">
+            <button type="button" id="search" class="me-md-1 btn btn-secondary">조회</button>
+            <button type="button" id="upload" class="me-md-1 btn btn-secondary">신규</button>
+            <button type="button" id="save" class="me-md-1 btn btn-secondary">저장</button>
+            <button type="button" id="delete" class="btn btn-secondary">삭제</button>
         </form>
 
         <div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
-            <div class="col">
+            <div class="col contents_name_box">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="s1">콘텐츠명</span>
@@ -27,9 +27,9 @@
                 </div>
             </div>
             <div class="col mt-2">
-                <div class="input-group">
+                <div class="input-group" style="align-items: center">
                     <div class="input-group-prepend">
-                        <span class="m-3 p-5">교과목명</span>
+                        <span class="m-3 p-5 contents_subject_name">교과목명</span>
                     </div>
                     <input class="form-control" type="search" placeholder="교과목명 검색" aria-label="Search">
                 </div>
@@ -39,29 +39,13 @@
         <div class="table-button-container border border-0">
             <div class="d2 border border-0">온라인콘텐츠 검색결과</div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="me-md-1 btn btn-secondary">업로드 인증</button>
-                <button type="button" id="login-button" class="btn btn-secondary">API 인증</button>
+                <button type="button" id="getDuration" class="me-md-1 btn btn-secondary">시간 갱신</button>
+                <button type="button" id="api-auth" class="btn btn-secondary">API 인증</button>
             </div>
         </div>
 
         <div class="tbl1">
             <div id="grid"></div>
-            <nav aria-label="Page navigation example">
-                <ul class="pg2 pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
         <input type="hidden" class="magId" th:value="${magId}"/>
         <table class="right-align">
@@ -69,37 +53,76 @@
             <tbody class="tbl2 border border-1">
 
             <tr>
-                <th class="border border-1 wider-th">콘텐츠괸리번호</th>
+                <th class="border border-1 wider-th">콘텐츠관리번호</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsNo" class="sfc form-control" type="search" aria-label="Search" readonly>
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">콘텐츠명*</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsName" class="sfc form-control" type="search" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">콘텐츠설명</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsDetail" class="sfc form-control" type="search" aria-label="Search">
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">YouTube연동번호*</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsYout" class="sfc form-control" type="reed" aria-label="Search" readonly>
                 </td>
             </tr>
             <tr>
                 <th class="border border-1 wider-th">차시 학습시간(초)</th>
                 <td class="border border-1 border-dark-subtle">
-                    <input class="sfc form-control" type="search" aria-label="Search">
+                    <input id="contsTime" class="sfc form-control" type="search" aria-label="Search" readonly>
                 </td>
             </tr>
             </tbody>
         </table>
+
+        <!-- 신규 버튼 클릭 시 업로드 창 -->
+        <div class="modalWrap" style="display: none;">
+            <div class="modal" style="display: none;">
+                <div class="upload_text_box">
+                    <div class="upload_text"><span><i class="fa-solid fa-cloud-arrow-up"></i></span></div>
+                </div>
+                <div class="upload_main">
+                    <form id="videoUpload" method="post" enctype="multipart/form-data">
+                        <div class="upload_title_text">
+                            <span>제목</span>
+                        </div>
+                        <div class="upload_title_input_box">
+                            <input type="text" name="title">
+                        </div>
+                            <div class="upload_detail_text">
+                                <span>설명</span>
+                            </div>
+                        <div class="upload_detail_textarea_box">
+                            <textarea name="detail"></textarea>
+                        </div>
+                        <div class="upload_file_text">
+                            <span>파일</span>
+                        </div>
+                        <div class="upload_file_input">
+                            <input type="file" name="file"/>
+                        </div>
+                        <div class="upload_btn_box">
+                            <div class="upload_exit">
+                                <button id="upExit" type="button">취소</button>
+                            </div>
+                            <div class="upload_btn">
+                                <button id="upClose" type="button">업로드</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
     <script src="/js/admin/youTube_registration.js"></script>

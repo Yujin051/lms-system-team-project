@@ -66,4 +66,6 @@ public class StudLectProg {
         this.checkDate = checkDate;
         this.progress = progress;
     }
+
+
 }
