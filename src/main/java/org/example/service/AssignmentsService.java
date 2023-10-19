@@ -73,4 +73,12 @@ public class AssignmentsService {
 //    public List<Assignments> assignmentViewByLectId(long id) {
 //        return assignmentsRepository.findByLectInfoLectId(id);
 //    }
+
+    public Assignments AssignmentsView(Long id) {
+        return assignmentsRepository.findById(id).get();
+    }
+
+    public void assiDelete(long id) {
+        assignmentsRepository.deleteById(id);
+    }
 }

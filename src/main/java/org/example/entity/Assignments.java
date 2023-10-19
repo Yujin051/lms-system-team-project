@@ -73,7 +73,7 @@ public class Assignments {
         this.savedFilename = savedFilename;
     }
 
-    public static Assignments createAssignments(Assignments assignmentsDto) {
+    public static Assignments createAssignments(AssignmentsDto assignmentsDto) {
         Assignments assignments = Assignments.builder()
                 .lectInfo(assignmentsDto.getLectInfo())
                 .name(assignmentsDto.getName())

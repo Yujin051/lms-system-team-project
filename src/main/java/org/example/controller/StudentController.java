@@ -276,8 +276,6 @@ public class StudentController {
         Member member = memberService.memberView(loginId);
         Student student = studentRepository.findByMember(member);
         LectInfo lectInfo = lectInfoRepository.findById(lectId).orElseThrow();
-
-
         lectInfo.minus();
         student.setStudNowCr(student.getStudNowCr() - lectCredit);
 
