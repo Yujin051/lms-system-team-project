@@ -34,4 +34,16 @@ public class LmsConts {
 
     @Column(name = "conts_yout")
     private String contsYout;
+
+    // 양방향 매핑, 컨텐츠 삭제할 때 차시정보 같이 삭제하도록
+    @OneToOne(cascade = CascadeType.REMOVE ,mappedBy = "lmsConts")
+    private LectNth lectNth;
+
+    public LmsConts(Long contsNo, String contsName, String contsDetail, int contsTime, String contsYout) {
+        this.contsNo = contsNo;
+        this.contsName = contsName;
+        this.contsDetail = contsDetail;
+        this.contsTime = contsTime;
+        this.contsYout = contsYout;
+    }
 }

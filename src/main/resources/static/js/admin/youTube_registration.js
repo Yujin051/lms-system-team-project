@@ -103,7 +103,7 @@ mWrap.addEventListener('click', (e) => {
 // ajax로 비디오 업로드 처리
 const uploadBtn = document.querySelector("#upClose")
 const vidUpload = document.querySelector("#videoUpload")
-const url = "/youtubeUpload"
+const url = "/youtube/vidUpload"
 uploadBtn.addEventListener('click', () => {
     let formData = new FormData(vidUpload)
     console.log(formData)
@@ -146,7 +146,7 @@ uploadBtn.addEventListener('click', () => {
 const save = document.querySelector("#save")
 save.addEventListener('click', () => {
 
-    const url = "/youtubeUpdate"
+    const url = "/youtube/vidUpdate"
 
     let id = document.querySelector("#contsNo")
     let name = document.querySelector("#contsName")
@@ -179,7 +179,7 @@ dCheck.addEventListener('click', () => {
 
     let yout = document.querySelector("#contsYout")
     let time = document.querySelector("#contsTime")
-    const url = "/getDuration"
+    const url = "/youtube/getDuration"
 
     $.ajax({
         url: url,

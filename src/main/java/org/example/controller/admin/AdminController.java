@@ -9,7 +9,6 @@ import org.example.dto.admin.LectDto;
 import org.example.dto.admin.MemberDto;
 import org.example.dto.admin.PostDto;
 import org.example.dto.admin.StudLectProgDto;
-import org.example.entity.BoardArticle;
 import org.example.service.LectNthService;
 import org.example.service.admin.AdminService;
 import org.example.service.admin.YoutubeService;
@@ -22,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -60,10 +58,10 @@ public class AdminController {
     public String adminStudent(Model model) {
         List<MemberDto> student = adminService.getStudentInfo();
         List<MemberDto> studentOne = adminService.getBasicInfo();
-        MemberDto studCreCplAvg = adminService.getStudCreCplAvg();
+//        MemberDto studCreCplAvg = adminService.getStudCreCplAvg();
         model.addAttribute("student", student);
         model.addAttribute("st", studentOne);
-        model.addAttribute("avg", studCreCplAvg);
+//        model.addAttribute("avg", studCreCplAvg);
         return "/admin/admin_student_manage";
     }
 

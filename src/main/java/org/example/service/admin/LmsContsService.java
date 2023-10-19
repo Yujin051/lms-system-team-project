@@ -1,6 +1,7 @@
 package org.example.service.admin;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.admin.LmsContsDto;
 import org.example.entity.LectInfo;
@@ -17,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class LecContsService {
+public class LmsContsService {
 
     private final LmsContsRepository lmsContsRepository;
     private final LectNthRepository lectNthRepository;
@@ -113,6 +114,7 @@ public class LecContsService {
 
 
     // 컨텐츠 정보 업데이트하기
+    @Transactional
     public void updateConts(Long contsNo, String title, String detail) {
 
         LmsConts lmsConts = lmsContsRepository.findById(contsNo)
@@ -125,6 +127,7 @@ public class LecContsService {
         lmsContsRepository.save(lmsConts);
     }
 
+    @Transactional
     // 총 재생시간 갱신
     public void updateTime(String videoId, int duration) {
         LmsConts lmsConts = lmsContsRepository.findByContsYout(videoId);
@@ -133,5 +136,12 @@ public class LecContsService {
         lmsConts.setContsTime(duration);
 
         lmsContsRepository.save(lmsConts);
+    }
+
+    // 컨텐츠 삭제
+    @Transactional
+    public void deleteConts(String videoId) {
+        LmsConts lmsConts = lmsContsRepository.findByContsYout(videoId);
+        lmsContsRepository.delete(lmsConts);
     }
 }

@@ -1,5 +1,4 @@
 const dataSource = {
-    contentType: 'application/json',
     api: {
         readData: {
             url: '/api/getlecturelist', method: 'GET'

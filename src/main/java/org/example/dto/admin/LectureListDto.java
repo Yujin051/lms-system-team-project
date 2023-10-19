@@ -1,15 +1,20 @@
 package org.example.dto.admin;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Data
 public class LectureListDto {
+
+    // 강좌리스트 필드
     private boolean isActive;
     private String lectName;
     private int lectElem;
@@ -19,6 +24,8 @@ public class LectureListDto {
     private LocalDateTime lectStart;
     private LocalDateTime lectEnd;
     private String userName;
+
+
     private LocalDateTime enrollStart;
     private LocalDateTime enrollEnd;
     private Long lectAssign;
@@ -28,6 +35,7 @@ public class LectureListDto {
     private Long lectMaxNum;
     private String lectYear;
     private String lectSem;
+
 
     public LectureListDto(boolean isActive, String lectName, int lectElem, Long lectCredit, String lectSubject, Long lectId, LocalDateTime lectStart, LocalDateTime lectEnd, String userName) {
         this.isActive = isActive;

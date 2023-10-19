@@ -18,9 +18,11 @@ import com.google.api.services.youtube.model.VideoStatus;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.groovy.tools.shell.IO;
 import org.example.dto.admin.StudLectProgDto;
 import org.example.entity.StudLectProg;
 import org.example.repository.admin.StudLectProgRepository;
@@ -252,32 +254,31 @@ public class YoutubeService {
         }
     }
 
-    // 기본 설정 초기화
-    // @PostCostruct는 의존성 주입이 완료된 후 한 번 실행됨.
-    @PostConstruct
-    public void setDefault() {
-        // 사용할 clientSecret 탐색하기
-        String clientSecretUrl = "C:\\app\\java\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\client_secrets.json";
-        // 경로에 파일이 없다면 에러메세지 출력?
-        Objects.requireNonNull(clientSecretUrl, "classpath:OAuthClientSecret/client_secrets.json 파일이 없습니다.");
+    // 비디오 삭제
+    public void deleteVideo(String videoId) throws IOException, GoogleJsonResponseException {
+        // 인증정보 가져오기
+        Credential credential = getUserCredential();
+        Objects.requireNonNull(credential, "먼저 API 인증을 진행해주세요.");
+        try{
+        // 유튜브 객체 생성
+        YouTube youtube = new YouTube.Builder(HTTP_TRANSPORT, GSON_FACTORY, credential)
+                .setApplicationName("lmsapp")
+                .build();
 
-        try (Reader reader = new FileReader(clientSecretUrl)) {
-            // Client secret 가져오기
-            this.clientSecrets = GoogleClientSecrets.load(GSON_FACTORY, reader);
-
-            // client_secrets.json 내부에 필요한 값이 존재하지 않는다면 예외처리
-            if (clientSecrets.getDetails().getClientId().startsWith("Enter")
-                    || clientSecrets.getDetails().getClientSecret().startsWith("Enter")) {
-                String msg = "https://console.developers.google.com/project/_/apiui/credential 에서 Client ID와 secret를 찾아서"
-                        + "src/main/resources/OAuthClientSecret/client_secrets.json 에 넣어주세요";
-                log.error(msg);
-                throw new IOException(msg);
-            }
-        } catch (IOException e) {
-            // 이 값 없이 API는 동작할 수 없으므로 RuntimeException
+        // 유튜브로 비디오 삭제 요청 생성 후 전달
+        YouTube.Videos.Delete request = youtube.videos().delete(videoId);
+        request.execute();
+        } catch(GoogleJsonResponseException e) {
+            throw e;
+        } catch(IOException e) {
+            log.error("삭제할 비디오 정보를 가져올 수 없습니다.");
             throw new RuntimeException(e);
         }
     }
+
+
+
+
 
     // 수강생차시진도 기본키 조회
     public StudLectProgDto getFindMagId() {
@@ -325,5 +326,33 @@ public class YoutubeService {
         studLectProg.setProgress(progress); //출석률 저장
         studLectProgRepository.save(studLectProg); // 데이터베이스에 저장
         return progress;
+    }
+
+
+    // 기본 설정 초기화
+    // @PostCostruct는 의존성 주입이 완료된 후 한 번 실행됨.
+    @PostConstruct
+    public void setDefault() {
+        // 사용할 clientSecret 탐색하기
+        String clientSecretUrl = "C:\\app\\java\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\client_secrets.json";
+        // 경로에 파일이 없다면 에러메세지 출력?
+        Objects.requireNonNull(clientSecretUrl, "classpath:OAuthClientSecret/client_secrets.json 파일이 없습니다.");
+
+        try (Reader reader = new FileReader(clientSecretUrl)) {
+            // Client secret 가져오기
+            this.clientSecrets = GoogleClientSecrets.load(GSON_FACTORY, reader);
+
+            // client_secrets.json 내부에 필요한 값이 존재하지 않는다면 예외처리
+            if (clientSecrets.getDetails().getClientId().startsWith("Enter")
+                    || clientSecrets.getDetails().getClientSecret().startsWith("Enter")) {
+                String msg = "https://console.developers.google.com/project/_/apiui/credential 에서 Client ID와 secret를 찾아서"
+                        + "src/main/resources/OAuthClientSecret/client_secrets.json 에 넣어주세요";
+                log.error(msg);
+                throw new IOException(msg);
+            }
+        } catch (IOException e) {
+            // 이 값 없이 API는 동작할 수 없으므로 RuntimeException
+            throw new RuntimeException(e);
+        }
     }
 }

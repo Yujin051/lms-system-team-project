@@ -5,11 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.DynamicUpdate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 /**
  * 강좌정보 엔티티
@@ -101,7 +98,7 @@ public class LectInfo {
     @Builder
     public LectInfo(Long lectId, String lectName, String lectSubject, String lectYear,
                     String lectSem, Long lectCredit, Long lectMaxnum, Long lectNownum,
-                    LocalDateTime lectStart, LocalDateTime lectEnd, Boolean isActive,
+                    LocalDateTime lectStart, LocalDateTime lectEnd, boolean isActive,
                     Long lectAssign, Long lectCheck, Long lectTest) {
         this.lectId = lectId;
         this.lectName = lectName;

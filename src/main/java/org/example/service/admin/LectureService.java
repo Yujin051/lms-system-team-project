@@ -47,7 +47,7 @@ public class LectureService {
 
         // 찾아온 교수 객체와 넘어온 필드값으로 새로운 강좌 생성
         LectInfo lectInfo = LectInfo.builder().professor(professor).lectName(lectName).lectSubject(lectSubject)
-                .lectYear(lectYear).lectSem(lectSem).lectCredit(lectCredit).lectNowNum(lectNowNum).lectMaxNum(lectMaxNum)
+                .lectYear(lectYear).lectSem(lectSem).lectCredit(lectCredit).lectNownum(lectNowNum).lectMaxnum(lectMaxNum)
                 .lectStart(lectStart).lectEnd(lectEnd).enrollStart(enrollStart).enrollEnd(enrollEnd).isActive(isActive)
                 .lectAssign(lectAssign).lectCheck(lectCheck).lectTest(lectTest).lectElem(lectElem).build();
 
@@ -57,7 +57,7 @@ public class LectureService {
     // 기존 강좌 수정
     @Transactional
     public void updateLecture(Long lectId, String profName, String lectName, String lectSubject, String lectYear,
-                              String lectSem, Long lectCredit, Long lectNowNum, Long lectMaxNum,
+                              String lectSem, Long lectCredit, Long lectNownum, Long lectMaxnum,
                               LocalDateTime lectStart, LocalDateTime lectEnd, LocalDateTime enrollStart,
                               LocalDateTime enrollEnd, boolean isActive, Long lectAssign, Long lectCheck,
                               Long lectTest, int lectElem) {
@@ -75,8 +75,8 @@ public class LectureService {
         lecture.setLectYear(lectYear);
         lecture.setLectSem(lectSem);
         lecture.setLectCredit(lectCredit);
-        lecture.setLectNowNum(lectNowNum);
-        lecture.setLectMaxNum(lectMaxNum);
+        lecture.setLectNownum(lectNownum);
+        lecture.setLectMaxnum(lectMaxnum);
         lecture.setLectStart(lectStart);
         lecture.setLectEnd(lectEnd);
         lecture.setEnrollStart(enrollStart);

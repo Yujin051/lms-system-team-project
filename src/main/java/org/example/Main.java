@@ -41,11 +41,33 @@ public class Main implements CommandLineRunner {
 //        memberRepository.save(new Member("prof",PasswordEncoder.encode("123123"),"","","","", LocalDate.of(2023,1,1),LocalDate.of(2023,1,1), Gender.MALE,RoleType.TEACHER));
         // 멤버객체
         Member member = memberRepository.save(new Member("student",PasswordEncoder.encode("123123"),"학생1","01066669999","학생네집","student@stud.com", LocalDate.of(2023,1,1),LocalDate.of(2023,1,1), Gender.MALE,RoleType.USER));
-
+//        INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+//                user_addr, user_role, user_id, user_pw)
+//        VALUES ('홍길동', NOW(), 'MALE', '010-1234-5678', 'ghdrlfehd@naver.com', 'asdqw', 'USER', 'asd', '111');
+//        INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+//                user_addr, user_role, user_id, user_pw)
+//        VALUES ('이순신', NOW(), 'MALE', '010-7978-2132', 'dltnstls@naver.com', 'asdqw', 'USER', 'asd1', '513');
+//        INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+//                user_addr, user_role, user_id, user_pw)
+//        VALUES ('스폰지밥', NOW(), 'MALE', '010-9997-6546', 'tmvhswlqkq@naver.com', 'asdqw', 'USER', 'asd13', '624234');
+//        INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+//                user_addr, user_role, user_id, user_pw)
+//        VALUES ('뚱이', NOW(), 'MALE', '010-8795-7912', 'Enddl@naver.com', 'asdqw', 'USER', 'asd1341', '632');
+//        INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+//                user_addr, user_role, user_id, user_pw)
+//        VALUES ('징징이', NOW(), 'MALE', '010-8878-9993', 'wldwlddl@naver.com', 'asdqw', 'USER', 'asd133151', '666');
+//        INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+//                user_addr, user_role, user_id, user_pw)
+//        VALUES ('다람이', NOW(), 'FEMALE', '010-2212-1131', 'ekfkadl@naver.com', 'asdqw', 'USER', 'asd1151', '111223');
+//        INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+//                user_addr, user_role, user_id, user_pw)
+//        VALUES ('신민기', NOW(), 'MALE', '010-6798-7952', 'tlsalsrl@naver.com', '김포', 'USER', 'tlsalsrl0421', 'asdasd1');
+//        INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+//                user_addr, user_role, user_id, user_pw)
         // 학생객체
-        Student student = studentRepository.save(new Student(1L, member, 2L, 19L, 18L, 18L));
-        Student student1 = studentRepository.save(new Student(2L, memberRepository.save(new Member("student1",PasswordEncoder.encode("123123"),"학생2","01066669999","학생네집","student@stud.com", LocalDate.of(2023,1,1),LocalDate.of(2023,1,1), Gender.MALE,RoleType.USER)), 2L, 19L, 18L, 18L));
-        Student student2 = studentRepository.save(new Student(3L,  memberRepository.save(new Member("student2",PasswordEncoder.encode("123123"),"학생3","01066669999","학생네집","student@stud.com", LocalDate.of(2023,1,1),LocalDate.of(2023,1,1), Gender.MALE,RoleType.USER)), 2L, 19L, 18L, 18L));
+        Student student = studentRepository.save(new Student(member, 2L, 19L, 18L, 18L));
+        Student student1 = studentRepository.save(new Student(memberRepository.save(new Member("student1",PasswordEncoder.encode("123123"),"학생2","01066669999","학생네집","student@stud.com", LocalDate.of(2023,1,1),LocalDate.of(2023,1,1), Gender.MALE,RoleType.USER)), 2L, 19L, 18L, 18L));
+        Student student2 = studentRepository.save(new Student(memberRepository.save(new Member("student2",PasswordEncoder.encode("123123"),"학생3","01066669999","학생네집","student@stud.com", LocalDate.of(2023,1,1),LocalDate.of(2023,1,1), Gender.MALE,RoleType.USER)), 2L, 19L, 18L, 18L));
 
         professorRepository.save(new Professor(memberRepository.save(new Member("prof",PasswordEncoder.encode("123123"),"선생1","01012345678","서울","prof@prof.com", LocalDate.of(2023,1,1),LocalDate.of(2023,1,1), Gender.MALE,RoleType.TEACHER)),"소속기관1","00은행","직무1","111-222-333333",true));
         professorRepository.save(new Professor(memberRepository.save(new Member("prof1",PasswordEncoder.encode("123123"),"선생2","01012345698","서울","prof@prof.com", LocalDate.of(2023,1,1),LocalDate.of(2023,1,1), Gender.MALE,RoleType.TEACHER)),"소속기관1","00은행","언어","111-222-333333",false));
@@ -79,4 +101,5 @@ public class Main implements CommandLineRunner {
         lectNthRepository.save(new LectNth(1L, lectInfo, lmsConts, "강좌3 차시1", 1L));
 
 
+    }
 }

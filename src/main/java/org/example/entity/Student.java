@@ -48,4 +48,11 @@ public class Student {
     @Column(name = "stud_crecpl")
     private Long studCreCpl;
 
+    public Student(Member member, Long studGrade, Long studMaxCr, Long studNowCr, Long studCreCpl) {
+        this.member = member;
+        this.studGrade = studGrade;
+        this.studMaxCr = studMaxCr;
+        this.studNowCr = studNowCr;
+        this.studCreCpl = studCreCpl;
+    }
 }

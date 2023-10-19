@@ -5,8 +5,6 @@ import org.example.entity.LectInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.parameters.P;
-
 import java.util.List;
 
 public interface LectureRepository extends JpaRepository<LectInfo, Long> {
@@ -20,8 +18,8 @@ public interface LectureRepository extends JpaRepository<LectInfo, Long> {
     // 상세정보 불러오는 쿼리
     @Query("SELECT new org.example.dto.admin.LectureListDto(l.isActive, l.lectName, l.lectElem, " +
             "l.lectCredit, l.lectSubject, l.lectId, l.lectStart, l.lectEnd, p.member.userName, " +
-            "l.enrollStart, l.enrollEnd, l.lectAssign, l.lectCheck, l.lectTest, l.lectNowNum, " +
-            "l.lectMaxNum, l.lectYear, l.lectSem)" +
+            "l.enrollStart, l.enrollEnd, l.lectAssign, l.lectCheck, l.lectTest, l.lectNownum, " +
+            "l.lectMaxnum, l.lectYear, l.lectSem)" +
             " from LectInfo l JOIN Professor p ON l.professor.id = p.id WHERE l.lectId = :lectId")
     LectureListDto findLecture(@Param("lectId") Long lectId);
 
