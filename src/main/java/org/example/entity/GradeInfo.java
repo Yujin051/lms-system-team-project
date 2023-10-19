@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 /**
  * 강좌성적 엔티티
@@ -17,6 +18,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Table(name = "grade_info")
 @NoArgsConstructor
 @AllArgsConstructor
+@DynamicInsert
 public class GradeInfo {
 
     //성적ID
@@ -30,16 +32,6 @@ public class GradeInfo {
     @JoinColumn(name = "apply_id")
     private StudLectApply studLectApply;
 
-    //강좌ID
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lect_id")
-    private LectInfo lectInfo;
-
-    //수강생ID
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stud_id")
-    private Student student;
-
     //평가등급
     @Column(name = "grade")
     @ColumnDefault("''")
@@ -47,19 +39,17 @@ public class GradeInfo {
 
     //출석점수
     @Column(name = "check_score")
-    @ColumnDefault("''")
-
+    @ColumnDefault("0")
     private Long checkScore;
 
     //과제점수
     @Column(name = "assign_score")
-    @ColumnDefault("''")
-
+    @ColumnDefault("0")
     private Long assignScore;
 
     //시험점수
     @Column(name = "test_score")
-    @ColumnDefault("''")
+    @ColumnDefault("0")
     private Long testScore;
 
 //

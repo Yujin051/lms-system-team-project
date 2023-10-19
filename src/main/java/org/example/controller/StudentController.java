@@ -232,8 +232,6 @@ public class StudentController {
 
                     GradeInfo gradeInfo = GradeInfo.builder()
                             .studLectApply(stud1)
-                            .student(student)
-                            .lectInfo(lectInfo)
                             .build();
 
                     gradeInfoRepository.save(gradeInfo);
@@ -272,9 +270,28 @@ public class StudentController {
         Member member = memberService.memberView(loginId);
         Student student = studentRepository.findByMember(member);
         LectInfo lectInfo = lectInfoRepository.findById(lectId).orElseThrow();
+
+
         lectInfo.minus();
         student.setStudNowCr(student.getStudNowCr() - lectCredit);
-        studLectApplyRepository.deleteById(applyId);
+
+        StudLectApply studLectApply = studLectApplyRepository.findById(applyId).orElse(null);
+
+        if (studLectApply != null) {
+            // 부모 엔티티에서 자식 엔티티를 가져옴
+            GradeInfo gradeInfos = gradeInfoRepository.findByStudLectApply(studLectApply);
+
+            if (gradeInfos != null) {
+                // 자식 엔티티를 삭제할게요.
+                gradeInfoRepository.delete(gradeInfos);
+            }
+            // 부모엔티티를 삭제할게요.
+            studLectApplyRepository.deleteById(applyId);
+        }
+
+
+
+
         model.addAttribute("message", "취소되었습니다.");
         model.addAttribute("SearchUrl", "/student/scr");
         model.addAttribute("list", studentService.lectInfoList());

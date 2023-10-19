@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +9,7 @@ import org.example.dto.AssignmentsDto;
 import org.example.dto.LectInfoDTO;
 import org.example.dto.ProfessorDto;
 import org.example.entity.*;
-import org.example.repository.AssignmentsRepository;
-import org.example.repository.LectInfoRepository;
-import org.example.repository.MemberRepository;
-import org.example.repository.ProfessorRepository;
+import org.example.repository.*;
 import org.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +55,7 @@ public class ProfessorController {
     private final AssignmentsRepository assignmentsRepository;
     private final LectureService lectureService;
 
+    private final GradeInfoRepository gradeInfoRepository;
     private final LectInfoRepository lectInfoRepository;
     private final AssignSubmitService assignSubmitService;
     private final StudentService studentService;
@@ -291,11 +290,26 @@ public class ProfessorController {
     @RequestMapping(value = "/assiGrade/write", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<?> findEnteringGrade(@RequestParam String lectId) {
-        log.info("lect아이디는?", lectId);
+    //    log.info("lect아이디는?", lectId);
         Long LongLectId = Long.valueOf(lectId);
         List<EnteringGradeDto> enteringGradeDtoList = professorService.EnteringGradeCheckList(LongLectId);
-        log.info("디티오는?, {}", enteringGradeDtoList.toString());
+    //    log.info("디티오는?, 1: {}, 2: {}", enteringGradeDtoList.get(0).toString());
         return ResponseEntity.status(HttpStatus.OK).body(enteringGradeDtoList);
+    }
+
+    @PostMapping("/assiGrade/enter")
+    public String assiGradeEnter(Model model, @RequestParam("gradeId") Long gradeId, @RequestParam("checkScore") Long checkScore, @RequestParam("assignScore") Long assignScore, @RequestParam("testScore") Long testScore){
+       log.info("아무거나떠라?", gradeId);
+        log.info("아무거나떠라?", assignScore);
+       log.info("아무거나떠라?", checkScore);
+        log.info("아무거나떠라?", testScore);
+        GradeInfo gradeInfoEnter = gradeInfoRepository.findById(gradeId).orElseThrow(EntityNotFoundException::new);
+        gradeInfoEnter.setAssignScore(assignScore);
+        gradeInfoEnter.setCheckScore(checkScore);
+        gradeInfoEnter.setTestScore(testScore);
+        model.addAttribute("message", "등록되었습니다.");
+        model.addAttribute("SearchUrl", "/prof/assiGrade");
+        return "Message";
     }
 
     @GetMapping("/onlineclass")

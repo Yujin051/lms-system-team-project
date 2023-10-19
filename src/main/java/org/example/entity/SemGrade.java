@@ -42,7 +42,7 @@ public class SemGrade {
 
     // 학기별 평균학점
     @Column(name = "sem_avg_crecpl")
-    private Long semAvgCrecpl;
+    private Float semAvgCrecpl;
 
     @Builder
     public SemGrade(Student student, String semYear, String semSem) {

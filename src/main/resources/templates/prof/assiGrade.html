@@ -29,7 +29,10 @@
                     <tr th:each="lectInfo : ${list}">
                         <td th:text="${lectInfo.lectId}">2023-S25</td>
                         <td th:text="${lectInfo.lectName}">자바의 정석</td>
-                        <td th:text="${lectInfo.isRecord}">Y</td>
+                        <td>
+                            <span th:if="${lectInfo.isRecord}">Y</span>
+                            <span th:if="${not lectInfo.isRecord}">N</span>
+                        </td>
                         <td>
                             <button class="ajax_button" th:attr="data-lect-id = ${lectInfo.lectId}"  type="button" id="toDetail">
                             작성하기
@@ -47,6 +50,7 @@
                 </div>
 
 
+                <form id="gradeForm" action="/prof/assiGrade/enter" method="POST">
                 <table class="assi_grade_body_stud_tb_body">
                     <thead>
                         <tr>
@@ -60,6 +64,7 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <input type="hidden" id="lectId" name="lectId" value="여기에_lectId_값_동적으로_설정">
                             <td id="userName"></td>
                             <td id="userEmail"></td>
                             <td id="checkScore"></td>
@@ -70,11 +75,12 @@
                     </tbody>
                 </table>
                 <div class="assi_grade_reg_btn_box">
-                    <button type="button" id="regBtn">등록</button>
+                    <button type="submit" id="regBtn">등록</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
-    <script src="/js/stud/assiGrade.js"></script>
+    <script src="/js/prof/assiGrade.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </div>
