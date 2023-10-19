@@ -43,4 +43,26 @@ public class Assignments {
     @Column(name = "is_submit")
     private boolean isSubmit;
 
+    // 교수가 제출하는 과제에 첨부하는 과제파일
+    @Column(name = "origin_filename")
+    private String originFilename;
+
+    @Column(name = "saved_filename")
+    private String savedFilename;
+
+
+    public Assignments(LectInfo lectInfo, String name, String detail, LocalDateTime start, LocalDateTime end, boolean isActive, boolean isSubmit, String originFilename, String savedFilename) {
+        this.lectInfo = lectInfo;
+        this.name = name;
+        this.detail = detail;
+        this.start = start;
+        this.end = end;
+        this.isActive = isActive;
+        this.isSubmit = isSubmit;
+        this.originFilename = originFilename;
+        this.savedFilename = savedFilename;
+    }
+
+
+
 }

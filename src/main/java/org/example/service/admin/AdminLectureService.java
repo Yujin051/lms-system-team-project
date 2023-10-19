@@ -9,16 +9,14 @@ import org.example.entity.Professor;
 import org.example.repository.LectureRepository;
 import org.example.repository.ProfessorRepository;
 import org.json.JSONObject;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class LectureService {
+public class AdminLectureService {
     private final LectureRepository lectureRepository;
     private final ProfessorRepository professorRepository;
 

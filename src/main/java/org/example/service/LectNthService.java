@@ -3,13 +3,12 @@ package org.example.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.LectInfoDto;
 import org.example.dto.LectNthDto;
 import org.example.dto.LmsContsDto;
 import org.example.entity.LectInfo;
 import org.example.entity.LectNth;
 import org.example.entity.LmsConts;
-import org.example.repository.admin.LectInfoRepository;
+import org.example.repository.admin.AdminLectInfoRepository;
 import org.example.repository.LectNthRepository;
 import org.example.repository.LmsContsRepository;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class LectNthService {
 
     private final LectNthRepository lectNthRepository;
     private final LmsContsRepository lmsContsRepository;
-    private final LectInfoRepository lectInfoRepository;
+    private final AdminLectInfoRepository adminLectInfoRepository;
 
     public List<LectNthDto> lectNthList(String searchType, Boolean nthKeyword) {
         return lectNthRepository.findLectNthDtos(searchType, nthKeyword);
@@ -63,14 +62,14 @@ public class LectNthService {
     }
     // 온라인 강의 조회
     public List<LectNthDto> getFindLectInfo2() {
-        return lectInfoRepository.findLectInfo2();
+        return adminLectInfoRepository.findLectInfo2();
     }
 
     /* 하단 우측 3번째 테이블 create (저장) */
     @Transactional
     public void createLectNth(LectNthDto lectNthDto) {
         log.info("getLectId : " + lectNthDto.getLectId());
-        LectInfo lectInfo = lectInfoRepository.findById(lectNthDto.getLectId())
+        LectInfo lectInfo = adminLectInfoRepository.findById(lectNthDto.getLectId())
                 .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
         log.info("lectinfo : {}", lectInfo.toString());
 
@@ -89,7 +88,7 @@ public class LectNthService {
     @Transactional
     public void updateLectNth(LectNthDto lectNthDto) {
 
-        LectInfo lectInfo = lectInfoRepository.findById(lectNthDto.getLectId())
+        LectInfo lectInfo = adminLectInfoRepository.findById(lectNthDto.getLectId())
                 .orElseThrow(() -> new IllegalArgumentException(" 게시판 정보를 찾을 수 없어"));
         log.info("lectInfo : " + lectInfo.getLectName());
 

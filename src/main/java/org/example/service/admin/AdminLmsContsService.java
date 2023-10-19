@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class LmsContsService {
+public class AdminLmsContsService {
 
     private final LmsContsRepository lmsContsRepository;
     private final LectNthRepository lectNthRepository;
@@ -91,6 +91,13 @@ public class LmsContsService {
         data.put("pagination", pagination);
         return object;
     }
+
+    // 검색 서비스
+    public List<LmsContsDto> searchConts(String contsName, String lectName) {
+        // 검색하는 서비스
+        return lmsContsRepository.searchByContsNameAndLectName(contsName, lectName);
+    }
+
 
     // 하나의 컨텐츠 상세정보 얻어오기
     public LmsContsDto getDetail(Long contsNo) {

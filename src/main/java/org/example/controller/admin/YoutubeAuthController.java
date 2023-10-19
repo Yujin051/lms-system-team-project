@@ -1,7 +1,7 @@
 package org.example.controller.admin;
 
 import lombok.RequiredArgsConstructor;
-import org.example.service.admin.YoutubeService;
+import org.example.service.admin.AdminYoutubeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +12,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class YoutubeAuthController {
 
-    private final YoutubeService youtubeService;
+    private final AdminYoutubeService adminYoutubeService;
 
     // 버튼 눌렀을 때 인증 토큰 얻어오는 컨트롤러
     @GetMapping("/youtubeAPIAuth")
@@ -31,7 +31,7 @@ public class YoutubeAuthController {
     public String youtubeToken(@RequestParam(name = "code") String code, Principal principal) {
 
         // api에서 응답받은 코드로 세션에 유저 인증 정보 credential 저장
-        youtubeService.createAndStoreCredential(code, principal);
+        adminYoutubeService.createAndStoreCredential(code, principal);
 
         return "redirect:/admin/ytr";
     }

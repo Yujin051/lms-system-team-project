@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface LectInfoRepository extends JpaRepository<LectInfo, Long> {
+public interface AdminLectInfoRepository extends JpaRepository<LectInfo, Long> {
 
     // 관리자 - 온라인강의수강현황 : 학습강좌 조회
     @Query("SELECT NEW org.example.dto.admin.LectDto" +

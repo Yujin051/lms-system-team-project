@@ -4,13 +4,12 @@ import org.example.dto.admin.StudLectProgDto;
 import org.example.entity.StudLectProg;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface StudLectProgRepository extends JpaRepository<StudLectProg, Long> {
+public interface AdminStudLectProgRepository extends JpaRepository<StudLectProg, Long> {
 
     // 수강생차시진도 기본키, 최대재생시간, 최종재생시간 조회
     @Query("SELECT NEW org.example.dto.admin.StudLectProgDto " +
