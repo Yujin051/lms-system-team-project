@@ -3,10 +3,7 @@ package org.example.controller.board;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.constant.RoleType;
-import org.example.dto.board.ClassListDto;
-import org.example.dto.board.DirectMsgDto;
-import org.example.dto.board.MsgPageDto;
-import org.example.dto.board.PageDto;
+import org.example.dto.board.*;
 import org.example.entity.*;
 import org.example.repository.StudentRepository;
 import org.example.service.*;
@@ -49,7 +46,7 @@ public class MsgController {
             Model model ,
             @PageableDefault(page = 0 , size = 5 , sort = "id" , direction = Sort.Direction.DESC) Pageable pageable ,
             Principal principal) {
-
+        log.info("Get요청 /board/msg/all >>> getMsgList()실행됨.");
         Page<DirectMsg> msgPages = directMsgService.getAllMsg(principal , pageable);
         MsgPageDto msgPageDto = new MsgPageDto(msgPages);
 
@@ -68,7 +65,7 @@ public class MsgController {
             Model model ,
             @PageableDefault(page = 0 , size = 5 , sort = "id" , direction = Sort.Direction.DESC) Pageable pageable ,
             Principal principal) {
-
+        log.info("Get요청 /board/msg/send >>> getSendMsgList()실행됨.");
         Page<DirectMsg> msgPages = directMsgService.getSendMsg(principal , pageable);
         MsgPageDto msgPageDto = new MsgPageDto(msgPages);
 
@@ -87,7 +84,7 @@ public class MsgController {
             Model model ,
             @PageableDefault(page = 0 , size = 5 , sort = "id" , direction = Sort.Direction.DESC) Pageable pageable ,
             Principal principal) {
-
+        log.info("Get요청 /board/msg/recv >>> getRecvMsgList()실행됨.");
         Page<DirectMsg> msgPages = directMsgService.getRecvMsg(principal , pageable);
         MsgPageDto msgPageDto = new MsgPageDto(msgPages);
 
@@ -106,7 +103,7 @@ public class MsgController {
             Model model ,
             @PageableDefault(page = 0 , size = 5 , sort = "id" , direction = Sort.Direction.DESC) Pageable pageable ,
             Principal principal) {
-
+        log.info("Get요청 /board/msg/trash >>> getTrashMsgList()실행됨.");
         Page<DirectMsg> msgPages = directMsgService.getTrashMsg(principal , pageable);
         MsgPageDto msgPageDto = new MsgPageDto(msgPages);
 
@@ -126,9 +123,9 @@ public class MsgController {
             @PathVariable(name = "id" , required = false)Long id ,
             Principal principal ,
             Model model) {
+        log.info("Get요청 /board/msg/view/{" + id + "} >>> getMsgList()실행됨.");
 
         DirectMsg msg = directMsgService.findById(id , principal);
-
 
         // 권한이 없어서 null인 msg 전달받은 경우.
         if(msg == null){
@@ -186,6 +183,40 @@ public class MsgController {
         return "/community/newMsg";
     }
 
+    // 쪽지 검색하기
+    @GetMapping("/msg/search/{searchType}/")
+    public String searchList(
+            Model model ,
+            @PathVariable(name = "searchType") String searchType,
+//            @PathVariable(name = "listType") Long listType,
+            @RequestParam(name = "searchValue") String value,
+            @PageableDefault(page = 0 , size = 5 , sort = "id" , direction = Sort.Direction.DESC)Pageable pageable,
+            Principal principal){
+
+        log.info("Get요청 /board/msg/search/{" + searchType + "}?" + value + " >>> searchList() 실행됨.");
+
+        Member myMember = memberService.memberView(principal.getName());
+
+        MsgPageDto msgPageDto = null;
+
+        if(searchType.equals("title")){
+            Page<DirectMsg> msgs = directMsgService.searchMsgTitle(value , myMember , pageable);
+            msgPageDto = new MsgPageDto(msgs);
+        }
+        else if(searchType.equals("content")){
+            Page<DirectMsg> msgs = directMsgService.searchMsgCont(value, myMember , pageable);
+            msgPageDto = new MsgPageDto(msgs);
+        }
+//        else if(searchType.equals("recv")){
+//            Page<DirectMsg> msgs = directMsgService.searchMsgRecvId(value , myMember , pageable);
+//            msgPageDto = new MsgPageDto(msgs);
+//        }
+
+        model.addAttribute("pageDto" , msgPageDto);
+        model.addAttribute("member" , myMember);
+
+        return "/community/searchMsg_list";
+    }
 
 
 

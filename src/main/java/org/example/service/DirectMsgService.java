@@ -169,9 +169,30 @@ public class DirectMsgService {
     @Transactional
     public void setRecvTime(DirectMsg msg , Member member){
         if(msg.getRecvId() == member){
-            LocalDateTime recvAt = LocalDateTime.now(); // 현재시간기록
-            msg.setRecvAt(recvAt);
+            if(msg.getRecvAt() == null){
+                LocalDateTime recvAt = LocalDateTime.now(); // 현재시간기록
+                msg.setRecvAt(recvAt);
+            }
         }
     }
+
+    // 메시지 리스트 내용 검색 (전체)
+    public Page<DirectMsg> searchMsgCont(String searchValue ,Member member , Pageable pageable){
+        Page<DirectMsg> msgs = directMsgPagingRepository.searchDirectMsgByMsgCont(searchValue , member , pageable);
+        return msgs;
+    }
+
+    // 메시지 리스트 제목 검색 (전체)
+    public Page<DirectMsg> searchMsgTitle(String searchValue , Member member , Pageable pageable){
+        Page<DirectMsg> msgs = directMsgPagingRepository.searchDirectMsgByMsgTitle(searchValue , member , pageable);
+        return msgs;
+    }
+
+    // 메시지 리스트 받는이 검색 (전체)
+    public Page<DirectMsg> searchMsgRecvId(String searchValue , Member member , Pageable pageable){
+        Page<DirectMsg> msgs = directMsgPagingRepository.searchDirectMsgByRecvId(searchValue , member , pageable);
+        return msgs;
+    }
+
 
 }

@@ -22,6 +22,9 @@ const searchBtn = document.getElementById('searchBtn');
 // 검색버튼 클릭 이벤트
 if(searchBtn){
     searchBtn.addEventListener('click', () => {
+
+        console.log('search click');
+
         let searchType = document.getElementById('search_select').value;
         let searchValue = document.getElementById('search_input').value;
         let boardType = document.getElementById('boardType').value;
