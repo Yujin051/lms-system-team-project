@@ -68,7 +68,6 @@ grid.on('click', (ev) => {
     })
 })
 
-
 //  그리드 요소에 CSS 스타일 적용
 grid.el.style.width = '700px';
 

@@ -28,8 +28,8 @@
     align-items: center;
 }
 .post_write_body > .post_write_btn_box > .post_write_box button{
-    background: #6b6b6b; color: white; border: none; width: 50px; height: 30px;
-    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 30px;
+    background: #6b6b6b; color: white; border: none; width: 50px; height: 35px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 35px;
 }
 .post_write_body > .post_write_btn_box > .post_write_box button:hover{
     opacity: 0.9;

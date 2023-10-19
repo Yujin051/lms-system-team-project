@@ -14,8 +14,8 @@
     align-items: center; height: 50px;
 }
 .as_body > .as_select_btn_box button{
-    background: #6b6b6b; color: white; border: none; width: 50px; height: 30px;
-    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 30px;
+    background: #6b6b6b; color: white; border: none; width: 50px; height: 35px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 35px;
     margin-left: 4px;
 }
 .as_body > .as_select_btn_box button:hover{
