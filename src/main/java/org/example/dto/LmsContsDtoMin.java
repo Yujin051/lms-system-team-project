@@ -7,16 +7,14 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LmsContsDto {
+public class LmsContsDtoMin {
 
         private Long nthId;
         private Long contsNo;
         private Long nthSequence;
         private String contsName;
         private String nthName;
-        private String contsYout;
         private int contsTime;
-
-
+        private String contsYout;
 
 }

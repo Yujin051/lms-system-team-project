@@ -4,11 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.constant.RoleType;
 import org.example.dto.LectNthDto;
-import org.example.dto.LmsContsDto;
-import org.example.dto.admin.LectDto;
-import org.example.dto.admin.MemberDto;
-import org.example.dto.admin.PostDto;
-import org.example.dto.admin.StudLectProgDto;
+import org.example.dto.LmsContsDtoMin;
+import org.example.dto.admin.*;
 import org.example.service.LectNthService;
 
 import org.example.dto.ProfessorDto;
@@ -24,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-
-import static org.example.constant.RoleType.ADMIN;
 
 @Controller
 @RequestMapping("/admin")
@@ -740,10 +735,9 @@ public class AdminController {
     /* 강의 차시정보 하단 우측 세번째 테이블 */
     @GetMapping("/api/contsName/search")
     @ResponseBody
-    public List<LmsContsDto> contsNameSearch(@RequestParam(value = "nthId") Long nthId) {
-        // 오전 10시에 contsNo를 nthId 로 변경함
+    public List<LmsContsDtoMin> contsNameSearch(@RequestParam(value = "nthId") Long nthId) {
         log.info("contsNo : " + nthId);
-        List<LmsContsDto> dtos = lectNthService.getFindContsNo(nthId);
+        List<LmsContsDtoMin> dtos = lectNthService.getFindContsNo(nthId);
         log.info("dtos : " + dtos);
         for (int i = 0; i < dtos.size(); i++) {
 

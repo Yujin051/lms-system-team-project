@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "lect_info")
 public class LectInfo {
 
@@ -96,25 +97,6 @@ public class LectInfo {
     @Column(name="lect_elem")
     private int lectElem;
 
-    @Builder
-    public LectInfo(String lectName, String lectSubject, String lectYear,
-                    String lectSem, Long lectCredit, Long lectMaxnum, Long lectNownum,
-                    LocalDateTime lectStart, LocalDateTime lectEnd, boolean isActive,
-                    Long lectAssign, Long lectCheck, Long lectTest) {
-        this.lectName = lectName;
-        this.lectSubject = lectSubject;
-        this.lectYear = lectYear;
-        this.lectSem = lectSem;
-        this.lectCredit = lectCredit;
-        this.lectMaxnum = lectMaxnum;
-        this.lectNownum = lectNownum;
-        this.lectStart = lectStart;
-        this.lectEnd = lectEnd;
-        this.isActive = isActive;
-        this.lectAssign = lectAssign;
-        this.lectCheck = lectCheck;
-        this.lectTest = lectTest;
-    }
 
     public LectInfo(Professor professor, String lectName,
                     String lectSubject, String lectYear, String lectSem,

@@ -51,7 +51,7 @@ public class YoutubeService {
     private static final String REDIRECT_URI = "http://localhost/youtubeAuthToken"; // 등록한 리디렉션 URI
     private static final List<String> SCOPES = Arrays.asList("https://www.googleapis.com/auth/youtube",
             "https://www.googleapis.com/auth/youtube.upload"); // 필요한 스코프, 유튜브 계정과 업로드 권한
-    private static final String FILE_DIRECTORY = "C:\\app\\java\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\AccessToken";
+    private static final String FILE_DIRECTORY = "C:\\Users\\shins\\OneDrive\\바탕 화면\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\AccessToken";
     private static final GsonFactory GSON_FACTORY = new GsonFactory();
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 
@@ -331,7 +331,7 @@ public class YoutubeService {
     @PostConstruct
     public void setDefault() {
         // 사용할 clientSecret 탐색하기
-        String clientSecretUrl = "C:\\project\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\client_secrets.json";
+        String clientSecretUrl = "C:\\Users\\shins\\OneDrive\\바탕 화면\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\client_secrets.json";
 
         // 경로에 파일이 없다면 에러메세지 출력?
         Objects.requireNonNull(clientSecretUrl, "classpath:OAuthClientSecret/client_secrets.json 파일이 없습니다.");
