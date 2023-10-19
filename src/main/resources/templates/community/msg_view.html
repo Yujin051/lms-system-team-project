@@ -72,9 +72,15 @@
                                 <span>|</span>
                                 <!-- 작성일 -->
                                 <span class="article_at" th:text="${#temporals.format(msg.getSendAt() , 'yy.MM.dd HH:mm')}">2023.10.01 18:32</span>
+                                <!-- 받는이 -->
                                 <span>|</span>
                                 <span>받는이</span>
                                 <span class="article_writer" th:text="${msg.getRecvId().getUserName()}">Denma</span>
+                                <th:block th:if="${msg.getRecvAt() != null}">
+                                    <span>|</span>
+                                    <!-- 읽은시간 -->
+                                    <span class="article_at" th:text="${#temporals.format(msg.getRecvAt() , 'yy.MM.dd HH:mm')}">2023.10.01 18:32</span>
+                                </th:block>
 
                             </div>
                         </div>
@@ -93,7 +99,9 @@
                         </div>
 
                         <div class="board_nav">
-                            <a th:href="@{'/board/msg/write?to=' + ${msg.getSendId().getUserId()}}"><button class="btn btn-dark">답장</button></a>
+                            <th:block th:if="${msg.getRecvId() == member}">
+                                <a th:href="@{'/board/msg/write?to=' + ${msg.getSendId().getUserId()} + '&id=' + ${msg.getId()}}"><button class="btn btn-dark">답장</button></a>
+                            </th:block>
                             <button class="btn btn-dark" th:onclick="'deleteMsg(' + ${msg.getId()} + ');'">삭제</button>
                             <button class="btn btn-dark" id="backBtn">돌아가기</button>
                         </div>

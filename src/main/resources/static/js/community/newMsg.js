@@ -161,66 +161,133 @@ cancelBtn.addEventListener('click' , () => {
     window.history.back();
 });
 
+if(document.getElementById('writeMsgBtn')){
+
 //전송 버튼 클릭시
-const writeMsgBtn = document.getElementById('writeMsgBtn');
+    const writeMsgBtn = document.getElementById('writeMsgBtn');
 
-writeMsgBtn.addEventListener('click' , ()=>{
+    writeMsgBtn.addEventListener('click' , ()=>{
 
-    const toUl = document.getElementById('toUl');   // 받는사람 목록
-    let msgTitle = document.getElementById('msgTitle').value;   // 제목 값
-    let msgCont = document.getElementById('msgText').value;     // 내용 값
+        const toUl = document.getElementById('toUl');   // 받는사람 목록
+        let msgTitle = document.getElementById('msgTitle').value;   // 제목 값
+        let msgCont = document.getElementById('msgText').value;     // 내용 값
 
-    if(toUl.children.length <= 0){
-        alert('받을 사람을 입력해주세요.');
-        return; // 종료시킴.
-    }
-    else if(msgTitle == null || msgTitle === ""){
-        alert('제목을 입력해주세요');
-        return;
-    }
-    else if(msgCont == null || msgCont === ""){
-        alert("내용을 입력해주세요");
-        return;
-    }
-
-    // 받는 사람 목록의 각 li 요소에서 로그인 아이디 추출하여 배열에 저장
-    const loginIds = Array.from(toUl.children).map(li => {
-        const text = li.textContent.trim(); // li 요소의 텍스트 추출
-        const match = text.match(/\(([^)]+)\)/); // 괄호로 묶인 부분을 추출하는 정규표현식
-
-        // 매칭되는 부분이 있다면 괄호 안의 내용(로그인 아이디) 반환
-        if (match && match.length === 2) {
-            return match[1]; // 로그인 아이디
-        } else {
-            // 매칭되는 부분이 없다면 빈 문자열 또는 에러 처리
-            return '';
+        if(toUl.children.length <= 0){
+            alert('받을 사람을 입력해주세요.');
+            return; // 종료시킴.
         }
-    }).filter(id => id !== ''); // 빈 문자열을 필터링하여 정상적인 로그인 아이디만 남김
-
-    // 서버에 전송할 데이터 형식: List<String>
-    let data = {
-        toSome: loginIds,
-        msgTitle: msgTitle,
-        msgCont: msgCont
-    };
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST' , '/board/msg/write' , true);
-    xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
-
-    xhr.onreadystatechange = function () {
-        if(xhr.readyState === 4){
-            if(xhr.status === 201){
-                // alert('성공');
-                window.location = '/board/msg/all';
-            }
-            else {
-                alert('실패 : firetrap5319@gmail.com 문의 바랍니다.');
-            }
+        else if(msgTitle == null || msgTitle === ""){
+            alert('제목을 입력해주세요');
+            return;
         }
-    };
-    xhr.send(JSON.stringify(data));
-});
+        else if(msgCont == null || msgCont === ""){
+            alert("내용을 입력해주세요");
+            return;
+        }
+
+        // 받는 사람 목록의 각 li 요소에서 로그인 아이디 추출하여 배열에 저장
+        const loginIds = Array.from(toUl.children).map(li => {
+            const text = li.textContent.trim(); // li 요소의 텍스트 추출
+            const match = text.match(/\(([^)]+)\)/); // 괄호로 묶인 부분을 추출하는 정규표현식
+
+            // 매칭되는 부분이 있다면 괄호 안의 내용(로그인 아이디) 반환
+            if (match && match.length === 2) {
+                return match[1]; // 로그인 아이디
+            } else {
+                // 매칭되는 부분이 없다면 빈 문자열 또는 에러 처리
+                return '';
+            }
+        }).filter(id => id !== ''); // 빈 문자열을 필터링하여 정상적인 로그인 아이디만 남김
+
+        // 서버에 전송할 데이터 형식
+        let data = {
+            toSome: loginIds,
+            msgTitle: msgTitle,
+            msgCont: msgCont
+        };
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST' , '/board/msg/write' , true);
+        xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4){
+                if(xhr.status === 201){
+                    // alert('성공');
+                    window.location = '/board/msg/all';
+                }
+                else {
+                    alert('실패 : firetrap5319@gmail.com 문의 바랍니다.');
+                }
+            }
+        };
+        xhr.send(JSON.stringify(data));
+    });
+}
 
 
 
+//답장 버튼 클릭시
+if(document.getElementById('reMsgBtn')){
+    const reMsgBtn = document.getElementById('reMsgBtn');
+
+    reMsgBtn.addEventListener('click' , ()=>{
+
+        const toUl = document.getElementById('toUl');   // 받는사람 목록
+        let msgTitle = document.getElementById('msgTitle').value;   // 제목 값
+        let msgCont = document.getElementById('msgText').value;     // 내용 값
+        let orgMsgId = document.getElementById('msgOrgId').value; // 이전 메시지 id
+
+        if(toUl.children.length <= 0){
+            alert('받을 사람을 입력해주세요.');
+            return; // 종료시킴.
+        }
+        else if(msgTitle == null || msgTitle === ""){
+            alert('제목을 입력해주세요');
+            return;
+        }
+        else if(msgCont == null || msgCont === ""){
+            alert("내용을 입력해주세요");
+            return;
+        }
+
+        // 받는 사람 목록의 각 li 요소에서 로그인 아이디 추출하여 배열에 저장
+        const loginIds = Array.from(toUl.children).map(li => {
+            const text = li.textContent.trim(); // li 요소의 텍스트 추출
+            const match = text.match(/\(([^)]+)\)/); // 괄호로 묶인 부분을 추출하는 정규표현식
+
+            // 매칭되는 부분이 있다면 괄호 안의 내용(로그인 아이디) 반환
+            if (match && match.length === 2) {
+                return match[1]; // 로그인 아이디
+            } else {
+                // 매칭되는 부분이 없다면 빈 문자열 또는 에러 처리
+                return '';
+            }
+        }).filter(id => id !== ''); // 빈 문자열을 필터링하여 정상적인 로그인 아이디만 남김
+
+        // 서버에 전송할 데이터 형식
+        let data = {
+            toSome: loginIds,
+            msgTitle: msgTitle,
+            msgCont: msgCont,
+            orgMsgId : orgMsgId
+        };
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('POST' , '/board/msg/write' , true);
+        xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4){
+                if(xhr.status === 201){
+                    // alert('성공');
+                    window.location = '/board/msg/all';
+                }
+                else {
+                    alert('실패 : firetrap5319@gmail.com 문의 바랍니다.');
+                }
+            }
+        };
+        xhr.send(JSON.stringify(data));
+    });
+}

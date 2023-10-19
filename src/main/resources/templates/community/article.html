@@ -26,11 +26,11 @@
 <section >
     <section>
         <div class="container board">
-            <input type="text" name="boardType" id="boardType" th:value="${article.getBoardInfo().getId()}">
-            <input type="text" name="isDel" id="isDel" th:value="${article.getIsDeleted()}">
-            <input type="text" name="isLock" id="isLock" th:value="${article.getIsLocked()}">
-            <input type="text" name="memId" id="memId" th:value="${member.getId()}">
-            <input type="text" name="artMemId" id="artMemId" th:value="${article.getMemberId().getId()}">
+            <input type="hidden" name="boardType" id="boardType" th:value="${article.getBoardInfo().getId()}">
+            <input type="hidden" name="isDel" id="isDel" th:value="${article.getIsDeleted()}">
+            <input type="hidden" name="isLock" id="isLock" th:value="${article.getIsLocked()}">
+            <input type="hidden" name="memId" id="memId" th:value="${member.getId()}">
+            <input type="hidden" name="artMemId" id="artMemId" th:value="${article.getMemberId().getId()}">
             <input type="hidden" id="articleId" th:value="${article.getId()}">
             <div class="board_nav">
                 <!-- th:if="${article.getMemberId() == member}"-->

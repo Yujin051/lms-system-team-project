@@ -464,36 +464,36 @@ insert into stud_lect_apply(lect_id, stud_id) VALUES
 
 
 
-insert into grade_info(apply_id, grade, check_score, assign_score, test_score) values
-                                                                                                     (1, 'D', 25, 21, 19),
-                                                                                                     (2, 'A', 25, 33, 13),
-                                                                                                     (3, 'B', 25, 33, 22),
-                                                                                                     (4, 'A', 25, 33, 21),
-                                                                                                     (5, 'A', 25, 33, 21),
-                                                                                                     (6, 'C', 25, 35, 24),
-                                                                                                     (7, 'A', 25, 36, 20),
-                                                                                                     (8, 'D', 25, 35, 20),
-                                                                                                     (9, 'A', 25, 31, 20),
-                                                                                                     (10, 'A', 25, 33, 20),
-                                                                                                     (11, 'D', 25, 33, 20),
-                                                                                                     (12, 'A', 25, 33, 20),
-                                                                                                     (13, 'A', 25, 33, 20),
-                                                                                                     (14, 'D', 25, 33, 20),
-                                                                                                     (15, 'C', 25, 33, 20),
-                                                                                                     (16, 'A', 25, 33, 20),
-                                                                                                     (17, 'D', 25, 33, 20),
-                                                                                                     (18, 'A', 25, 33, 20),
-                                                                                                     (19, 'A', 25, 33, 20);
+insert into grade_info(apply_id, lect_id, stud_id, grade, check_score, assign_score, test_score) values
+                                                                                                     (1, 1, 1, 'D', 25, 21, 19),
+                                                                                                     (2, 1, 2, 'A', 25, 33, 13),
+                                                                                                     (3, 2, 2, 'B', 25, 33, 22),
+                                                                                                     (4, 3, 1, 'A', 25, 33, 21),
+                                                                                                     (5, 4, 1, 'A', 25, 33, 21),
+                                                                                                     (6, 5, 1, 'C', 25, 35, 24),
+                                                                                                     (7, 6, 1, 'A', 25, 36, 20),
+                                                                                                     (8, 7, 2, 'D', 25, 35, 20),
+                                                                                                     (9, 8, 1, 'A', 25, 31, 20),
+                                                                                                     (10, 9, 2, 'A', 25, 33, 20),
+                                                                                                     (11, 10, 2, 'D', 25, 33, 20),
+                                                                                                     (12, 11, 1, 'A', 25, 33, 20),
+                                                                                                     (13, 12, 1, 'A', 25, 33, 20),
+                                                                                                     (14, 13, 2, 'D', 25, 33, 20),
+                                                                                                     (15, 14, 1, 'C', 25, 33, 20),
+                                                                                                     (16, 14, 2, 'A', 25, 33, 20),
+                                                                                                     (17, 15, 1, 'D', 25, 33, 20),
+                                                                                                     (18, 15, 2, 'A', 25, 33, 20),
+                                                                                                     (19, 16, 1, 'A', 25, 33, 20);
 
 insert into sem_grade(stud_id, sem_year, sem_sem, sem_crecpl, sem_avg_crecpl) values
-                                                                                  (1, '2023', '2학기', 17, 2.6),
-                                                                                  (1, '2023', '1학기', 14, 1.9),
-                                                                                  (1, '2022', '2학기', 13, 2.5),
-                                                                                  (1, '2022', '1학기', 19, 4.0),
-                                                                                  (2, '2023', '2학기', 13, 3.8),
-                                                                                  (2, '2023', '1학기', 15, 4),
-                                                                                  (2, '2022', '2학기', 13, 2.9),
-                                                                                  (2, '2021', '2학기', 14, 3);
+                                                                                  (1, '2023', '2학기', 0, 0),
+                                                                                  (1, '2023', '1학기', 0, 0),
+                                                                                  (1, '2022', '2학기', 0, 0),
+                                                                                  (1, '2022', '1학기', 0, 0),
+                                                                                  (2, '2023', '2학기', 0, 0),
+                                                                                  (2, '2023', '1학기', 0, 0),
+                                                                                  (2, '2022', '2학기', 0, 0),
+                                                                                  (2, '2021', '2학기', 0, 0);
 
 insert into lect_plan(plan_id, lect_id, plan_des, plan_book) values
                                                                  (1, 1, '1번 강의에 대한 설명', '교재 1번'),
@@ -507,7 +507,6 @@ insert into assign_info(lect_id, assign_name, assign_detail, assign_start, assig
                                                                                                                                                   (1, '과제2', '과제 2 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
                                                                                                                                                   (2, '과제3', '과제 3 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
                                                                                                                                                   (3, '과제4', '과제 4 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt');
-
 
 insert into board_info (board_type , board_name) values ('학생' , '학생');
 insert into board_info (board_type , board_name) values ('질문건의' , '질문건의');

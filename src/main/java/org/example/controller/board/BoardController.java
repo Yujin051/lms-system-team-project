@@ -177,7 +177,7 @@ public class BoardController {
             @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC)Pageable pageable,
             Principal principal){
 
-        log.info("Get요청 /board/search/{" + searchType + "}/{" + id + "} >>> searchList() 실행됨.");
+        log.info("Get요청 /board/search/{" + searchType + "}/{" + id + "}?" + value + " >>> searchList() 실행됨.");
 
         Page<BoardArticle> articles = null;
 

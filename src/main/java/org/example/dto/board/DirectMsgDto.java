@@ -22,6 +22,8 @@ public class DirectMsgDto {
     // 쪽지 id
     private Long id;
     // 이전쪽지 id
+    private Long orgMsgId;
+    // 이전쪽지
     private DirectMsg orgMsg;
     // 발신자 id
     private Member sendId;

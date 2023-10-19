@@ -19,6 +19,7 @@ public class ClassMateDto {
 
     // 수업명
 //    private String ClassName;
+
     // 수업 번호 lect_id
     private Long classId;
     // 수업 참가자 이름
