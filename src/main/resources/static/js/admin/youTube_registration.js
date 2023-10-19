@@ -199,3 +199,10 @@ dCheck.addEventListener('click', () => {
 
     })
 })
+
+// 취소버튼 클릭 시 모달 창 닫음
+const cancelButton = document.getElementById('upExit');
+cancelButton.addEventListener('click', function() {
+    mWrap.style.display = 'none';
+    modal.style.display = 'none';
+});
