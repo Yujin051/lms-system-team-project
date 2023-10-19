@@ -39,8 +39,7 @@ public class LmsConts {
     @OneToOne(cascade = CascadeType.REMOVE ,mappedBy = "lmsConts")
     private LectNth lectNth;
 
-    public LmsConts(Long contsNo, String contsName, String contsDetail, int contsTime, String contsYout) {
-        this.contsNo = contsNo;
+    public LmsConts(String contsName, String contsDetail, int contsTime, String contsYout) {
         this.contsName = contsName;
         this.contsDetail = contsDetail;
         this.contsTime = contsTime;

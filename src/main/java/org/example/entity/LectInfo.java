@@ -96,11 +96,10 @@ public class LectInfo {
     private int lectElem;
 
     @Builder
-    public LectInfo(Long lectId, String lectName, String lectSubject, String lectYear,
+    public LectInfo(String lectName, String lectSubject, String lectYear,
                     String lectSem, Long lectCredit, Long lectMaxnum, Long lectNownum,
                     LocalDateTime lectStart, LocalDateTime lectEnd, boolean isActive,
                     Long lectAssign, Long lectCheck, Long lectTest) {
-        this.lectId = lectId;
         this.lectName = lectName;
         this.lectSubject = lectSubject;
         this.lectYear = lectYear;
@@ -116,4 +115,24 @@ public class LectInfo {
         this.lectTest = lectTest;
     }
 
+    public LectInfo(Professor professor, String lectName,
+                    String lectSubject, String lectYear, String lectSem,
+                    Long lectCredit, Long lectNownum, Long lectMaxnum,
+                    LocalDateTime enrollStart, LocalDateTime enrollEnd,
+                    LocalDateTime lectStart, LocalDateTime lectEnd,
+                    Boolean isActive) {
+        this.professor = professor;
+        this.lectName = lectName;
+        this.lectSubject = lectSubject;
+        this.lectYear = lectYear;
+        this.lectSem = lectSem;
+        this.lectCredit = lectCredit;
+        this.lectNownum = lectNownum;
+        this.lectMaxnum = lectMaxnum;
+        this.enrollStart = enrollStart;
+        this.enrollEnd = enrollEnd;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+    }
 }

@@ -38,4 +38,11 @@ public class SemGrade {
     //평균
     @Column(name = "sem_avg")
     private Long semAvg;
+
+    public SemGrade(Student student, String semYear, String semSem, String semRating) {
+        this.student = student;
+        this.semYear = semYear;
+        this.semSem = semSem;
+        this.semRating = semRating;
+    }
 }

@@ -18,16 +18,6 @@ public class GradeInfo {
     @Column(name = "grade_id")
     private Long gradeId;
 
-    //강좌ID
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "lect_id")
-    private LectInfo lectInfo;
-
-    //수강생ID
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stud_id")
-    private Student student;
-
     //강의수강신청ID
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apply_id")
@@ -52,5 +42,16 @@ public class GradeInfo {
     //성적입력여부
     @Column(name = "is_record")
     private boolean isRecord;
+
+    public GradeInfo(StudLectApply studLectApply, String grade,
+                     Long checkScore, Long testScore, Long assignScore,
+                     boolean isRecord) {
+        this.studLectApply = studLectApply;
+        this.grade = grade;
+        this.checkScore = checkScore;
+        this.testScore = testScore;
+        this.assignScore = assignScore;
+        this.isRecord = isRecord;
+    }
 
 }

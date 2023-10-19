@@ -37,4 +37,12 @@ public class LectNth {
     @Column(name = "nth_sequence")
     private Long nthSequence;
 
+
+    public LectNth(LectInfo lectInfo, LmsConts lmsConts,
+                   String nthName, Long nthSequence) {
+        this.lectInfo = lectInfo;
+        this.lmsConts = lmsConts;
+        this.nthName = nthName;
+        this.nthSequence = nthSequence;
+    }
 }

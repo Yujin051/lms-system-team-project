@@ -6,8 +6,8 @@
 #mainFrame {
     border: 0;
     width: 1670px;
-    height: 820px;
-    overflow-y: scroll;
+    min-height: 800px;
+    height: auto;
     overflow-x: hidden;
 }
 

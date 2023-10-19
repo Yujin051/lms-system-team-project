@@ -112,23 +112,25 @@ searchBtn.addEventListener('click', () => {
 // 셀 클릭시 해당 행 상세정보 출력
 grid.on('click', (ev) => {
     const url = "/admin/getdetail"
-    console.log(ev.rowKey)
     // 그리드에서 가져온 행의 키값 추출
-    const valueList = Object.values(grid.getRow(ev.rowKey))
+    const toName = grid.getValue(ev.rowKey, 'userName')
+    const toWork = grid.getValue(ev.rowKey, 'profWork')
 
-    const pId = $("#pId")
-    const name =$("#name")
-    const bDay = $("#birthDay")
-    const gender = $("#gender")
-    const tel = $("#tel")
-    const addr = $("#addr")
-    const mId = $("#mId")
-    const email = $("#email")
-    const isActive = $("#isActive")
-    const aOwn = $("#aOwn")
-    const bank = $("#bank")
-    const acc = $("#account")
-    const agency = $("#agency")
+    console.log(toName, toWork)
+
+    const pId = document.querySelector("#pId");
+    const name = document.querySelector("#name");
+    const bDay = document.querySelector("#birthDay");
+    const gender = document.querySelector("#gender");
+    const tel = document.querySelector("#tel");
+    const addr = document.querySelector("#addr");
+    const mId = document.querySelector("#mId");
+    const email = document.querySelector("#email");
+    const isActive = document.querySelector("#isActive");
+    const aOwn = document.querySelector("#aOwn");
+    const bank = document.querySelector("#bank");
+    const acc = document.querySelector("#account");
+    const agency = document.querySelector("#agency");
 
 
     $.ajax({
@@ -137,26 +139,30 @@ grid.on('click', (ev) => {
         async: false,
         dataType: 'json',
         data: {
-            name : valueList[0],
-            work : valueList[6]
+            name : toName,
+            work : toWork
         },
         success: function (response) {
-            const repList = Object.values(response)
-            console.log(repList)
+            let boolean;
+            if(response.isActive === true) {
+                boolean = "활동중"
+            } else {
+                boolean = "활둥중이 아님"
+            }
 
-            pId.html(repList[0])
-            name.html(repList[6])
-            bDay.html(repList[10])
-            gender.html(repList[11])
-            tel.html(repList[7])
-            addr.html(repList[9])
-            mId.html(repList[12])
-            email.html(repList[8])
-            isActive.html(String(repList[13]))
-            aOwn.html(repList[2])
-            bank.html(repList[3])
-            acc.html(repList[4])
-            agency.html(repList[1])
+            pId.textContent = response.id;
+            name.textContent = response.userName;
+            bDay.textContent = response.userBirthDay;
+            gender.textContent = response.userGender;
+            tel.textContent = response.userPhoneNum;
+            addr.textContent = response.userAddr;
+            mId.textContent = response.memberId;
+            email.textContent = response.userEmail;
+            isActive.textContent = boolean;
+            aOwn.textContent = response.profAcOwner;
+            bank.textContent = response.profBank;
+            acc.textContent = response.profAccount;
+            agency.textContent = response.profAgency;
         },
         error: function () {
             console.log("실패")

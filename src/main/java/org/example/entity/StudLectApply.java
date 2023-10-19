@@ -31,4 +31,9 @@ public class StudLectApply {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lect_id")
     private LectInfo lectInfo;
+
+    public StudLectApply(Student student, LectInfo lectInfo) {
+        this.student = student;
+        this.lectInfo = lectInfo;
+    }
 }
