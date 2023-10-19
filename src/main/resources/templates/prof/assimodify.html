@@ -33,7 +33,7 @@
     </script>
 </head>
 <div id="mainFrame" layout:fragment="content" class="mainFrame">
-    <form th:action="@{'/prof/lecture/view/' + ${lectId} + '/assignments/add/add'}" class="assi_write_body" method="post" th:object="${assignment}" enctype="multipart/form-data">
+    <form th:action="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.id}+ '/modify/modify'}" class="assi_write_body" method="post" th:object="${assignment}" enctype="multipart/form-data">
         <div class="assi_write_btn_box">
             <div class="assi_write_assi_info_text_box">
                 <span>📄&nbsp 과제정보</span>
@@ -49,7 +49,7 @@
             <div class="assi_write_assi_name_box">
                 <div class="assi_write_assi_name_text_box">
                     <span>과제명</span>
-                    <input th:field="${assignment.lectInfo}" th:value="${lectId}" type="hidden">
+                    <input type="text" th:field="${assignment.lectInfo}">
                 </div>
                 <div class="assi_write_assi_name_input">
                     <input th:field="${assignment.name}" type="text" id="assignName" placeholder="과제명"/>
@@ -60,7 +60,7 @@
                     <span>과제설명</span>
                 </div>
                 <div class="assi_write_assi_detail_textarea">
-                    <textarea th:field="${assignment.detail}" id="assignDetail"></textarea>
+                    <textarea th:text ="${assignment.detail}" th:field="${assignment.detail}" id="assignDetail"></textarea>
                 </div>
             </div>
             <div class="assi_write_assi_date_box">

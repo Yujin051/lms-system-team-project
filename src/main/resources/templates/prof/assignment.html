@@ -110,8 +110,8 @@
                             <td><span th:text="${assignment.end}"></span></td>
                             <td><span th:text="${assignment.isActive ? '진행중' : '마감'}"></span></td>
                             <td>
-                                <button type="button" class="assiUpdateBtn"><span>수정</span></button>
-                                <button type="button" class="assiDeleteBtn"><span>삭제</span></button>
+                                <a type="button" class="assiUpdateBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.id}+ '/modify'}"><span>수정</span></a>
+                                <a type="button" class="assiDeleteBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.id}+ '/delete'}"><span>삭제</span></a>
                             </td>
                         </tr>
                     </tbody>

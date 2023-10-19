@@ -208,22 +208,54 @@ public class ProfessorController {
     }
 
     @GetMapping("/lecture/view/{lectId}/assignments/add")
-    public String addAssignment2(@PathVariable("lectId") Long lectId, Model model, Assignments assignments) {
-        model.addAttribute("lectId", lectId);
-        model.addAttribute("assignment", assignments);
+    public String addAssignment2(@PathVariable("lectId") Long lectId, Model model) {
+        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
+        model.addAttribute("lectId", lectInfo.getLectId());
+        model.addAttribute("lectName", lectInfo.getLectName());
+        model.addAttribute("assignment", new AssignmentsDto());
         return "prof/assiWrite";
     }
 
     @PostMapping("/lecture/view/{lectId}/assignments/add/add")
-    public String studentUpdate(@PathVariable("lectId") Long lectId, @Validated Assignments assignment, @RequestPart MultipartFile file, Model model) throws Exception {
+    public String addAssign(@PathVariable("lectId")Long lectId, @Validated AssignmentsDto assignmentDto, @RequestPart MultipartFile file, Model model) throws Exception {
         try {
-            Assignments assignments = Assignments.createAssignments(assignment);
+            Assignments assignments = Assignments.createAssignments(assignmentDto);
             assignmentsService.saveAssignment(assignments, file);
+
             model.addAttribute("message", "과제가 추가되었습니다.");
         } catch (Exception e) {
             model.addAttribute("error", "과제 추가 중 오류가 발생했습니다.");
         }
-        return "prof/assignment";
+        return "prof/prof_main";
+    }
+
+    @GetMapping("/lecture/view/{lectId}/assignments/{id}/modify")
+    public String modifyAssignment(@PathVariable("lectId") Long lectId, @PathVariable("id")Long id, Model model) {
+        model.addAttribute("assignment",assignmentsService.AssignmentsView(id));
+        return "prof/assimodify";
+    }
+
+    @PostMapping("/lecture/view/{lectId}/assignments/{id}/modify/modify")
+    public String modifyAssi(@PathVariable("lectId") Long lectId, @PathVariable("id")Long id, Model model, Assignments assignments, @RequestPart MultipartFile file) throws Exception {
+        Assignments assignmentsT = assignmentsService.AssignmentsView(id);
+        assignmentsT.setName(assignments.getName());
+        assignmentsT.setDetail(assignments.getDetail());
+        assignmentsT.setStart(assignments.getStart());
+        assignmentsT.setEnd(assignments.getEnd());
+        assignmentsT.setActive(assignments.isActive());
+        assignmentsService.saveAssignment(assignmentsT);
+        assignmentsService.saveAssignment(assignmentsT, file);
+        model.addAttribute("message", "과제가 수정되었습니다.");
+        model.addAttribute("SearchUrl", "/prof");
+        return "/student/message";
+        }
+
+    @GetMapping("/lecture/view/{lectId}/assignments/{assiId}/delete")
+    public String deleteAssignment(@PathVariable("lectId") Long lectId, @PathVariable("assiId")Long assiId, Model model) {
+        assignmentsService.assiDelete(assiId);
+        model.addAttribute("message", "과제가 삭제되었습니다.");
+        model.addAttribute("SearchUrl", "/prof");
+        return "/student/message";
     }
 
 //    @GetMapping("/findStudentInfo")
