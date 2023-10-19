@@ -118,13 +118,13 @@ grid.on('click', (ev) => {
         success: function (response) {
             // 강좌 이름 undefined 처리
             if (response.lectName === null || response.lectName === undefined) {
-                lectName.value = "강좌 이름을 입력해주세요."
+                lectName.value = ""
             } else {
                 lectName.value = response.lectName
             }
             // 강좌 분류(과목) undefined 처리
             if (response.lectSubject === null || response.lectSubject === undefined) {
-                subject.value = "과목을 입력해주세요."
+                subject.value = ""
             } else {
                 subject.value = response.lectSubject
             }
@@ -135,7 +135,7 @@ grid.on('click', (ev) => {
                 lectId.value = response.lectId
             }
             if (response.userName === null || response.userName === undefined) {
-                profName.value = "강사 이름을 입력해주세요."
+                profName.value = ""
             } else {
                 profName.value = response.userName
             }
