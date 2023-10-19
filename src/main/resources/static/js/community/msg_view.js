@@ -55,3 +55,27 @@ function reMsg(recvId){
     };
     xhr.send(JSON.stringify(data));
 }
+
+// window.onload = function (){
+//
+//     // let time =
+//
+//     let data = {
+//
+//     }
+//
+//     let xhr = new XMLHttpRequest();
+//     xhr.open('POST' , '' , true);
+//     xhr.setRequestHeader('Content-Type' , 'application/json; charset=UTF-8');
+//     xhr.onreadystatechange = ()=>{
+//         if(xhr.readyState === 4){
+//             if(xhr.status === 200){
+//                 alert('성공');
+//             }
+//             else{
+//                 alert('실패');
+//             }
+//         }
+//     };
+//     // xhr.send(JSON.stringify(data));
+// }

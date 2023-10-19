@@ -24,7 +24,7 @@
 
     <section>
         <div class="container board">
-            
+            <input th:if="${msg.getOrgMsgId() != null}" type="hidden" th:value="${msg.getOrgMsgId()}" id="msgOrgId">
             <div class="msg_top container-fluid">
                 <div class="row">
 
@@ -47,10 +47,10 @@
                     <!-- 사이드바 메뉴 -->
                     <div class="col-md-4 msg_side">
                         <ul>
-                            <li><a href="">전체</a></li>
-                            <li><a href="">받은쪽지</a></li>
-                            <li><a href="">보낸쪽지</a></li>
-                            <li><a href="">휴지통</a></li>
+                            <li><a href="/board/msg/all">전체</a></li>
+                            <li><a href="/board/msg/recv">받은쪽지</a></li>
+                            <li><a href="/board/msg/send">보낸쪽지</a></li>
+                            <li><a href="/board/msg/trash">휴지통</a></li>
                         </ul>
 <!--                        <div>-->
 <!--                            <button class="btn btn-dark">쪽지쓰기</button>-->
@@ -103,7 +103,10 @@
                         </form>
 
                         <div class="board_nav">
-                            <button class="btn btn-dark" id="writeMsgBtn">전송</button>
+                            <button th:if="${msg.getOrgMsgId() != null}"
+                                    class="btn btn-dark" id="reMsgBtn">전송</button>
+                            <button th:if="${msg.getOrgMsgId() == null}"
+                                    class="btn btn-dark" id="writeMsgBtn">전송</button>
                             <button class="btn btn-dark" id="cancelBtn">취소</button>
                         </div>
                     </div>
@@ -128,6 +131,11 @@
                             <li th:text="${class.getLectInfo().getLectName()}"
                                 th:onclick="'getClassMate(' + ${class.getLectInfo().getLectId()} + ');'"></li>
                         </th:block>
+
+                        <th:block th:if="${profClassList.size() > 0}" th:each="class : ${profClassList}">
+                            <li th:text="${class.getLectName()}"
+                                th:onclick="'getClassMate(' + ${class.getLectInfo()} + ');'"></li>
+                        </th:block>
                     </ul>
                 </div>
     
@@ -144,19 +152,6 @@
                     <ul class="classmate">
                         <!-- 참여자 이름 출력 -->
 <!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        -->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
-                        
                     </ul>
                 </div>
     

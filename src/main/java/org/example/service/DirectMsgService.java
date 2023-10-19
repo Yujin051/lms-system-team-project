@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,14 @@ public class DirectMsgService {
         List<DirectMsg> directMsgs = new ArrayList<>();
         // 발신자 설정(사용자 자신)
         Member sendId = memberRepository.findByUserId(principal.getName());
+
+        // 이전 메시지 id(Long)가 존재한다면 오리지널 메시지 찾아와 설정
+        if(directMsgDto.getOrgMsgId() != null){
+            DirectMsg orgMsg = directMsgRepository.findById(directMsgDto.getOrgMsgId())
+                    .orElseThrow(()->new IllegalArgumentException("Not found : " + directMsgDto.getOrgMsgId() + "로 메시지 찾기 불가."));
+            directMsgDto.setOrgMsg(orgMsg);
+        }
+
         // 보낼 대상의 수만큼.
         loginIds.forEach(loginId -> {
             // 발신자 id 찾아와서 설정
@@ -64,6 +73,12 @@ public class DirectMsgService {
         Member sendId = memberRepository.findByUserId(principal.getName());
         // 발신자 id 찾아와서 설정
         Member recvId = memberRepository.findByUserId(loginId);
+        // 이전 메시지 id(Long)가 존재한다면 오리지널 메시지 찾아와 설정
+        if(directMsgDto.getOrgMsgId() != null){
+            DirectMsg orgMsg = directMsgRepository.findById(directMsgDto.getOrgMsgId())
+                    .orElseThrow(()->new IllegalArgumentException("Not found : " + directMsgDto.getOrgMsgId() + "로 메시지 찾기 불가."));
+            directMsgDto.setOrgMsg(orgMsg);
+        }
         // 각각 dto에 설정 해준다.
         directMsgDto.setRecvId(recvId);
         directMsgDto.setSendId(sendId);
@@ -148,6 +163,15 @@ public class DirectMsgService {
             return false;
         }
 
+    }
+
+    // 읽은 시간 기록
+    @Transactional
+    public void setRecvTime(DirectMsg msg , Member member){
+        if(msg.getRecvId() == member){
+            LocalDateTime recvAt = LocalDateTime.now(); // 현재시간기록
+            msg.setRecvAt(recvAt);
+        }
     }
 
 }
