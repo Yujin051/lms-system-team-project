@@ -85,26 +85,40 @@
             </tbody>
         </table>
 
+        <!-- 신규 버튼 클릭 시 업로드 창 -->
         <div class="modalWrap" style="display: none;">
             <div class="modal" style="display: none;">
-                <div>업로드</div>
-
-                <div>총 레이아웃 창
+                <div class="upload_text_box">
+                    <div class="upload_text"><span><i class="fa-solid fa-cloud-arrow-up"></i></span></div>
+                </div>
+                <div class="upload_main">
                     <form id="videoUpload" method="post" enctype="multipart/form-data">
-                    <div>제목</div>
-                    <div>
-                        <input type="text" name="title" placeholder="제목 넣어요">
-                    </div>
-                    <div>설명</div>
-                    <div>
-                        <textarea name="detail"></textarea>
-                    </div>
-                    <div>파일</div>
-                    <div>
-                        파일 업로드에요
-                        <input type="file" name="file">
-                    </div>
-                    <button id="upClose" type="button">이건 업로드 버튼이에요</button>
+                        <div class="upload_title_text">
+                            <span>제목</span>
+                        </div>
+                        <div class="upload_title_input_box">
+                            <input type="text" name="title">
+                        </div>
+                            <div class="upload_detail_text">
+                                <span>설명</span>
+                            </div>
+                        <div class="upload_detail_textarea_box">
+                            <textarea name="detail"></textarea>
+                        </div>
+                        <div class="upload_file_text">
+                            <span>파일</span>
+                        </div>
+                        <div class="upload_file_input">
+                            <input type="file" name="file"/>
+                        </div>
+                        <div class="upload_btn_box">
+                            <div class="upload_exit">
+                                <button id="upExit" type="button">취소</button>
+                            </div>
+                            <div class="upload_btn">
+                                <button id="upClose" type="button">업로드</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 
