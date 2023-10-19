@@ -45,7 +45,6 @@ import java.util.List;
 @Slf4j
 @Controller
 @RequestMapping("/prof")
-@Log4j2
 @RequiredArgsConstructor
 public class ProfessorController {
 

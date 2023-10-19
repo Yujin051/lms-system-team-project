@@ -1,12 +1,20 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.example.dto.AssignmentSubmitDto;
+import org.example.service.AssignmentsService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name="assign_submit")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
 public class AssignSubmit {
 
     @Id
@@ -44,4 +52,17 @@ public class AssignSubmit {
     private boolean isSubmit;
     // 과제 피드백
     private String feedback;
+
+    public static AssignSubmit createAssignmentSubmit(AssignmentSubmitDto assignmentSubmitDto) {
+        AssignSubmit assignSubmit = AssignSubmit.builder()
+                .member(assignmentSubmitDto.getMember())
+                .assignments(assignmentSubmitDto.getAssignments())
+                .content(assignmentSubmitDto.getContent())
+                .originalName(assignmentSubmitDto.getOriginalName())
+                .savedName(assignmentSubmitDto.getSavedName())
+                .dateTime(assignmentSubmitDto.getDateTime())
+                .isSubmit(assignmentSubmitDto.isSubmit())
+                .build();
+        return assignSubmit;
+    }
 }
