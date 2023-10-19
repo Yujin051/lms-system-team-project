@@ -329,8 +329,10 @@ saveButton2.addEventListener('click', async () => {
         nthId: nthId,
         lectId: lectId,
         nthSequence: nthSequence,
+        // contsName: contsName,
         nthName: nthName,
-        contsTime: contsTime,
+        // contsYout: contsYout,
+        contsTime: contsTime
     };
     console.log("lectId2222 : " + lectId);
     console.log("nthSequenceInput : " + data.nthSequence);
@@ -417,11 +419,11 @@ createButton.addEventListener('click', () => {
     // 새로운 빈 행 생성
     const newEmptyRow = {
         nthId: '',
-        // contsNo: '',
+        contsNo: '',
         nthSequence: '',
-        // contsName: '',
+        contsName: '',
         nthName: '',
-        // contsYout: '',
+        contsYout: '',
         contsTime: ''
     };
     grid2.appendRow(newEmptyRow);
