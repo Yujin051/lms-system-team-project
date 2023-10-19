@@ -92,6 +92,13 @@ public class LmsContsService {
         return object;
     }
 
+    // 검색 서비스
+    public List<LmsContsDto> searchConts(String contsName, String lectName) {
+        // 검색하는 서비스
+        return lmsContsRepository.searchByContsNameAndLectName(contsName, lectName);
+    }
+
+
     // 하나의 컨텐츠 상세정보 얻어오기
     public LmsContsDto getDetail(Long contsNo) {
         LmsConts lmsConts = lmsContsRepository.findById(contsNo)

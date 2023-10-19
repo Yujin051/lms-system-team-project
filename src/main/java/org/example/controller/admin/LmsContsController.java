@@ -8,8 +8,11 @@ import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,5 +36,16 @@ public class LmsContsController {
     public ResponseEntity<?> findContsDetail(@RequestParam(name = "contsNo") Long contsNo) {
         LmsContsDto lmsContsDto = lmsContsService.getDetail(contsNo);
         return ResponseEntity.status(HttpStatus.OK).body(lmsContsDto);
+    }
+
+    // 검색 컨트롤러
+    @PostMapping("/findLmsConts")
+    public ResponseEntity<?> findConts(@RequestParam(name = "conts") String contsName,
+                                       @RequestParam(name = "lects") String lectName) {
+
+        // 입력받은 콘텐츠 이름과 강좌 이름으로 컨텐츠 검색
+        List<LmsContsDto> lmsContsDtoList = lmsContsService.searchConts(contsName, lectName);
+
+        return ResponseEntity.status(HttpStatus.OK).body(lmsContsDtoList);
     }
 }

@@ -23,15 +23,15 @@
                     <div class="input-group-prepend">
                         <span class="s1">콘텐츠명</span>
                     </div>
-                    <input class="form-control" type="search" placeholder="콘텐츠명 검색" aria-label="Search">
+                    <input id="contsSearch" class="form-control" type="search" placeholder="콘텐츠명 검색" aria-label="Search">
                 </div>
             </div>
             <div class="col mt-2">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="m-3 p-5">교과목명</span>
+                        <span class="m-3 p-5">강좌명</span>
                     </div>
-                    <input class="form-control" type="search" placeholder="교과목명 검색" aria-label="Search">
+                    <input id="lectSearch" class="form-control" type="search" placeholder="강좌명 검색" aria-label="Search">
                 </div>
             </div>
         </div>
@@ -40,29 +40,12 @@
             <div class="d2 border border-0">온라인콘텐츠 검색결과</div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" id="getDuration" class="me-md-1 btn btn-secondary">시간 갱신</button>
-                <button type="button" id="checkVid" class="me-md-1 btn btn-secondary">업로드 인증</button>
                 <button type="button" id="api-auth" class="btn btn-secondary">API 인증</button>
             </div>
         </div>
 
         <div class="tbl1">
             <div id="grid"></div>
-            <nav aria-label="Page navigation example">
-                <ul class="pg2 pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
         </div>
         <input type="hidden" class="magId" th:value="${magId}"/>
         <table class="right-align">
