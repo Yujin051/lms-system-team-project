@@ -101,6 +101,4 @@ public class BoardArticle {
         this.memberId = memberId;
         this.articleFileNum = articleFileNum;
     }
-
-
 }

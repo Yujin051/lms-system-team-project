@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,9 +30,6 @@ public class Student {
     @JoinColumn(name = "id")
     private Member member;
 
-    @OneToMany(mappedBy = "student")
-    private List<SemGrade> semGrade;
-
     //수강생 학년
     @Column(name = "stud_grade")
     private Long studGrade;
@@ -48,7 +46,8 @@ public class Student {
     @Column(name = "stud_crecpl")
     private Long studCreCpl;
 
-    public Student(Member member, Long studGrade, Long studMaxCr, Long studNowCr, Long studCreCpl) {
+    public Student(Member member, Long studGrade, Long studMaxCr,
+                   Long studNowCr, Long studCreCpl) {
         this.member = member;
         this.studGrade = studGrade;
         this.studMaxCr = studMaxCr;

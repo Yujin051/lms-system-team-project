@@ -23,11 +23,12 @@ spring:
     show-sql: true
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
 
     properties:
       hibernate:
-        show_sql: true
         format_sql: true
 
     defer-datasource-initialization: true
+
+

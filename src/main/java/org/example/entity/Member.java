@@ -31,7 +31,6 @@ public class Member {
     @OneToOne(mappedBy = "member")
     private Student student;
 
-
     @OneToOne(mappedBy = "member")
     private Professor professor;
 
@@ -114,6 +113,8 @@ public class Member {
                 .build();
         return member;
     }
+
+
 
 
 

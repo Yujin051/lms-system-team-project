@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 강좌성적 엔티티
@@ -10,6 +11,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "grade_info")
+@NoArgsConstructor
 public class GradeInfo {
 
     //성적ID
@@ -53,5 +55,4 @@ public class GradeInfo {
         this.assignScore = assignScore;
         this.isRecord = isRecord;
     }
-
 }

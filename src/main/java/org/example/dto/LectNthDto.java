@@ -131,7 +131,6 @@ public class LectNthDto {
                 .build();
     }
 
-
     /* grid2 와 tb1 테이블 Respository 쓸 때 사용 */
     public LectNthDto(Long nthId, Long nthSequence,
                       String nthName, int contsTime) {

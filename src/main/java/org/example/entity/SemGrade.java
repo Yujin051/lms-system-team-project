@@ -1,7 +1,9 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 학기별 성적 엔티티
@@ -10,6 +12,8 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "sem_grade")
+@AllArgsConstructor
+@NoArgsConstructor
 public class SemGrade {
 
     //id

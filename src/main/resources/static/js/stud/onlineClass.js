@@ -19,32 +19,16 @@ window.onload = function () {
     learnBtn.addEventListener('click', function (event) {
         event.preventDefault();
         modalBody.style.display = 'block';
+        modalBody.classList.add("active");
     });
 
-    closeButton.addEventListener('click', function () {
-        modalBody.style.display = 'none';
+    closeButton.addEventListener("click", function() {
+        modalBody.classList.remove("active");
+        setTimeout(function() {
+            modalBody.style.display = "none";
+        }, 400); // 애니메이션 시간 (0.4초) 이후에 모달을 숨김
     });
 };
 
-const modalIn = keyframes`
-  from{
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to{
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
 
-const modalOut = keyframes`
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-`;
 

@@ -10,10 +10,11 @@ import org.example.dto.admin.MemberDto;
 import org.example.dto.admin.PostDto;
 import org.example.dto.admin.StudLectProgDto;
 import org.example.service.LectNthService;
-import org.example.service.admin.AdminService;
-import org.example.service.admin.YoutubeService;
+
 import org.example.dto.ProfessorDto;
+import org.example.service.admin.AdminService;
 import org.example.service.admin.ProfInfoService;
+import org.example.service.admin.YoutubeService;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,6 +55,10 @@ public class AdminController {
         return "/admin/admin_lecture_apply";
     }
 
+    /**
+     * 관리자 - 학생관리
+     * @author 임휘재
+     */
     @GetMapping("/studentmanage")
     public String adminStudent(Model model) {
         List<MemberDto> student = adminService.getStudentInfo();
@@ -182,11 +187,11 @@ public class AdminController {
 
 
     /**
-     * 관리자 : 전체관리성적
+     * 관리자 : 전체관리성적 조회
      * @author 임휘재
      */
     @GetMapping("/grade")
-    public String grade() {
+    public String grade(){
         return "/admin/gradeManagement";
     }
 

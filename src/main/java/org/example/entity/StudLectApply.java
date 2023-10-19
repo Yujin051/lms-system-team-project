@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
  */
 @Entity
 @Data
+@Table(name = "stud_lect_apply")
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "stud_lect_apply")
 public class StudLectApply {
 
     //수강강좌ID

@@ -278,8 +278,6 @@ public class YoutubeService {
 
 
 
-
-
     // 수강생차시진도 기본키 조회
     public StudLectProgDto getFindMagId() {
         return studLectProgRepository.findMagId();
@@ -328,13 +326,13 @@ public class YoutubeService {
         return progress;
     }
 
-
     // 기본 설정 초기화
     // @PostCostruct는 의존성 주입이 완료된 후 한 번 실행됨.
     @PostConstruct
     public void setDefault() {
         // 사용할 clientSecret 탐색하기
-        String clientSecretUrl = "C:\\app\\java\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\client_secrets.json";
+        String clientSecretUrl = "C:\\project\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\client_secrets.json";
+
         // 경로에 파일이 없다면 에러메세지 출력?
         Objects.requireNonNull(clientSecretUrl, "classpath:OAuthClientSecret/client_secrets.json 파일이 없습니다.");
 

@@ -1,3 +1,9 @@
+/* 애니메이션 효과 */
+.modal_body.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
 /*전체 화면 부분*/
 .mainFrame {
     display: flex; justify-content: center; border: 0px solid black;

@@ -104,11 +104,11 @@ const assign = document.querySelector("#assign")
 
 // 행 클릭했을 때 상세정보 출력하기
 grid.on('click', (ev) => {
-    const valueList = grid.getRow(ev.rowKey)
+    let valueList = grid.getRow(ev.rowKey)
     const url = "/api/getlecturedetail"
     // 번호가 정수가 아닐 때 0으로 처리, 빈 값일 경우
-    const id = valueList.lectId
-    const getId = typeof id === 'number' ? id : 0;
+    let id = valueList.lectId
+    let getId = typeof id === 'number' ? id : 0;
 
     $.ajax({
         url: url,
@@ -230,11 +230,12 @@ saveBtn.addEventListener('click', () => {
     // 서버로 보낼 data 지정
     let id = parseInt(lectId.value)
     let nowNum = parseInt(enrollNow.value)
-    // console.log(id)
     // id 값은 신규 생성 시 할당되지 않으므로 0으로 처리
-    id = typeof id === 'number' ? id : 0
+    id = typeof id === 'number' && !isNaN(id) ? id : 0;
     // 현재 수강인원도 신규 시 생성되지 않으므로
-    nowNum = typeof nowNum === 'number' ? nowNum : 0
+    nowNum = typeof nowNum === 'number' && !isNaN(nowNum) ? nowNum : 0;
+
+    // console.log(id)
 
     const data = {
         lectName: lectName.value,
@@ -256,6 +257,7 @@ saveBtn.addEventListener('click', () => {
         lectCheck: check.value,
         lectAssign: assign.value
     }
+    console.log(data)
 
     const newData = JSON.stringify(data);
 
@@ -271,7 +273,7 @@ saveBtn.addEventListener('click', () => {
         error: function (jqXHR) {
             console.log(jqXHR.status)
             console.log(jqXHR.error())
-            alert("강좌 등록에 실패했습니다.")
+            alert("강좌 등록에 실패했습니다. 입력 사항을 확인해주세요.")
         }
     })
 })

@@ -36,11 +36,6 @@ public class AdminService {
         return adminRepository.findMemberDtoOne();
     }
 
-    //관리자 - 학생관리 : 평균학점
-//    public MemberDto getStudCreCplAvg(){
-//        return adminRepository.findStudCreCplAvg();
-//    }
-
     //관리자 - 학생관리 : 이름검색
     public List<MemberDto> getFindUserNameContaining(String keyword){
         return adminRepository.findByUserNameContainingIgnoreCase(keyword);
@@ -163,7 +158,7 @@ public class AdminService {
     @Transactional
     public BoardArticle createArticle(PostDto postDto, RoleType userRole) {
 
-        BoardInfo boardInfo = boardInfoRepository.findById(1L)
+        BoardInfo boardInfo = boardInfoRepository.findById(postDto.getBoardId())
                 .orElseThrow(() -> new IllegalArgumentException("게시판 정보를 찾을 수 없습니다"));
 
 

@@ -66,15 +66,19 @@ public class LectureManageController {
         String profName = mLecture.getUserName();
         // 넘어온 강좌 id 로깅
 //        logger.info("Received LectId : {}", mLecture.getLectId());
-        Professor professor = professorRepository.findProfessorByMember_UserName(mLecture.getUserName());
         // 해당 교수 아래로 새로운 강좌 생성
+        Professor professor = professorRepository.findProfessorByMember_UserName(profName);
         // 뷰에서 강좌 ID 값이 없는 경우 0으로 넘어오므로 0일 때와 아닐 때로 처리
         if (mLecture.getLectId() == 0) {
-            lectureService.newLecture(profName, mLecture.getLectName(), mLecture.getLectSubject(), mLecture.getLectYear(),
-                    mLecture.getLectSem(), mLecture.getLectCredit(), mLecture.getLectNowNum(), mLecture.getLectMaxNum(),
-                    mLecture.getLectStart(), mLecture.getLectEnd(), mLecture.getEnrollStart(), mLecture.getEnrollEnd(),
-                    mLecture.isActive(), mLecture.getLectAssign(), mLecture.getLectCheck(), mLecture.getLectTest(),
-                    mLecture.getLectElem());
+            if(professor != null) {
+                lectureService.newLecture(profName, mLecture.getLectName(), mLecture.getLectSubject(), mLecture.getLectYear(),
+                        mLecture.getLectSem(), mLecture.getLectCredit(), mLecture.getLectNowNum(), mLecture.getLectMaxNum(),
+                        mLecture.getLectStart(), mLecture.getLectEnd(), mLecture.getEnrollStart(), mLecture.getEnrollEnd(),
+                        mLecture.isActive(), mLecture.getLectAssign(), mLecture.getLectCheck(), mLecture.getLectTest(),
+                        mLecture.getLectElem());
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당 강사가 존재하지 않습니다.");
+            }
         } else {
             lectureService.updateLecture(mLecture.getLectId(), profName, mLecture.getLectName(), mLecture.getLectSubject(),
                     mLecture.getLectYear(), mLecture.getLectSem(), mLecture.getLectCredit(), mLecture.getLectNowNum(),
