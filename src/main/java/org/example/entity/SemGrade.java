@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 학기별 성적 엔티티
@@ -10,6 +11,7 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "sem_grade")
+@NoArgsConstructor
 public class SemGrade {
 
     //id
@@ -38,4 +40,11 @@ public class SemGrade {
     //평균
     @Column(name = "sem_avg")
     private Long semAvg;
+
+    public SemGrade(Student student, String semYear, String semSem, String semRating) {
+        this.student = student;
+        this.semYear = semYear;
+        this.semSem = semSem;
+        this.semRating = semRating;
+    }
 }

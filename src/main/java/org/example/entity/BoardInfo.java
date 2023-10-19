@@ -42,5 +42,8 @@ public class BoardInfo {
         this.boardResp = boardResp;
         this.boardType = boardType;
     }
-
+    public BoardInfo(String boardName, String boardType) {
+        this.boardName = boardName;
+        this.boardType = boardType;
+    }
 }

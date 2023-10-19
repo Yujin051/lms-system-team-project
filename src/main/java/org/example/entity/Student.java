@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "student")
+@NoArgsConstructor
 public class Student {
 
     //수강생ID
@@ -44,4 +46,12 @@ public class Student {
     @Column(name = "stud_crecpl")
     private Long studCreCpl;
 
+    public Student(Member member, Long studGrade, Long studMaxCr,
+                   Long studNowCr, Long studCreCpl) {
+        this.member = member;
+        this.studGrade = studGrade;
+        this.studMaxCr = studMaxCr;
+        this.studNowCr = studNowCr;
+        this.studCreCpl = studCreCpl;
+    }
 }

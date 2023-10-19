@@ -104,13 +104,14 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
 
     // 관리자 - 전체성적관리 : 이름, 학번 검색
     @Query("SELECT NEW org.example.dto.admin.MemberDto" +
-            "(s.studGrade, m.userName, m.userBirthday, m.userGender, m.userEmail," +
-            " m.userId, m.id, s.studId) " +
+            "(s.studGrade, m.userName, m.userBirthday, " +
+            "m.userGender, m.userEmail," +
+            " m.userId, m.id, s.studId)" +
             "FROM Student s JOIN s.member m ON m.id = s.member.id " +
             "WHERE (m.userId LIKE CONCAT('%', :idKeyword, '%') OR :idKeyword IS NULL) " +
-            "AND (m.userName LIKE CONCAT('%', :nameKeyword, '%') OR :nameKeyword IS NULL) ")
+            "AND   (m.userName LIKE CONCAT('%', :nameKeyword, '%') OR :nameKeyword IS NULL) ")
     List<MemberDto> gradeFindUserIdAndUserName(@Param("idKeyword") String idKeyword,
-                                       @Param("nameKeyword") String nameKeyword);
+                                               @Param("nameKeyword") String nameKeyword);
 
 
     //관리자 - 전체성적관리 : 이름, 학번, 학년 전체 검색
@@ -122,8 +123,8 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
             "AND (m.userName LIKE CONCAT('%', :nameKeyword, '%') OR :nameKeyword IS NULL) " +
             "AND (s.studGrade = :gradeKeyword OR :gradeKeyword IS NULL)")
     List<MemberDto> gradeFindAllSearch(@Param("idKeyword") String idKeyword,
-                                            @Param("nameKeyword") String nameKeyword,
-                                            @Param("gradeKeyword") Long gradeKeyword);
+                                       @Param("nameKeyword") String nameKeyword,
+                                       @Param("gradeKeyword") Long gradeKeyword);
 
     //관리자 - 전체성적관리 : 검색어가 비어있을 때 전체 조회되게
     @Query("SELECT NEW org.example.dto.admin.MemberDto" +
@@ -259,9 +260,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
             "   )) " +
             "   AND (:articleAt IS NULL OR ba.articleAt = :articleAt)")
     List<PostDto> postNoSearch(@Param("boardTypeKeyword") String boardTypeKeyword,
-                                @Param("searchType") String searchType,
-                                @Param("requirement") String requirement,
-                                @Param("articleAt") LocalDate articleAt);
+                               @Param("searchType") String searchType,
+                               @Param("requirement") String requirement,
+                               @Param("articleAt") LocalDate articleAt);
 
     // 관리자 - 게시글 작성(담당용) : 해당 게시글 번호의 게시글 내용 조회
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
@@ -307,7 +308,7 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
             "WHERE bi.Id = :boardId " +
             "AND bi.boardName LIKE %:boardName%")
     List<PostDto> boardInfoBoardIdAndBoardNameSearch(@Param("boardId") Long boardId,
-                                           @Param("boardName") String boardName);
+                                                     @Param("boardName") String boardName);
 
     // 관리자 - 게시판 정보관리 : 게시판 정보 목록 게시판 번호, 게시판 이름 검색
     @Query("SELECT NEW org.example.dto.admin.PostDto" +

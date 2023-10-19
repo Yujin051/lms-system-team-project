@@ -455,7 +455,7 @@ deleteButton.addEventListener('click', async () => {
                 });
 
                 if (response.ok) {
-                    alert("삭제했어");
+                    alert("선택한 정보를 삭제하였습니다");
                     // 선택한 행을 그리드에서 제거
                     grid2.removeRow(row._attributes.rowKey);
                 } else {

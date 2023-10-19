@@ -44,7 +44,12 @@ public class LectNth {
         this.lmsConts = lmsConts;
         this.nthName = nthName;
         this.nthSequence = nthSequence;
-
-
+    }
+    public LectNth(LectInfo lectInfo, LmsConts lmsConts,
+                   String nthName, Long nthSequence) {
+        this.lectInfo = lectInfo;
+        this.lmsConts = lmsConts;
+        this.nthName = nthName;
+        this.nthSequence = nthSequence;
     }
 }

@@ -22,9 +22,9 @@ VALUES ('다람이', NOW(), 'FEMALE', '010-2212-1131', 'ekfkadl@naver.com', 'asd
 INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
                     user_addr, user_role, user_id, user_pw)
 VALUES ('신민기', NOW(), 'MALE', '010-6798-7952', 'tlsalsrl@naver.com', '김포', 'USER', 'tlsalsrl0421', 'asdasd1');
-INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
+/*INSERT INTO member (user_name, user_birthday, user_gender, user_phonenum, user_email,
                     user_addr, user_role, user_id, user_pw)
-VALUES ('선생2', NOW(), 'FEMALE', '010-1132-8788', 'teacher1@naver.com', '서울', 'TEACHER', 'teacher111', 'teacher111');
+VALUES ('선생2', NOW(), 'FEMALE', '010-1132-8788', 'teacher1@naver.com', '서울', 'TEACHER', 'teacher111', 'teacher111');*/
 
 
 

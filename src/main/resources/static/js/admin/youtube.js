@@ -74,6 +74,7 @@ function onPlayerStateChange(event) {
         //일시정지한 시간을 기록하고 다시 재생했을때 일시정지된 시간부터 재생
         fnlPosition = player.getCurrentTime();
         if (event.target.getCurrentTime() <= maxPosition + 5) {
+            sendProgressToServer();
             updateVideoPosition();
             console.log("일시정지 시 최종재생시간 : " + fnlPosition);
         }

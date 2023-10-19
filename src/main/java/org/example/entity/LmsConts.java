@@ -43,4 +43,10 @@ public class LmsConts {
         this.contsTime = contsTime;
         this.contsYout = contsYout;
     }
+    public LmsConts(String contsName, String contsDetail, int contsTime, String contsYout) {
+        this.contsName = contsName;
+        this.contsDetail = contsDetail;
+        this.contsTime = contsTime;
+        this.contsYout = contsYout;
+    }
 }

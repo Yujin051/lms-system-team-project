@@ -65,13 +65,14 @@ public class AdminController {
 
     /**
      * 관리자 - 학생관리 : 학생정보 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/st")
     @ResponseBody
     public ResponseEntity<List<MemberDto>> adminStudentApi() {
         List<MemberDto> dtos = adminService.getStudentInfo();
-        for(int i=0; i < dtos.size(); i++){
+        for (int i = 0; i < dtos.size(); i++) {
             MemberDto dto = dtos.get(i);
             log.info("studId : {}", dto.getStudId());
             log.info("userName : {}", dto.getUserName());
@@ -88,34 +89,37 @@ public class AdminController {
 
     /**
      * 관리자 - 학생관리 : 학생정보 이름검색
+     *
      * @author 임휘재
      */
     @GetMapping("/studentmanage/userName/api/search")
     @ResponseBody
-    public List<MemberDto> userNameSearch(@RequestParam(value = "keyword") String keyword){
+    public List<MemberDto> userNameSearch(@RequestParam(value = "keyword") String keyword) {
         log.info("keyword : " + keyword);
         return adminService.getFindUserNameContaining(keyword);
     }
 
     /**
      * 관리자 - 학생관리 : 학생정보 학번검색
+     *
      * @author 임휘재
      */
     @GetMapping("/studentmanage/studId/api/search")
     @ResponseBody
-    public List<MemberDto> studIdSearch(@RequestParam(value = "keyword") String keyword){
+    public List<MemberDto> studIdSearch(@RequestParam(value = "keyword") String keyword) {
         log.info("keyword : " + keyword);
         return adminService.getFindByStudId(keyword);
     }
 
     /**
      * 관리자 - 학생관리 : 학생정보 이름, 학번 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/studentmanage/all/api/search")
     @ResponseBody
-    public List<MemberDto> allSearch(@RequestParam(value = "idKeyword", required = false) String idKeyword ,
-                                     @RequestParam(value = "nameKeyword", required = false) String nameKeyword){
+    public List<MemberDto> allSearch(@RequestParam(value = "idKeyword", required = false) String idKeyword,
+                                     @RequestParam(value = "nameKeyword", required = false) String nameKeyword) {
         log.info("idKeyword : " + idKeyword);
         log.info("nameKeyword : " + nameKeyword);
         return adminService.getFindByStudIdAndUserName(idKeyword, nameKeyword);
@@ -123,12 +127,13 @@ public class AdminController {
 
     /**
      * 관리자 - 학생관리 : 검색어가 비어있을때 조회버튼 누르면 전체 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/studentmanage/no/api/search")
     @ResponseBody
-    public List<MemberDto> noSearch(@RequestParam(value = "idKeyword", required = false) String idKeyword ,
-                                     @RequestParam(value = "nameKeyword", required = false) String nameKeyword){
+    public List<MemberDto> noSearch(@RequestParam(value = "idKeyword", required = false) String idKeyword,
+                                    @RequestParam(value = "nameKeyword", required = false) String nameKeyword) {
         log.info("idKeyword : " + idKeyword);
         log.info("nameKeyword : " + nameKeyword);
         return adminService.getNoSearch(idKeyword, nameKeyword);
@@ -141,22 +146,24 @@ public class AdminController {
 
     /**
      * 관리자 : 전체관리성적 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/grade")
-    public String grade(){
+    public String grade() {
         return "/admin/gradeManagement";
     }
 
     /**
      * 관리자 : 전체관리성적 : 학생정보 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/grade")
     @ResponseBody
     public ResponseEntity<List<MemberDto>> adminGradeStudInfo() {
         List<MemberDto> dtos = adminService.getAdminGradeStudInfo();
-        for(int i=0; i < dtos.size(); i++){
+        for (int i = 0; i < dtos.size(); i++) {
             MemberDto dto = dtos.get(i);
             log.info("gradeUserName : {}", dto.getUserName());
             log.info("userEmail : {}", dto.getUserEmail());
@@ -166,57 +173,62 @@ public class AdminController {
 
     /**
      * 관리자 - 전체관리성적 이름 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/grade/userName/api/search")
     @ResponseBody
-    public List<MemberDto> gradeUserNameSearch(@RequestParam(value = "keyword") String keyword){
+    public List<MemberDto> gradeUserNameSearch(@RequestParam(value = "keyword") String keyword) {
         log.info("keyword : " + keyword);
         return adminService.getAdminGradeUserNameSearch(keyword);
     }
 
     /**
      * 관리자 - 전체관리성적 학번 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/grade/studId/api/search")
     @ResponseBody
-    public List<MemberDto> gradeStudIdSearch(@RequestParam(value = "keyword") String keyword){
+    public List<MemberDto> gradeStudIdSearch(@RequestParam(value = "keyword") String keyword) {
         log.info("keyword : " + keyword);
         return adminService.getAdminGradeStudIdSearch(keyword);
     }
 
     /**
      * 관리자 - 전체관리성적 학년 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/grade/studGrade/api/search")
     @ResponseBody
-    public List<MemberDto> gradeStudGradeSearch(@RequestParam(value = "keyword") Long keyword){
+    public List<MemberDto> gradeStudGradeSearch(@RequestParam(value = "keyword") Long keyword) {
         log.info("keyword : " + keyword);
         return adminService.getAdminGradeStudGradeSearch(keyword);
     }
 
     /**
      * 관리자 - 전체관리성적 이름, 학번 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/grade/userIdAndUserName/api/search")
     @ResponseBody
     public List<MemberDto> getGradeFindUserIdAndUserName(@RequestParam(value = "idKeyword") String idKeyword,
-                                                         @RequestParam(value = "nameKeyword") String nameKeyword){
+                                                         @RequestParam(value = "nameKeyword") String nameKeyword) {
         return adminService.getGradeFindUserIdAndUserName(idKeyword, nameKeyword);
     }
 
     /**
      * 관리자 - 전체관리성적 이름, 학번, 학년 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/grade/all/api/search")
     @ResponseBody
-    public List<MemberDto> gradeAllSearch(@RequestParam(value = "idKeyword", required = false) String idKeyword ,
-                                     @RequestParam(value = "nameKeyword", required = false) String nameKeyword,
-                                          @RequestParam(value = "gradeKeyword") Long gradeKeyword){
+    public List<MemberDto> gradeAllSearch(@RequestParam(value = "idKeyword", required = false) String idKeyword,
+                                          @RequestParam(value = "nameKeyword", required = false) String nameKeyword,
+                                          @RequestParam(value = "gradeKeyword") Long gradeKeyword) {
         log.info("idKeyword : " + idKeyword);
         log.info("nameKeyword : " + nameKeyword);
         log.info("gradeKeyword : " + gradeKeyword);
@@ -225,13 +237,14 @@ public class AdminController {
 
     /**
      * 관리자 - 전체관리성적 : 검색어가 비어있을때 조회버튼 누르면 전체 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/grade/no/api/search")
     @ResponseBody
-    public List<MemberDto> gradeNoSearch(@RequestParam(value = "idKeyword", required = false) String idKeyword ,
-                                    @RequestParam(value = "nameKeyword", required = false) String nameKeyword,
-                                         @RequestParam(value = "gradeKeyword", required = false) Long gradeKeyword){
+    public List<MemberDto> gradeNoSearch(@RequestParam(value = "idKeyword", required = false) String idKeyword,
+                                         @RequestParam(value = "nameKeyword", required = false) String nameKeyword,
+                                         @RequestParam(value = "gradeKeyword", required = false) Long gradeKeyword) {
         log.info("idKeyword : " + idKeyword);
         log.info("nameKeyword : " + nameKeyword);
         return adminService.getAdminGradeNoSearch(idKeyword, nameKeyword, gradeKeyword);
@@ -239,6 +252,7 @@ public class AdminController {
 
     /**
      * 관리자 - 전체성적관리 : 전체 학기성적 및 전체 현황
+     *
      * @author 임휘재
      */
     @GetMapping("/api/gradeRecord")
@@ -250,6 +264,7 @@ public class AdminController {
 
     /**
      * 관리자 - 전체성적관리 : 강좌별성적
+     *
      * @author 임휘재
      */
     @GetMapping("/api/findGradeByCourse")
@@ -258,24 +273,27 @@ public class AdminController {
         List<MemberDto> dtos = adminService.getFindGradesByCourse(studId);
         return ResponseEntity.ok(dtos);
     }
+
     /**
      * 관리자 : 게시글 관리(담당용)
+     *
      * @author 임휘재
      */
     @GetMapping("/postWrite")
-    public String postWrite(){
+    public String postWrite() {
         return "/admin/postWrite";
     }
 
     /**
      * 관리자 : 게시글 관리(담당용) 게시글 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postWrite")
     @ResponseBody
     public ResponseEntity<List<PostDto>> adminPostInfo() {
         List<PostDto> dtos = adminService.getPostInfo();
-        for(int i = 0; i < dtos.size(); i++) {
+        for (int i = 0; i < dtos.size(); i++) {
             log.info("boardId : " + dtos.get(i).getBoardId());
             log.info("articleId : " + dtos.get(i).getArticleId());
         }
@@ -284,39 +302,43 @@ public class AdminController {
 
     /**
      * 관리자 : 게시글 관리(담당용) 게시글 목록 게시판 종류 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postWrite/search/boardType")
     @ResponseBody
-    public List<PostDto> postInfoBoardTypeSearch(@RequestParam(value = "keyword") String keyword){
+    public List<PostDto> postInfoBoardTypeSearch(@RequestParam(value = "keyword") String keyword) {
         return adminService.getArticleFindByUserNameContainingIgnoreCase(keyword);
     }
 
     /**
      * 관리자 : 게시글 관리(담당용) 게시글 목록 검색조건 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postWrite/search/requirement")
     @ResponseBody
     public List<PostDto> postInfoRequirementSearch(@RequestParam(value = "keyword") String keyword,
-                                                   @RequestParam(value = "searchType") String searchType){
+                                                   @RequestParam(value = "searchType") String searchType) {
         return adminService.getArticleSearchRequirement(keyword, searchType);
     }
 
     /**
      * 관리자 : 게시글 관리(담당용) 게시글 목록 작성일 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postWrite/search/articleAt")
     @ResponseBody
     public List<PostDto> postSearchArticleAt(@RequestParam(value = "keyword", required = false)
-                                                 LocalDate keyword){
+                                             LocalDate keyword) {
         log.info("articleAt : " + keyword);
         return adminService.getPostSearchArticleAt(keyword);
     }
 
     /**
      * 관리자 : 게시글 관리(담당용) 게시글 목록 게시글 종류, 검색조건으로 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postWrite/search/boardTypeAndArticleAt")
@@ -324,13 +346,14 @@ public class AdminController {
     public List<PostDto> postSearchBoardTypeAndArticleAt(
             @RequestParam(value = "boardTypeKeyword") String boardTypeKeyword,
             @RequestParam(value = "searchType") String searchType,
-            @RequestParam(value = "requirement") String requirement){
+            @RequestParam(value = "requirement") String requirement) {
         return adminService.getPostSearchBoardTypeAndRequirement(boardTypeKeyword,
-                searchType,requirement);
+                searchType, requirement);
     }
 
     /**
      * 관리자 - 게시글 작성(담당용) : 게시글 목록 게시판종류, 검색조건, 작성일 전부 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postWrite/search/all")
@@ -338,13 +361,14 @@ public class AdminController {
     public List<PostDto> postAllSearch(@RequestParam(value = "boardTypeKeyword") String boardTypeKeyword,
                                        @RequestParam(value = "searchType") String searchType,
                                        @RequestParam(value = "requirement") String requirement,
-                                       @RequestParam(value = "articleAt") LocalDate articleAt){
+                                       @RequestParam(value = "articleAt") LocalDate articleAt) {
         log.info("boardTypeKeyword : " + boardTypeKeyword);
         return adminService.getPostAllSearch(boardTypeKeyword, searchType, requirement, articleAt);
     }
 
     /**
      * 관리자 - 게시글 작성(담당용) : 게시글 목록 게시판종류, 검색조건, 작성일 비어있을때 전체검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postWrite/search/no")
@@ -352,13 +376,14 @@ public class AdminController {
     public List<PostDto> postNoSearch(@RequestParam(value = "boardTypeKeyword", required = false) String boardTypeKeyword,
                                       @RequestParam(value = "searchType", required = false) String searchType,
                                       @RequestParam(value = "requirement", required = false) String requirement,
-                                      @RequestParam(value = "articleAt", required = false) LocalDate articleAt){
+                                      @RequestParam(value = "articleAt", required = false) LocalDate articleAt) {
         log.info("boardTypeKeyword : " + boardTypeKeyword);
         return adminService.getPostNoSearch(boardTypeKeyword, searchType, requirement, articleAt);
     }
 
     /**
      * 관리자 - 게시글 작성(담당용) : 게시글 목록 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postWrite/postContentInfo")
@@ -370,16 +395,17 @@ public class AdminController {
 
     /**
      * 관리자 - 게시글 작성(담당용) : 게시글 목록 저장
+     *
      * @author 임휘재
      */
     @PutMapping("/api/postWrite/save")
     @ResponseBody
     public ResponseEntity<?> createArticle(@RequestBody PostDto postDto,
                                            RoleType ADMIN) {
-        if(postDto.getArticleId() == null) {
+        if (postDto.getArticleId() == null) {
             adminService.createArticle(postDto, ADMIN);
             log.info("saveArticleId : " + postDto.getArticleId());
-        }else {
+        } else {
             adminService.updateArticle(postDto);
             log.info("updateArticleId : " + postDto.getArticleId());
         }
@@ -390,6 +416,7 @@ public class AdminController {
 
     /**
      * 관리자 - 게시글 작성(담당용) : 게시글 목록 삭제
+     *
      * @author 임휘재
      */
     @DeleteMapping("/api/postWrite/delete")
@@ -407,15 +434,17 @@ public class AdminController {
 
     /**
      * 관리자 : 게시판 정보관리
+     *
      * @author 임휘재
      */
     @GetMapping("/postInfo")
-    public String postInfo(){
+    public String postInfo() {
         return "/admin/postInfo";
     }
 
     /**
      * 관리자 : 게시판 정보관리 : 게시판 정보 목록 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postInfo")
@@ -427,79 +456,86 @@ public class AdminController {
 
     /**
      * 관리자 : 게시판 정보관리 : 게시판 정보 목록 게시판 번호 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postInfo/boardId/search")
     @ResponseBody
-    public List<PostDto> boardInfoBoardIdSearch(@RequestParam(value = "boardId") Long boardId){
+    public List<PostDto> boardInfoBoardIdSearch(@RequestParam(value = "boardId") Long boardId) {
         return adminService.getBoardInfoBoardIdSearch(boardId);
     }
 
     /**
      * 관리자 : 게시판 정보관리 : 게시판 정보 목록 게시판 이름 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postInfo/boardName/search")
     @ResponseBody
-    public List<PostDto> boardInfoBoardNameSearch(@RequestParam(value = "boardName") String boardName){
+    public List<PostDto> boardInfoBoardNameSearch(@RequestParam(value = "boardName") String boardName) {
         return adminService.getBoardInfoBoardNameSearch(boardName);
     }
 
     /**
      * 관리자 : 게시판 정보관리 : 게시판 정보 목록 게시판 종류 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postInfo/boardType/search")
     @ResponseBody
-    public List<PostDto> boardInfoBoardTypeSearch(@RequestParam(value = "boardType") String boardType){
+    public List<PostDto> boardInfoBoardTypeSearch(@RequestParam(value = "boardType") String boardType) {
         return adminService.getBoardInfoBoardTypeSearch(boardType);
     }
 
     /**
      * 관리자 : 게시판 정보관리 : 게시판 정보 목록 게시판 번호, 게시판 이름 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postInfo/boardIdAndBoardName/search")
     @ResponseBody
     public List<PostDto> boardInfoBoardIdAndBoardNameSearch(@RequestParam(value = "boardId") Long boardId,
-                                                  @RequestParam(value = "boardName") String boardName){
-        return adminService.getBoardInfoBoardIdAndBoardNameSearch(boardId,boardName);
+                                                            @RequestParam(value = "boardName") String boardName) {
+        return adminService.getBoardInfoBoardIdAndBoardNameSearch(boardId, boardName);
     }
 
     /**
      * 관리자 : 게시판 정보관리 : 게시판 정보 목록 게시판 번호, 게시판 종류 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postInfo/boardIdAndBoardType/search")
     @ResponseBody
     public List<PostDto> boardInfoBoardIdAndBoardTypeSearch(@RequestParam(value = "boardId") Long boardId,
-                                                            @RequestParam(value = "boardType") String boardType){
-        return adminService.getBoardInfoBoardIdAndBoardTypeSearch(boardId,boardType);
+                                                            @RequestParam(value = "boardType") String boardType) {
+        return adminService.getBoardInfoBoardIdAndBoardTypeSearch(boardId, boardType);
     }
 
     /**
      * 관리자 : 게시판 정보관리 : 게시판 정보 목록 모든 검색어 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/postInfo/all/search")
     @ResponseBody
     public List<PostDto> boardInfoAllSearch(@RequestParam(value = "boardId") Long boardId,
                                             @RequestParam(value = "boardType") String boardType,
-                                            @RequestParam(value = "boardName") String boardName){
-        return adminService.getBoardInfoAllSearch(boardId,boardType,boardName);
+                                            @RequestParam(value = "boardName") String boardName) {
+        return adminService.getBoardInfoAllSearch(boardId, boardType, boardName);
     }
 
     /**
      * 관리자 : 게시판 정보관리 : 게시판 정보 등록
+     *
      * @author 임휘재
      */
     @PutMapping("/api/postInfo/save")
     @ResponseBody
     public ResponseEntity<?> createBoard(@RequestBody PostDto postDto) {
-        if(postDto.getBoardId() == null) {
+        if (postDto.getBoardId() == null) {
             adminService.createBoard(postDto);
             log.info("saveBoardId : " + postDto.getBoardId());
-        }else {
+        } else {
             adminService.updateBoard(postDto);
             log.info("updateBoardId : " + postDto.getBoardId());
         }
@@ -509,6 +545,7 @@ public class AdminController {
 
     /**
      * 관리자 - 게시글 작성(담당용) : 게시판 정보 삭제
+     *
      * @author 임휘재
      */
     @DeleteMapping("/api/postInfo/delete")
@@ -532,6 +569,7 @@ public class AdminController {
 
     /**
      * 관리자 - 온라인강의수강현황 : 학습강좌조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/as")
@@ -543,37 +581,41 @@ public class AdminController {
 
     /**
      * 관리자 - 온라인강의수강현황 : 학습강좌 강좌명으로 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/as/lectName/search")
     @ResponseBody
-    public List<LectDto> boardInfoBoardIdSearch(@RequestParam(value = "lectName") String lectName){
+    public List<LectDto> boardInfoBoardIdSearch(@RequestParam(value = "lectName") String lectName) {
         return adminService.getLearningCourseLectNameSearch(lectName);
     }
 
     /**
      * 관리자 - 온라인강의수강현황 : 학습강좌 강좌운영상태로 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/as/isActive/search")
     @ResponseBody
-    public List<LectDto> boardInfoBoardIdSearch(@RequestParam(value = "isActive") Boolean isActive){
+    public List<LectDto> boardInfoBoardIdSearch(@RequestParam(value = "isActive") Boolean isActive) {
         return adminService.getLearningCourseIsActiveSearch(isActive);
     }
 
     /**
      * 관리자 - 온라인강의수강현황 : 학습강좌 강좌명, 강좌운영상태로 검색
+     *
      * @author 임휘재
      */
     @GetMapping("/api/as/all/search")
     @ResponseBody
     public List<LectDto> learningCourseAllSearch(@RequestParam(value = "lectName") String lectName,
-                                                 @RequestParam(value = "isActive") Boolean isActive){
+                                                 @RequestParam(value = "isActive") Boolean isActive) {
         return adminService.getLearningCourseAllSearch(lectName, isActive);
     }
 
     /**
      * 관리자 - 온라인강의수강현황 : 전체이수현황 조회
+     *
      * @author 임휘재
      */
     @GetMapping("/api/as/status")

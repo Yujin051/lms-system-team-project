@@ -112,4 +112,41 @@ public class LectInfo {
         this.lectTest = lectTest;
     }
 
+    public LectInfo(String lectSubject, String lectYear,
+                    String lectSem, Long lectCredit,
+                    LocalDateTime enrollStart,
+                    LocalDateTime enrollEnd,
+                    LocalDateTime lectStart,
+                    LocalDateTime lectEnd, Boolean isActive) {
+        this.lectSubject = lectSubject;
+        this.lectYear = lectYear;
+        this.lectSem = lectSem;
+        this.lectCredit = lectCredit;
+        this.enrollStart = enrollStart;
+        this.enrollEnd = enrollEnd;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+    }
+
+    public LectInfo(Professor professor, String lectName,
+                    String lectSubject, String lectYear, String lectSem,
+                    Long lectCredit, Long lectNownum, Long lectMaxnum,
+                    LocalDateTime enrollStart, LocalDateTime enrollEnd,
+                    LocalDateTime lectStart, LocalDateTime lectEnd,
+                    Boolean isActive) {
+        this.professor = professor;
+        this.lectName = lectName;
+        this.lectSubject = lectSubject;
+        this.lectYear = lectYear;
+        this.lectSem = lectSem;
+        this.lectCredit = lectCredit;
+        this.lectNownum = lectNownum;
+        this.lectMaxnum = lectMaxnum;
+        this.enrollStart = enrollStart;
+        this.enrollEnd = enrollEnd;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+    }
 }
