@@ -1,12 +1,11 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -17,6 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 @Table(name = "lect_info")
 public class LectInfo {
 
@@ -77,7 +77,7 @@ public class LectInfo {
 
     //강좌 운영상태
     @Column(name = "is_active")
-    private Boolean isActive;
+    private boolean isActive;
 
     //과제 배점
     @Column(name = "lect_assign")
@@ -91,12 +91,15 @@ public class LectInfo {
     @Column(name = "lect_test")
     private Long lectTest;
 
+    // 수강 대상 학년
+    @Column(name="lect_elem")
+    private int lectElem;
+
     @Builder
-    public LectInfo(Long lectId, String lectName, String lectSubject, String lectYear,
+    public LectInfo(String lectName, String lectSubject, String lectYear,
                     String lectSem, Long lectCredit, Long lectMaxnum, Long lectNownum,
-                    LocalDateTime lectStart, LocalDateTime lectEnd, Boolean isActive,
+                    LocalDateTime lectStart, LocalDateTime lectEnd, boolean isActive,
                     Long lectAssign, Long lectCheck, Long lectTest) {
-        this.lectId = lectId;
         this.lectName = lectName;
         this.lectSubject = lectSubject;
         this.lectYear = lectYear;
@@ -112,4 +115,24 @@ public class LectInfo {
         this.lectTest = lectTest;
     }
 
+    public LectInfo(Professor professor, String lectName,
+                    String lectSubject, String lectYear, String lectSem,
+                    Long lectCredit, Long lectNownum, Long lectMaxnum,
+                    LocalDateTime enrollStart, LocalDateTime enrollEnd,
+                    LocalDateTime lectStart, LocalDateTime lectEnd,
+                    Boolean isActive) {
+        this.professor = professor;
+        this.lectName = lectName;
+        this.lectSubject = lectSubject;
+        this.lectYear = lectYear;
+        this.lectSem = lectSem;
+        this.lectCredit = lectCredit;
+        this.lectNownum = lectNownum;
+        this.lectMaxnum = lectMaxnum;
+        this.enrollStart = enrollStart;
+        this.enrollEnd = enrollEnd;
+        this.lectStart = lectStart;
+        this.lectEnd = lectEnd;
+        this.isActive = isActive;
+    }
 }

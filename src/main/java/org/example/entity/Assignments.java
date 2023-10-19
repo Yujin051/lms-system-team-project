@@ -18,6 +18,7 @@ public class Assignments {
     @JoinColumn(name = "lect_id")
     private LectInfo lectInfo;
 
+
     // 과제 이름
     @Column(name = "assign_name")
     private String name;

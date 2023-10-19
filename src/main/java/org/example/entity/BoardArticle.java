@@ -87,5 +87,20 @@ public class BoardArticle {
         this.articleFileNum = articleFileNum;
     }
 
+    public BoardArticle(BoardInfo boardInfo, String articleTitle,
+                        String articleContent, Long articleView,
+                        LocalDate articleAt, Boolean isLocked,
+                        Boolean isDeleted, Member memberId, Long articleFileNum) {
+        this.boardInfo = boardInfo;
+        this.articleTitle = articleTitle;
+        this.articleContent = articleContent;
+        this.articleView = articleView;
+        this.articleAt = articleAt;
+        this.isLocked = isLocked;
+        this.isDeleted = isDeleted;
+        this.memberId = memberId;
+        this.articleFileNum = articleFileNum;
+    }
+
 
 }

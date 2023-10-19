@@ -37,9 +37,9 @@ public class AdminService {
     }
 
     //관리자 - 학생관리 : 평균학점
-    public MemberDto getStudCreCplAvg(){
-        return adminRepository.findStudCreCplAvg();
-    }
+//    public MemberDto getStudCreCplAvg(){
+//        return adminRepository.findStudCreCplAvg();
+//    }
 
     //관리자 - 학생관리 : 이름검색
     public List<MemberDto> getFindUserNameContaining(String keyword){

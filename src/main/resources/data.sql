@@ -60,30 +60,30 @@ values (6, '2023', '1학기', 'C');
 INSERT INTO sem_grade(stud_id, sem_year, sem_sem, sem_rating)
 values (7, '2023', '1학기', 'D');
 
-INSERT INTO teacher(id)
-values (8);
+INSERT INTO professor(id, is_active)
+values (8, 1);
 
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (1, '자바를 배우자', '자바', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (1, '자바를 배우자', '자바', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', 1);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (1, '자바스크립트를 배우자', '자바스크립트', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (1, '자바스크립트를 배우자', '자바스크립트', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', 1);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (1, '스프링 프레임워크를 배우자', '스프링 프레임워크', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+VALUES (1, '스프링 프레임워크를 배우자', '스프링 프레임워크', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', 0);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (1, '스프링부트를 배우자', '스프링부트', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+VALUES (1, '스프링부트를 배우자', '스프링부트', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', 0);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (1, 'mybatis를 배우자', 'mybatis', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+VALUES (1, 'mybatis를 배우자', 'mybatis', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', 1);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (1, 'jpa를 배우자', 'jpa', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', true);
+VALUES (1, 'jpa를 배우자', 'jpa', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', 1);
 insert into lect_info (prof_id, lect_name, lect_subject, lect_year, lect_sem, lect_credit, lect_nownum,
                        lect_maxnum, enroll_start, enroll_end, lect_start, lect_end, is_active)
-VALUES (1, 'sql을 배우자', 'sql', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', false);
+VALUES (1, 'sql을 배우자', 'sql', '2023', '1학기', 3, 0, 30, '2023-01-01', '2023-01-31', '2023-02-01', '2023-06-30', 0);
 
 
 INSERT INTO board_info(board_name, board_type)
@@ -101,22 +101,22 @@ values ('게시판이름6', '수업게시판');
 
 INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
                           article_at, is_locked, is_deleted, file_num)
-values (1, 1, '게시글제목1', '게시글내용11', 10024, now(), false, true, 1);
+values (1, 1, '게시글제목1', '게시글내용11', 10024, now(), 0, 1, 1);
 INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
                           article_at, is_locked, is_deleted, file_num)
-values (2, 2, '게시글제목2', '게시글내용22', 5505, now(), true, true, 2);
+values (2, 2, '게시글제목2', '게시글내용22', 5505, now(), 1, 1, 2);
 INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
                           article_at, is_locked, is_deleted, file_num)
-values (3, 2, '게시글제목3', '게시글내용3123', 111, now(), true, false, 3);
+values (3, 2, '게시글제목3', '게시글내용3123', 111, now(), 1, 0, 3);
 INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
                           article_at, is_locked, is_deleted, file_num)
-values (4, 4, '게시글제목4', '게시글내용sadf', 22, now(), true, false, 4);
+values (4, 4, '게시글제목4', '게시글내용sadf', 22, now(), 1, 0, 4);
 INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
                           article_at, is_locked, is_deleted, file_num)
-values (5, 4, '게시글제목5', '게시글내용qweqwe1', 1315, now(), true, false, 5);
+values (5, 4, '게시글제목5', '게시글내용qweqwe1', 1315, now(), 1, 0, 5);
 INSERT INTO board_article(board_id, member_id, article_title, article_cont, article_view,
                           article_at, is_locked, is_deleted, file_num)
-values (6, 5, '게시글제목6', '게시글내용aqeqe1', 513, now(), true, false, 6);
+values (6, 5, '게시글제목6', '게시글내용aqeqe1', 513, now(), 1, 0, 6);
 
 INSERT INTO stud_lect_apply(stud_id, lect_id)
 values (1, 1);
@@ -139,13 +139,13 @@ values (3, 6);
 
 /* 수강생차시진도 */
 INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
-values (1, 1, 1, 'A', 95, 95, 89, true);
+values (1, 1, 1, 'A', 95, 95, 89, 1);
 INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
-values (2, 2, 2, 'B', 88, 81, 79, true);
+values (2, 2, 2, 'B', 88, 81, 79, 1);
 INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
-values (3, 3, 2, 'B', 81, 77, 98, true);
+values (3, 3, 2, 'B', 81, 77, 98, 1);
 INSERT INTO grade_info(apply_id, stud_id, lect_id, grade, check_score, assign_score, test_score, is_record)
-values (4, 4, 4, 'B', 80, 81, 82, true);
+values (4, 4, 4, 'B', 80, 81, 82, 1);
 
 
 /* 수강생차시진도 */

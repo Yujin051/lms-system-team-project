@@ -6,8 +6,8 @@
 #mainFrame {
     border: 0;
     width: 1670px;
-    height: 820px;
-    overflow-y: scroll;
+    min-height: 800px;
+    height: auto;
     overflow-x: hidden;
 }
 
@@ -21,15 +21,17 @@
     height: 45px;
 }
 
-.buttonGroup > div{
+.buttonGroup > button{
     margin-left: 10px;
     float: left;
     width: 45px;
     height: 30px;
     border: 1px solid black;
     border-radius: 3px;
-    line-height: 30px;
+    line-height: 27px;
     text-align: center;
+    color: white;
+    background-color: black;
 }
 
 /* 검색 박스 */
@@ -91,7 +93,6 @@
     position: relative;
     left: 85px;
     width: 1500px;
-    margin-bottom: 50px;
     display: flex;
 }
 
@@ -100,6 +101,7 @@
     width: 1500px;
     height: 600px;
     margin-left: 85px;
+    margin-bottom: 50px;
     display: flex;
 }
 

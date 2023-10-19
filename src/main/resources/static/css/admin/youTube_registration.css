@@ -121,3 +121,25 @@ table {
     height: 80px;
 }
 
+.modalWrap {
+    position: absolute;
+    left: 220px;
+    top: 80px;
+    z-index: 20;
+    width: 1700px;
+    height: 1000px;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal {
+    padding-top: 30px;
+    position: relative;
+    left:430px;
+    top: 50px;
+    z-index: 21;
+    width: 800px;
+    height: 700px;
+    color: black;
+    background: white;
+}

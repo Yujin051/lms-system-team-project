@@ -9,17 +9,18 @@ import org.example.dto.admin.LectDto;
 import org.example.dto.admin.MemberDto;
 import org.example.dto.admin.PostDto;
 import org.example.dto.admin.StudLectProgDto;
-import org.example.entity.BoardArticle;
 import org.example.service.LectNthService;
 import org.example.service.admin.AdminService;
 import org.example.service.admin.YoutubeService;
+import org.example.dto.ProfessorDto;
+import org.example.service.admin.ProfInfoService;
+import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class AdminController {
     private final AdminService adminService;
     private final YoutubeService youtubeService;
     private final LectNthService lectNthService;
+    private final ProfInfoService profInfoService;
 
     // 어드민 메인페이지
     @GetMapping("")
@@ -56,10 +58,10 @@ public class AdminController {
     public String adminStudent(Model model) {
         List<MemberDto> student = adminService.getStudentInfo();
         List<MemberDto> studentOne = adminService.getBasicInfo();
-        MemberDto studCreCplAvg = adminService.getStudCreCplAvg();
+//        MemberDto studCreCplAvg = adminService.getStudCreCplAvg();
         model.addAttribute("student", student);
         model.addAttribute("st", studentOne);
-        model.addAttribute("avg", studCreCplAvg);
+//        model.addAttribute("avg", studCreCplAvg);
         return "/admin/admin_student_manage";
     }
 
@@ -139,12 +141,52 @@ public class AdminController {
         return "/admin/admin_prof_manage";
     }
 
+    // 강사관리 페이지 로딩 시 전체 조회 후 그리드에 출력할 데이터 리턴
+    @GetMapping("/getproflist")
+    @ResponseBody
+    public ResponseEntity adminProfList() {
+        List<ProfessorDto> profList = profInfoService.professorList();
+        JSONObject object = new JSONObject();
+        JSONObject data = new JSONObject();
+        JSONObject pagination = new JSONObject();
+        object.put("result", true);
+        object.put("data", data);
+        data.put("contents", profList);
+        data.put("pagination", pagination);
+        pagination.put("page", 1);
+        pagination.put("totalCount", 12);
+
+//        System.out.println(object.toString());
+        return new ResponseEntity<>(object.toString(), HttpStatus.OK);
+    }
+
+    @PostMapping("/getproflist")
+    @ResponseBody
+    public ResponseEntity searchList(@RequestParam("active") String active,
+                                     @RequestParam("subject") String subject,
+                                     @RequestParam("name") String name) {
+        List<ProfessorDto> profList = profInfoService.professorConditionList(active, subject, name);
+
+//        System.out.println(profList.toString());
+        return new ResponseEntity<>(profList, HttpStatus.OK);
+    }
+
+    @PostMapping("/getdetail")
+    @ResponseBody
+    public ResponseEntity profDetail(@RequestParam("name") String name,
+                                     @RequestParam("work") String work) {
+        ProfessorDto professorDto = profInfoService.professorDetails(work, name);
+//        System.out.println(professorDto);
+        return new ResponseEntity(professorDto, HttpStatus.OK);
+    }
+
+
     /**
-     * 관리자 : 전체관리성적 조회
+     * 관리자 : 전체관리성적
      * @author 임휘재
      */
     @GetMapping("/grade")
-    public String grade(){
+    public String grade() {
         return "/admin/gradeManagement";
     }
 
