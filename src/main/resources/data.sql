@@ -410,6 +410,10 @@ insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate 
                                                                                                                                                         ('prof2' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '이선생','01024225555' , '2023-1-1' , '선생2집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'TEACHER'),
                                                                                                                                                         ('prof3' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '신선생','01024225555' , '2023-1-1' , '선생2집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'TEACHER');
 
+insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role, img_original, img_saved) values
+                                                                                                                                                                                 ('student3' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '이현석','01022225555' , '2023-1-1' , '학생1집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'USER', 'noimg2.png', 'noimg2.png');
+
+
 insert into student(member_id, stud_grade, stud_maxcr, stud_nowcr, stud_crecpl) values
                                                                                     (2, 2, 18, 0, 11),
                                                                                     (3, 3, 16, 0, 15);
@@ -464,26 +468,26 @@ insert into stud_lect_apply(lect_id, stud_id) VALUES
 
 
 
-insert into grade_info(apply_id, lect_id, stud_id, grade, check_score, assign_score, test_score) values
-                                                                                                     (1, 1, 1, 'D', 25, 21, 19),
-                                                                                                     (2, 1, 2, 'A', 25, 33, 13),
-                                                                                                     (3, 2, 2, 'B', 25, 33, 22),
-                                                                                                     (4, 3, 1, 'A', 25, 33, 21),
-                                                                                                     (5, 4, 1, 'A', 25, 33, 21),
-                                                                                                     (6, 5, 1, 'C', 25, 35, 24),
-                                                                                                     (7, 6, 1, 'A', 25, 36, 20),
-                                                                                                     (8, 7, 2, 'D', 25, 35, 20),
-                                                                                                     (9, 8, 1, 'A', 25, 31, 20),
-                                                                                                     (10, 9, 2, 'A', 25, 33, 20),
-                                                                                                     (11, 10, 2, 'D', 25, 33, 20),
-                                                                                                     (12, 11, 1, 'A', 25, 33, 20),
-                                                                                                     (13, 12, 1, 'A', 25, 33, 20),
-                                                                                                     (14, 13, 2, 'D', 25, 33, 20),
-                                                                                                     (15, 14, 1, 'C', 25, 33, 20),
-                                                                                                     (16, 14, 2, 'A', 25, 33, 20),
-                                                                                                     (17, 15, 1, 'D', 25, 33, 20),
-                                                                                                     (18, 15, 2, 'A', 25, 33, 20),
-                                                                                                     (19, 16, 1, 'A', 25, 33, 20);
+insert into grade_info(apply_id,grade, check_score, assign_score, test_score) values
+                                                                                                     (1, 'D', 25, 21, 19),
+                                                                                                     (2, 'A', 25, 33, 13),
+                                                                                                     (3, 'B', 25, 33, 22),
+                                                                                                     (4, 'A', 25, 33, 21),
+                                                                                                     (5, 'A', 25, 33, 21),
+                                                                                                     (6, 'C', 25, 35, 24),
+                                                                                                     (7, 'A', 25, 36, 20),
+                                                                                                     (8, 'D', 25, 35, 20),
+                                                                                                     (9, 'A', 25, 31, 20),
+                                                                                                     (10, 'A', 25, 33, 20),
+                                                                                                     (11,  'D', 25, 33, 20),
+                                                                                                     (12,  'A', 25, 33, 20),
+                                                                                                     (13,  'A', 25, 33, 20),
+                                                                                                     (14,  'D', 25, 33, 20),
+                                                                                                     (15,  'C', 25, 33, 20),
+                                                                                                     (16,  'A', 25, 33, 20),
+                                                                                                     (17,  'D', 25, 33, 20),
+                                                                                                     (18,  'A', 25, 33, 20),
+                                                                                                     (19,  'A', 25, 33, 20);
 
 insert into sem_grade(stud_id, sem_year, sem_sem, sem_crecpl, sem_avg_crecpl) values
                                                                                   (1, '2023', '2학기', 0, 0),
