@@ -237,16 +237,10 @@ public class StudentController {
                             .build();
 
                     gradeInfoRepository.save(gradeInfo);
-
-
-
-
                     model.addAttribute("message", "신청되었습니다.");
                     model.addAttribute("SearchUrl", "/student/scr");
                     model.addAttribute("list", studentService.lectInfoList());
                     model.addAttribute("list1", studentService.studLectApplyCheckList(member.getId()));
-
-
                     return "Message";
 
                 } else {
@@ -278,16 +272,9 @@ public class StudentController {
         Member member = memberService.memberView(loginId);
         Student student = studentRepository.findByMember(member);
         LectInfo lectInfo = lectInfoRepository.findById(lectId).orElseThrow();
-
-
         lectInfo.minus();
         student.setStudNowCr(student.getStudNowCr() - lectCredit);
-
         studLectApplyRepository.deleteById(applyId);
-
-
-
-
         model.addAttribute("message", "취소되었습니다.");
         model.addAttribute("SearchUrl", "/student/scr");
         model.addAttribute("list", studentService.lectInfoList());

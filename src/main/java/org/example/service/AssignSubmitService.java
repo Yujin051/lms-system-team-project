@@ -17,8 +17,9 @@ public class AssignSubmitService {
 //        return assignSubmitRepository.findByAssignmentsLectInfoLectId(lectId);
 //    }
 
-    public void saveSubmission(AssignSubmit submission) {
+    public void createAssignmentSubmit(AssignSubmit submission) {
         assignSubmitRepository.save(submission);
     }
+
 
 }
