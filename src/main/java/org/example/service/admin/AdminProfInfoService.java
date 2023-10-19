@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProfInfoService {
+public class AdminProfInfoService {
 
     private final ProfessorRepository professorRepository;
     

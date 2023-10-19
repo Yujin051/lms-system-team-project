@@ -13,8 +13,8 @@ import org.example.service.LectNthService;
 
 import org.example.dto.ProfessorDto;
 import org.example.service.admin.AdminService;
-import org.example.service.admin.ProfInfoService;
-import org.example.service.admin.YoutubeService;
+import org.example.service.admin.AdminProfInfoService;
+import org.example.service.admin.AdminYoutubeService;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +25,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.example.constant.RoleType.ADMIN;
-
 @Controller
 @RequestMapping("/admin")
 @RequiredArgsConstructor
@@ -34,9 +32,9 @@ import static org.example.constant.RoleType.ADMIN;
 public class AdminController {
 
     private final AdminService adminService;
-    private final YoutubeService youtubeService;
+    private final AdminYoutubeService adminYoutubeService;
     private final LectNthService lectNthService;
-    private final ProfInfoService profInfoService;
+    private final AdminProfInfoService adminProfInfoService;
 
     // 어드민 메인페이지
     @GetMapping("")
@@ -150,7 +148,7 @@ public class AdminController {
     @GetMapping("/getproflist")
     @ResponseBody
     public ResponseEntity adminProfList() {
-        List<ProfessorDto> profList = profInfoService.professorList();
+        List<ProfessorDto> profList = adminProfInfoService.professorList();
         JSONObject object = new JSONObject();
         JSONObject data = new JSONObject();
         JSONObject pagination = new JSONObject();
@@ -170,7 +168,7 @@ public class AdminController {
     public ResponseEntity searchList(@RequestParam("active") String active,
                                      @RequestParam("subject") String subject,
                                      @RequestParam("name") String name) {
-        List<ProfessorDto> profList = profInfoService.professorConditionList(active, subject, name);
+        List<ProfessorDto> profList = adminProfInfoService.professorConditionList(active, subject, name);
 
 //        System.out.println(profList.toString());
         return new ResponseEntity<>(profList, HttpStatus.OK);
@@ -180,7 +178,7 @@ public class AdminController {
     @ResponseBody
     public ResponseEntity profDetail(@RequestParam("name") String name,
                                      @RequestParam("work") String work) {
-        ProfessorDto professorDto = profInfoService.professorDetails(work, name);
+        ProfessorDto professorDto = adminProfInfoService.professorDetails(work, name);
 //        System.out.println(professorDto);
         return new ResponseEntity(professorDto, HttpStatus.OK);
     }
@@ -634,7 +632,7 @@ public class AdminController {
     //온라인강의콘텐츠관리
     @GetMapping("/ytr")
     public String youTubeRegistration(Model model) {
-        StudLectProgDto dto = youtubeService.getFindMagId();
+        StudLectProgDto dto = adminYoutubeService.getFindMagId();
         model.addAttribute("magId", dto.getMagId());
         log.info("magId : " + dto.getMagId());
         return "/admin/youTube_registration";

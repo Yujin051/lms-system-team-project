@@ -6,7 +6,6 @@ import org.example.constant.RoleType;
 import org.example.dto.admin.LectDto;
 import org.example.dto.admin.MemberDto;
 import org.example.dto.admin.PostDto;
-import org.example.dto.admin.StudLectProgDto;
 import org.example.entity.*;
 import org.example.repository.admin.*;
 import org.springframework.stereotype.Service;
@@ -21,10 +20,10 @@ import java.util.List;
 public class AdminService {
 
     private final AdminRepository adminRepository;
-    private final BoardArticleRepository articleRepository;
-    private final BoardInfoRepository boardInfoRepository;
-    private final LectInfoRepository lectInfoRepository;
-    private final StudLectProgRepository studLectProgRepository;
+    private final AdminBoardArticleRepository articleRepository;
+    private final AdminBoardInfoRepository adminBoardInfoRepository;
+    private final AdminLectInfoRepository adminLectInfoRepository;
+    private final AdminStudLectProgRepository adminStudLectProgRepository;
 
     //관리자 - 학생관리 : 학생정보
     public List<MemberDto> getStudentInfo(){
@@ -158,7 +157,7 @@ public class AdminService {
     @Transactional
     public BoardArticle createArticle(PostDto postDto, RoleType userRole) {
 
-        BoardInfo boardInfo = boardInfoRepository.findById(postDto.getBoardId())
+        BoardInfo boardInfo = adminBoardInfoRepository.findById(postDto.getBoardId())
                 .orElseThrow(() -> new IllegalArgumentException("게시판 정보를 찾을 수 없습니다"));
 
 
@@ -236,56 +235,56 @@ public class AdminService {
     //관리자 - 게시판 정보관리 : 게시판 정보 목록 등록
     @Transactional
     public BoardInfo createBoard(PostDto postDto) {
-        BoardInfo boardInfo = boardInfoRepository.findById(1L)
+        BoardInfo boardInfo = adminBoardInfoRepository.findById(1L)
                 .orElseThrow(() -> new IllegalArgumentException("게시판 정보를 찾을 수 없습니다"));
         postDto.setBoardInfo(boardInfo);
-        return boardInfoRepository.save(postDto.boardInfoToEntity());
+        return adminBoardInfoRepository.save(postDto.boardInfoToEntity());
     }
 
     //관리자 - 게시판 정보관리 : 게시판 정보 목록 수정
     @Transactional
     public BoardInfo updateBoard(PostDto postDto) {
         // 1. 게시물 ID를 사용하여 해당 게시물을 조회합니다.
-        BoardInfo boardInfo = boardInfoRepository.findById(postDto.getBoardId())
+        BoardInfo boardInfo = adminBoardInfoRepository.findById(postDto.getBoardId())
                 .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다"));
         // 2. 수정할 필드를 업데이트합니다.
         boardInfo.setBoardName(postDto.getBoardName());
         boardInfo.setBoardType(postDto.getBoardType());
         // 3. 수정된 엔티티를 저장합니다.
-        return boardInfoRepository.save(boardInfo);
+        return adminBoardInfoRepository.save(boardInfo);
     }
 
     //관리자 - 게시판 정보관리 : 게시판 정보 목록 삭제
     @Transactional
     public void deleteBoard(Long boardId) {
-        BoardInfo boardInfo = boardInfoRepository.findById(boardId)
+        BoardInfo boardInfo = adminBoardInfoRepository.findById(boardId)
                 .orElseThrow(() -> new IllegalArgumentException("게시판 번호가 없습니다."));
-        boardInfoRepository.delete(boardInfo);
+        adminBoardInfoRepository.delete(boardInfo);
     }
 
     //관리자 - 온라인강의수강현황 : 학습강좌 조회
     public List<LectDto> getFindLearningCourse() {
-        return lectInfoRepository.findLearningCourse();
+        return adminLectInfoRepository.findLearningCourse();
     }
 
     //관리자 - 온라인강의수강현황 : 학습강좌 강좌명으로 검색
     public List<LectDto> getLearningCourseLectNameSearch(String lectName) {
-        return lectInfoRepository.learningCourseLectNameSearch(lectName);
+        return adminLectInfoRepository.learningCourseLectNameSearch(lectName);
     }
 
     // 관리자 - 온라인강의수강현황 : 학습강좌 강좌진행상태로 검색
     public List<LectDto> getLearningCourseIsActiveSearch(Boolean isActive) {
-        return lectInfoRepository.learningCourseIsActiveSearch(isActive);
+        return adminLectInfoRepository.learningCourseIsActiveSearch(isActive);
     }
 
     // 관리자 - 온라인강의수강현황 : 학습강좌 강좌명, 강좌진행상태로 검색
     public List<LectDto> getLearningCourseAllSearch(String lectName, Boolean isActive) {
-        return lectInfoRepository.learningCourseAllSearch(lectName, isActive);
+        return adminLectInfoRepository.learningCourseAllSearch(lectName, isActive);
     }
 
     // 관리자 - 온라인강의수강현황 : 전체이수현황 조회
     public List<LectDto> getTotalCompletionStatus(Long lectId) {
-        return lectInfoRepository.totalCompletionStatus(lectId);
+        return adminLectInfoRepository.totalCompletionStatus(lectId);
     }
 
 

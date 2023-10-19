@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class LmsContsService {
+public class AdminLmsContsService {
 
     private final LmsContsRepository lmsContsRepository;
     private final LectNthRepository lectNthRepository;

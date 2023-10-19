@@ -38,13 +38,10 @@ public class LectPlan {
     private long testScore;
 
     @Builder
-    public LectPlan(LectInfo lect, String planDes, String planBook, long checkScore, long assignScore, long testScore) {
+    public LectPlan(LectInfo lect, String planDes, String planBook) {
         this.lect = lect;
         this.planDes = planDes;
         this.planBook = planBook;
-        this. checkScore = checkScore;
-        this.assignScore = assignScore;
-        this.testScore = testScore;
     }
 }
 

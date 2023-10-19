@@ -18,20 +18,17 @@ import com.google.api.services.youtube.model.VideoStatus;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.codehaus.groovy.tools.shell.IO;
 import org.example.dto.admin.StudLectProgDto;
 import org.example.entity.StudLectProg;
-import org.example.repository.admin.StudLectProgRepository;
+import org.example.repository.admin.AdminStudLectProgRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.security.Principal;
@@ -43,9 +40,9 @@ import java.util.Objects;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class YoutubeService {
+public class AdminYoutubeService {
 
-    private final StudLectProgRepository studLectProgRepository;
+    private final AdminStudLectProgRepository adminStudLectProgRepository;
 
     // 사용자 상수들
     private static final String REDIRECT_URI = "http://localhost/youtubeAuthToken"; // 등록한 리디렉션 URI
@@ -280,17 +277,17 @@ public class YoutubeService {
 
     // 수강생차시진도 기본키 조회
     public StudLectProgDto getFindMagId() {
-        return studLectProgRepository.findMagId();
+        return adminStudLectProgRepository.findMagId();
     }
 
     // 수강생차시진도 모두 조회
     public List<StudLectProgDto> getFindStudLectProg() {
-        return studLectProgRepository.findStudLectProg();
+        return adminStudLectProgRepository.findStudLectProg();
     }
 
     // 최종재생위치(fnlPosi)와 최대재생위치(maxPosi)를 데이터베이스에 저장
     public void savePlayTime(Long magId, double fnlPosi, double maxPosi) {
-        StudLectProg studLectProg = studLectProgRepository.findById(magId)
+        StudLectProg studLectProg = adminStudLectProgRepository.findById(magId)
                 .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
         log.info("serfnlPosi : " + fnlPosi);
         log.info("sermaxPosi : " + maxPosi);
@@ -298,12 +295,12 @@ public class YoutubeService {
             studLectProg.setMaxPosi(maxPosi);
         }
         studLectProg.setFnlPosi(fnlPosi); // 최종 재생 위치 업데이트
-        studLectProgRepository.save(studLectProg);
+        adminStudLectProgRepository.save(studLectProg);
     }
 
     // 진행률 데이터베이스에 저장
     public double saveProgress(Long magId, double progress) {
-        StudLectProg studLectProg = studLectProgRepository.findById(magId)
+        StudLectProg studLectProg = adminStudLectProgRepository.findById(magId)
                 .orElseThrow(() -> new IllegalArgumentException("magId 오류"));
 
         // 만약, 진행률 70프로가 넘으면 출석 상태를 true로 바꾸고 현재 시간 찍히게
@@ -322,7 +319,7 @@ public class YoutubeService {
         }
         log.info("serProgress : " + progress);
         studLectProg.setProgress(progress); //출석률 저장
-        studLectProgRepository.save(studLectProg); // 데이터베이스에 저장
+        adminStudLectProgRepository.save(studLectProg); // 데이터베이스에 저장
         return progress;
     }
 

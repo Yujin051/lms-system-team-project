@@ -11,7 +11,7 @@ import org.example.entity.Student;
 import org.example.repository.LectApplyRepository;
 import org.example.repository.LectureRepository;
 import org.example.repository.StudentRepository;
-import org.example.service.admin.LectureService;
+import org.example.service.admin.AdminLectureService;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LectureApplyController {
 
-    private final LectureService lectureService;
+    private final AdminLectureService adminLectureService;
     private final LectApplyRepository lectApplyRepository;
     private final LectureRepository lectureRepository;
     private final StudentRepository studentRepository;
@@ -32,7 +32,7 @@ public class LectureApplyController {
     // 수강신청 대상 강좌 리스트 불러오기
     @GetMapping("/lecturelist")
     public ResponseEntity<?> lectList() {
-        JSONObject lectureList = lectureService.findAllLecture();
+        JSONObject lectureList = adminLectureService.findAllLecture();
         return ResponseEntity.status(HttpStatus.OK).body(lectureList.toString());
     }
 
