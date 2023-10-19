@@ -3,11 +3,10 @@
     font-family: 'SUIT-Regular';
 }
 #top-table {
-    width: 1522px;
+    width: 1500px;
     margin-left: 90px;
-
+    display: flex;
 }
-
 
 .table {
     margin-left: 90px;
@@ -22,14 +21,9 @@
 .sfc {
     height: 80px;
 }
-
-
 .s1 {
     margin-right: 50px;
 }
-
-
-
 .d1 {
     font-size: 19px;
     font-weight: bold;
@@ -40,14 +34,11 @@
     font-weight: bold;
     margin-top: 30px;
 }
-
-
 .tbl1 {
     margin-left: 90px;
     width: 40%;
     float: left;
 }
-
 .tbl2 .tr {
     height: 1000px;
 }
@@ -80,22 +71,6 @@
     font-size: 14px;
 }
 
-.pg1.pagination li.page-item a.page-link {
-    font-size: 15px; /* 페이지 번호의 폰트 크기 조절 */
-    padding: 5px 13px; /* 페이지 번호의 패딩 조절 */
-    border-color: grey;
-    color: grey;
-}
-
-.pg2.pagination li.page-item a.page-link {
-    font-size: 12px; /* 페이지 번호의 폰트 크기 조절 */
-    padding: 5px 10px; /* 페이지 번호의 패딩 조절 */
-    border-color: grey;
-    color: grey;
-}
-
-
-
 /* 오른쪽으로 이동시킬 클래스 */
 .right-align {
     float: right;
@@ -119,6 +94,14 @@ table {
 
 .form-control-2 {
     height: 80px;
+}
+
+/*검색 부분*/
+.contents_name_box {
+    display: flex;
+}
+.contents_name_box > .input-group {
+    display: flex; justify-content: center; align-items: center;
 }
 
 /*업로드 모달 창*/

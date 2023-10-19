@@ -417,11 +417,11 @@ createButton.addEventListener('click', () => {
     // 새로운 빈 행 생성
     const newEmptyRow = {
         nthId: '',
-        // contsNo: '',
+        contsNo: '',
         nthSequence: '',
-        // contsName: '',
+        contsName: '',
         nthName: '',
-        // contsYout: '',
+        contsYout: '',
         contsTime: ''
     };
     grid2.appendRow(newEmptyRow);
