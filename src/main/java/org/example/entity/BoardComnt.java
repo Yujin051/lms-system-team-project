@@ -1,7 +1,12 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.board.ArticleDto;
+import org.example.dto.board.CommentDto;
+import org.hibernate.annotations.ColumnDefault;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -28,12 +33,8 @@ public class BoardComnt {
     //  게시글(article) id (외래키)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "article_id" , updatable = false , nullable = false)
+    @JsonIgnore
     private BoardArticle boardArticle;
-
-    // 회원ID
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
-    private Member member;
 
     // 댓글 작성일시
     @CreatedDate
@@ -41,18 +42,35 @@ public class BoardComnt {
     private LocalDateTime comntAt;
 
     // 댓글 작성자
-    @Column(name = "comnt_writer" , nullable = false)
-    private String comntWriter;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id" , updatable = false , nullable = false)
+    @JsonIgnore
+    private Member memberId;
 
     // 댓글 내용
     @Column(name = "comnt_cont" , nullable = false)
     private String comntCont;
 
+    // 댓글 논리삭제
+    @Column(name = "isDeleted" , nullable = false)
+    @ColumnDefault("false")
+    private Boolean isDeleted;
+
+    // entity 생성
     @Builder
-    public BoardComnt (BoardArticle boardArticle , String comntWriter , String comntCont){
+    public BoardComnt (BoardArticle boardArticle , Member member , String comntCont , Boolean isDeleted){
         this.boardArticle = boardArticle;
-        this.comntWriter = comntWriter;
+        this.memberId = member;
         this.comntCont = comntCont;
+        this.isDeleted = isDeleted;
+    }
+    // 내용 수정
+    public void update(String commentText){
+        this.comntCont = commentText;
+    }
+    // 논리 삭제
+    public void delete(){
+        this.isDeleted = true;
     }
 
 }

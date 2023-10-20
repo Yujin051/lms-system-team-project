@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.dto.ProfessorDto;
+import org.example.entity.Member;
 import org.example.entity.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,10 @@ import java.util.List;
 
 @Repository
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {
+    @Query("SELECT p FROM Professor p WHERE p.member.id = :memberId")
+    Professor findByProfessorId(@Param("memberId") Long memberId);
+
+    Professor findByMember(Member member);
 
     // 강사정보 전체 조회
     @Query("select new org.example.dto.ProfessorDto(m.userName, m.userPhoneNum, m.userEmail, "
@@ -41,3 +46,4 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 
 
 }
+

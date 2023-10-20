@@ -34,6 +34,9 @@ dependencies {
     implementation 'org.jetbrains:annotations:24.0.0'
     annotationProcessor 'org.projectlombok:lombok'
 
+    // 파일 업로드 , 다운로드 용 라이브러리
+    implementation 'net.coobird:thumbnailator:0.4.16'
+
     // 타임리프
     implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.0.0'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
