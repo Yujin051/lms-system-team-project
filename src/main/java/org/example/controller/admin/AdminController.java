@@ -12,8 +12,8 @@ import org.example.dto.admin.StudLectProgDto;
 import org.example.service.LectNthService;
 
 import org.example.dto.ProfessorDto;
-import org.example.service.admin.AdminService;
 import org.example.service.admin.AdminProfInfoService;
+import org.example.service.admin.AdminService;
 import org.example.service.admin.AdminYoutubeService;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;

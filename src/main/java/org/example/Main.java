@@ -27,14 +27,14 @@ public class Main implements CommandLineRunner {
     private final ProfessorRepository professorRepository;
     private final StudentRepository studentRepository;
     private final PasswordEncoder PasswordEncoder;
-    private final SemGradeRepository semGradeRepository;
-    private final BoardInfoRepository boardInfoRepository;
-    private final BoardArticleRepository boardArticleRepository;
-    private final StudLectApplyRepository studLectApplyRepository;
-    private final StudLectProgRepository studLectProgRepository;
+    private final AdminSemGradeRepository semGradeRepository;
+    private final AdminBoardInfoRepository boardInfoRepository;
+    private final AdminBoardArticleRepository boardArticleRepository;
+    private final AdminStudLectApplyRepository studLectApplyRepository;
+    private final AdminStudLectProgRepository studLectProgRepository;
     private final LmsContsRepository lmsContsRepository;
-    private final LectInfoRepository lectInfoRepository;
-    private final GradeInfoRepository gradeInfoRepository;
+    private final AdminLectInfoRepository lectInfoRepository;
+    private final AdminGradeInfoRepository gradeInfoRepository;
     private final LectNthRepository lectNthRepository;
     public static void main(String[] args) {
         SpringApplication.run(Main.class, args);
