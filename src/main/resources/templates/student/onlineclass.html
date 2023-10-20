@@ -4,11 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/studentDefault}">
 <head>
-    <th:block layout:fragment="script">
-        <script th:inline="javascript" src="/js/stud/onlineClass.js"></script>
-    </th:block>
     <link rel="stylesheet" href="/css/stud/onlineClass.css">
-
 </head>
 <section id="mainFrame" layout:fragment="content" class="mainFrame">
     <div class="online_class_body">
@@ -75,5 +71,6 @@
     </div>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="/js/admin/youtube.js"></script>
+    <script src="/js/stud/onlineClass.js"></script>
 </section>
 </html>

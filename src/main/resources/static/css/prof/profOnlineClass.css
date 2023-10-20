@@ -77,7 +77,7 @@
 }
 .subtr > .lecture > .lecture_top_box > .lecture_btn_box a{
     margin-right: 10px; text-underline: none; color: white; background: black;
-    width: 80px; height: 30px; border-radius: 7px; text-decoration: none;
+    width: 60px; height: 30px; border-radius: 7px; text-decoration: none;
     display: flex; justify-content: center; align-items: center; line-height: 30px;
 }
 
@@ -97,16 +97,13 @@
     width: 498px; border: 0px solid black; display: flex;
 }
 .subtr > .lecture > .lecture_bottom_box > .lecture_study_time_progress_box > .lecture_study_time_box{
-    width: 50%;
-}
-.subtr > .lecture > .lecture_bottom_box > .lecture_study_time_progress_box > .lecture_progress_box {
-    width: 50%; display: flex; justify-content: center; align-items: center;
+    width: 100%;
 }
 
 /*모달 창 부분*/
 .modal_body {
     border: 0px solid black; width: 900px;
-    height: 550px; z-index: 1000; position: fixed; top: 19% !important; left: 27%!important;
+    height: 550px; z-index: 1000; position: fixed; top: 19%; left: 27%;
 }
 .modal_body > .modal_exit {
     border: 0px solid black; height: 50px; display: flex; justify-content: end;
