@@ -11,6 +11,8 @@ spring:
   # 파일 크기 제한
   servlet:
     multipart:
+      enabled: true
+      location: C:\\upload
       max-file-size: 100MB
       max-request-size: 100MB
 

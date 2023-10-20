@@ -16,7 +16,7 @@
     <!-- header css -->
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/student/courseRegisteration.css">
+    <link rel="stylesheet" href="/css/stud/courseRegisteration.css">
     <title>Document</title>
 </head>
 <body layout:fragment="content">
@@ -73,56 +73,22 @@
             <th>신청현황</th>
             <th>신청</th>
         </tr>
-        <tr>
-            <td class="userId">1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-primary pull-right">신청</button>
-            </td>
-        </tr>
+
+            <tr th:each="lectInfo : ${list}" >
+                <form th:action="@{/student/scr/my}" method="post" id="abra">
+                <td th:text="${lectInfo.lectId}" class="userId"></td>
+                <td th:text="${lectInfo.lectName}"></td>
+                <td th:text="${lectInfo.lectCredit}"></td>
+                <td th:text="${lectInfo.userName}"></td>
+                <td th:text="${lectInfo.lectNownum} + '/' + ${lectInfo.lectMaxnum}"></td>
+                <td>
+                    <input type="hidden" name = "lectCredit" th:value="${lectInfo.lectCredit}"/>
+                    <input type="hidden" name = "lectId" th:value="${lectInfo.lectId}"/>
+                    <button type="submit" class="btn btn-primary pull-right">신청</button>
+                </td>
+                </form>
+            </tr>
+
     </table>
 </div>
 <!--페이징-->
@@ -145,7 +111,12 @@
 </nav>
 <!-- 2번쨰 테이블-->
 <div class="ct1 container">
-    <div class="d1">I 수강신청 신청강좌</div>
+    <div class="d1">
+        <div>I 수강신청 신청강좌</div>
+        <div th:text="${student.studNowCr} + '/' + ${student.studMaxCr}"></div>
+
+
+    </div>
     <table id="userList2" class="table table-hover">
         <tr>
             <th>개설강좌번호</th>
@@ -155,76 +126,24 @@
             <th>신청현황</th>
             <th>취소</th>
         </tr>
-        <tr>
-            <td class="userId">1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr th:each="lectInfo : ${list1}">
+            <form th:action="@{/student/scr/myDelete}" method="post" id="abracadabra">
+            <td th:text="${lectInfo.lectId}" class="userId">1</td>
+            <td th:text="${lectInfo.lectName}"></td>
+            <td th:text="${lectInfo.lectCredit}"></td>
+            <td th:text="${lectInfo.userName}"></td>
+            <td th:text="${lectInfo.lectNownum} + '/' + ${lectInfo.lectMaxnum}"></td>
             <td>
-                <button class="btn btn-danger pull-right">취소</button>
+                <input type="hidden" name = "lectCredit" th:value="${lectInfo.lectCredit}"/>
+                <input type="hidden" name = "lectId" th:value="${lectInfo.lectId}"/>
+                <input type="hidden" name = "applyId" th:value="${lectInfo.applyId}"/>
+                <button type="submit" class="btn btn-danger pull-right">취소</button>
             </td>
-        </tr>
-        <tr>
-            <td class="userId">2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-danger pull-right">취소</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">3</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-danger pull-right">취소</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">4</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-danger pull-right">취소</button>
-            </td>
-        </tr>
-        <tr>
-            <td class="userId">5</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button class="btn btn-danger pull-right">취소</button>
-            </td>
+            </form>
         </tr>
     </table>
 </div>
-<!--페이징-->
-<nav aria-label="Page navigation example">
-    <ul class="pg1 pagination justify-content-center">
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
-</nav>
+
 
 
 <!-- bootstrap js -->
@@ -232,6 +151,6 @@
 <!-- header js -->
 <script src="/js/header.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-<script src="/js/courseRegisteration.js"></script>
+<script src="/js/stud/courseRegisteration.js"></script>
 </body>
 </html>

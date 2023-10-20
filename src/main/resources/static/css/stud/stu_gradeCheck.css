@@ -13,7 +13,7 @@
 }
 
 /* 과목별 성적 테이블 */
-.subGrade {
+.subGrade1 {
     margin-top: 20px;
     margin-bottom: 100px;
     width: 1100px;
@@ -21,9 +21,36 @@
     border-collapse: collapse;
 }
 
-.subGrade tr {
+.subGrade1 tr {
     height: 45px;
     border: 1px solid black;
+}
+
+.subGrade2 {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    width: 1100px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.subGrade2 tr {
+    height: 45px;
+    border: 1px solid black;
+    border-bottom: none;
+    border-collapse: collapse;
+}
+
+.subGrade2 tr > td {
+    padding: 0;
+    border: 0px solid black;
+    border-collapse: collapse;
+}
+
+
+.subGrade2 tr > td > td{
+    padding: 0;
+    border-collapse: collapse;
 }
 
 .lecName {
@@ -52,3 +79,5 @@
     margin-top: 100px;
     display: none;
 }
+
+

@@ -41,8 +41,8 @@ public class MemberDto {
     //lect_info
     private Long lectId;
     private String lectName;
-    private LocalDateTime lectStart;
-    private LocalDateTime lectEnd;
+    private LocalDate lectStart;
+    private LocalDate lectEnd;
     private Long lectCredit;
     private boolean isActive;
 
@@ -105,26 +105,24 @@ public class MemberDto {
 
     // 관리자 - 전체성적관리 : 전체 학기성적 및 전체 현황
 
-    public MemberDto(String userId, Long id, String semRating,String semSem,
+    public MemberDto(String userId, Long id, String semSem,
                      Long studNowCr, Long studMaxCr, Long studId) {
         this.userId = userId;
         this.id = id;
-        this.semRating = semRating;
+        this.semSem = semSem;
         this.studNowCr = studNowCr;
         this.studMaxCr = studMaxCr;
-        this.semSem = semSem;
         this.studId = studId;
     }
 
     // 관리자 - 전체성적관리 : 강좌별 성적
     public MemberDto(String lectName, String grade, Long checkScore, Long assignScore,
-                     Long testScore, Boolean isRecord) {
+                     Long testScore) {
         this.lectName = lectName;
         this.grade = grade;
         this.checkScore = checkScore;
         this.assignScore = assignScore;
         this.testScore = testScore;
-        this.isRecord = isRecord;
     }
 
 
@@ -143,7 +141,7 @@ public class MemberDto {
         this.userId = userId;
     }
 
-    public MemberDto(Long lectId, String lectName, LocalDateTime lectStart, LocalDateTime lectEnd, Long lectCredit, boolean isActive, String userName, Long studId) {
+    public MemberDto(Long lectId, String lectName, LocalDate lectStart, LocalDate lectEnd, Long lectCredit, boolean isActive, String userName, Long studId) {
         this.lectId = lectId;
         this.lectName = lectName;
         this.lectStart = lectStart;

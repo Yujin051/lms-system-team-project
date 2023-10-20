@@ -90,7 +90,6 @@ public class PostDto {
         return BoardArticle.builder()
                 .articleTitle(articleTitle)
                 .memberId(member)
-                .articleView(articleView)
                 .boardInfo(boardInfo)
                 .isLocked(isLocked)
                 .isDeleted(isDeleted)

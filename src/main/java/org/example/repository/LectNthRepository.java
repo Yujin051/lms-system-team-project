@@ -1,7 +1,7 @@
 package org.example.repository;
 
 import org.example.dto.LectNthDto;
-import org.example.dto.LmsContsDto;
+import org.example.dto.LmsContsDtoMin;
 import org.example.entity.LectNth;
 import org.example.entity.LmsConts;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -75,14 +75,14 @@ public interface LectNthRepository extends JpaRepository<LectNth, Long> {
 
 
     /* 강의 차시정보 신규/저장 */
-    @Query("SELECT NEW org.example.dto.LmsContsDto(nth.nthId, cs.contsNo, nth.nthSequence," +
+    @Query("SELECT NEW org.example.dto.LmsContsDtoMin(nth.nthId, cs.contsNo, nth.nthSequence," +
             "cs.contsName, nth.nthName, cs.contsYout, cs.contsTime) " +
             "FROM LectNth nth " +
             " join nth.lectInfo lif on lif.lectId = nth.lectInfo.lectId" +
             " join nth.lmsConts cs on nth.lmsConts.contsNo = cs.contsNo" +
             " where nth.nthId = :nthId")
     // conts 를 nthId로바꿈
-    List<LmsContsDto> findContsNo(@Param("nthId") Long nthId);
+    List<LmsContsDtoMin> findContsNo(@Param("nthId") Long nthId);
 
     // 해당 컨텐츠 정보가 강좌에 등록되어 있는지 확인
     Optional<LectNth> findByLmsConts(LmsConts lmsConts);

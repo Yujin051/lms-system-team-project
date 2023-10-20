@@ -25,10 +25,10 @@
         <article class="middle_article1">
             <div class="article1_box">
                 <div class="profile_img">
-                    <img src="/img/student/suzi.png" alt="">
+                    <img th:src="@{'/img/profile/' + ${profileImg}}"/>
                 </div>
-                <div class="profile_name">
-                    배수지
+                <div class="profile_name"  th:text="${name}">
+                    이름이 표기됩니다.
                 </div>
                 <div class="profile_bottom">
                     <p class="profile_letter">

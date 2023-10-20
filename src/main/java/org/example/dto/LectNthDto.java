@@ -8,6 +8,7 @@ import org.example.entity.LectNth;
 import org.example.entity.LmsConts;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -23,8 +24,8 @@ public class LectNthDto {
     private String lectSubject;
     private LocalDateTime enrollStart;
     private LocalDateTime enrollEnd;
-    private LocalDateTime lectStart;
-    private LocalDateTime lectEnd;
+    private LocalDate lectStart;
+    private LocalDate lectEnd;
     private boolean isActive;
 
     /* lectNth 테이블 컬럼 */
@@ -47,7 +48,7 @@ public class LectNthDto {
 
     // 온라인강의 조회
     public LectNthDto(Long lectId, String lectName, String lectSubject,
-                      LocalDateTime lectStart, LocalDateTime lectEnd,
+                      LocalDate lectStart, LocalDate lectEnd,
                       boolean isActive) {
         this.lectId = lectId;
         this.lectName = lectName;
@@ -72,7 +73,7 @@ public class LectNthDto {
 
     public LectNthDto(Long lectId, String lectName, String lectSubject,
                       LocalDateTime enrollStart, LocalDateTime enrollEnd,
-                      LocalDateTime lectStart, LocalDateTime lectEnd,
+                      LocalDate lectStart, LocalDate lectEnd,
                       boolean isActive, Long nthSequence,
                       String nthName, int contsTime, Long contsNo,
                       Long nthId, String contsName, String contsYout,
@@ -102,8 +103,8 @@ public class LectNthDto {
             String lectSubject,
             LocalDateTime enrollStart,
             LocalDateTime enrollEnd,
-            LocalDateTime lectStart,
-            LocalDateTime lectEnd,
+            LocalDate lectStart,
+            LocalDate lectEnd,
             boolean isActive,
             Long nthSequence,
             String nthName,

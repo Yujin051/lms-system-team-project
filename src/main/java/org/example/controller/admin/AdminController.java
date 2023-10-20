@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.constant.RoleType;
 import org.example.dto.LectNthDto;
-import org.example.dto.LmsContsDto;
+import org.example.dto.LmsContsDtoMin;
 import org.example.dto.admin.LectDto;
 import org.example.dto.admin.MemberDto;
 import org.example.dto.admin.PostDto;
@@ -696,10 +696,10 @@ public class AdminController {
     /* 강의 차시정보 하단 우측 세번째 테이블 */
     @GetMapping("/api/contsName/search")
     @ResponseBody
-    public List<LmsContsDto> contsNameSearch(@RequestParam(value = "nthId") Long nthId) {
+    public List<LmsContsDtoMin> contsNameSearch(@RequestParam(value = "nthId") Long nthId) {
         // 오전 10시에 contsNo를 nthId 로 변경함
         log.info("contsNo : " + nthId);
-        List<LmsContsDto> dtos = lectNthService.getFindContsNo(nthId);
+        List<LmsContsDtoMin> dtos = lectNthService.getFindContsNo(nthId);
         log.info("dtos : " + dtos);
         for (int i = 0; i < dtos.size(); i++) {
 

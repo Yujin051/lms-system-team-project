@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.dto.MemberFormDto;
@@ -20,10 +21,11 @@ public class Professor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prof_id", updatable = false)
-    private Long id;
+    private Long profId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name= "id")
+    @OneToOne
+    @JoinColumn(name= "member_id")
+    @JsonIgnore
     private Member member;
 
     @Column(name= "prof_agency")
