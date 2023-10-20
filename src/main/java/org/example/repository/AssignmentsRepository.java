@@ -13,7 +13,7 @@ import java.util.List;
 public interface AssignmentsRepository extends JpaRepository<Assignments, Long> {
     List<Assignments> findByLectInfoLectId(Long lectId);
 
-    @Query("SELECT a FROM Assignments a WHERE a.lectInfo.lectId = :lectId AND a.id = :assignId")
+    @Query("SELECT a FROM Assignments a WHERE a.lectInfo.lectId = :lectId AND a.assiId = :assignId")
     Assignments findAssignmentByLectIdAndAssignId(@Param("lectId") Long lectId, @Param("assignId") Long assignId);
 
 

@@ -6,33 +6,25 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.example.constant.Gender;
 import org.example.dto.*;
 import org.example.entity.LectInfo;
 import org.example.entity.Member;
 import org.example.repository.AssignmentsRepository;
 import org.example.repository.MemberRepository;
 import org.example.service.*;
-import org.hibernate.sql.ast.tree.update.Assignment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import lombok.RequiredArgsConstructor;
 import org.example.entity.*;
 import org.example.repository.GradeInfoRepository;
 import org.example.repository.LectInfoRepository;
 import org.example.repository.StudLectApplyRepository;
 import org.example.repository.StudentRepository;
 import org.example.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -216,7 +208,7 @@ public class StudentController {
     }
 
     @PostMapping("/lecture/view/{lectId}/assignments/{assiId}/submit/submit")
-    public String addAssign(@PathVariable("lectId")Long lectId, @Validated AssignmentSubmitDto assignmentSubmitDto, @RequestPart MultipartFile file, Model model) throws Exception {
+    public String addAssignmentSubmit(@PathVariable("lectId")Long lectId, @PathVariable("assiId")Long assiId, @Validated AssignmentSubmitDto assignmentSubmitDto, @RequestPart MultipartFile file, Model model) throws Exception {
         try {
             AssignSubmit assignSubmit = AssignSubmit.createAssignmentSubmit(assignmentSubmitDto);
             assignSubmitService.saveAssignSubmit(assignSubmit);

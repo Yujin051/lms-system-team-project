@@ -60,8 +60,8 @@ public class AssignSubmit {
                 .content(assignmentSubmitDto.getContent())
                 .originalName(assignmentSubmitDto.getOriginalName())
                 .savedName(assignmentSubmitDto.getSavedName())
-                .dateTime(assignmentSubmitDto.getDateTime())
-                .isSubmit(assignmentSubmitDto.isSubmit())
+                .dateTime(LocalDate.now())
+                .isSubmit(true)
                 .build();
         return assignSubmit;
     }
