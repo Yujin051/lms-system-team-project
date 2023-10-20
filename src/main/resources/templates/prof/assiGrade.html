@@ -18,24 +18,27 @@
         <div class="assi_grade_view_box">
             <table class="assi_grade_tb_body">
                 <thead class="assi_grade_tb_thead">
-                    <tr>
-                        <td><span>강좌번호</span></td>
-                        <td><span>강좌명</span></td>
-                        <td><span>성적입력여부</span></td>
-                        <td><span>성적입력</span></td>
-                    </tr>
+                <tr>
+                    <td><span>강좌번호</span></td>
+                    <td><span>강좌명</span></td>
+                    <td><span>성적입력여부</span></td>
+                    <td><span>성적입력</span></td>
+                </tr>
                 </thead>
                 <tbody class="assi_grade_tb_tbody">
-                    <tr th:each="lectInfo : ${list}">
-                        <td th:text="${lectInfo.lectId}">2023-S25</td>
-                        <td th:text="${lectInfo.lectName}">자바의 정석</td>
-                        <td th:text="${lectInfo.isRecord}">Y</td>
-                        <td>
-                            <button class="ajax_button" th:attr="data-lect-id = ${lectInfo.lectId}"  type="button" id="toDetail">
+                <tr th:each="lectInfo : ${list}">
+                    <td th:text="${lectInfo.lectId}">2023-S25</td>
+                    <td th:text="${lectInfo.lectName}">자바의 정석</td>
+                    <td>
+                        <span th:if="${lectInfo.isRecord}">Y</span>
+                        <span th:if="${not lectInfo.isRecord}">N</span>
+                    </td>
+                    <td>
+                        <button class="ajax_button" th:attr="data-lect-id = ${lectInfo.lectId}"  type="button" id="toDetail">
                             작성하기
-                            </button>
-                        </td>
-                    </tr>
+                        </button>
+                    </td>
+                </tr>
                 </tbody>
             </table>
             <div id="detail" class="detail" style="display: none">
@@ -47,8 +50,9 @@
                 </div>
 
 
-                <table class="assi_grade_body_stud_tb_body">
-                    <thead>
+                <form id="gradeForm" action="/prof/assiGrade/enter" method="POST">
+                    <table class="assi_grade_body_stud_tb_body">
+                        <thead>
                         <tr>
                             <td><span>성명</span></td>
                             <td><span>이메일</span></td>
@@ -57,9 +61,10 @@
                             <td id="lectTest">시험(최대점수)</td>
                             <td><span>평가등급</span></td>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
+                            <input type="hidden" id="lectId" name="lectId" value="여기에_lectId_값_동적으로_설정">
                             <td id="userName"></td>
                             <td id="userEmail"></td>
                             <td id="checkScore"></td>
@@ -67,14 +72,15 @@
                             <td id="testScore"></td>
                             <td id="grade"></td>
                         </tr>
-                    </tbody>
-                </table>
-                <div class="assi_grade_reg_btn_box">
-                    <button type="button" id="regBtn">등록</button>
-                </div>
+                        </tbody>
+                    </table>
+                    <div class="assi_grade_reg_btn_box">
+                        <button type="submit" id="regBtn">등록</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    <script src="/js/stud/assiGrade.js"></script>
+    <script src="/js/prof/assiGrade.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </div>

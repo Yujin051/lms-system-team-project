@@ -48,7 +48,7 @@ public class BoardArticle {
     private String articleContent;
 
     // 게시글 조회수
-    @Column(name = "article_view" , nullable = false)
+    @Column(name = "article_view" , nullable = true)
     @ColumnDefault("0")
     private Long articleView;
 
@@ -74,7 +74,7 @@ public class BoardArticle {
     private Member memberId;
 
     // 게시글 첨부파일 번호
-    @Column(name = "file_num" , nullable = false)
+    @Column(name = "file_num")
     @ColumnDefault("0")
     private Long articleFileNum;
 
@@ -114,7 +114,7 @@ public class BoardArticle {
     public BoardArticle(BoardInfo boardInfo, String articleTitle,
                         String articleContent, Long articleView,
                         LocalDate articleAt, Boolean isLocked,
-                        Boolean isDeleted, Member memberId, Long articleFileNum) {
+                        Boolean isDeleted, Member memberId) {
         this.boardInfo = boardInfo;
         this.articleTitle = articleTitle;
         this.articleContent = articleContent;
@@ -123,6 +123,5 @@ public class BoardArticle {
         this.isLocked = isLocked;
         this.isDeleted = isDeleted;
         this.memberId = memberId;
-        this.articleFileNum = articleFileNum;
     }
 }

@@ -85,4 +85,16 @@ public class Assignments {
                 .build();
         return assignments;
     }
+
+    public Assignments(LectInfo lectInfo, String name, String detail, LocalDate start, LocalDate end, boolean isActive, boolean isSubmit, String originFilename, String savedFilename) {
+        this.lectInfo = lectInfo;
+        this.name = name;
+        this.detail = detail;
+        this.start = start;
+        this.end = end;
+        this.isActive = isActive;
+        this.isSubmit = isSubmit;
+        this.originFilename = originFilename;
+        this.savedFilename = savedFilename;
+    }
 }

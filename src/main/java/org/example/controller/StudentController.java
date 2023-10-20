@@ -201,7 +201,7 @@ public class StudentController {
         LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
         Assignments assignments = assignmentsRepository.findById(assiId).orElseThrow(EntityNotFoundException::new);
         model.addAttribute("lectId", lectInfo.getLectId());
-        model.addAttribute("assiId", assignments.getId());
+        model.addAttribute("assiId", assignments.getAssiId());
         model.addAttribute("lectName", lectInfo.getLectName());
         model.addAttribute("assignment", new AssignmentSubmitDto());
         return "student/assiWrite";
@@ -226,6 +226,7 @@ public class StudentController {
     public String courseRegisteration(Model model, Principal principal) {
         // 사용자 로그인 아이디 가져오기
         String loginId = principal.getName();
+        System.out.println(loginId);
         // 사용자 정보 가져오기(member)
         Member member = memberService.memberView(loginId);
         Student student = studentRepository.findByMember(member);
@@ -301,7 +302,24 @@ public class StudentController {
         LectInfo lectInfo = lectInfoRepository.findById(lectId).orElseThrow();
         lectInfo.minus();
         student.setStudNowCr(student.getStudNowCr() - lectCredit);
-        studLectApplyRepository.deleteById(applyId);
+
+        StudLectApply studLectApply = studLectApplyRepository.findById(applyId).orElse(null);
+
+        if (studLectApply != null) {
+            // 부모 엔티티에서 자식 엔티티를 가져옴
+            GradeInfo gradeInfos = gradeInfoRepository.findByStudLectApply(studLectApply);
+
+            if (gradeInfos != null) {
+                // 자식 엔티티를 삭제할게요.
+                gradeInfoRepository.delete(gradeInfos);
+            }
+            // 부모엔티티를 삭제할게요.
+            studLectApplyRepository.deleteById(applyId);
+        }
+
+
+
+
         model.addAttribute("message", "취소되었습니다.");
         model.addAttribute("SearchUrl", "/student/scr");
         model.addAttribute("list", studentService.lectInfoList());
