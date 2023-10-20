@@ -60,7 +60,7 @@ public class MsgRestController {
         // 받는 사람이 한명인 경우
         else{
             DirectMsg msg = directMsgService.save(directMsgDto , principal);
-            log.info("msg::{}",msg);
+//            log.info("msg::{}",msg);
             return ResponseEntity.status(HttpStatus.CREATED).body(msg);
         }
     }

@@ -1,4 +1,4 @@
-                                                                                                                (3, '과제4', '과제 4 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt');
+
 insert into member(user_id , user_pw , user_name , user_phonenum , user_regdate , user_addr , user_birthday , user_email , user_gender , user_role , img_original , img_saved) values
 ('admin1' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '관리자1','01022225555' , '2023-1-1' , '관리자네집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'ADMIN', 'noimg2.png' ,'noimg2.png'),
 ('student1' , '$2a$10$BNEf0bp3OvIoAL9kIAStP.pyoMnNIpdjFuUnv2SvATm75s6YrM1HG' , '김학생','01022225555' , '2023-1-1' , '학생1집', '2023-1-1' ,'admin@admin.com', 'MALE' , 'USER' , 'noimg2.png' ,'noimg2.png'),
@@ -91,19 +91,6 @@ insert into sem_grade(stud_id, sem_year, sem_sem, sem_crecpl, sem_avg_crecpl) va
 (2, '2023', '1학기', 0, 0),
 (2, '2022', '2학기', 0, 0),
 (2, '2021', '2학기', 0, 0);
-
-insert into lect_plan(plan_id, lect_id, plan_des, plan_book) values
-(1, 1, '1번 강의에 대한 설명', '교재 1번'),
-(2, 2, '2번 강의에 대한 설명', '교재 2번'),
-(3, 3, '3번 강의에 대한 설명', '교재 3번'),
-(4, 4, '4번 강의에 대한 설명', '교재 4번'),
-(5, 5, '5번 강의에 대한 설명', '교재 5번');
-
-insert into assign_info(lect_id, assign_name, assign_detail, assign_start, assign_end, is_active, is_submit, origin_filename, saved_filename) values
-(1, '과제1', '과제 1 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
-(1, '과제2', '과제 2 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
-(2, '과제3', '과제 3 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
-(3, '과제4', '과제 4 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt');
 
 
 insert into board_info (board_type , board_name) values ('학생' , '학생');
@@ -236,3 +223,17 @@ INSERT INTO board_article (board_id, article_title, article_cont, article_view, 
 (4, '교사 게시글 작성', '안녕하세요.', 0, NOW(), FALSE, FALSE, 6),
 (4, '교사 게시글 작성', '안녕하세요.', 0, NOW(), FALSE, FALSE, 6),
 (4, '교사 게시글 작성', '안녕하세요.', 0, NOW(), FALSE, FALSE, 6);
+
+
+
+insert into lect_plan(plan_id, lect_id, plan_des, plan_book) values
+(1, 1, '1번 강의에 대한 설명', '교재 1번'),
+(2, 2, '2번 강의에 대한 설명', '교재 2번'),
+(3, 3, '3번 강의에 대한 설명', '교재 3번'),
+(4, 4, '4번 강의에 대한 설명', '교재 4번'),
+(5, 5, '5번 강의에 대한 설명', '교재 5번');
+insert into assign_info(lect_id, assign_name, assign_detail, assign_start, assign_end, is_active, is_submit, origin_filename, saved_filename) values
+(1, '과제1', '과제 1 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+(1, '과제2', '과제 2 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+(2, '과제3', '과제 3 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt'),
+(3, '과제4', '과제 4 설명', NOW(), NOW(), true, false, 'lostname.txt', 'lostname.txt');
