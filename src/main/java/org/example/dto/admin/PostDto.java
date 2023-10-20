@@ -47,7 +47,7 @@ public class PostDto {
 
     //게시글 목록
     public PostDto(String userName, String userId, LocalDate userBirthday,
-                   Gender userGender, String userEmail, Long studGrade, Long articleId,
+                   Gender userGender, String userEmail, Long articleId,
                    String articleTitle, LocalDate articleAt, Long articleView,
                    Boolean isLocked, Boolean isDeleted, String articleContent,
                    String boardType, Long boardId) {
@@ -56,7 +56,6 @@ public class PostDto {
         this.userBirthday = userBirthday;
         this.userGender = userGender;
         this.userEmail = userEmail;
-        this.studGrade = studGrade;
         this.articleId = articleId;
         this.articleTitle = articleTitle;
         this.articleAt = articleAt;

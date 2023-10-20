@@ -177,10 +177,16 @@ public class AdminService {
         BoardArticle existingArticle = articleRepository.findById(postDto.getArticleId())
                 .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다"));
 
+        BoardInfo boardInfo = adminBoardInfoRepository.findById(postDto.getBoardId())
+                .orElseThrow(() -> new IllegalArgumentException("게시판 정보를 찾을 수 없습니다"));
+        log.info(postDto.getBoardType());
+        log.info("보드id :{}", (postDto.getBoardId()));
+
+
         // 2. 수정할 필드를 업데이트합니다.
         existingArticle.setArticleTitle(postDto.getArticleTitle());
         existingArticle.setArticleContent(postDto.getArticleContent());
-        existingArticle.setBoardInfo(postDto.getBoardInfo());
+        existingArticle.setBoardInfo(boardInfo);
         existingArticle.setIsLocked(postDto.getIsLocked());
         existingArticle.setIsDeleted(postDto.getIsDeleted());
 

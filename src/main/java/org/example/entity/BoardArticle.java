@@ -31,7 +31,7 @@ public class BoardArticle {
 
     // 게시판 id (외래키)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id" , updatable = false , nullable = false)
+    @JoinColumn(name = "board_id" , nullable = false)
     private BoardInfo boardInfo;
 
     // 게시글 이름

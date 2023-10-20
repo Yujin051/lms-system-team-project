@@ -185,9 +185,6 @@ grid1.on('click', async (ev) => {
     const rowData = grid1.getRow(rowKey);
     const articleId = rowData.articleId;
     console.log("articleId : " + articleId);
-    const articleId2 = typeof articleId === 'number' ? articleId : 0;
-    console.log("articleId2 : " + articleId2);
-
     if(articleId) {
         try {
             const response = await fetch(`/admin/api/postWrite/postContentInfo?articleId=${articleId}`);
@@ -205,7 +202,6 @@ grid1.on('click', async (ev) => {
                 const isLockedCheckbox = document.getElementById('isLocked');
                 const isDeletedCheckbox = document.getElementById('isDeleted');
                 const realContent = document.querySelector('.real_content');
-                console.log("boardIdInput : " + boardIdInput);
 
                 if (postData.length > 0) {
                     const post = postData[0];
@@ -276,18 +272,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     boardTypeSelect.addEventListener('change', function () {
         const selectedValue = boardTypeSelect.value;
-        if (selectedValue === '건의사항') {
-            boardIdInput.value = '1';
+        if (selectedValue === '학생') {
+            boardIdInput.value = 1;
+        } else if (selectedValue === '질문건의') {
+            boardIdInput.value = 2;
         } else if (selectedValue === '공지사항') {
-            boardIdInput.value = '2';
-        } else if (selectedValue === '학생') {
-            boardIdInput.value = '3';
+            boardIdInput.value = 3;
         } else if (selectedValue === '교원') {
-            boardIdInput.value = '4';
-        } else if (selectedValue === '과정') {
-            boardIdInput.value = '5';
-        } else if (selectedValue === '수업게시판') {
-            boardIdInput.value = '6';
+            boardIdInput.value = 4;
         } else {
             boardIdInput.value = ''; // 선택하지 않은 경우 빈 값으로 설정
         }
@@ -326,10 +318,8 @@ saveButton.addEventListener('click', async () => {
         isDeleted: isDeletedCheckbox,
         articleContent: realContent.value,
     };
-    console.log("articleTitle : " + data.articleTitle);
-    console.log("articleContent : " + data.articleContent);
-    console.log("articleId : " + data.articleId);
-    console.log("boardId : " + data.boardId);
+    console.log("saveBoardId : " + data.boardId);
+    console.log("saveBoardType : " + data.boardType);
 
     try {
         const response = await fetch('/admin/api/postWrite/save', {

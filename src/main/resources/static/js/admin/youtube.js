@@ -52,14 +52,16 @@ function onPlayerStateChange(event) {
         clearInterval(intervalId); //setInterval() 실행하기 전 중단
         intervalId = setInterval(() => {
             fnlPosition = player.getCurrentTime(); // 현재 재생 위치 가져오기
+            loadMaxPositionFromServer().then((serverMaxPosition) => {
+                console.log("최대재생시간 : " + serverMaxPosition);
+                const runTime = player.getDuration(); // 전체 재생 시간
+                const progress = ((serverMaxPosition / runTime) * 100).toFixed(2);
+                console.log("진행률 : " + progress + '%');
+                sendProgressToServer(progress); //업데이트 후 진행률 서버로 전송
+            });
             updateVideoPosition(); //최종, 최대재생시간 업데이트
             console.log("최종재생시간 : " + fnlPosition);
-            console.log("최대재생시간 : " + maxPosition);
-            const runTime = player.getDuration(); // 전체 재생 시간
-            const progress = ((maxPosition / runTime) * 100).toFixed(2);
-            console.log("진행률 : " + progress + '%');
-            sendProgressToServer(progress); //업데이트 후 진행률 서버로 전송
-        }, 3000); // 5초마다 실행
+        }, 5000); // 5초마다 실행
 
         // 현재재생위치가 최대재생위치를 초과하면 현재재생위치로 되돌림
         loadMaxPositionFromServer().then((serverMaxPosition) => {
