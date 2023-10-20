@@ -20,7 +20,7 @@ public class AssignSubmit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="submit_id")
-    private Long id;
+    private Long assiId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")

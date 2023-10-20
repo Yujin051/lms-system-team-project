@@ -59,8 +59,14 @@ public class ProfessorController {
     private final AssignSubmitService assignSubmitService;
     private final StudentService studentService;
     private final AssignmentsService assignmentsService;
+    private final AssignSubmitRepository assignSubmitRepository;
 
 
+    @GetMapping("/test23")
+    public String testing() {
+        System.out.println("컨트롤러테스트 "+List.of(assignSubmitRepository.findAssignmentByLectIdAndAssignId(1L, 1L)));
+        return "/prof/prof_main";
+    }
 
 
     // 강사 메인페이지
@@ -198,9 +204,11 @@ public class ProfessorController {
         LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
         List<Assignments> assignmentsList = assignmentsRepository.findByLectInfoLectId(lectId);
 
+        List<AssignSubmit> assignSubmitList = assignSubmitRepository.findByAssignmentsLectInfoLectId(lectId);
 //        List<AssignSubmit> submissions = assignSubmitService.getSubmissionsByLectId(lectId);
         model.addAttribute("lectInfo", lectInfo);
         model.addAttribute("assignmentsList", assignmentsList);
+        model.addAttribute("submitList", assignSubmitList);
 //        model.addAttribute("submissions", submissions);
         return "prof/assignment"; // Thymeleaf 템플릿 경로 수정
     }
@@ -231,6 +239,14 @@ public class ProfessorController {
     public String modifyAssignment(@PathVariable("lectId") Long lectId, @PathVariable("id")Long id, Model model) {
         model.addAttribute("assignment",assignmentsService.AssignmentsView(id));
         return "prof/assimodify";
+    }
+
+    @GetMapping("/lecture/view/{id}/assignments/{assiId}/view")
+    public String assiSubmitView(@PathVariable("id")long lectId, @PathVariable("assiId")long assiId, Model model, Principal principal){
+        model.addAttribute("assignments",assignSubmitRepository.findAssignmentByLectIdAndAssignId(lectId, assiId));
+        System.out.println("컨트롤러테스트 "+List.of(assignSubmitRepository.findAssignmentByLectIdAndAssignId(lectId, assiId)));
+        System.out.println("lectId :"+ lectId + "assiId : "+ assiId);
+        return "/prof/assiView";
     }
 
     @PostMapping("/lecture/view/{lectId}/assignments/{id}/modify/modify")
@@ -267,11 +283,6 @@ public class ProfessorController {
          * @author 임휘재
          */
 
-    //강사 : 나의강의실 - 과제정보쓰기
-    @GetMapping("/assiWrite")
-    public String assiWrite(){
-        return "/prof/assiWrite";
-    }
 
     //강사 : 나의강의실 - 성적입력
     @GetMapping("/assiGrade")

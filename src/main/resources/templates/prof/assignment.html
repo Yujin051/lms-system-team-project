@@ -104,7 +104,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="assignment : ${assignmentsList}">
-                            <td><span th:text="${assignment.getAssiId}"></span></td>
+                            <td><span th:text="${assignment.assiId}"></span></td>
                             <td><span th:text="${assignment.name}"></span></td>
                             <td><span th:text="${assignment.start}"></span></td>
                             <td><span th:text="${assignment.end}"></span></td>
@@ -128,12 +128,22 @@
                             <td><span>성명</span></td>
                             <td><span>제출일시</span></td>
                             <td><span>제출구분</span></td>
-                            <td><span>과제제출정보</span></td>
-                            <td><span>피드백</span></td>
+                            <td><span>과제명</span></td>
                         </tr>
                     </thead>
                     <tbody>
-
+                        <tr th:each="submitList : ${submitList}">
+                            <td><span th:text="${submitList.member.id}"></span></td>
+                            <td><span th:text="${submitList.member.userName}"></span></td>
+                            <td><span th:text="${submitList.dateTime}"></span></td>
+                            <td><span th:text="${submitList.submit}"></span></td>
+                            <td><span th:text="${submitList.assignments.name}"></span></td>
+                            <td>
+                                <a th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${submitList.assignments.assiId}+ '/view'}">보기</a>
+<!--                                <a type="button" class="assiUpdateBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/modify'}"><span>수정</span></a>-->
+<!--                                <a type="button" class="assiDeleteBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/delete'}"><span>삭제</span></a>-->
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -190,9 +190,12 @@ public class StudentController {
     }
 
     @GetMapping("/lecture/view/{lectId}/assignments/{assiId}/submit")
-    public String addAssignment2(@PathVariable("lectId") Long lectId, @PathVariable("assiId") Long assiId, Model model) {
+    public String addAssignment2(@PathVariable("lectId") Long lectId, Principal principal, @PathVariable("assiId") Long assiId, Model model) {
         LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
         Assignments assignments = assignmentsRepository.findByAssiId(assiId);
+        Member member = memberRepository.findByUserId(principal.getName());
+        model.addAttribute("member", member);
+        model.addAttribute("assi",assignments);
         model.addAttribute("lectId", lectInfo.getLectId());
         model.addAttribute("assiId", assignments.getAssiId());
         model.addAttribute("lectName", lectInfo.getLectName());
@@ -204,7 +207,7 @@ public class StudentController {
     public String addAssignmentSubmit(@PathVariable("lectId")Long lectId, @PathVariable("assiId")Long assiId, @Validated AssignmentSubmitDto assignmentSubmitDto, @RequestPart MultipartFile file, Model model) throws Exception {
         try {
             AssignSubmit assignSubmit = AssignSubmit.createAssignmentSubmit(assignmentSubmitDto);
-            assignSubmitService.saveAssignSubmit(assignSubmit);
+            assignSubmitService.saveAssignmentSubmit(assignSubmit, file);
 
             model.addAttribute("message", "과제가 제출되었습니다.");
         } catch (Exception e) {

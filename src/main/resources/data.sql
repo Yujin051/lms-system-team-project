@@ -516,3 +516,6 @@ insert into board_info (board_type , board_name) values ('학생' , '학생');
 insert into board_info (board_type , board_name) values ('질문건의' , '질문건의');
 insert into board_info (board_type , board_name) values ('공지사항' , '공지사항');
 insert into board_info (board_type , board_name) values ('교원' , '교원');
+
+
+insert into assign_submit(member_id, assign_id, submit_cont, is_submit) values (2, 1, 'tttt', true);

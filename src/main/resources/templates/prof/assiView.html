@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profDefault}">
+<head>
+    <link rel="stylesheet" href="/css/stud/assiView.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</head>
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+        <div class="assi_info_btn_box">
+            <div class="assi_info_course_text_box">
+                <span>🔍&nbsp 참여자정보</span>
+            </div>
+        </div>
+        <div class="assi_info_big_box">
+            <div class="assi_info_top_box">
+                <div class="assi_info_assi_name">
+                    <div class="assi_info_assi_name_text">
+                        <span>과제명</span>
+                    </div>
+                    <div class="assi_info_assi_name_input">
+                        <div th:text="${assignments.assignments.name}" type="text" id="assiName"></div>
+                    </div>
+                </div>
+                <div class="assi_info_stud_name">
+                    <div class="assi_info_assi_stud_text">
+                        <span>제출자</span>
+                    </div>
+                    <div class="assi_info_assi_stud_input">
+                        <div th:text="${assignments.member.userName}" type="text" id="stud_id" style="width: 90%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="assi_info_mid_box">
+                <div class="assi_info_sub_file">
+                    <div class="assi_info_sub_file_text">
+                        <span>제출파일</span>
+                    </div>
+                    <div class="assi_info_sub_file_download">
+                        <div class="assi_info_sub_file_input">
+                            <input th:field="${assignments.originalName}" type="text" id="assiName2" placeholder="과제명" readonly/>
+                        </div>
+                        <div class="assi_info_download_btn">
+                            <a th:href="@{'/download/' + ${assignments.savedName}}" download class="download_btn">다운로드</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="assi_info_assi_end">
+                    <div class="assi_info_assi_end_text">
+                        <span>평가마감일</span>
+                    </div>
+                    <div class="assi_info_assi_end_input">
+                        <input th:field="${assignments.dateTime}" type="text" id="assignEnd"/>
+                    </div>
+                </div>
+            </div>
+            <div class="assi_info_bottom_box">
+                <div class="assi_info_assi_detail_box">
+                    <div class="assi_info_assi_detail_text_box">
+                        <span>과제설명</span>
+                    </div>
+                    <div class="assi_info_assi_detail_content_box">
+                        <div class="assi_info_assi_detail">
+                            <div th:text="${assignments.content}"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="assi_info_feedback_box">
+                    <div class="assi_info_feedback_text_box">
+                        <span>과제 평가물</span>
+                    </div>
+                    <div class="assi_info_feedback_content_box">
+                        <div class="assi_info_feedback">
+                            <textarea></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="/js/stud/assiView.js"></script>
+</div>
