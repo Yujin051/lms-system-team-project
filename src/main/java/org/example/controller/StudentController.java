@@ -201,7 +201,7 @@ public class StudentController {
     }
 
     @PostMapping("/lecture/view/{lectId}/assignments/{assiId}/submit/submit")
-    public String addAssign(@PathVariable("lectId")Long lectId, @Validated AssignmentSubmitDto assignmentSubmitDto, @RequestPart MultipartFile file, Model model) throws Exception {
+    public String addAssignmentSubmit(@PathVariable("lectId")Long lectId, @PathVariable("assiId")Long assiId, @Validated AssignmentSubmitDto assignmentSubmitDto, @RequestPart MultipartFile file, Model model) throws Exception {
         try {
             AssignSubmit assignSubmit = AssignSubmit.createAssignmentSubmit(assignmentSubmitDto);
             assignSubmitService.saveAssignSubmit(assignSubmit);
