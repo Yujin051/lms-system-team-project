@@ -37,33 +37,25 @@ public class GradeInfo {
 
     //출석점수
     @Column(name = "check_score")
-    @ColumnDefault("''")
-
+    @ColumnDefault("0")
     private Long checkScore;
 
     //과제점수
     @Column(name = "assign_score")
-    @ColumnDefault("''")
-
+    @ColumnDefault("0")
     private Long assignScore;
 
     //시험점수
     @Column(name = "test_score")
-    @ColumnDefault("''")
+    @ColumnDefault("0")
     private Long testScore;
 
-    //성적입력여부
-    @Column(name = "is_record")
-    private boolean isRecord;
-
     public GradeInfo(StudLectApply studLectApply, String grade,
-                     Long checkScore, Long testScore, Long assignScore,
-                     boolean isRecord) {
+                     Long checkScore, Long testScore, Long assignScore) {
         this.studLectApply = studLectApply;
         this.grade = grade;
         this.checkScore = checkScore;
         this.testScore = testScore;
         this.assignScore = assignScore;
-        this.isRecord = isRecord;
     }
 }

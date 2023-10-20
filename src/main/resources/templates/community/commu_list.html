@@ -77,9 +77,9 @@
                                 </td>
 
                                 <td>
-                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getBoardInfo().getBoardName()}"
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getBoardInfo().getBoardType()}"
                                        th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
-                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getBoardInfo().getBoardName()}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getBoardInfo().getBoardType()}"></a>
                                 </td>
 
                                 <td class="articleTitle" >

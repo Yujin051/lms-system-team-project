@@ -1,32 +1,30 @@
 package org.example.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.example.entity.LectInfo;
 
-import java.time.LocalDateTime;
+@Getter
+@Setter
+public class LectInfoDTO {
 
-@Data
-public class LectInfoDto {
-    /* lectInfo 테이블 Dto*/
-    private LectInfo lectInfo;
     private Long lectId;
     private String lectName;
     private String lectSubject;
-    private LocalDateTime enrollStart;
-    private LocalDateTime enrollEnd;
-    private LocalDateTime lectStart;
-    private LocalDateTime lectEnd;
-    private boolean isActive;
+    private String lectYear;
+    private String lectSem;
+    private Long lectCredit;
 
-    // 온라인 강의 조회
-    public LectInfoDto(Long lectId, String lectName, String lectSubject,
-                       LocalDateTime enrollStart, LocalDateTime enrollEnd,
-                       boolean isActive) {
-        this.lectId = lectId;
-        this.lectName = lectName;
-        this.lectSubject = lectSubject;
-        this.enrollStart = enrollStart;
-        this.enrollEnd = enrollEnd;
-        this.isActive = isActive;
+    // getter and setter methods
+
+    public static LectInfoDTO fromLectInfo(LectInfo lectInfo) {
+        LectInfoDTO dto = new LectInfoDTO();
+        dto.setLectId(lectInfo.getLectId());
+        dto.setLectName(lectInfo.getLectName());
+        dto.setLectSubject(lectInfo.getLectSubject());
+        dto.setLectYear(lectInfo.getLectYear());
+        dto.setLectSem(lectInfo.getLectSem());
+        dto.setLectCredit(lectInfo.getLectCredit());
+        return dto;
     }
 }

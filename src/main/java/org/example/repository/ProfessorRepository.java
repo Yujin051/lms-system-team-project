@@ -33,7 +33,7 @@ public interface ProfessorRepository extends JpaRepository<Professor, Long> {
                                                      @Param("name") String name);
 
     // 강사 상세정보 조회
-    @Query("select new org.example.dto.ProfessorDto(p.id, m.userName, m.userBirthday, "
+    @Query("select new org.example.dto.ProfessorDto(p.profId, m.userName, m.userBirthday, "
             + "m.userGender, m.userPhoneNum, m.userAddr, m.id, m.userEmail, p.isActive, "
             + "p.profAcOwner, p.profBank, p.profAccount, p.profAgency) from Professor p "
             + "join p.member m where m.id = p.member.id and p.profWork = :work and "

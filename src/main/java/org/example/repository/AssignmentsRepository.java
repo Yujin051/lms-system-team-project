@@ -17,7 +17,7 @@ public interface AssignmentsRepository extends JpaRepository<Assignments, Long> 
     Assignments findAssignmentByLectIdAndAssignId(@Param("lectId") Long lectId, @Param("assignId") Long assignId);
 
 
-    Assignments findByAssiId(Long assiId);
+//    Assignments findByAssiId(Long assiId);
 
 
 }

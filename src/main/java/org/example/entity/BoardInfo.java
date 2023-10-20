@@ -14,6 +14,7 @@ import org.hibernate.annotations.Fetch;
 @AllArgsConstructor
 @Table(name = "board_info")
 @Getter @Setter
+@Builder
 @Entity
 @ToString
 //@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -44,21 +45,10 @@ public class BoardInfo {
     @JoinColumn(name = "lect_info" , nullable = true)
     private LectInfo lectInfo;
 
-    @Builder
-    public BoardInfo(String boardName , Boolean boardResp , String boardType , LectInfo lectInfo){
+    public BoardInfo(String boardName, String boardType, Boolean boardResp){
         this.boardName = boardName;
         this.boardResp = boardResp;
         this.boardType = boardType;
-        this.lectInfo = lectInfo;
     }
 
-
-
-
-}
-
-    public BoardInfo(String boardName, String boardType) {
-        this.boardName = boardName;
-        this.boardType = boardType;
-    }
 }

@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.LectNthDto;
-import org.example.dto.LmsContsDto;
+import org.example.dto.LmsContsDtoMin;
 import org.example.entity.LectInfo;
 import org.example.entity.LectNth;
 import org.example.entity.LmsConts;
@@ -57,7 +57,7 @@ public class LectNthService {
     }
 
     /* 강의 차시정보 하단 우측 3번째 테이블  */
-    public List<LmsContsDto> getFindContsNo(Long nthId) {
+    public List<LmsContsDtoMin> getFindContsNo(Long nthId) {
         return lectNthRepository.findContsNo(nthId);
     }
     // 온라인 강의 조회

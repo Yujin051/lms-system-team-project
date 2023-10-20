@@ -2,6 +2,7 @@ package org.example.controller;
 
 import groovy.util.logging.Log4j2;
 import groovy.util.logging.Slf4j;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -206,7 +207,7 @@ public class StudentController {
     @GetMapping("/lecture/view/{lectId}/assignments/{assiId}/submit")
     public String addAssignment2(@PathVariable("lectId") Long lectId, @PathVariable("assiId") Long assiId, Model model) {
         LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
-        Assignments assignments = assignmentsRepository.findByAssiId(assiId);
+        Assignments assignments = assignmentsRepository.findById(assiId).orElseThrow(EntityNotFoundException::new);
         model.addAttribute("lectId", lectInfo.getLectId());
         model.addAttribute("assiId", assignments.getId());
         model.addAttribute("lectName", lectInfo.getLectName());
@@ -268,8 +269,6 @@ public class StudentController {
 
                     GradeInfo gradeInfo = GradeInfo.builder()
                             .studLectApply(stud1)
-                            .student(student)
-                            .lectInfo(lectInfo)
                             .build();
 
                     gradeInfoRepository.save(gradeInfo);

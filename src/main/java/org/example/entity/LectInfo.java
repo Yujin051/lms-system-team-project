@@ -104,7 +104,7 @@ public class LectInfo {
 
     @Builder
     public LectInfo(Professor professor, String lectName, String lectSubject, String lectYear, String lectSem,
-                    Long lectCredit, Long lectNownum, Long lectMaxnum, LocalDate enrollStart, LocalDate enrollEnd,
+                    Long lectCredit, Long lectNownum, Long lectMaxnum, LocalDateTime enrollStart, LocalDateTime enrollEnd,
                     LocalDate lectStart, LocalDate lectEnd, boolean isActive, Long lectAssign, Long lectCheck, Long lectTest, boolean isRecord) {
 
         this.professor = professor;

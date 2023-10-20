@@ -11,6 +11,7 @@ import org.example.repository.ProfessorRepository;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class AdminLectureService {
     @Transactional
     public void newLecture(String profName, String lectName, String lectSubject, String lectYear,
                            String lectSem, Long lectCredit, Long lectNowNum, Long lectMaxNum,
-                           LocalDateTime lectStart, LocalDateTime lectEnd, LocalDateTime enrollStart,
+                           LocalDate lectStart, LocalDate lectEnd, LocalDateTime enrollStart,
                            LocalDateTime enrollEnd, boolean isActive, Long lectAssign, Long lectCheck,
                            Long lectTest, int lectElem) {
         // 이름으로 교수 객체 찾아오기
@@ -56,7 +57,7 @@ public class AdminLectureService {
     @Transactional
     public void updateLecture(Long lectId, String profName, String lectName, String lectSubject, String lectYear,
                               String lectSem, Long lectCredit, Long lectNownum, Long lectMaxnum,
-                              LocalDateTime lectStart, LocalDateTime lectEnd, LocalDateTime enrollStart,
+                              LocalDate lectStart, LocalDate lectEnd, LocalDateTime enrollStart,
                               LocalDateTime enrollEnd, boolean isActive, Long lectAssign, Long lectCheck,
                               Long lectTest, int lectElem) {
         // JPA 더티체크 확인해보기 -> 넘어온 모든 필드값 수정하는 방식

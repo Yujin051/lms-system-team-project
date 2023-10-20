@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LmsContsDto {
+public class LmsContsDtoMin {
 
         private Long nthId;
         private Long contsNo;
