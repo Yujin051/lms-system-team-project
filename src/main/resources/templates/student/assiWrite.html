@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/profdefault}">
+      layout:decorate="~{layouts/studentDefault}">
 <head>
     <link rel="stylesheet" href="/css/prof/assiWrite.css">
     <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
@@ -33,7 +33,7 @@
     </script>
 </head>
 <div id="mainFrame" layout:fragment="content" class="mainFrame">
-    <form th:action="@{'/prof/lecture/view/' + ${lectId} + '/assignments/add/add'}" class="assi_write_body" method="post" th:object="${assignment}" enctype="multipart/form-data">
+    <form th:action="@{'/student/lecture/view/' + ${lectId} + '/assignments/'+ ${assiId} +'/submit/submit'}" class="assi_write_body" method="post" th:object="${assignment}" enctype="multipart/form-data">
         <div class="assi_write_btn_box">
             <div class="assi_write_assi_info_text_box">
                 <span>📄&nbsp 과제정보</span>
@@ -49,10 +49,10 @@
             <div class="assi_write_assi_name_box">
                 <div class="assi_write_assi_name_text_box">
                     <span>과제명</span>
-                    <input th:field="${assignment.lectInfo}" th:value="${lectId}" type="hidden">
+                    <input th:field="${assignment.assignments.lectInfo}" th:value="${lectId}" type="hidden">
                 </div>
                 <div class="assi_write_assi_name_input">
-                    <input th:field="${assignment.name}" type="text" id="assignName" placeholder="과제명"/>
+                    <input th:field="${assignment.assignments.name}" type="text" id="assignName" placeholder="과제명" readonly/>
                 </div>
             </div>
             <div class="assi_write_assi_detail_box">
@@ -60,26 +60,26 @@
                     <span>과제설명</span>
                 </div>
                 <div class="assi_write_assi_detail_textarea">
-                    <textarea th:field="${assignment.detail}" id="assignDetail"></textarea>
+                    <textarea th:field="${assignment.content}" id="assignDetail"></textarea>
                 </div>
             </div>
             <div class="assi_write_assi_date_box">
                 <div class="assi_write_assi_start_box">
-                    <div class="assi_write_assi_start_text_box">
-                        <span>제출시작일시</span>
-                    </div>
-                    <div class="assi_write_assi_start_input">
-                        <input th:field="${assignment.start}" type="text" id="assignStart" placeholder="0000. 00. 00. 형식으로 입력"/>
-                    </div>
+<!--                    <div class="assi_write_assi_start_text_box">-->
+<!--                        <span>제출시작일시</span>-->
+<!--                    </div>-->
+<!--                    <div class="assi_write_assi_start_input">-->
+<!--                        <input th:field="${assignment.}" type="text" id="assignStart" placeholder="0000. 00. 00. 형식으로 입력"/>-->
+<!--                    </div>-->
                 </div>
-                <div class="assi_write_assi_end_box">
-                    <div class="assi_write_assi_end_text_box">
-                        <span>제출마감일시</span>
-                    </div>
-                    <div class="assi_write_assi_end_input">
-                        <input th:field="${assignment.end}" type="text" id="assignEnd" placeholder="0000. 00. 00. 형식으로 입력"/>
-                    </div>
-                </div>
+<!--                <div class="assi_write_assi_end_box">-->
+<!--                    <div class="assi_write_assi_end_text_box">-->
+<!--                        <span>제출마감일시</span>-->
+<!--                    </div>-->
+<!--                    <div class="assi_write_assi_end_input">-->
+<!--                        <input th:field="${assignment.end}" type="text" id="assignEnd" placeholder="0000. 00. 00. 형식으로 입력"/>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <div class="assi_write_is_active_box">
 <!--                <div class="assi_write_is_active">-->

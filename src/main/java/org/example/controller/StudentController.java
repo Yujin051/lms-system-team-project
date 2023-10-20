@@ -1,47 +1,30 @@
 package org.example.controller;
 
 import groovy.util.logging.Log4j2;
-import groovy.util.logging.Slf4j;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.example.constant.Gender;
-import org.example.dto.LectInfoDTO;
+import org.example.dto.*;
 import org.example.entity.LectInfo;
 import org.example.entity.Member;
 import org.example.repository.AssignmentsRepository;
 import org.example.repository.MemberRepository;
-import org.example.service.AssignmentsService;
-import org.example.service.LectureService;
-import org.example.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import lombok.RequiredArgsConstructor;
-import org.example.dto.CheckGradeDto;
-import org.example.dto.CheckSemGradeDto;
 import org.example.entity.*;
 import org.example.repository.GradeInfoRepository;
 import org.example.repository.LectInfoRepository;
 import org.example.repository.StudLectApplyRepository;
 import org.example.repository.StudentRepository;
 import org.example.service.MemberService;
-import org.example.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @Log4j2
@@ -60,6 +43,7 @@ public class StudentController {
     private final StudentRepository studentRepository;
     private final LectInfoRepository lectInfoRepository;
     private final GradeInfoRepository gradeInfoRepository;
+    private final AssignSubmitService assignSubmitService;
 
     // 학생 메인 페이지
     @GetMapping("")
@@ -155,10 +139,8 @@ public class StudentController {
         memberT.setUserPhoneNum(member.getUserPhoneNum());
         memberT.setUserEmail(member.getUserEmail());
         memberT.setUserAddr(member.getUserAddr());
-
         //memberT.setPassword(passwordEncoder.encode(member.getPassword()));
         memberService.updateMember(memberT, file);
-
         model.addAttribute("message", "정보가 수정되었습니다.");
         model.addAttribute("SearchUrl", "/student");
         return "/student/message";
@@ -191,6 +173,46 @@ public class StudentController {
         System.out.println("lectId :"+ lectId + "assiId : "+ assiId);
         return "/student/assiView";
     }
+
+
+
+    @GetMapping("/lecture/view/{lectId}/assignments")
+    public String assignment(@PathVariable("lectId") Long lectId, Model model) {
+        model.addAttribute("lectId", lectId);
+        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
+        List<Assignments> assignmentsList = assignmentsRepository.findByLectInfoLectId(lectId);
+
+//        List<AssignSubmit> submissions = assignSubmitService.getSubmissionsByLectId(lectId);
+        model.addAttribute("lectInfo", lectInfo);
+        model.addAttribute("assignmentsList", assignmentsList);
+//        model.addAttribute("submissions", submissions);
+        return "/student/assignment"; // Thymeleaf 템플릿 경로 수정
+    }
+
+    @GetMapping("/lecture/view/{lectId}/assignments/{assiId}/submit")
+    public String addAssignment2(@PathVariable("lectId") Long lectId, @PathVariable("assiId") Long assiId, Model model) {
+        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
+        Assignments assignments = assignmentsRepository.findByAssiId(assiId);
+        model.addAttribute("lectId", lectInfo.getLectId());
+        model.addAttribute("assiId", assignments.getAssiId());
+        model.addAttribute("lectName", lectInfo.getLectName());
+        model.addAttribute("assignment", new AssignmentSubmitDto());
+        return "student/assiWrite";
+    }
+
+    @PostMapping("/lecture/view/{lectId}/assignments/{assiId}/submit/submit")
+    public String addAssignmentSubmit(@PathVariable("lectId")Long lectId, @PathVariable("assiId")Long assiId, @Validated AssignmentSubmitDto assignmentSubmitDto, @RequestPart MultipartFile file, Model model) throws Exception {
+        try {
+            AssignSubmit assignSubmit = AssignSubmit.createAssignmentSubmit(assignmentSubmitDto);
+            assignSubmitService.saveAssignSubmit(assignSubmit);
+
+            model.addAttribute("message", "과제가 제출되었습니다.");
+        } catch (Exception e) {
+            model.addAttribute("error", "과제 추가 중 오류가 발생했습니다.");
+        }
+        return "student/stud_main";
+    }
+
 
 
     @GetMapping("/scr")

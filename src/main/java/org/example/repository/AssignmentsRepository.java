@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import org.example.entity.Assignments;
+import org.hibernate.sql.ast.tree.update.Assignment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,8 +13,11 @@ import java.util.List;
 public interface AssignmentsRepository extends JpaRepository<Assignments, Long> {
     List<Assignments> findByLectInfoLectId(Long lectId);
 
-    @Query("SELECT a FROM Assignments a WHERE a.lectInfo.lectId = :lectId AND a.id = :assignId")
+    @Query("SELECT a FROM Assignments a WHERE a.lectInfo.lectId = :lectId AND a.assiId = :assignId")
     Assignments findAssignmentByLectIdAndAssignId(@Param("lectId") Long lectId, @Param("assignId") Long assignId);
+
+
+    Assignments findByAssiId(Long assiId);
 
 
 }
