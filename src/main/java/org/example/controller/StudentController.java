@@ -1,44 +1,30 @@
 package org.example.controller;
 
 import groovy.util.logging.Log4j2;
-import groovy.util.logging.Slf4j;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.example.constant.Gender;
 import org.example.dto.*;
 import org.example.entity.LectInfo;
 import org.example.entity.Member;
 import org.example.repository.AssignmentsRepository;
 import org.example.repository.MemberRepository;
 import org.example.service.*;
-import org.hibernate.sql.ast.tree.update.Assignment;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import lombok.RequiredArgsConstructor;
 import org.example.entity.*;
 import org.example.repository.GradeInfoRepository;
 import org.example.repository.LectInfoRepository;
 import org.example.repository.StudLectApplyRepository;
 import org.example.repository.StudentRepository;
 import org.example.service.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 @Controller
 @Log4j2
@@ -208,7 +194,7 @@ public class StudentController {
         LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
         Assignments assignments = assignmentsRepository.findByAssiId(assiId);
         model.addAttribute("lectId", lectInfo.getLectId());
-        model.addAttribute("assiId", assignments.getId());
+        model.addAttribute("assiId", assignments.getAssiId());
         model.addAttribute("lectName", lectInfo.getLectName());
         model.addAttribute("assignment", new AssignmentSubmitDto());
         return "student/assiWrite";

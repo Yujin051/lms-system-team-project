@@ -73,7 +73,7 @@
                     <div class="assi_search_lect_name">
                         <select id="assiId" style="width: 351px; height: 35px; border-radius: 5px; border: 1px solid #cccccc; outline: none; text-indent: 5px;">
                             <option th:each="assignment : ${assignmentsList}"
-                                    th:value="${assignment.id}"
+                                    th:value="${assignment.getAssiId}"
                                     th:text="${assignment.name}">
                             </option>
                         </select>
@@ -104,14 +104,14 @@
                     </thead>
                     <tbody>
                         <tr th:each="assignment : ${assignmentsList}">
-                            <td><span th:text="${assignment.id}"></span></td>
+                            <td><span th:text="${assignment.getAssiId}"></span></td>
                             <td><span th:text="${assignment.name}"></span></td>
                             <td><span th:text="${assignment.start}"></span></td>
                             <td><span th:text="${assignment.end}"></span></td>
                             <td><span th:text="${assignment.isActive ? '진행중' : '마감'}"></span></td>
                             <td>
-                                <a type="button" class="assiDeleteBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.id}+ '/submit'}"><span>제출</span></a>
-                                <a type="button" class="assiUpdateBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.id}+ '/modify'}"><span>수정</span></a>
+                                <a type="button" class="assiDeleteBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/submit'}"><span>제출</span></a>
+                                <a type="button" class="assiUpdateBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/modify'}"><span>수정</span></a>
                             </td>
                         </tr>
                     </tbody>

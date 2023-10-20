@@ -3,10 +3,8 @@ package org.example.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.dto.AssignmentsDto;
-import org.example.repository.AssignmentsRepository;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -19,7 +17,7 @@ public class Assignments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "assign_id")
-    private Long id;
+    private Long assiId;
 
 
     // 강좌 키 외래키로
@@ -60,8 +58,8 @@ public class Assignments {
 
 
     @Builder
-    public Assignments(long id, LectInfo lectInfo, String name, String detail, LocalDate start, LocalDate end, boolean isActive, boolean isSubmit, String originFilename, String savedFilename) {
-        this.id = id;
+    public Assignments(long assiId, LectInfo lectInfo, String name, String detail, LocalDate start, LocalDate end, boolean isActive, boolean isSubmit, String originFilename, String savedFilename) {
+        this.assiId = assiId;
         this.lectInfo = lectInfo;
         this.name = name;
         this.detail = detail;

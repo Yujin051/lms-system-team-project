@@ -33,7 +33,7 @@
     </script>
 </head>
 <div id="mainFrame" layout:fragment="content" class="mainFrame">
-    <form th:action="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.id}+ '/modify/modify'}" class="assi_write_body" method="post" th:object="${assignment}" enctype="multipart/form-data">
+    <form th:action="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/modify/modify'}" class="assi_write_body" method="post" th:object="${assignment}" enctype="multipart/form-data">
         <div class="assi_write_btn_box">
             <div class="assi_write_assi_info_text_box">
                 <span>📄&nbsp 과제정보</span>
