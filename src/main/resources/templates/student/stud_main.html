@@ -48,11 +48,10 @@
                            이모티콘
                         </p>
                     </div>
-                    <div class="class_box">
-                        암호학개론
-                    </div>
-                    <div class="class_box">
-                        세계사와 사회변화
+                    <div style="width: 350px; height: 50px;" th:each="lectInfo, iterStat : ${lectInfo}" th:if="${iterStat.index} < 5">
+                        <a style="text-decoration: none; border-radius: 10px; margin-top: 10px; width: 350px; height: 50px; margin-left: 25px;background-color: white; line-height: 45px;
+                           text-indent: 10px; display: block;
+                           font-size: 12px;" th:href="@{'/student/lecture/view/' + ${lectInfo.lectId}}" th:text="${lectInfo.lectName}" class="class_box">test</a>
                     </div>
                 </div>
                 <div class="article1_box">
@@ -64,11 +63,11 @@
                             이모티콘
                         </p>
                     </div>
-                    <div class="homework_box">
-                         전국도감 찾아오기!
-                    </div>
-                    <div class="homework_box">
-                         만원으로 일주일버티기!
+                    <div th:each="assignmentsList, iterStat : ${assignmentsList}" th:if="${iterStat.index} < 5">
+                        <div style="text-decoration: none; border-radius: 10px; margin-top: 10px; width: 350px; height: 50px; margin-left: 25px;background-color: white; line-height: 45px;
+                           text-indent: 10px; display: block;
+                           font-size: 12px;"  th:text="${assignmentsList.name}" class="homework_box">
+                        </div>
                     </div>
                 </div>
             </article>

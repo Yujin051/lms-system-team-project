@@ -70,6 +70,21 @@ public class StudentController {
         model.addAttribute("profileImg", savedProfile);
         System.out.println(savedProfile);
 
+        Long id =  member.getId();
+        model.addAttribute("memberId", id);
+
+        System.out.println(lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기"));
+        List<LectInfo> lectInfoList = lectureService.findCoursesByMemberAndSemester(id, "2023", "2학기");
+        model.addAttribute("lectInfo", lectInfoList);
+
+        model.addAttribute("lectId", 1);
+        LectInfo lectInfo = lectInfoRepository.findByLectId(1L);
+        List<Assignments> assignmentsList = assignmentsRepository.findByLectInfoLectId(1L);
+
+//        List<AssignSubmit> submissions = assignSubmitService.getSubmissionsByLectId(lectId);
+
+        model.addAttribute("assignmentsList", assignmentsList);
+
         return "/student/stud_main";
     }
     // 학생 성적 페이지
