@@ -200,12 +200,6 @@ const grid2 = new tui.Grid({
                 sortable: true
             },
             {
-                header: '등급',
-                name: 'semRating',
-                sortingType: 'asc',
-                sortable: true
-            },
-            {
                 header: '학기',
                 name: 'semSem',
                 sortingType: 'asc',
@@ -244,12 +238,6 @@ const grid2 = new tui.Grid({
         {
             header: '학번',
             name: 'userId',
-            sortingType: 'asc',
-            sortable: true
-        },
-        {
-            header: '등급',
-            name: 'semRating',
             sortingType: 'asc',
             sortable: true
         },

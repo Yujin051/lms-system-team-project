@@ -60,6 +60,11 @@ const grid = new tui.Grid({
                 name: 'studNowCr',
                 sortable: true,
                 hidden: true,
+            },
+            {
+                header: '이미지',
+                name: 'imgSaved',
+                hidden: true
             }
         ],
         "pagination": {
@@ -131,6 +136,11 @@ const grid = new tui.Grid({
             name: 'studNowCr',
             sortable: true,
             hidden: true,
+        },
+        {
+            header: '이미지',
+            name: 'imgSaved',
+            hidden: true
         }
     ],
 });
@@ -138,6 +148,7 @@ console.log(grid)
 grid.on('click', async (ev) => {
     const rowData = grid.getRow(ev.rowKey);
 
+    // const fileName = "/static/img/profile";
     // 각 열에 대한 데이터 추출
     const userId = rowData.userId; //학번
     const studId = rowData.studId; //수강생번호
@@ -148,6 +159,7 @@ grid.on('click', async (ev) => {
     const userStudNowCr = rowData.studNowCr; //학점
     const userGender = rowData.userGender; //성별
     const userAddr = rowData.userAddr; //주소
+    const imgSaved = "/img/profile/" + rowData.imgSaved;
     console.log("studId : " + rowData.studId);
 
 
@@ -160,6 +172,10 @@ grid.on('click', async (ev) => {
     const userGenderSpan = document.querySelector('.user_gender');
     const userAddrSpan = document.querySelector('.user_addr');
     const userStudNowCrSpan = document.querySelector('.user_stud_now_cr');
+    const userImgSavedP = document.querySelector('.img_saved');
+
+    const img = document.querySelector('.img2');
+
 
 
     userIdSpan.style.display = 'block';
@@ -171,6 +187,9 @@ grid.on('click', async (ev) => {
     userStudNowCrSpan.style.display = 'block';
     userGenderSpan.style.display = 'block';
     userAddrSpan.style.display = 'block';
+    userImgSavedP.style.display = 'block';
+
+    img.src = imgSaved;
 
 
     // 데이터 넣기
@@ -183,6 +202,7 @@ grid.on('click', async (ev) => {
     userStudNowCrSpan.textContent = userStudNowCr;
     userGenderSpan.textContent = userGender;
     userAddrSpan.textContent = userAddr;
+    userImgSavedP.appendChild = userImg;
 
 });
 
