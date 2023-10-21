@@ -10,6 +10,11 @@
 .after_click_color{
     color: #245396; font-weight: bold;
 }
+
+#logo {
+    height: 70px;
+}
+
 /* 슬라이드 인 애니메이션 정의 */
 .slide-in {
     animation-name: slideIn;
@@ -30,6 +35,7 @@
 }
 .admin_body {
     width: 1908px;
+    height: auto;
 }
 .aside_main {
     border: 0px solid black; width: 220px; height: 1200px;

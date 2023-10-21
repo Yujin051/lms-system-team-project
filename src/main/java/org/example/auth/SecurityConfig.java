@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.example.constant.RoleType;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -41,7 +43,7 @@ public class SecurityConfig {
                                 .requestMatchers(
                                         "/h2-console/**"   // H2 콘솔 허용
                                 ).permitAll()
-                                .requestMatchers("/admin","prof/**").hasRole(RoleType.ADMIN.toString())
+                                .requestMatchers("/admin","admin/**").hasRole(RoleType.ADMIN.toString())
                                 .requestMatchers("/prof","prof/**").hasRole(RoleType.TEACHER.toString())
                                 .requestMatchers("/student","student/**").hasRole(RoleType.USER.toString())
                         //.requestMatchers("/my/**").hasAnyRole(RoleType.ADMIN.toString(), RoleType.TEACHER.toString(), RoleType.USER.toString())
@@ -59,6 +61,7 @@ public class SecurityConfig {
                         .permitAll()    //로그인 페이지 접근 허용
                         .failureUrl("/member/login/error")) // 로그인 실패 페이지
 
+
                 // 로그아웃
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")) // 로그아웃 페이지
@@ -66,6 +69,11 @@ public class SecurityConfig {
 
                 .exceptionHandling().accessDeniedPage("/denied");
 
+
+//        http.sessionManagement() // 세션 관리 (동시 로그인 제한)
+//                .maximumSessions(1) // 최대 허용 가능 세션 수 (-1 : 무제한)
+//                .maxSessionsPreventsLogin(true) // true : 로그인 제한 false(default) : 기존 세션 만료
+//                .expiredUrl("/login"); // 세션 만료시 이동 페이지
 
         return http.build();
 
@@ -90,6 +98,7 @@ public class SecurityConfig {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
                 .requestMatchers("/css/**","/js/**","/img/**");
     }
+
 
     //권한별 로그인 성공 시 이동하는 페이지
     public static class LoginSuccessHandler implements AuthenticationSuccessHandler {

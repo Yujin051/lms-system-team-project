@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profDefault}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,139 +14,17 @@
     <!-- header css -->
     <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/stud/myClassroom.css">
+    <link rel="stylesheet" href="/css/student/myClassroom.css">
     <title>Document</title>
 </head>
 <body>
-
-<header id="header">
-    <nav id="nav" class="container">
-        <a href="https:www.naver.com" target="_self" class="brand"></a>
-
-        <div class="menu" id="menu">
-
-            <ul class="header_menu">
-
-                <li class="menu-item">
-                    <a href="#" class="menu-link">학사정보</a>
-                </li>
-
-                <li class="menu-item">
-                    <a href="#" class="menu-link">수업정보</a>
-                </li>
-
-                <li class="menu-item">
-                    <a href="#" class="menu-link">커뮤니티</a>
-                </li>
-
-            </ul>
-
-            <div class="nav-right">
-                <a href="" id="logout">
-                    <i class="bi bi-box-arrow-right mx-2"></i>
-                    로그아웃
-                </a>
-            </div>
-        </div>
-        <a class="header_toggle">
-            <i class="fa-solid fa-bars" style="color: #000000;"></i>
-        </a>
-
-    </nav>
-
-
-</header>
-
-<div class="sub_menu" id="sub_menu1">
-
-    <div class="container">
-        <ul class="wrap_sub mt-3">
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_myinfo.png" alt="나의 정보 조회">
-                    <p>나의 정보 조회</p>
-                </a>
-            </li>
-
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_grade.png" alt="성적조회">
-                    <p>성적 조회</p>
-                </a>
-            </li>
-        </ul>
-    </div>
-</div>
-
-<div class="sub_menu" id="sub_menu2">
-    <div class="container">
-        <ul class="wrap_sub mt-3">
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_blackboard.png" alt="나의강의실">
-                    <p>나의 강의실</p>
-                </a>
-            </li>
-
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_onlineclass.png" alt="온라인강의실">
-                    <p>온라인강의실</p>
-                </a>
-            </li>
-
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_click.png" alt="수강신청">
-                    <p>나의 강의실</p>
-                </a>
-            </li>
-
-        </ul>
-    </div>
-</div>
-
-
-<div class="sub_menu" id="sub_menu3">
-    <div class="container">
-        <ul class="wrap_sub mt-3">
-
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_memo.png" alt="공지사항">
-                    <p>공지사항</p>
-                </a>
-            </li>
-
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_school.png" alt="학생">
-                    <p>학생</p>
-                </a>
-            </li>
-
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_chat.png" alt="질문/건의">
-                    <p>질문/건의</p>
-                </a>
-            </li>
-
-            <li>
-                <a href="" class="bounce">
-                    <img class="sub_menu_icon" src="/img/icon_envelop_2.png" alt="쪽지">
-                    <p>쪽지</p>
-                </a>
-            </li>
-
-        </ul>
-    </div>
-</div>
+<section id="mainFrame" layout:fragment="content">
 <!--조회-->
 <form class="d-flex m-2">
     <button type="button" class="bt btn btn-secondary">조회</button>
 </form>
 <!--상단 검색란-->
+
 <div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
     <div class="col">
         <div class="input-group">
@@ -155,8 +34,6 @@
             <div>
                 <input class="form-control" type="search" placeholder="콘텐츠명 검색" aria-label="Search">
             </div>
-
-
             <div class="input-group-prepend2 input-group-prepend">
                 <span class="s2">학기</span>
             </div>
@@ -220,67 +97,7 @@
         </div>
     </div>
 </div>
-
-<footer>
-    <div class="wrap_footer">
-        <div class="footer_top_wrap">
-            <div class="footer1">
-                <div class="logos">
-                    <a>
-                        <img src="/img/footerLeftLogo.png" alt="TRANSLATION ACADEMY LTI KOREA LOGO">
-                    </a>
-                    <a>
-                        <img src="/img/footerRightLogo.png" alt="한국문학번역원 로고">
-                    </a>
-                </div>
-            </div>
-            <div class="footer2">
-                <ul class="personalinfo">
-                    <li>
-                        <a>개인정보처리방침</a>
-                    </li>
-                    <li>
-                        <a>오시는길</a>
-                    </li>
-                    <li>
-                        <a>이용약관</a>
-                    </li>
-                    <li>
-                        <a>이메일무단수집금지</a>
-                    </li>
-                </ul>
-                <ul class = "address">
-                    <li>
-                        서울특별시 마포구 신촌로 176
-                    </li>
-                    <li>
-                        대표자 : 권혁인 &nbsp; &nbsp;
-                        사업자등록번호 : 103-91-93011 &nbsp; &nbsp;
-                        Tel : 010-5432-1313 Fax : 02-3448-4247
-                    </li>
-                </ul>
-                <p class="copyright">
-                    Copyright ⓒ Literature Translation Institute of Korea. All Rights Reserved.
-                </p>
-            </div>
-        </div>
-        <div class="footer_btm_wrap">
-            <div class="footer3">
-                <ul>
-                    <li>
-                        이메일문의 lmsonline@naver.com
-                    </li>
-                </ul>
-                <ul>
-                    <li>
-                        문의시간 평일:09:00 ~ 17:00/토.일요일,공휴일 휴무
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</footer>
-
+</section>
 
 
 <!-- bootstrap js -->
@@ -288,6 +105,6 @@
 <!-- header js -->
 <script src="/js/header.js"></script>
 <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
-<script src="/js/stud/myClassroom.js"></script>
+<script src="/js/myClassroom.js"></script>
 </body>
 </html>

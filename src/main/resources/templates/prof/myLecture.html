@@ -1,55 +1,23 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/profDefault}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/profDefault}">
 <head>
     <meta charset="UTF-8">
     <title>나의 강의실</title>
     <link rel="stylesheet" href="/css/stud/stu_lecture.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
 <section id="mainFrame" layout:fragment="content">
     <article class="mainContainer">
-        <h4>나의 강의 현황</h4>
-        <div class="optContainer">
-            <div>
-                <div>
-                    <span>년도</span>
-                    <select class="selector">
-                        <option>2020</option>
-                        <option>2021</option>
-                        <option>2022</option>
-                        <option>2023</option>
-                    </select>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <span>학기</span>
-                    <select class="selector">
-                        <option>1학기</option>
-                        <option>2학기</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- 학기 정보는 위의 현황 테이블에서 받아서 적용되도록. 타임리프 사용? -->
-        <h4>2023년도 2학기</h4>
+        <h4 th:text="'나의 강의 현황 - ' + ${year} + '년도 ' + ${semester}" />
         <div>
             <div class="lectureContainer">
                 <div class="lectureName">
-                    <span>과목 : 과목 이름이 옵니다. 타임리프 반복</span>
-                    <i id="plus" class="fa-solid fa-plus"></i>
-                    <i id="minus" class="fa-solid fa-minus"></i>
-                </div>
-                <div class="lectureClick">
-                    <!-- 타임리프 통해서 각 페이지로 이동 -->
-                    <a href="#"><div class="lecMenu">강의 계획서</div></a>
-                    <a href="#"><div class="lecMenu">출결 조회</div></a>
-                    <a href="#"><div class="lecMenu">과제 출제</div></a>
-                    <a href="#"><div class="lecMenu">수업 게시판</div></a>
+                    <div th:each="lectInfo : ${lectInfoList}">
+                        <input type="hidden" id="professorId" th:value="${professorId}">
+                        <a style="display: block; text-decoration: none; color: black; width: 200px;" th:href="@{'/prof/lecture/view/' + ${lectInfo.lectId}}" th:text="${lectInfo.lectName}"></a>
+                    </div>
                 </div>
             </div>
         </div>

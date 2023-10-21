@@ -1,7 +1,10 @@
 package org.example.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 강의콘텐츠정보 엔티티
@@ -10,6 +13,9 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "lms_conts")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class LmsConts {
 
     @Id
@@ -28,4 +34,15 @@ public class LmsConts {
 
     @Column(name = "conts_yout")
     private String contsYout;
+
+    // 양방향 매핑, 컨텐츠 삭제할 때 차시정보 같이 삭제하도록
+    @OneToOne(cascade = CascadeType.REMOVE ,mappedBy = "lmsConts")
+    private LectNth lectNth;
+
+    public LmsConts(String contsName, String contsDetail, int contsTime, String contsYout) {
+        this.contsName = contsName;
+        this.contsDetail = contsDetail;
+        this.contsTime = contsTime;
+        this.contsYout = contsYout;
+    }
 }

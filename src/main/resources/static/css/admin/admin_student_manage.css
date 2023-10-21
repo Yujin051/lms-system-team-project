@@ -15,23 +15,20 @@
 .buttonGroup {
     position: relative;
     top: 10px;
-    left: 1530px;
+    left: 1534px;
     width: 220px;
     outline: 0;
     height: 45px;
+    margin-bottom: 5px;
 }
 
 .buttonGroup > div{
-    margin-left: 10px;
-    float: left;
-    width: 45px;
-    height: 30px;
-    border: 1px solid black;
-    border-radius: 3px;
-    line-height: 30px;
-    text-align: center;
+    background: #6b6b6b; color: white; border: none; width: 50px; height: 35px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 35px;
 }
-
+.buttonGroup > div:hover {
+    opacity: 0.9;
+}
 /* 검색 박스 */
 .searchBox {
     margin-left: 85px;
@@ -63,12 +60,15 @@
 }
 
 /* 강좌명 검색 인풋 */
-.lName {
+.lName, .lNum {
     position: absolute;
     top: 20px;
     left: 230px;
     width: 250px;
     height: 30px;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
 }
 
 /* 그리드 영역 */
@@ -84,6 +84,9 @@
     left: 200px;
     width: 300px;
     height: 30px;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
 }
 
 /* 그리드 */
@@ -91,14 +94,13 @@
     position: relative;
     left: 85px;
     width: 1500px;
-    margin-bottom: 50px;
-    display: flex;
 }
 
 /* 상세정보 영역 */
 .table {
     width: 1500px;
     height: 600px;
+    margin-top: 50px;
     margin-left: 85px;
     display: flex;
 }

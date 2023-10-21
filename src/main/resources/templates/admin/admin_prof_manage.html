@@ -13,25 +13,25 @@
     <!-- 검색 조건 설정, 조회 등 버튼 위치 구역 -->
     <article class="searchFrame">
         <div class="buttonGroup">
-            <div>조회</div>
+            <button id="searchBtn">조회</button>
         </div>
         <div class="searchBox">
             <div>
                 <div class="searchContainer">
                     <span>과목명</span>
-                    <select>
-                        <option>언어</option>
-                        <option>사회</option>
-                        <option>과학</option>
+                    <select id="subject">
+                        <option value="언어">언어</option>
+                        <option value="사회">사회</option>
+                        <option value="과학">과학</option>
                     </select>
                 </div>
             </div>
             <div>
                 <div class="searchContainer">
                     <span>활동 상태</span>
-                    <select>
-                        <option>활동중</option>
-                        <option>휴식중</option>
+                    <select id="active">
+                        <option value="true">활동중</option>
+                        <option value="false">휴식중</option>
                     </select>
                 </div>
             </div>
@@ -44,7 +44,7 @@
         </div>
     </article>
 
-    <div class="result">검색 결과 : value건</div>
+    <div class="result" id="result">검색 결과 : value건</div>
     <h4 class="list">강사 정보</h4>
     <div id="grid"></div>
 
@@ -54,79 +54,79 @@
             <tr>
                 <th>교원 번호</th>
                 <td>
-                    <div>교원 번호가 옵니다.</div>
+                    <div id="pId"></div>
                 </td>
             </tr>
             <tr>
                 <th>성명</th>
                 <td>
-                    <div>이름이 옵니다.</div>
+                    <div id="name"></div>
                 </td>
             </tr>
             <tr>
                 <th>생년월일</th>
                 <td>
-                    <div>생일이 옵니다.</div>
+                    <div id="birthDay"></div>
                 </td>
             </tr>
             <tr>
                 <th>성별</th>
                 <td>
-                    <div>성별이 옵니다.</div>
+                    <div id="gender"></div>
                 </td>
             </tr>
             <tr>
                 <th>전화번호</th>
                 <td>
-                    <div>전화번호가 옵니다.</div>
+                    <div id="tel"></div>
                 </td>
             </tr>
             <tr>
                 <th>주소</th>
                 <td>
-                    <div>주소가 옵니다.</div>
+                    <div id="addr"></div>
                 </td>
             </tr>
             <tr>
                 <th>회원 번호</th>
                 <td>
-                    <div>회원 번호가 옵니다.</div>
+                    <div id="mId"></div>
                 </td>
             </tr>
             <tr>
                 <th>이메일</th>
                 <td>
-                    <div>이메일이 옵니다.</div>
+                    <div id="email"></div>
                 </td>
             </tr>
             <tr>
                 <th>활동 상태 구분</th>
                 <td>
-                    <div>현재 활동 상태가 옵니다.</div>
+                    <div id="isActive"></div>
                 </td>
             </tr>
             <tr>
                 <th>예금주</th>
                 <td>
-                    <div>예금주가 옵니다.</div>
+                    <div id="aOwn"></div>
                 </td>
             </tr>
             <tr>
                 <th>은행명</th>
                 <td>
-                    <div>은행 명이 옵니다.</div>
+                    <div id="bank"></div>
                 </td>
             </tr>
             <tr>
                 <th>계좌번호</th>
                 <td>
-                    <div>계좌번호가 옵니다.</div>
+                    <div id="account"></div>
                 </td>
             </tr>
             <tr>
                 <th>소속 기관</th>
                 <td>
-                    <div>소속 기관이 옵니다.</div>
+                    <div id="agency"></div>
                 </td>
             </tr>
         </table>

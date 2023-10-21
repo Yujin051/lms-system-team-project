@@ -3,6 +3,8 @@
       layout:decorate="~{/layouts/admin_default}">
 <head>
     <link href="/css/admin/postWrite.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.0/main.min.js"></script>
 </head>
 <div id="mainFrame" layout:fragment="content" class="mainFrame">
     <div class="post_write_body">
@@ -11,12 +13,12 @@
                 <span>게시글 작성(담당용)</span>
             </div>
             <div class="post_write_box">
-                <form method="post">
+                <div>
                 <button type="submit" name="" class="post_write_select_btn">조회</button>
                 <button type="submit" name="" class="post_write_create_btn">신규</button>
                 <button type="submit" name="" class="post_write_save_btn">저장</button>
                 <button type="submit" name="" class="post_write_delete_btn">삭제</button>
-                </form>
+                </div>
             </div>
         </div>
         <div class="post_search_body">
@@ -24,7 +26,7 @@
                 <div class="post_board_box">
                     <span>게시판</span>
                     <select class="post_board_select">
-                        <option>(전체)</option>
+                        <option value="">(전체)</option>
                         <option value="공지사항">공지사항</option>
                         <option value="건의사항">건의사항</option>
                         <option value="학생">학생</option>
@@ -36,22 +38,24 @@
                 <div class="post_search_requirement_box">
                     <span>검색조건</span>
                     <select class="post_search_requirement_select">
-                        <option>(전체)</option>
+                        <option value="">(전체)</option>
                         <option value="제목">제목</option>
                         <option value="내용">내용</option>
-                        <option value="첨부파일">첨부파일</option>
+                        <option value="작성자">작성자</option>
                     </select>
+                    <input type="text" class="post_search_requirement_input">
                 </div>
                 <div class="post_date_box">
                     <span>작성일</span>
-                    <input type="text" id="post_reg_date" readonly placeholder="2023-09-30"/>
-                    <span><i class="fa-solid fa-calendar-days"></i></span>
+                        <input type="date" min="2017-01-01" max="2030-12-31"
+                           class="post_reg_date" id="post_reg_date" placeholder="2023-09-30"/>
                 </div>
             </div>
         </div>
         <div class="post_list_text_box">
             <div class="post_list_text">
                 <span>📚&nbsp 게시글 목록</span>
+                <span class="result2"></span>
             </div>
         </div>
         <div class="post_list_box">
@@ -72,7 +76,7 @@
                             <span>게시글 번호</span>
                         </div>
                         <div class="post_content_num">
-                            <input type="text" id="postId" placeholder="2023-L0189" readonly/>
+                            <input type="text" id="articleId" class="article_id" readonly/>
                         </div>
                     </div>
                     <div class="post_content_title_box">
@@ -80,7 +84,7 @@
                             <span>제목</span>
                         </div>
                         <div class="post_content_title">
-                            <input type="text" id="postCont" placeholder="제목입니다."/>
+                            <input type="text" id="postContTitle" class="post_cont_title"/>
                         </div>
                     </div>
                     <div class="post_content_writer_box">
@@ -88,7 +92,7 @@
                             <span>작성자</span>
                         </div>
                         <div class="post_content_writer">
-                            <input type="text" id="postWriter" placeholder="홍길동" readonly/>
+                            <input type="text" id="postWriter" class="post_writer" readonly/>
                         </div>
                     </div>
                     <div class="post_content_date_box">
@@ -96,7 +100,7 @@
                             <span>작성일자</span>
                         </div>
                         <div class="post_content_date">
-                            <input type="text" id="postRegDate" placeholder="2023-09-30" readonly/>
+                            <input type="text" id="postRegDate" class="post_reg_date" readonly/>
                         </div>
                     </div>
                 </div>
@@ -106,7 +110,7 @@
                             <span>조회수</span>
                         </div>
                         <div class="post_content_views">
-                            <input type="text" id="postView" placeholder="7" readonly/>
+                            <input type="text" id="postView" class="post_view" readonly/>
                         </div>
                     </div>
                     <div class="post_content_board_type_box">
@@ -114,7 +118,14 @@
                             <span>게시판종류</span>
                         </div>
                         <div class="post_content_board_type">
-                            <input type="text" id="boardType" placeholder="학생" readonly/>
+                            <select id="boardType" class="board_type">
+                                <option value="">선택</option>
+                                <option value="학생">학생</option>
+                                <option value="질문건의">질문건의</option>
+                                <option value="공지사항">공지사항</option>
+                                <option value="교원">교원</option>
+                            </select>
+                            <input type="text" id="boardId" class="board_id" readonly/>
                         </div>
                     </div>
                     <div class="post_content_is_locked_box">
@@ -122,7 +133,7 @@
                             <span>공개여부</span>
                         </div>
                         <div class="post_content_is_locked">
-                            <input type="checkbox" id="isLocked"/>
+                            <input type="checkbox" id="isLocked" class="is_locked"/>
                         </div>
                     </div>
                     <div class="post_content_is_deleted_box">
@@ -130,7 +141,7 @@
                             <span>삭제여부</span>
                         </div>
                         <div class="post_content_is_deleted">
-                            <input type="checkbox" id="isDeleted"/>
+                            <input type="checkbox" id="isDeleted" class="is_deleted"/>
                         </div>
                     </div>
                 </div>
@@ -144,7 +155,7 @@
         <div class="content_box">
             <div class="content">
                 <div class="real_content">
-                    <p>asdwqdq</p>
+                    <textarea class="post_cont_text" id="post_cont_text"></textarea>
                 </div>
             </div>
         </div>

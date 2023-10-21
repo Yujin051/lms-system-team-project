@@ -3,13 +3,21 @@
     font-family: 'SUIT-Regular';
 }
 #top-table {
-    width: 1522px;
+    width: 1500px;
     margin-left: 90px;
+}
+.bt1 {
+    width: 1500px;
+}
+
+.btn1 {
+    margin-left: 1455px;
+
 }
 
 
 .table {
-    margin-left: 90px;
+    margin-left: 50px;
     width: 94.5%;
 }
 
@@ -22,12 +30,32 @@
     height: 37px;
 }
 
-
-.s1 {
-    margin-right: 50px;
+.result2 {
+    margin-left: 1400px;
 }
 
 
+
+.s1 {
+    padding-right: 40px;
+    padding-top: 15px;
+}
+
+#contsNthIdInput {
+    background: rgb(204,204,204);
+}
+
+#contsNoInput {
+    background: rgb(204,204,204);
+}
+
+#contsNameInput {
+    background: rgb(204,204,204);
+}
+
+#contsYoutInput {
+    background: rgb(204,204,204);
+}
 
 .d1 {
     font-size: 19px;
@@ -43,7 +71,7 @@
 
 .tbl1 {
     margin-left: 90px;
-    width: 40%;
+
     float: left;
 }
 
@@ -94,6 +122,7 @@
 
      /* 오른쪽으로 이동시킬 클래스 */
  .right-align {
+     width: 700px;
      float: right;
  }
 

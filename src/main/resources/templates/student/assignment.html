@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profdefault}">
+<head>
+    <link rel="stylesheet" href="/css/prof/assignment.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.assiSubmitBtn').on('click', function(event) {
+                event.preventDefault(); // 클릭 이벤트 기본 동작 중단
+
+                var submitButton = $(this);
+                var buttonText = submitButton.find('.buttonText'); // 버튼 내의 텍스트 요소
+
+                // AJAX 요청을 보내고 성공하면 버튼 텍스트를 변경
+                $.ajax({
+                    type: 'POST', // 또는 사용하는 메서드
+                    url: submitButton.attr('href'), // 또는 사용하는 URL
+                    success: function(response) {
+                        if (response === 'success') {
+                            // "제출" 버튼 텍스트를 "제출됨"으로 변경
+                            buttonText.text('제출됨');
+                        }
+                    },
+                    error: function() {
+                        alert('과제 제출 중 오류가 발생했습니다.');
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+
+    <div class="assi_body">
+        <form id="searchForm">
+        <div class="assi_back_btn_box">
+            <div class="assi_course_search_text_box">
+                <span>🔍&nbsp 과제검색</span>
+            </div>
+<!--            <div class="assi_back_btn">-->
+<!--                <button type="button" class="backBtn">돌아가기</button>-->
+<!--            </div>-->
+        </div>
+        <div class="assi_search_box">
+            <div class="assi_search_bottom_box">
+                <div class="assi_ch_lect_name">
+                    <div class="assi_search_lect_name_text">
+                        <span>강좌명</span>
+                    </div>
+                    <div class="assi_search_lect_name">
+                        <input id="lectId" style="width: 351px; height: 35px; border-radius: 5px; border: 1px solid #cccccc; outline: none; text-indent: 5px;" type="text" th:value="${lectInfo.lectName}" readonly/>
+                    </div>
+                </div>
+            </div>
+            <div class="assi_search_bottom_box">
+                <div class="assi_ch_lect_name">
+                    <div class="assi_search_lect_name_text">
+                        <span>과제명</span>
+                    </div>
+                    <div class="assi_search_lect_name">
+                        <select id="assiId" style="width: 351px; height: 35px; border-radius: 5px; border: 1px solid #cccccc; outline: none; text-indent: 5px;">
+                            <option th:each="assignment : ${assignmentsList}"
+                                    th:value="${assignment.getAssiId}"
+                                    th:text="${assignment.name}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+
+            <div class="assi_total_status_text_box">
+                <span>📊&nbsp 과제정보</span>
+                <div class="assi_que_btn_box">
+                </div>
+            </div>
+            <div class="assi_ch_total_status_grid1">
+                <table class="assi_ch_assi_info_tb">
+                    <thead>
+                        <tr>
+                            <td><span>과제번호</span></td>
+                            <td><span>과제명</span></td>
+                            <td><span>제출시작일시</span></td>
+                            <td><span>제출마감일시</span></td>
+                            <td><span>진행상태</span></td>
+                            <td><span>과제수정</span></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="assignment : ${assignmentsList}">
+                            <td><span th:text="${assignment.getAssiId}"></span></td>
+                            <td><span th:text="${assignment.name}"></span></td>
+                            <td><span th:text="${assignment.start}"></span></td>
+                            <td><span th:text="${assignment.end}"></span></td>
+                            <td><span th:text="${assignment.isActive ? '진행중' : '마감'}"></span></td>
+                            <td>
+                                <a style="text-decoration: none; background: #6b6b6b; color: white; border: none; width: 76px; height: 28px; border-radius: 5px; line-height: 28px;" type="button" class="assiDeleteBtn" th:href="@{'/student/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/submit'}"><span class="buttonText">제출</span></a>
+                                <a style="text-decoration: none; background: #6b6b6b; color: white; border: none; width: 76px; height: 28px; border-radius: 5px; line-height: 28px;" type="button" class="assiUpdateBtn" th:href="@{'/student/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}}"><span>과제보기</span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+    </div>
+    <script src="/js/prof/assignment.js"></script>
+</div>

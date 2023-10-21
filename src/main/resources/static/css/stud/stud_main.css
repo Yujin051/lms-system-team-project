@@ -61,7 +61,7 @@ section .middle_article1 .article1_box .profile_bottom .profile_letter {
     margin-left: 90px;
     text-align: center;
     line-height: 63px;
-    font-size: 13px;
+    font-size: 15px;
     cursor: pointer;
 }
 
@@ -73,7 +73,7 @@ section .middle_article1 .article1_box .profile_bottom .profile_pswd {
     margin-left: 20px;
     text-align: center;
     line-height: 63px;
-    font-size: 13px;
+    font-size: 15px;
     cursor: pointer;
 }
 
@@ -97,7 +97,7 @@ section .middle_article1 .article1_box .class_top {
     font-weight: bolder;
 }
 
-section .middle_article1 .article1_box .class_box {
+section .middle_article1 .article1_box div .class_box {
     border: 0px solid black;
     border-radius: 10px;
     margin-top: 10px;
@@ -107,10 +107,11 @@ section .middle_article1 .article1_box .class_box {
     background-color: white;
     line-height: 45px;
     text-indent: 10px;
-    font-size: 12px;
+    font-size: 15px;
 }
 
-section .middle_article1 .article1_box .class_box:hover {
+.class_box:hover {
+    display: block;
     background-color: skyblue;
     color: white;
 }
@@ -140,7 +141,7 @@ section .middle_article1 .article1_box .homework_box {
     background-color: white;
     line-height: 45px;
     text-indent: 10px;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 section .middle_article1 .article1_box .homework_box:hover {
@@ -190,7 +191,10 @@ section .middle_article2 .article2_box .teacher_comu_box {
     background-color: white;
     line-height: 45px;
     text-indent: 10px;
-    font-size: 12px;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 section .middle_article2 .article2_box .teacher_comu_box:hover {
@@ -223,7 +227,10 @@ section .middle_article2 .article2_box .notice_box {
     background-color: white;
     line-height: 45px;
     text-indent: 10px;
-    font-size: 12px;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 section .middle_article2 .article2_box .notice_box:hover {
@@ -256,7 +263,10 @@ section .middle_article2 .article2_box .class_notice_box {
     background-color: white;
     line-height: 45px;
     text-indent: 10px;
-    font-size: 12px;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 section .middle_article2 .article2_box .class_notice_box:hover {

@@ -25,10 +25,10 @@
         <article class="middle_article1">
             <div class="article1_box">
                 <div class="profile_img">
-                    <img src="/img/student/suzi.png" alt="">
+                    <img th:src="@{'/img/profile/' + ${profileImg}}"/>
                 </div>
-                <div class="profile_name">
-                    배수지
+                <div class="profile_name"  th:text="${name}">
+                    이름이 표기됩니다.
                 </div>
                 <div class="profile_bottom">
                     <p class="profile_letter">
@@ -82,12 +82,18 @@
                        이모티콘
                     </p>
                 </div>
-                <div class="teacher_comu_box">
-                    커뮤니티 오세여~
-                </div>
-                <div class="teacher_comu_box">
-                    커뮤니티 이용하세여~
-                </div>
+                <th:block th:each="article : ${profArticles}">
+                    <div class="teacher_comu_box" >
+                        <a th:text="${article.getArticleTitle()}" th:href="@{/board/view/{id}(id=${article.getId()})}"
+                           style="text-decoration: none; color: black">커뮤니티 오세여~</a>
+                    </div>
+                </th:block>
+<!--                <div class="teacher_comu_box">-->
+<!--                    커뮤니티 오세여~-->
+<!--                </div>-->
+<!--                <div class="teacher_comu_box">-->
+<!--                    커뮤니티 이용하세여~-->
+<!--                </div>-->
             </div>
             <div class="article2_box">
                 <div class="notice_top">
@@ -98,12 +104,18 @@
                        이모티콘
                     </p>
                 </div>
-                <div class="notice_box">
-                    이 공지사항은 테스트입니다.
-                </div>
-                <div class="notice_box">
-                    이 공지사항은 테스트입니다.
-                </div>
+                <th:block th:each="article : ${noticeArticles}">
+                    <div class="teacher_comu_box" >
+                        <a th:text="${article.getArticleTitle()}" th:href="@{/board/view/{id}(id=${article.getId()})}"
+                           style="text-decoration: none; color: black">커뮤니티 오세여~</a>
+                    </div>
+                </th:block>
+<!--                <div class="notice_box">-->
+<!--                    이 공지사항은 테스트입니다.-->
+<!--                </div>-->
+<!--                <div class="notice_box">-->
+<!--                    이 공지사항은 테스트입니다.-->
+<!--                </div>-->
             </div>
             <div class="article2_box">
                 <div class="class_notice_top">

@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.dto.MemberFormDto;
@@ -10,19 +11,21 @@ import javax.swing.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name= "teacher")
+@Table(name= "professor")
 @Getter
 @Setter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 public class Professor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prof_id", updatable = false)
-    private Long id;
+    private Long profId;
 
     @OneToOne
     @JoinColumn(name= "member_id")
+    @JsonIgnore
     private Member member;
 
     @Column(name= "prof_agency")
@@ -36,6 +39,9 @@ public class Professor {
 
     @Column(name = "prof_account")
     private String profAccount;
+
+    @Column(name= "prof_acOwner")
+    private String profAcOwner;
 
     @Column(name = "is_active")
     private boolean isActive;

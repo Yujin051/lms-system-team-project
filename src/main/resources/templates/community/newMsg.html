@@ -20,13 +20,11 @@
     <link rel="stylesheet" href="/css/community/newMsg.css">
     <title>쪽지</title>
 </head>
-<body>
-
-<section id="mainFrame" layout:fragment="content">
+<body id="mainFrame" layout:fragment="content">
 
     <section>
         <div class="container board">
-            
+            <input th:if="${msg.getOrgMsgId() != null}" type="hidden" th:value="${msg.getOrgMsgId()}" id="msgOrgId">
             <div class="msg_top container-fluid">
                 <div class="row">
 
@@ -37,7 +35,7 @@
 
                     <!-- 우측 상단 메뉴 -->
                     <div class="col-md-8 msg_right">
-                        
+
                     </div>
 
                 </div>
@@ -49,14 +47,14 @@
                     <!-- 사이드바 메뉴 -->
                     <div class="col-md-4 msg_side">
                         <ul>
-                            <li><a href="">전체</a></li>
-                            <li><a href="">받은쪽지</a></li>
-                            <li><a href="">보낸쪽지</a></li>
-                            <li><a href="">휴지통</a></li>
+                            <li><a href="/board/msg/all">전체</a></li>
+                            <li><a href="/board/msg/recv">받은쪽지</a></li>
+                            <li><a href="/board/msg/send">보낸쪽지</a></li>
+                            <li><a href="/board/msg/trash">휴지통</a></li>
                         </ul>
-                        <div>
-                            <button class="btn btn-dark">쪽지쓰기</button>
-                        </div>
+<!--                        <div>-->
+<!--                            <button class="btn btn-dark">쪽지쓰기</button>-->
+<!--                        </div>-->
                     </div>
                     
                     <div class="col-md-8 msg_write">
@@ -72,14 +70,12 @@
                                     <span>받는사람</span>
                                 </div>
                                 <div class="col-md-7">
-                                    <ul>
-                                        <li>권혁인<span>X</span></li>
-                                        <li>신동은<span>X</span></li>
-                                        <li>이현석<span>X</span></li>
-                                        <li>신민기<span>X</span></li>
-                                        <li>임휘재<span>X</span></li>
-                                        <li>임승범<span>X</span></li>
-                                        
+                                <!--th 조건 반복 처리 필요-->
+                                    <ul id="toUl">
+                                        <li th:if="${msg.getRecvId() != null}"
+                                            th:text="${msg.getRecvId().getUserName()} + '(' + ${msg.getRecvId().getUserId()} + ')'">
+                                            임승범(dlatmdqja)
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="col-md-2">
@@ -107,8 +103,11 @@
                         </form>
 
                         <div class="board_nav">
-                            <button class="btn btn-dark">답장</button>
-                            <button class="btn btn-dark">취소</button>
+                            <button th:if="${msg.getOrgMsgId() != null}"
+                                    class="btn btn-dark" id="reMsgBtn">전송</button>
+                            <button th:if="${msg.getOrgMsgId() == null}"
+                                    class="btn btn-dark" id="writeMsgBtn">전송</button>
+                            <button class="btn btn-dark" id="cancelBtn">취소</button>
                         </div>
                     </div>
 
@@ -128,12 +127,15 @@
                     <div><span>수업</span></div>
                     <ul class="classtype_list">
                         <!-- 수업 목록 출력 -->
-                        <li>자바의 정석</li>
-                        <li>시나공 정보처리기사</li>
-                        <li>혼자 공부하는 자바</li>
-                        <li>자기주도 c언어 프로그래밍</li>
-                        <li>새 행정학 2.0</li>
-                        <li>자바의 정석</li>
+                        <th:block th:if="${classList.size() > 0}" th:each="class : ${classList}">
+                            <li th:text="${class.getLectInfo().getLectName()}"
+                                th:onclick="'getClassMate(' + ${class.getLectInfo().getLectId()} + ');'"></li>
+                        </th:block>
+
+                        <th:block th:if="${profClassList.size() > 0}" th:each="class : ${profClassList}">
+                            <li th:text="${class.getLectName()}"
+                                th:onclick="'getClassMate(' + ${class.getLectInfo()} + ');'"></li>
+                        </th:block>
                     </ul>
                 </div>
     
@@ -149,24 +151,11 @@
                     </div>
                     <ul class="classmate">
                         <!-- 참여자 이름 출력 -->
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        <li><input type="checkbox" name="classmate">참여자 이름</li>
-                        
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
                     </ul>
                 </div>
     
-                <div class="col-md-4 to">
+                <div class="col-md-4 msgToBox">
                     <div>
                         <span>받는사람</span>
                         <!-- 인원수 -->
@@ -186,15 +175,13 @@
                 </div>
     
                 <div id="modalSeletedBtn">
-                    <button class="btn btn-dark mb-3">선택완료</button>
+                    <button class="btn btn-dark mb-3" id="modelSelBtn">선택완료</button>
                 </div>
             </div>
     
         </div>
 
     </section>
-</section>
-
         <!-- bootstrap js -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
         <!-- header js -->

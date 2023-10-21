@@ -1,23 +1,22 @@
+/*전체 화면 부분*/
+.mainFrame {
+    width: 1902px; display: flex; justify-content: center; align-items: center;
+
+}
 .middle_section {
-    border: 0px solid black;
-    max-width: 1640px;
-    padding: 0 20px;
-    margin: 0 auto;
-    width: 100%;
-    margin-top: 80px;
-    margin-bottom: 80px;
+    width: 1500px;
 }
 
 .middle_section .title {
     padding-top: 4px;
-    width: 100%;
+    width: 456px;
     height: 35px;
     display: flex;
-    justify-content: space-between;
+    justify-content: end;
 }
 
 .middle_section .title p {
-    font-size: 25px;
+    font-size: 1.3rem;
     font-weight: 500;
     border-left: 4px solid #000;
     padding-left: 8px;
@@ -28,69 +27,52 @@
 }
 
 .middle_section .information {
-    border-top: 2px solid black;
-    margin-top: 10px;
-    height: 350px;
-    display: flex;
+    border: 1px solid #cccccc; border-radius: 5px;
+    width: 830px; margin: 0 auto;
 }
 
 .middle_section .information .box1 {
-    border: 0px solid black;
-    width: 820px;
+    border: 0px solid black; width: 820px;
 }
 
 .middle_section .information .box1 .graph {
-    border-bottom: 1px solid black;
-    height: 50px;
-    display: flex;
+    border-bottom: 1px solid #cccccc; height: 59px; display: flex; width: 828px;
 }
 
 .middle_section .information .box1 .graph .graph_left {
-    width: 330px;
-    background-color: rgb(235, 240, 247);
-    line-height: 50px;
-    text-indent: 10px;
-    font-weight: bolder;
-    font-size: 20px;
+    width: 244px; background-color: rgb(235, 240, 247); font-weight: bolder;
+    font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
 }
 
 .middle_section .information .box1 .graph .graph_right {
-    width: 510px;
+    width: 576px; display: flex; align-items: center; justify-content: center;
 }
 
 .middle_section .information .box1 .graph .graph_right input {
-    width: 480px;
-    height: 40px;
-    margin-left: 10px;
-    margin-top: 5px;
-    text-indent: 5px;
-    font-size: 20px;
-    background-color: rgb(247, 248, 250);
-    border: none;
+    width: 550px; height: 40px; font-size: 1.1rem; background-color: rgb(247, 248, 250);
+    border: 1px solid #cccccc; border-radius: 5px; text-indent: 5px;
+    outline: none;
 }
 
 .middle_section .information .box2 {
     border: 0px solid black;
     width: 820px;
+    height: 316px;
 }
 
 .middle_section .information .box2 .photo {
-    border-bottom: 1px solid black;
-    height: 350px;
+    border-bottom: 0px solid black;
+    height: 316px;
     display: flex;
 }
 
 .middle_section .information .box2 .photo .photo_left {
-    width: 330px;
-    background-color: rgb(235, 240, 247);
-    line-height: 350px;
-    text-indent: 10px;
-    font-weight: bolder;
-    font-size: 20px;
+    width: 244px; background-color: rgb(235, 240, 247); font-weight: bolder;
+    font-size: 1.1rem; display: flex; justify-content: center; align-items: center;
 }
 
 .middle_section .information .box2 .photo .photo_right {
-    width: 510px;
+    width: 570px; display: flex; justify-content: center; align-items: center;
 }
 
 .middle_section .information .box2 .photo .photo_right .img {
@@ -105,13 +87,17 @@
     width: 230px;
     height: 230px;
 }
-
+.middle_section .information .box2 .photo .photo_right > .delete_img_btn_box > .delete_img{
+    width: 100px; height: 30px; border: 1px solid #cccccc; display: flex; justify-content: center;
+    align-items: center; border-radius: 5px; background-color: rgb(235, 240, 247);
+    color: black; font-size: 0.9rem; line-height: 30px;
+}
 .middle_section .information .box2 .photo .photo_right .button {
     display: flex;
 }
 
 .middle_section .information .box2 .photo .photo_right .button p {
-    border: 1px solid black;
+    border: 0px solid black;
     margin-left: 20px;
     width: 60px;
     height: 30px;
@@ -157,15 +143,15 @@
     line-height: 50px;
     text-indent: 10px;
 }
-
-.middle_section .update {
-    width: 100px;
-    height: 35px;
-    font-size: 13px;
-    margin-left: 770px;
-    margin-top: 30px;
-    background-color: rgb(235, 240, 247);
+.btn_box {
+    width: 1165px; display: flex; justify-content: end; align-items: center;
+    height: 50px;
 }
+.btn_box > .update {
+    width: 100px; height: 35px; font-size: 0.9rem; background-color: rgb(235, 240, 247);
+    border: 1px solid #cccccc; border-radius: 5px; line-height: 35px;
+}
+
 
 
 

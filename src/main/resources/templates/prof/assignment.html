@@ -6,57 +6,88 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
     <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
     <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
-    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#searchForm').submit(function(event) {
+                event.preventDefault();
+                var lectId = $('#lectId').val();
+                var assiId = $('#assiId').val();
+
+                // Make an AJAX request to fetch student data based on lectId and assiId
+                $.ajax({
+                    type: 'GET',
+                    url: '/prof/findStudentInfo',
+                    data: { lectId: lectId, assiId: assiId },
+                    success: function(data) {
+                        // Update the table with student data
+                        var studentTable = $('#studentTable');
+                        studentTable.empty();
+                        $.each(data, function(index, student) {
+                            studentTable.append('<tr>' +
+                                '<td>' + student.member.memberId + '</td>' +
+                                '<td>' + student.member.userName + '</td>' +
+                                '<td>' + student.studGrade + '</td>' +
+                                '<td>' + student.studMaxCr + '</td>' +
+                                '<td>' + student.studNowCr + '</td>' +
+                                '<td>' + student.studCreCpl + '</td>' +
+                                '</tr>');
+                        });
+                    },
+                    error: function() {
+                        alert('An error occurred while fetching student data.');
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 
 <div id="mainFrame" layout:fragment="content" class="mainFrame">
+
     <div class="assi_body">
+        <form id="searchForm">
         <div class="assi_back_btn_box">
             <div class="assi_course_search_text_box">
-                <span>🔍&nbsp 강좌검색</span>
+                <span>🔍&nbsp 과제검색</span>
             </div>
 <!--            <div class="assi_back_btn">-->
 <!--                <button type="button" class="backBtn">돌아가기</button>-->
 <!--            </div>-->
         </div>
         <div class="assi_search_box">
-            <div class="assi_search_top_box">
-                <div class="assi_search_year_sem_box">
-                    <div class="assi_search_year_text">
-                        <span>년도</span>
-                    </div>
-                    <div class="assi_search_year">
-                        <input type="text" id="lectYear" placeholder="2023"/>
-                    </div>
-                </div>
-                <div class="assi_search_semester_box">
-                    <div class="assi_ch_search_semester_text">
-                        <span>학기</span>
-                    </div>
-                    <div class="assi_search_semester">
-                        <input type="text" id="lectSem" placeholder="2학기"/>
-                    </div>
-                </div>
-            </div>
             <div class="assi_search_bottom_box">
                 <div class="assi_ch_lect_name">
                     <div class="assi_search_lect_name_text">
                         <span>강좌명</span>
                     </div>
                     <div class="assi_search_lect_name">
-                        <input type="text" id="lectName" placeholder="슬기로운 코딩생활"/>
+                        <input id="lectId" style="width: 351px; height: 35px; border-radius: 5px; border: 1px solid #cccccc; outline: none; text-indent: 5px;" type="text" th:value="${lectInfo.lectName}" readonly/>
                     </div>
                 </div>
-                <div>
-
+            </div>
+            <div class="assi_search_bottom_box">
+                <div class="assi_ch_lect_name">
+                    <div class="assi_search_lect_name_text">
+                        <span>과제명</span>
+                    </div>
+                    <div class="assi_search_lect_name">
+                        <select id="assiId" style="width: 351px; height: 35px; border-radius: 5px; border: 1px solid #cccccc; outline: none; text-indent: 5px;">
+                            <option th:each="assignment : ${assignmentsList}"
+                                    th:value="${assignment.getAssiId}"
+                                    th:text="${assignment.name}">
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
-        <form>
+            <button type="submit">제출</button>
+        </form>
+
             <div class="assi_total_status_text_box">
                 <span>📊&nbsp 과제정보</span>
                 <div class="assi_que_btn_box">
-                    <button type="button" class="assi_que_btn"><a href="/prof/assiInfo">과제출제</a></button>
+                    <button type="button" class="assi_que_btn"><a th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/add'}">과제출제</a></button>
                 </div>
             </div>
             <div class="assi_ch_total_status_grid1">
@@ -72,26 +103,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><span>1742134213</span></td>
-                            <td><span>사회정석과제</span></td>
-                            <td><span>2023-09-04 00:00</span></td>
-                            <td><span>2023-09-05 23:59</span></td>
-                            <td><span>마감</span></td>
+                        <tr th:each="assignment : ${assignmentsList}">
+                            <td><span th:text="${assignment.assiId}"></span></td>
+                            <td><span th:text="${assignment.name}"></span></td>
+                            <td><span th:text="${assignment.start}"></span></td>
+                            <td><span th:text="${assignment.end}"></span></td>
+                            <td><span th:text="${assignment.isActive ? '진행중' : '마감'}"></span></td>
                             <td>
-                                <button type="button" class="assiUpdateBtn"><span>수정</span></button>
-                                <button type="button" class="assiDeleteBtn"><span>삭제</span></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><span>1742134213</span></td>
-                            <td><span>사회정석과제</span></td>
-                            <td><span>2023-09-04 00:00</span></td>
-                            <td><span>2023-09-05 23:59</span></td>
-                            <td><span>마감</span></td>
-                            <td>
-                                <button type="button" class="assiUpdateBtn"><span>수정</span></button>
-                                <button type="button" class="assiDeleteBtn"><span>삭제</span></button>
+                                <a type="button" class="assiUpdateBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/modify'}"><span>수정</span></a>
+                                <a type="button" class="assiDeleteBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/delete'}"><span>삭제</span></a>
                             </td>
                         </tr>
                     </tbody>
@@ -101,46 +121,32 @@
                 <span>🙌&nbsp 학생정보</span>
             </div>
             <div class="assi_ch_total_status_grid2">
-                <table class="assi_ch_stud_info_tb">
+                <table id="studentTable" class="assi_ch_stud_info_tb">
                     <thead>
                         <tr>
                             <td><span>학번</span></td>
                             <td><span>성명</span></td>
                             <td><span>제출일시</span></td>
                             <td><span>제출구분</span></td>
-                            <td><span>과제제출정보</span></td>
-                            <td><span>피드백</span></td>
+                            <td><span>과제명</span></td>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><span>60171443</span></td>
-                            <td><span>김호우</span></td>
-                            <td><span>2023-09-05 23:59</span></td>
-                            <td><span>제출</span></td>
-                            <td><button type="button" class="assiDetailBtn"><span>과제상세보기</span></button></td>
-                            <td><span>완료</span></td>
-                        </tr>
-                        <tr>
-                            <td><span>60171443</span></td>
-                            <td><span>김호우</span></td>
-                            <td><span>2023-09-05 23:59</span></td>
-                            <td><span>제출</span></td>
-                            <td><button type="button" class="assiDetailBtn"><span>과제상세보기</span></button></td>
-                            <td><span>완료</span></td>
-                        </tr>
-                        <tr>
-                            <td><span>60171443</span></td>
-                            <td><span>김호우</span></td>
-                            <td><span>2023-09-05 23:59</span></td>
-                            <td><span>제출</span></td>
-                            <td><button type="button" class="assiDetailBtn"><span>과제상세보기</span></button></td>
-                            <td><span>완료</span></td>
+                        <tr th:each="submitList : ${submitList}">
+                            <td><span th:text="${submitList.member.id}"></span></td>
+                            <td><span th:text="${submitList.member.userName}"></span></td>
+                            <td><span th:text="${submitList.dateTime}"></span></td>
+                            <td><span th:text="${submitList.submit}"></span></td>
+                            <td><span th:text="${submitList.assignments.name}"></span></td>
+                            <td>
+                                <a th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${submitList.assignments.assiId}+ '/view'}">보기</a>
+<!--                                <a type="button" class="assiUpdateBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/modify'}"><span>수정</span></a>-->
+<!--                                <a type="button" class="assiDeleteBtn" th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/delete'}"><span>삭제</span></a>-->
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-        </form>
     </div>
     <script src="/js/prof/assignment.js"></script>
 </div>
