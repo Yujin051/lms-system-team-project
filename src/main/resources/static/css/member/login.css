@@ -1,0 +1,122 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'KBO-Dia-Gothic_bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/KBO-Dia-Gothic_bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+/*전체 화면 부분*/
+body {
+    display: flex; font-family: 'SUIT-Regular';
+    justify-content: center; align-items: center; width: 1902px; height: 940px;
+}
+article {
+    width: 600px; border: 0px solid white; display: flex; justify-content: center;
+    align-items: center; height: 600px;
+}
+.login_body {
+    width: 500px; height: 650px; border: 0px solid black; border-radius: 10px;
+}
+
+/*이미지 부분*/
+.login_body > .login_img_box {
+    border: 0px solid black; width: 500px; height: 150px;
+}
+.login_body > .login_img_box img {
+    width: 500px; height: 130px;
+}
+
+/*로그인 부분*/
+/*아이디 부분*/
+form {
+    border: 0px solid white; width: 500px; height: 599px; background: black;
+    border-radius: 20px;
+}
+form > .login_text_box {
+    width: 500px; height: 120px; border: 0px solid black; display: flex; justify-content: center;
+    align-items: center; font-size: 1.5rem;
+}
+form > .login_text_box p {
+    letter-spacing: 1px; color: white; font-family: 'KBO-Dia-Gothic_bold';
+}
+form > .email_box {
+    border: 0px solid black; height: 70px; width: 500px; position: relative;
+}
+form > .email_box > .email_img_box {
+    width: 60px; height: 60px; border: 0px solid #245396; background: white;
+    color: black; display: flex; justify-content: center; align-items: center;
+    border-radius: 50px; position: absolute; z-index: 1000; left: 69px;
+}
+form > .email_box > .email_img_box i {
+    font-size: 1.7rem;
+}
+form > .email_box > .email_input_box {
+    width: 500px; display: flex; justify-content: center; align-items: center;
+    height: 60px;
+}
+form > .email_box > .email_input_box input {
+    width: 354px; height: 50px; border-radius: 50px; border: 0px solid #245396;
+    text-indent: 66px; outline: none; position: absolute; z-index: 999;
+    font-size: 0.9rem; font-family: 'SUIT-Regular'; opacity: 0.8;
+}
+
+/*비밀번호 부분*/
+form > .password_box {
+    border: 0px solid black; height: 60px; width: 500px; position: relative;
+}
+form > .password_box > .password_img_box {
+    width: 60px; height: 60px; border: 0px solid #245396; background: white;
+    color: black; display: flex; justify-content: center; align-items: center;
+    border-radius: 50px; position: absolute; z-index: 1000; left: 370px;
+}
+form > .password_box > .password_img_box i {
+    font-size: 1.7rem;
+}
+form > .password_box > .password_input_box {
+    width: 500px; display: flex; justify-content: center; align-items: center;
+    height: 60px;
+}
+form > .password_box > .password_input_box input {
+    width: 354px; height: 50px; border-radius: 50px; border: 0px solid #245396;
+    text-indent: 18px; outline: none; position: absolute; z-index: 999;
+    font-size: 0.9rem; font-family: 'SUIT-Regular'; opacity: 0.8;
+}
+
+/*로그인 버튼 부분*/
+form > .login_btn_body {
+    width: 500px; height: 250px; border: 0px solid white; display: flex;
+    justify-content: center; align-items: center;
+}
+form > .login_btn_body button {
+    width: 358px; height: 55px; border: 0px solid black; border-radius: 50px;
+    background: white; color: black; font-family: 'KBO-Dia-Gothic_bold';
+    font-size: 1.6rem; cursor: pointer;
+}
+
+/*아이디 찾기, 비밀번호 찾기, 회원가입 부분*/
+form > .find_btn_box {
+    width: 500px; height: 50px; border: 0px solid white; display: flex;
+    justify-content: center;
+}
+form > .find_btn_box > .find_btn_body {
+    display: flex; justify-content: center; align-items: center;
+    width: 358px; height: 50px;
+}
+form > .find_btn_box a {
+    text-decoration: none; color: white;
+}
+form > .find_btn_box > .find_btn_body > .find_id {
+    width: 33%; display: flex; justify-content: center; height: 20px;
+}
+form > .find_btn_box > .find_btn_body > .find_pwd {
+    width: 34%; display: flex; justify-content: center; height: 20px;
+}
+form > .find_btn_box > .find_btn_body > .find_join {
+    width: 33%; display: flex; justify-content: center; height: 20px;
+}
+
