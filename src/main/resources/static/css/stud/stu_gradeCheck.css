@@ -26,6 +26,9 @@
     border: 1px solid black;
 }
 
+.subGrade1 tr th {
+    background-color: rgb(235, 240, 247);
+}
 .subGrade2 {
     margin-top: 20px;
     margin-bottom: 100px;
@@ -39,6 +42,9 @@
     border: 1px solid black;
     border-bottom: none;
     border-collapse: collapse;
+}
+.semGrade tr th {
+    background-color: rgb(235, 240, 247);
 }
 
 .subGrade2 tr > td {

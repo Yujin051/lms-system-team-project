@@ -427,8 +427,8 @@ public class AdminController {
         }else {
             adminService.updateArticle(postDto);
             log.info("updateArticleId : " + postDto.getArticleId());
+            log.info("updateBoardId : " + postDto.getBoardId());
         }
-
         List<PostDto> dtos = adminService.getPostInfo();
         return ResponseEntity.ok(dtos);
     }

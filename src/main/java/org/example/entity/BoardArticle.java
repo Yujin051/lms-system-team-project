@@ -35,8 +35,7 @@ public class BoardArticle {
 
     // 게시판 id (외래키)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id" , updatable = false , nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "board_id" , nullable = false)
     private BoardInfo boardInfo;
 
     // 게시글 이름
@@ -48,7 +47,7 @@ public class BoardArticle {
     private String articleContent;
 
     // 게시글 조회수
-    @Column(name = "article_view" , nullable = true)
+    @Column(name = "article_view")
     @ColumnDefault("0")
     private Long articleView;
 
@@ -58,19 +57,19 @@ public class BoardArticle {
     private LocalDate articleAt;
 
     // 게시글 공개여부
-    @Column(name = "is_locked" , nullable = false)
+    @Column(name = "is_locked")
     @ColumnDefault("false")
     private Boolean isLocked;
 
     // 게시글 삭제여부
-    @Column(name = "is_deleted" , nullable = false)
+    @Column(name = "is_deleted")
     @ColumnDefault("false")
     private Boolean isDeleted;
 
     // 게시글 작성자(외래키)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id" , updatable = false , nullable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Member memberId;
 
     // 게시글 첨부파일 번호

@@ -8,6 +8,10 @@ spring:
       name: user
       password: 1234
 
+  thymeleaf:
+    cache: false
+
+
   # 파일 크기 제한
   servlet:
     multipart:
@@ -38,3 +42,4 @@ spring:
         format_sql: true
 
     defer-datasource-initialization: true
+

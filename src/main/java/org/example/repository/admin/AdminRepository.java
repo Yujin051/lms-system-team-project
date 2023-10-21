@@ -244,9 +244,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 게시판종류, 검색조건, 작성일 비어있을때 전체 조회
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, m.userId, m.userBirthday, m.userGender, m.userEmail, " +
-            "s.studGrade, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
+            "ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
             "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
-            "FROM Member m JOIN Student s ON s.studId = m.student.studId " +
+            "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id " +
             "WHERE " +

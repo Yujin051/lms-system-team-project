@@ -75,6 +75,10 @@ public class YoutubeController {
         return ResponseEntity.ok("재생 위치 저장 성공.");
     }
 
+    /**
+     * 관리자 - 온라인강의콘텐츠관리 : 진행률 저장
+     * @author 임휘재
+     */
     @PutMapping("/api/saveProgress")
     public double saveProgress(@RequestParam(value = "magId") Long magId,
                                @RequestParam(value = "progress") double progress) {
