@@ -109,5 +109,15 @@ public class BoardArticle {
         this.articleView = articleView+1;
     }
 
-
+    public BoardArticle(BoardInfo boardInfo, String articleTitle, String articleContent, Long articleView, LocalDateTime articleAt, Boolean isLocked, Boolean isDeleted, Member memberId, Long articleFileNum) {
+        this.boardInfo = boardInfo;
+        this.articleTitle = articleTitle;
+        this.articleContent = articleContent;
+        this.articleView = articleView;
+        this.articleAt = articleAt;
+        this.isLocked = isLocked;
+        this.isDeleted = isDeleted;
+        this.memberId = memberId;
+        this.articleFileNum = articleFileNum;
+    }
 }

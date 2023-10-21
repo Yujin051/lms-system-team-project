@@ -216,9 +216,7 @@ public class StudentController {
 
         Student student = studentRepository.findByMember(member);
         LectInfo lectInfo = lectInfoRepository.findById(lectId).orElseThrow();
-
         boolean alreadyRegistered = studLectApplyRepository.existsByStudentAndLectInfo(student, lectInfo);
-
 
         if (!alreadyRegistered) {
             if (lectInfo.getLectNownum() < lectInfo.getLectMaxnum()) {
@@ -236,17 +234,12 @@ public class StudentController {
 
                     gradeInfoRepository.save(gradeInfo);
 
-
-
-
                     model.addAttribute("message", "신청되었습니다.");
                     model.addAttribute("SearchUrl", "/student/scr");
                     model.addAttribute("list", studentService.lectInfoList());
                     model.addAttribute("list1", studentService.studLectApplyCheckList(member.getId()));
 
-
                     return "Message";
-
                 } else {
                     model.addAttribute("message", "들을수있는 학점을 넘으셨습니다.");
                     model.addAttribute("SearchUrl", "/student/scr");
@@ -262,7 +255,6 @@ public class StudentController {
                 model.addAttribute("SearchUrl", "/student/scr");
                 return "Message";
             }
-
         }
 
 
@@ -292,9 +284,6 @@ public class StudentController {
             // 부모엔티티를 삭제할게요.
             studLectApplyRepository.deleteById(applyId);
         }
-
-
-
 
         model.addAttribute("message", "취소되었습니다.");
         model.addAttribute("SearchUrl", "/student/scr");

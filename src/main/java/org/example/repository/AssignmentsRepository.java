@@ -16,19 +16,4 @@ public interface AssignmentsRepository extends JpaRepository<Assignments, Long> 
     Assignments findAssignmentByLectIdAndAssignId(@Param("lectId") Long lectId, @Param("assignId") Long assignId);
 
 
-    @Modifying
-    @Query("insert into Assignments (lectInfo, name, detail, start, end, isActive, isSubmit, originFilename, savedFilename) " +
-            "SELECT l, :name, :detail, :start, :end, :isActive, :isSubmit, :originFilename, :savedFilename " +
-            "FROM LectInfo l WHERE l.lectId = :lectId")
-    void addAssignmentToLect(@Param("lectId") Long lectId,
-                             @Param("name") String name,
-                             @Param("detail") String detail,
-                             @Param("start") LocalDate start,
-                             @Param("end") LocalDate end,
-                             @Param("isActive") boolean isActive,
-                             @Param("isSubmit") boolean isSubmit,
-                             @Param("originFilename") String originFilename,
-                             @Param("savedFilename") String savedFilename);
-
-
 }

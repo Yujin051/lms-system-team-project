@@ -30,7 +30,7 @@ public class BoardInfo {
     private String boardName;
 
     // 게시판 응답여부
-    @Column(name = "board_resp" , nullable = false)
+    @Column(name = "board_resp" , nullable = true)
     @ColumnDefault("false")
     private Boolean boardResp;
 
@@ -53,6 +53,8 @@ public class BoardInfo {
     }
 
 
-
-
+    public BoardInfo(String boardName, String boardType) {
+        this.boardName = boardName;
+        this.boardType = boardType;
+    }
 }
