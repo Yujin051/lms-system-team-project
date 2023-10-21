@@ -68,6 +68,7 @@ public class StudentController {
     public String studentGrade(Model model , Principal principal) {
         // 사용자 loginId 가져오기
         String loginId = principal.getName();
+        System.out.println(loginId);
         // 사용자 정보 가져오기(member)
         Member member = memberService.memberView(loginId);
         // member 뭐 들었는지 제대로 들어왔는지 확인.
