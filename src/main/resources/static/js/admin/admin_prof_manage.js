@@ -150,7 +150,7 @@ grid.on('click', (ev) => {
                 boolean = "활둥중이 아님"
             }
 
-            pId.textContent = response.id;
+            pId.textContent = response.profId;
             name.textContent = response.userName;
             bDay.textContent = response.userBirthDay;
             gender.textContent = response.userGender;

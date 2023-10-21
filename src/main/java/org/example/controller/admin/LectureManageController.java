@@ -5,7 +5,7 @@ import org.example.dto.admin.LectureListDto;
 import org.example.entity.Professor;
 import org.example.repository.LectureRepository;
 import org.example.repository.ProfessorRepository;
-import org.example.service.admin.LectureService;
+import org.example.service.admin.AdminLectureService;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,14 +21,14 @@ import java.util.List;
 public class LectureManageController {
 
     private static final Logger logger = LoggerFactory.getLogger(LectureManageController.class);
-    private final LectureService lectureService;
+    private final AdminLectureService adminLectureService;
     private final LectureRepository lectureRepository;
     private final ProfessorRepository professorRepository;
 
     // 전체 강좌 리스트 뷰로 보내는 컨트롤러
     @GetMapping("/getlecturelist")
     public ResponseEntity lectureList() {
-        JSONObject lectureList = lectureService.findAllLecture();
+        JSONObject lectureList = adminLectureService.findAllLecture();
         return new ResponseEntity<>(lectureList.toString(), HttpStatus.OK);
     }
 
@@ -71,7 +71,7 @@ public class LectureManageController {
         // 뷰에서 강좌 ID 값이 없는 경우 0으로 넘어오므로 0일 때와 아닐 때로 처리
         if (mLecture.getLectId() == 0) {
             if(professor != null) {
-                lectureService.newLecture(profName, mLecture.getLectName(), mLecture.getLectSubject(), mLecture.getLectYear(),
+                adminLectureService.newLecture(profName, mLecture.getLectName(), mLecture.getLectSubject(), mLecture.getLectYear(),
                         mLecture.getLectSem(), mLecture.getLectCredit(), mLecture.getLectNowNum(), mLecture.getLectMaxNum(),
                         mLecture.getLectStart(), mLecture.getLectEnd(), mLecture.getEnrollStart(), mLecture.getEnrollEnd(),
                         mLecture.isActive(), mLecture.getLectAssign(), mLecture.getLectCheck(), mLecture.getLectTest(),
@@ -80,7 +80,7 @@ public class LectureManageController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당 강사가 존재하지 않습니다.");
             }
         } else {
-            lectureService.updateLecture(mLecture.getLectId(), profName, mLecture.getLectName(), mLecture.getLectSubject(),
+            adminLectureService.updateLecture(mLecture.getLectId(), profName, mLecture.getLectName(), mLecture.getLectSubject(),
                     mLecture.getLectYear(), mLecture.getLectSem(), mLecture.getLectCredit(), mLecture.getLectNowNum(),
                     mLecture.getLectMaxNum(), mLecture.getLectStart(), mLecture.getLectEnd(), mLecture.getEnrollStart(),
                     mLecture.getEnrollEnd(), mLecture.isActive(), mLecture.getLectAssign(), mLecture.getLectCheck(), mLecture.getLectTest(),

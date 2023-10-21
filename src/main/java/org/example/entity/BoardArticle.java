@@ -1,7 +1,10 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.board.ArticleDto;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Fetch;
 import org.springframework.data.annotation.CreatedDate;
@@ -21,6 +24,7 @@ import java.time.LocalDateTime;
 @Setter //수정
 @Entity
 @ToString
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class BoardArticle {
 
     // 게시글 id
@@ -31,7 +35,7 @@ public class BoardArticle {
 
     // 게시판 id (외래키)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id" , updatable = false , nullable = false)
+    @JoinColumn(name = "board_id" , nullable = false)
     private BoardInfo boardInfo;
 
     // 게시글 이름
@@ -65,7 +69,7 @@ public class BoardArticle {
     // 게시글 작성자(외래키)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id" , updatable = false , nullable = false)
-//    @ColumnDefault("3")
+//    @JsonIgnore
     private Member memberId;
 
     // 게시글 첨부파일 번호
@@ -73,6 +77,7 @@ public class BoardArticle {
     @ColumnDefault("0")
     private Long articleFileNum;
 
+    // entity 생성
     @Builder
     public BoardArticle(
             BoardInfo boardInfo , String articleTitle , String articleContent , Long articleView,
@@ -86,10 +91,29 @@ public class BoardArticle {
         this.memberId = memberId;
         this.articleFileNum = articleFileNum;
     }
+    // 수정
+    public void update(ArticleDto articleDto){
+        this.articleTitle = articleDto.getTitle();
+        this.articleContent = articleDto.getContent();
+        this.isLocked = articleDto.getIsLocked();
+        this.articleFileNum =
+                articleDto.getFileNo() != null && articleDto.getFileNo() != 0L?
+                        articleDto.getFileNo() : this.articleFileNum;
+    }
+    // 논리 삭제
+    public void delete(){
+        this.isDeleted = true;
+    }
+
+    // 게시글 조회수 증가
+    public void updateView(){
+        this.articleView = articleView+1;
+    }
+
     public BoardArticle(BoardInfo boardInfo, String articleTitle,
                         String articleContent, Long articleView,
                         LocalDate articleAt, Boolean isLocked,
-                        Boolean isDeleted, Member memberId, Long articleFileNum) {
+                        Boolean isDeleted, Member memberId) {
         this.boardInfo = boardInfo;
         this.articleTitle = articleTitle;
         this.articleContent = articleContent;
@@ -98,7 +122,5 @@ public class BoardArticle {
         this.isLocked = isLocked;
         this.isDeleted = isDeleted;
         this.memberId = memberId;
-        this.articleFileNum = articleFileNum;
     }
-
 }

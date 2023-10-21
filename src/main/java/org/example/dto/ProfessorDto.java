@@ -2,14 +2,18 @@ package org.example.dto;
 
 import lombok.*;
 import org.example.constant.Gender;
-import org.example.entity.Member;
-
 import java.time.LocalDate;
+import org.example.entity.Member;
+import org.example.entity.Professor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
 public class ProfessorDto {
 
+    private Long profId;
     private Long id;
     private String profAgency;
     private String profWork;
@@ -28,7 +32,9 @@ public class ProfessorDto {
 
 
     @Builder
-    public ProfessorDto(String profAgency, String profWork, String profBank, String profAccount, boolean isActive) {
+    public ProfessorDto(Long profId, Long memberId ,String profAgency, String profWork, String profBank, String profAccount, boolean isActive) {
+        this.profId = profId;
+        this.memberId = memberId;
         this.profAgency = profAgency;
         this.profWork = profWork;
         this.profBank = profBank;
@@ -52,7 +58,7 @@ public class ProfessorDto {
                         String userPhoneNum, String userAddr, Long memberId, String userEmail,
                         boolean isActive, String profAcOwner, String profBank, String profAccount,
                         String profAgency) {
-        this.id = profId;
+        this.profId = profId;
         this.userName = userName;
         this.userBirthDay = userBirthDay;
         this.userGender = userGender;

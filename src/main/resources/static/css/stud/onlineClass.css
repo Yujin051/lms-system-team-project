@@ -1,9 +1,3 @@
-/* 애니메이션 효과 */
-.modal_body.active {
-    opacity: 1;
-    transform: scale(1);
-}
-
 /*전체 화면 부분*/
 .mainFrame {
     display: flex; justify-content: center; border: 0px solid black;
@@ -82,8 +76,9 @@
 }
 
 .subtr > .lecture > .lecture_bottom_box {
-    display: flex; width: 1300px; border: 0px solid red; height: 145px;
-    align-items: center;
+    display: flex; width: 1298px; border: 0px solid red; height: 143px;
+    align-items: center; background: #f4f4f4; border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 .subtr > .lecture > .lecture_bottom_box > .lecture_img_box {
     width: 200px; height: 120px; border: 1px solid black; margin-left: 20px;
@@ -93,20 +88,19 @@
     align-items: center;
 }
 .subtr > .lecture > .lecture_bottom_box > .lecture_study_time_progress_box {
-    width: 480px; border: 0px solid black; display: flex;
+    width: 498px; border: 0px solid black; display: flex;
 }
 .subtr > .lecture > .lecture_bottom_box > .lecture_study_time_progress_box > .lecture_study_time_box{
     width: 50%;
 }
 .subtr > .lecture > .lecture_bottom_box > .lecture_study_time_progress_box > .lecture_progress_box {
-    width: 50%;
+    width: 50%; display: flex; justify-content: center; align-items: center;
 }
 
 /*모달 창 부분*/
 .modal_body {
-    border: 0px solid black; position: absolute; top: 50%; left: 50%;
-    transform: translate(-50%, -50%); width: 900px;
-    height: 550px; z-index: 1000
+    border: 0px solid black; width: 900px;
+    height: 550px; z-index: 1000; position: fixed; top: 19% !important; left: 27%!important;
 }
 .modal_body > .modal_exit {
     border: 0px solid black; height: 50px; display: flex; justify-content: end;

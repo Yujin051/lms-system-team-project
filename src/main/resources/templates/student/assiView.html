@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
     <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
     <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <script>
+        function history_back() {
+            history.back();
+        }
+    </script>
 </head>
 <div id="mainFrame" layout:fragment="content" class="mainFrame">
     <form class="assi_info_body" method="post">
@@ -15,7 +20,7 @@
                 <span>🔍&nbsp 참여자정보</span>
             </div>
             <div class="assi_info_save_btn">
-                <button type="button" class="backBtn">저장</button>
+                <button onclick="history_back()" value="history.back()" type="button" class="backBtn">돌아가기</button>
             </div>
             <!--            <div class="assi_info_back_btn">-->
             <!--                <button type="button" class="backBtn">돌아가기</button>-->
@@ -28,7 +33,7 @@
                         <span>과제명</span>
                     </div>
                     <div class="assi_info_assi_name_input">
-                        <input type="text" id="assiName" placeholder="과제명"/>
+                        <input  th:field="${assignments.name}" type="text" id="assiName"/>
                     </div>
                 </div>
                 <div class="assi_info_stud_name">
@@ -36,7 +41,7 @@
                         <span>참여자</span>
                     </div>
                     <div class="assi_info_assi_stud_input">
-                        <input type="text" id="stud_id" placeholder="스폰지밥"/>
+                        <div th:text="${membername}" type="text" id="stud_id" style="width: 90%;"></div>
                     </div>
                 </div>
             </div>
@@ -47,10 +52,10 @@
                     </div>
                     <div class="assi_info_sub_file_download">
                         <div class="assi_info_sub_file_input">
-                            <input type="text" id="assiName2" placeholder="과제명" readonly/>
+                            <input th:field="${assignments.originFilename}" type="text" id="assiName2" placeholder="과제명" readonly/>
                         </div>
                         <div class="assi_info_download_btn">
-                            <button type="button" class="download_btn">다운로드</button>
+                            <a th:href="@{'/download/' + ${assignments.savedFilename}}" download class="download_btn">다운로드</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +64,7 @@
                         <span>평가마감일</span>
                     </div>
                     <div class="assi_info_assi_end_input">
-                        <input type="text" id="assignEnd" placeholder="2023-09-30"/>
+                        <input th:field="${assignments.end}" type="text" id="assignEnd" placeholder="2023-09-30"/>
                     </div>
                 </div>
             </div>
@@ -70,17 +75,7 @@
                     </div>
                     <div class="assi_info_assi_detail_content_box">
                         <div class="assi_info_assi_detail">
-                            <textarea></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="assi_info_feedback_box">
-                    <div class="assi_info_feedback_text_box">
-                        <span>과제 평가물</span>
-                    </div>
-                    <div class="assi_info_feedback_content_box">
-                        <div class="assi_info_feedback">
-                            <textarea></textarea>
+                            <div th:text="${assignments.detail}"></div>
                         </div>
                     </div>
                 </div>

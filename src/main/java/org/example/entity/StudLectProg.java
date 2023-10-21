@@ -49,6 +49,16 @@ public class StudLectProg {
     @Column(name = "is_checked")
     private Boolean isChecked = false;
 
+    public StudLectProg(Student student, LectNth lectNth, LectInfo lectInfo, int fnlPosi, int maxPosi, boolean isChecked, LocalDateTime checkDate) {
+        this.student = student;
+        this.lectNth = lectNth;
+        this.lectInfo = lectInfo;
+        this.fnlPosi = fnlPosi;
+        this.maxPosi = maxPosi;
+        this.isChecked = isChecked;
+        this.checkDate = checkDate;
+    }
+
     /* 출석 날짜 */
     @Column(name = "check_date")
     private LocalDateTime checkDate;

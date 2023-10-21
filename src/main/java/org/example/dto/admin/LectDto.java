@@ -17,8 +17,8 @@ public class LectDto {
     private Long lectId; //강좌ID
     private String lectName; //강좌명
     private String lectSubject; //과목명
-    private LocalDateTime lectStart; //강좌시작일시
-    private LocalDateTime lectEnd; //강좌종료일시
+    private LocalDate lectStart; //강좌시작일시
+    private LocalDate lectEnd; //강좌종료일시
     private Boolean isActive; //강좌운영상태
     private Long lectCredit; //강좌의 학점
 
@@ -38,7 +38,7 @@ public class LectDto {
 
     // 온라인수강현황 : 학습강좌 조회
     public LectDto(Long lectId, String lectName, String lectSubject,
-                   LocalDateTime lectStart, LocalDateTime lectEnd, boolean isActive) {
+                   LocalDate lectStart, LocalDate lectEnd, boolean isActive) {
         this.lectId = lectId;
         this.lectName = lectName;
         this.lectSubject = lectSubject;
@@ -55,17 +55,6 @@ public class LectDto {
         this.studGrade = studGrade;
         this.userName = userName;
         this.userId = userId;
-    }
-
-    // 온라인수강현황 : 학습강좌 추가
-    public LectInfo createLect() {
-        return LectInfo.builder()
-                .lectName(lectName)
-                .lectSubject(lectSubject)
-                .lectStart(lectStart)
-                .lectEnd(lectEnd)
-                .isActive(isActive)
-                .build();
     }
 
 }

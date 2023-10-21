@@ -199,6 +199,37 @@ dCheck.addEventListener('click', () => {
     })
 })
 
+// 검색 버튼
+const search = document.querySelector("#search")
+search.addEventListener('click', () => {
+    // 검색 조건 받아오기
+    const contSearch = document.querySelector("#contsSearch").value
+    const lectSearch = document.querySelector("#lectSearch").value
+
+    const url = '/findLmsConts'
+
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: {
+            conts: contSearch,
+            lects: lectSearch
+        },
+        success: function (response) {
+            grid.resetData(response)
+        },
+        error: function () {
+            alert("검색 에러")
+        }
+    })
+})
+
+// 삭제
+const deleteBtn = document.querySelector("#delete")
+deleteBtn.addEventListener('click', () => {
+
+})
+
 // 취소버튼 클릭 시 모달 창 닫음
 const cancelButton = document.getElementById('upExit');
 cancelButton.addEventListener('click', function() {

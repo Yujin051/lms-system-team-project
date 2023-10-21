@@ -2,6 +2,7 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -35,18 +36,25 @@ public class SemGrade {
     @Column(name = "sem_sem")
     private String semSem;
 
-    //등급
-    @Column(name = "sem_rating")
-    private String semRating;
+    // 학기별 이수학점
+    @Column(name = "sem_crecpl")
+    private Long semCrecpl;
 
-    //평균
-    @Column(name = "sem_avg")
-    private Long semAvg;
+    // 학기별 평균학점
+    @Column(name = "sem_avg_crecpl")
+    private double semAvgCrecpl;
 
-    public SemGrade(Student student, String semYear, String semSem, String semRating) {
+    @Builder
+    public SemGrade(Student student, String semYear, String semSem) {
         this.student = student;
         this.semYear = semYear;
         this.semSem = semSem;
-        this.semRating = semRating;
+    }
+
+    public SemGrade(Student student, String semYear, String semSem, double semAvgCrecpl) {
+        this.student = student;
+        this.semYear = semYear;
+        this.semSem = semSem;
+        this.semAvgCrecpl = semAvgCrecpl;
     }
 }

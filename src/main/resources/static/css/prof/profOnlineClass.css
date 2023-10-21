@@ -1,0 +1,122 @@
+/* 애니메이션 효과 */
+.modal_body.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/*전체 화면 부분*/
+.mainFrame {
+    display: flex; justify-content: center; border: 0px solid black;
+    width: 1903px; min-height: 800px;
+}
+.mainFrame > .online_class_body {
+    border: 0px solid black; width: 1500px; display: flex; justify-content: center;
+    position: relative;
+}
+
+/*강의 목록 텍스트 부분*/
+.online_class_body > .online_class_box > .online_class_box_text_box {
+    border: 0px solid black; width: 1500px; height: 50px; font-size: 1.2rem;
+    display: flex; align-items: center;
+}
+
+/*head부분*/
+.online_class_body > .online_class_box > .div_head_box {
+    width: 1500px; height: 50px; display: flex; border-top: 0px solid black;
+    border-bottom: 0px solid black; background-color: #F4F4F4; font-size: 1.0rem;
+    font-weight: bold;
+}
+.online_class_body > .online_class_box > .div_head_box > .div_head{
+    display: flex; justify-content: center;
+}
+.online_class_body > .online_class_box > .div_head_box > .div_head p{
+    width: 375px; border: 0px solid black; height: 50px; display: flex;
+    justify-content: center; align-items: center;
+}
+
+/*강좌부분*/
+.online_class_body > .online_class_box > .div_main_box {
+    display: flex; width: 1500px; height: 50px; font-size: 0.95rem;
+    border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;
+}
+.online_class_body > .online_class_box > .div_main_box > p{
+    display: flex; justify-content: center; width: 375px; line-height: 50px;
+}
+.online_class_body > .online_class_box > .div_main_box > .view_btn_box {
+    border: 0px solid black; display: flex; justify-content: center;
+    align-items: center; width: 375px;
+}
+.online_class_body > .online_class_box > .div_main_box > .view_btn_box a{
+    width: 60px; height: 28px; border: 0px solid black; display: flex;
+    justify-content: center; align-items: center; border-radius: 7px;
+    background: black; text-underline: none; color: white; cursor: pointer;
+    text-decoration: none;
+}
+
+/*강좌영상 부분*/
+.subtr {
+    display: flex; width: 1500px; justify-content: center; align-items: center;
+    margin-top: 20px; margin-bottom: 20px;
+}
+.subtr > .lecture{
+    width: 1300px; height: 195px; border: 1px solid #cccccc; border-radius: 10px;
+}
+.subtr > .lecture > .lecture_top_box{
+    width: 1300px; height: 50px; border: 0px solid black; display: flex;
+    border-bottom: 1px solid #cccccc;
+}
+.subtr > .lecture > .lecture_top_box > .lecture_name_text_box {
+    width: 50%; display: flex; align-items: center;
+}
+.subtr > .lecture > .lecture_top_box > .lecture_name_text_box span{
+    margin-left: 10px;
+}
+.subtr > .lecture > .lecture_top_box > .lecture_btn_box {
+    width: 50%; display: flex; align-items: center; justify-content: end;
+    font-size: 0.95rem;
+}
+.subtr > .lecture > .lecture_top_box > .lecture_btn_box a{
+    margin-right: 10px; text-underline: none; color: white; background: black;
+    width: 60px; height: 30px; border-radius: 7px; text-decoration: none;
+    display: flex; justify-content: center; align-items: center; line-height: 30px;
+}
+
+.subtr > .lecture > .lecture_bottom_box {
+    display: flex; width: 1298px; border: 0px solid red; height: 143px;
+    align-items: center; background: #f4f4f4; border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.subtr > .lecture > .lecture_bottom_box > .lecture_img_box {
+    width: 200px; height: 120px; border: 1px solid black; margin-left: 20px;
+}
+.subtr > .lecture > .lecture_bottom_box > .lecture_nth_name_text_box {
+    width: 600px; border: 0px solid black; display: flex; justify-content: center;
+    align-items: center;
+}
+.subtr > .lecture > .lecture_bottom_box > .lecture_study_time_progress_box {
+    width: 498px; border: 0px solid black; display: flex;
+}
+.subtr > .lecture > .lecture_bottom_box > .lecture_study_time_progress_box > .lecture_study_time_box{
+    width: 100%;
+}
+
+/*모달 창 부분*/
+.modal_body {
+    border: 0px solid black; width: 900px;
+    height: 550px; z-index: 1000; position: fixed; top: 19%; left: 27%;
+}
+.modal_body > .modal_exit {
+    border: 0px solid black; height: 50px; display: flex; justify-content: end;
+    align-items: center; background: #ffffff;
+}
+.modal_body > .modal_exit > .modal_exit_icon_box {
+    border: 0px solid black; width: 70px; height: 50px; display: flex;
+    justify-content: center; align-items: center; cursor: pointer;
+}
+.modal_body > .modal_exit > .modal_exit_icon_box i{
+    font-size: 1.3rem; color: black;
+}
+
+.modal_body > .modal_video_box {
+    border: 0px solid red; width: 900px; height: 550px; display: flex;
+}

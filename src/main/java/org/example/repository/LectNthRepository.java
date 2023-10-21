@@ -18,12 +18,10 @@ public interface LectNthRepository extends JpaRepository<LectNth, Long> {
 
 
     /* 검색 조회기능 */
-    @Query("select new org.example.dto.LectNthDto(lif.lectId, lif.lectName," +
-              " lif.lectSubject, lif.enrollStart, lif.enrollEnd, "
-            + "lif.lectStart, lif.lectEnd, lif.isActive, nth.nthSequence," +
-              " nth.nthName ,cs.contsTime) "
+    @Query("select new org.example.dto.LectNthDto(lif.lectId, lif.lectName, lif.lectSubject, lif.enrollStart, lif.enrollEnd, "
+            + "lif.lectStart, lif.lectEnd, lif.isActive, nth.nthSequence, nth.nthName ,cs.contsTime) "
             + "from LectNth nth join nth.lectInfo lif " +
-              "join nth.lmsConts cs " +
+            "join nth.lmsConts cs " +
             "WHERE lif.lectName LIKE %:lectName% AND lif.isActive = :isActive")
     List<LectNthDto> findLectNthSearch(@Param("lectName") String lectName, @Param("isActive") Boolean isActive);
 
@@ -39,8 +37,8 @@ public interface LectNthRepository extends JpaRepository<LectNth, Long> {
     @Query("select new org.example.dto.LectNthDto(lif.lectId, lif.lectName, lif.lectSubject, lif.enrollStart, lif.enrollEnd, "
             + "lif.lectStart, lif.lectEnd, lif.isActive, nth.nthSequence, nth.nthName, cs.contsTime)"
             + "from LectNth nth join nth.lectInfo lif " +
-              "join nth.lmsConts cs " +
-              "WHERE lif.lectName like %:lectName%")
+            "join nth.lmsConts cs " +
+            "WHERE lif.lectName like %:lectName%")
     List<LectNthDto> findLectName(@Param("lectName") String lectName);
 
 
@@ -78,12 +76,12 @@ public interface LectNthRepository extends JpaRepository<LectNth, Long> {
 
     /* 강의 차시정보 신규/저장 */
     @Query("SELECT NEW org.example.dto.LmsContsDtoMin(nth.nthId, cs.contsNo, nth.nthSequence," +
-            " cs.contsName, nth.nthName,cs.contsTime, cs.contsYout) " +
+            "cs.contsName, nth.nthName, cs.contsYout, cs.contsTime) " +
             "FROM LectNth nth " +
             " join nth.lectInfo lif on lif.lectId = nth.lectInfo.lectId" +
             " join nth.lmsConts cs on nth.lmsConts.contsNo = cs.contsNo" +
             " where nth.nthId = :nthId")
-
+    // conts 를 nthId로바꿈
     List<LmsContsDtoMin> findContsNo(@Param("nthId") Long nthId);
 
     // 해당 컨텐츠 정보가 강좌에 등록되어 있는지 확인

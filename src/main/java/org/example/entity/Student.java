@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,8 +16,8 @@ import java.util.List;
 @Entity
 @Data
 @Table(name = "student")
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
     //수강생ID
@@ -28,6 +29,7 @@ public class Student {
     //회원ID
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
+    @JsonIgnore
     private Member member;
 
     //수강생 학년

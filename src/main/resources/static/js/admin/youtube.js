@@ -49,15 +49,18 @@ function onPlayerReady(event) {
 
 function onPlayerStateChange(event) {
     if (event.data === YT.PlayerState.PLAYING) { //비디오가 재생중일때
-        fnlPosition = player.getCurrentTime(); // 현재 재생 위치 가져오기
-        maxPosition = loadMaxPositionFromServer(); // 서버에서 최대 재생 위치 가져오기
         clearInterval(intervalId); //setInterval() 실행하기 전 중단
         intervalId = setInterval(() => {
-            fnlPosition = player.getCurrentTime();
+            fnlPosition = player.getCurrentTime(); // 현재 재생 위치 가져오기
+            loadMaxPositionFromServer().then((serverMaxPosition) => {
+                console.log("최대재생시간 : " + serverMaxPosition);
+                const runTime = player.getDuration(); // 전체 재생 시간
+                const progress = ((serverMaxPosition / runTime) * 100).toFixed(2);
+                console.log("진행률 : " + progress + '%');
+                sendProgressToServer(progress); //업데이트 후 진행률 서버로 전송
+            });
             updateVideoPosition(); //최종, 최대재생시간 업데이트
             console.log("최종재생시간 : " + fnlPosition);
-            console.log("최대재생시간 : " + maxPosition);
-            sendProgressToServer(); //업데이트 후 진행률 서버로 전송
         }, 5000); // 5초마다 실행
 
         // 현재재생위치가 최대재생위치를 초과하면 현재재생위치로 되돌림
@@ -68,7 +71,10 @@ function onPlayerStateChange(event) {
                 event.target.seekTo(maxPosition);
             }
         });
-        sendProgressToServer(); //일시정지 후 다시 재생할 때 진행률 전송
+        const runTime = player.getDuration(); // 전체 재생 시간
+        const progress = ((maxPosition / runTime) * 100).toFixed(2);
+        console.log("진행률 : " + progress + '%');
+        sendProgressToServer(progress); //일시정지 후 다시 재생할 때 진행률 전송
     } else if (event.data === YT.PlayerState.PAUSED) { // 비디오가 일시정지일때
         // 재생 중이 아니면 interval을 해제하여 업데이트를 중지
         clearInterval(intervalId);
@@ -83,9 +89,12 @@ function onPlayerStateChange(event) {
         // 비디오가 끝나더라도 1초 이전으로 되돌려서 일시정지(다음 비디오를 안전하게 실행하기 위함)
     } else if (event.data === YT.PlayerState.ENDED) { //비디오가 끝났을 때
         console.log("영상이 끝나기 -1초 전의 시간 : " + maxPosition);
-        event.target.seekTo(event.target.getDuration() - 1);
+        event.target.seekTo(event.target.getDuration() - 1); // 비디오가 끝나기 1초전 중지
         event.target.pauseVideo();
-        sendProgressToServer();
+        const runTime = player.getDuration(); // 전체 재생 시간
+        const progress = ((maxPosition / runTime) * 100).toFixed(2);
+        console.log("진행률 : " + progress + '%');
+        sendProgressToServer(progress); // 비디오가 끝날 때 진행률 서버에 전송
     }
 }
 
@@ -158,13 +167,8 @@ function loadFnlPositionFromServer() {
 }
 
 // 진행률 서버에 저장
-async function sendProgressToServer() {
+async function sendProgressToServer(progress) {
     try {
-        const runTime = player.getDuration(); // 전체 재생 시간
-        const maxPosition = await loadMaxPositionFromServer(); // 사용자가 최대로 본 시간
-        const progress = ((maxPosition / runTime) * 100).toFixed(2);
-        console.log("진행률 : " + progress + '%');
-
         // 진행률 정보를 서버로 전송
         const response = await fetch(`/youtube/api/saveProgress?magId=${magId}&progress=${progress}`, {
             method: 'PUT',
@@ -173,7 +177,6 @@ async function sendProgressToServer() {
             },
             body: JSON.stringify({ progress }),
         });
-
         if (response.ok) {
             console.log('진행률 정보 서버에 전송 성공');
         } else {
@@ -183,7 +186,6 @@ async function sendProgressToServer() {
         console.error('오류 발생:', error);
     }
 }
-
 
 // 스페이스바를 눌렀을 때 비디오 재생 또는 일시정지
 document.addEventListener('keydown', function(event) {

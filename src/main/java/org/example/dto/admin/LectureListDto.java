@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
@@ -21,8 +22,8 @@ public class LectureListDto {
     private Long lectCredit;
     private String lectSubject;
     private Long lectId;
-    private LocalDateTime lectStart;
-    private LocalDateTime lectEnd;
+    private LocalDate lectStart;
+    private LocalDate lectEnd;
     private String userName;
 
 
@@ -37,7 +38,7 @@ public class LectureListDto {
     private String lectSem;
 
 
-    public LectureListDto(boolean isActive, String lectName, int lectElem, Long lectCredit, String lectSubject, Long lectId, LocalDateTime lectStart, LocalDateTime lectEnd, String userName) {
+    public LectureListDto(boolean isActive, String lectName, int lectElem, Long lectCredit, String lectSubject, Long lectId, LocalDate lectStart, LocalDate lectEnd, String userName) {
         this.isActive = isActive;
         this.lectName = lectName;
         this.lectElem = lectElem;

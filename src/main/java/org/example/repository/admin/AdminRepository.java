@@ -141,7 +141,7 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
 
     // 관리자 - 전체성적관리 : 전체 학기성적 및 전체 현황
     @Query("SELECT NEW org.example.dto.admin.MemberDto" +
-            "(m.userId, m.id, sg.semRating, sg.semSem, s.studNowCr, s.studMaxCr," +
+            "(m.userId, m.id, sg.semSem, s.studNowCr, s.studMaxCr," +
             "s.studId) " +
             "FROM Student s JOIN s.member m ON m.id = s.member.id " +
             "JOIN SemGrade sg ON s.studId = sg.student.studId " +
@@ -150,8 +150,7 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
 
     // 관리자 - 전체성적관리 : 강좌별성적
     @Query("SELECT NEW org.example.dto.admin.MemberDto" +
-            "(li.lectName, gi.grade, gi.checkScore, gi.assignScore, gi.testScore," +
-            "gi.isRecord) " +
+            "(li.lectName, gi.grade, gi.checkScore, gi.assignScore, gi.testScore) " +
             "FROM Student s JOIN s.member m ON m.id = s.member.id " +
             "JOIN StudLectApply ap ON ap.student.studId = s.studId " +
             "JOIN LectInfo li ON li.lectId = ap.lectInfo.lectId " +
@@ -162,9 +161,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 게시글 목록 조회
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, m.userId, m.userBirthday, m.userGender, m.userEmail, " +
-            "s.studGrade, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
+            "ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
             "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
-            "FROM Member m JOIN Student s ON s.studId = m.student.studId " +
+            "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id")
     List<PostDto> postInfo();
@@ -172,9 +171,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 게시글 목록 게시판종류 검색
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, m.userId, m.userBirthday, m.userGender, m.userEmail, " +
-            "s.studGrade, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
+            "ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
             "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
-            "FROM Member m JOIN Student s ON s.studId = m.student.studId " +
+            "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id " +
             "WHERE bi.boardType = :keyword")
@@ -183,9 +182,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 게시글 목록 검색조건(제목, 내용, 작성자) 검색
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, m.userId, m.userBirthday, m.userGender, m.userEmail, " +
-            "s.studGrade, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
+            "ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
             "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
-            "FROM Member m JOIN Student s ON s.studId = m.student.studId " +
+            "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id " +
             "WHERE " +
@@ -199,9 +198,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 게시글 목록 작성일 검색
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, m.userId, m.userBirthday, m.userGender, m.userEmail, " +
-            "s.studGrade, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
+            " ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
             "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
-            "FROM Member m JOIN Student s ON s.studId = m.student.studId " +
+            "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id " +
             "WHERE ba.articleAt = :keyword")
@@ -210,9 +209,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 게시글 목록 게시판종류, 작성일 검색
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, m.userId, m.userBirthday, m.userGender, m.userEmail, " +
-            "s.studGrade, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
+            "ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
             "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
-            "FROM Member m JOIN Student s ON s.studId = m.student.studId " +
+            "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id " +
             "WHERE bi.boardType = :boardTypeKeyword " +
@@ -226,9 +225,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 게시판종류, 검색조건, 작성일 모두 검색
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, m.userId, m.userBirthday, m.userGender, m.userEmail, " +
-            "s.studGrade, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
+            "ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
             "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
-            "FROM Member m JOIN Student s ON s.studId = m.student.studId " +
+            "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id " +
             "WHERE (bi.boardType = :boardTypeKeyword) " +
@@ -246,9 +245,9 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 - 게시글 작성(담당용) : 게시판종류, 검색조건, 작성일 비어있을때 전체 조회
     @Query("SELECT NEW org.example.dto.admin.PostDto" +
             "(m.userName, m.userId, m.userBirthday, m.userGender, m.userEmail, " +
-            "s.studGrade, ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
+            "ba.Id, ba.articleTitle, ba.articleAt, ba.articleView, " +
             "ba.isLocked, ba.isDeleted, ba.articleContent, bi.boardType, bi.Id) " +
-            "FROM Member m JOIN Student s ON s.studId = m.student.studId " +
+            "FROM Member m " +
             "JOIN BoardArticle ba ON ba.memberId.id = m.id " +
             "JOIN BoardInfo bi ON bi.Id = ba.boardInfo.Id " +
             "WHERE " +
