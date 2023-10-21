@@ -95,7 +95,7 @@ public class BoardController {
 
         if(fileNo != null && fileNo != 0L){
             files = fileInfoService.findFileInfoList(fileNo);
-            log.info("files::{}",files);
+//            log.info("files::{}",files);
         }
         // 이전 게시글
         BoardArticle beforeArticle = boardService.findBeforeBoardArticle(

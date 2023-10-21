@@ -10,6 +10,10 @@ import org.example.entity.*;
 import org.example.repository.*;
 import org.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -56,19 +60,17 @@ public class ProfessorController {
     private final AssignSubmitService assignSubmitService;
     private final StudentService studentService;
     private final AssignmentsService assignmentsService;
+    private final BoardPagingRepository boardPagingRepository;
     private final AssignSubmitRepository assignSubmitRepository;
 
 
-    @GetMapping("/test23")
-    public String testing() {
-        System.out.println("컨트롤러테스트 "+List.of(assignSubmitRepository.findAssignmentByLectIdAndAssignId(1L, 1L)));
-        return "/prof/prof_main";
-    }
 
 
     // 강사 메인페이지
     @GetMapping("")
-    public String profMain(Principal principal, Model model) {
+    public String profMain(
+            Principal principal, Model model
+            ,@PageableDefault(page = 0 , size = 4 , sort = "Id" , direction = Sort.Direction.DESC) Pageable pageable) {
 
         // 강사 프로필에 이름 띄우기
         Member member = memberRepository.findByUserId(principal.getName());
@@ -76,6 +78,11 @@ public class ProfessorController {
         String savedProfile = (member != null) ? member.getImgSaved() : "Unknown";
         model.addAttribute("name", name);
         model.addAttribute("profileImg", savedProfile);
+        Page<BoardArticle> profArticles = boardPagingRepository.findByBoardInfo_IdAndIsDeletedFalse(4L , pageable);
+        Page<BoardArticle> noticeArticles = boardPagingRepository.findByBoardInfo_IdAndIsDeletedFalse(3L , pageable);
+        model.addAttribute("profArticles" , profArticles);
+        model.addAttribute("noticeArticles" , noticeArticles);
+
         return "/prof/prof_main";
     }
 
