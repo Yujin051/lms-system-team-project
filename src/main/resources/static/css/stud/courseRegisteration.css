@@ -1,0 +1,60 @@
+/*그리드 폰트 변경*/
+.tui-grid-container{
+    font-family: 'SUIT-Regular';
+}
+body {
+    font-family: 'SUIT-Regular';
+}
+
+.bt {
+    margin-left: 1395px;
+}
+
+#top-table {
+    width: 1000px;
+    margin-top: 10px;
+    margin-left: 460px;
+}
+
+.s1 {
+    font-size: 20px;
+    margin-left: 80px;
+    font-weight: bold;
+}
+
+.s2 {
+    font-size: 20px;
+    margin-left: 40px;
+    font-weight: bold;
+}
+
+.input-group-prepend .s1 {
+    margin-right: 40px;
+}
+
+.input-group-prepend2 .s2 {
+    margin-right: 40px;
+}
+
+.dropdown .btn {
+    margin-left: 20px;
+}
+
+.bt {
+    margin-left: 1395px;
+}
+
+.d1 {
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 23px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.d1:nth-child(2) {
+    margin-left: 300px;
+}
+
+
+

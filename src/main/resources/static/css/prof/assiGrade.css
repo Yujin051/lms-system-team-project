@@ -1,0 +1,127 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/*그리드 폰트 변경*/
+.tui-grid-rside-area, .tui-grid-table{
+    font-family: 'SUIT-Regular';
+}
+
+/*input number 증감 없애기*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+.mainFrame {
+    min-height: 500px;
+    font-family: 'SUIT-Regular';
+    border: 0px solid black; width: 1903px; display: flex;
+    justify-content: center; align-items: center; min-width: 1500px;
+}
+
+/*헤더, 푸터 사이 화면*/
+.assi_grade_body {
+    border: 0px solid black; width: 1500px; min-width: 1400px;
+}
+
+/*성적입력 텍스트 부분*/
+.assi_grade_body > .assi_grade_lect_text_box {
+    border: 0px solid black; width: 1500px; height: 50px;
+}
+.assi_grade_body > .assi_grade_lect_text_box > .assi_grade_lect_text{
+    border: 0px solid black; width: 100px; height: 50px; font-size: 1.1rem;
+    display: flex; justify-content: center; align-items: center;
+}
+
+/*강좌정보 테이블*/
+.assi_grade_view_box {
+    border: 0px solid black; width: 1500px;
+}
+.assi_grade_tb_body {
+    border: 0px solid black; width: 1500px; max-height: 400px;
+}
+.assi_grade_tb_body thead{
+    border: 0px solid #cccccc; border-radius: 10px; background: #E6E6E6;
+    height: 50px; font-weight: bold;
+}
+.assi_grade_tb_body thead tr td{
+    height: 30px; text-align: center;
+}
+.assi_grade_tb_body thead tr td:nth-child(1){
+    width: 10%;
+}
+.assi_grade_tb_body thead tr td:nth-child(2){
+    width: 45%;
+}
+.assi_grade_tb_body thead tr td:nth-child(3){
+    width: 25%;
+}
+.assi_grade_tb_body thead tr td:nth-child(4){
+    width: 25%;
+}
+.assi_grade_tb_body tbody{
+    border: 0px solid #cccccc; border-radius: 10px; border-top: none;
+}
+.assi_grade_tb_body tbody tr {
+    height: 50px; border-bottom: 1px solid #cccccc;
+}
+.assi_grade_tb_body tbody tr td{
+    height: 30px; text-align: center;
+}
+.assi_grade_tb_body tbody tr td button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;
+    border-radius: 5px; line-height: 28px; font-size: 0.9rem;
+}
+
+/*성적입력 텍스트 부분*/
+.assi_grade_text_box {
+    border: 0px solid black; width: 1500px; height: 50px;
+}
+.assi_grade_text_box > .assi_grade_text{
+    border: 0px solid black; width: 100px; height: 50px; font-size: 1.1rem;
+    display: flex; justify-content: center; align-items: center;
+}
+
+/*학생성적입력 테이블*/
+.assi_grade_body_stud_tb_body {
+    width: 1500px;
+}
+.assi_grade_body_stud_tb_body thead{
+    border: 0px solid #cccccc; border-radius: 10px; background: #E6E6E6;
+    height: 50px; font-weight: bold;
+}
+.assi_grade_body_stud_tb_body thead tr td{
+    height: 30px; text-align: center;
+}
+.assi_grade_body_stud_tb_body tbody{
+    border: 0px solid #cccccc; border-radius: 10px; border-top: none;
+}
+.assi_grade_body_stud_tb_body tbody tr {
+    height: 40px; border-bottom: 1px solid #cccccc;
+}
+.assi_grade_body_stud_tb_body tbody tr td{
+    height: 50px; text-align: center;
+}
+.assi_grade_body_stud_tb_body tbody tr td input {
+    width: 100px; border-radius: 5px; border: 1px solid #cccccc; outline: none;
+    text-indent: 5px; text-align: center;
+}
+
+/*등록버튼*/
+.assi_grade_reg_btn_box {
+    border: 0px solid black; width: 1500px; height: 50px; display: flex;
+    justify-content: end; align-items: center;
+}
+.assi_grade_reg_btn_box button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 35px;
+    border-radius: 5px; line-height: 28px;
+}
+
+/*.detail {*/
+/*    display: none;*/
+/*}*/
+
+

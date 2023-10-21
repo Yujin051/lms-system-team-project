@@ -1,0 +1,227 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+/*그리드 폰트 변경*/
+.tui-grid-rside-area, .tui-grid-table{
+    font-family: 'SUIT-Regular';
+}
+
+.mainFrame {
+    font-family: 'SUIT-Regular';
+    border: 0px solid black; width: 1903px; display: flex;
+    justify-content: center; align-items: center; min-width: 1500px;
+}
+/*헤더, 푸터 사이 화면*/
+.assi_body {
+    border: 0px solid red; width: 1500px; min-width: 1400px;
+}
+
+/*강좌검색 텍스트 부분*/
+.assi_back_btn_box > .assi_course_search_text_box {
+    border: 0px solid black; width: 1500px; height: 50px; display: flex;
+    align-items: center; font-size: 1.1rem;
+}
+
+/*돌아가기 버튼*/
+/*.assi_body > .assi_back_btn_box {*/
+/*    border: 0px solid black; width: 1500px; height: 40px; display: flex;*/
+/*    align-items: center;*/
+/*}*/
+/*.assi_body > .assi_back_btn_box > .assi_back_btn {*/
+/*    border: 0px solid black; width: 76px; height: 40px; font-size: 0.9rem; display: flex;*/
+/*    justify-content: center; align-items: center; text-align: center;*/
+/*}*/
+/*.assi_body > .assi_back_btn_box > .assi_back_btn button{*/
+/*    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;*/
+/*    border-radius: 5px; line-height: 28px;*/
+/*}*/
+
+/*조건검색 부분*/
+.assi_search_box {
+    border: 1px solid #cccccc; width: 1500px; height: 100px;
+    border-right: none; border-left: none;
+}
+
+/*년도, 학기 검색 부분*/
+.assi_search_box > .assi_search_top_box {
+    border: 0px solid black; width: 1500px; height: 50px; display: flex;
+    justify-content: center; align-items: center; flex-wrap: wrap;
+}
+
+/*년도 부분*/
+.assi_search_box > .assi_search_top_box > .assi_search_year_sem_box{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+}
+.assi_search_box > .assi_search_top_box > .assi_search_year_sem_box > .assi_search_year_text{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+    justify-content: center; align-items: center; font-size: 1.1rem;
+}
+.assi_search_box > .assi_search_top_box > .assi_search_year_sem_box > .assi_search_year{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+    justify-content: center; align-items: center; font-size: 1.1rem;
+}
+.assi_search_box > .assi_search_top_box > .assi_search_year_sem_box > .assi_search_year input{
+    width: 351px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*학기 부분*/
+.assi_search_box > .assi_search_top_box > .assi_search_semester_box{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+}
+.assi_search_box > .assi_search_top_box > .assi_search_semester_box > .assi_ch_search_semester_text{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+    justify-content: center; align-items: center; font-size: 1.1rem;
+}
+.assi_search_box > .assi_search_top_box > .assi_search_semester_box > .assi_search_semester{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+    justify-content: center; align-items: center; font-size: 1.1rem;
+}
+.assi_search_box > .assi_search_top_box > .assi_search_semester_box > .assi_search_semester input{
+    width: 351px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+
+/*강좌명 검색 부분*/
+.assi_search_box > .assi_search_bottom_box {
+    border: 0px solid black; width: 1500px; height: 50px; display: flex;
+}
+.assi_search_box > .assi_search_bottom_box > .assi_ch_lect_name{
+    width: 50%; height: 50px; display: flex; border: 0px solid black;
+    justify-content: center;
+}
+
+/*강좌명 부분*/
+.assi_search_box > .assi_search_bottom_box > .assi_ch_lect_name > .assi_search_semester_box{
+    border: 0px solid black; width: 100%; height: 50px; display: flex;
+}
+.assi_search_box > .assi_search_bottom_box > .assi_ch_lect_name > .assi_search_lect_name_text{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+    justify-content: center; align-items: center; font-size: 1.1rem;
+}
+.assi_search_box > .assi_search_bottom_box > .assi_ch_lect_name > .assi_search_lect_name{
+    border: 0px solid black; width: 50%; height: 50px; display: flex;
+    justify-content: center; align-items: center; font-size: 1.1rem;
+}
+.assi_search_box > .assi_search_bottom_box > .assi_ch_lect_name > .assi_search_lect_name > input{
+    width: 351px; height: 35px; border-radius: 5px;
+    border: 1px solid #cccccc; outline: none; text-indent: 5px;
+}
+.assi_search_box > .assi_search_bottom_box div:nth-child(3){
+    width: 50%;
+}
+
+/*과제정보 텍스트*/
+.assi_total_status_text_box {
+    border: 0px solid black; width: 1500px; height: 50px; display: flex;
+    align-items: center; font-size: 1.1rem; justify-content: space-between;
+}
+
+/*과제출제 버튼*/
+.assi_total_status_text_box > .assi_que_btn_box {
+    border: 0px solid black; width: 76px; height: 28px; font-size: 0.9rem; display: flex;
+    justify-content: center; align-items: center; text-align: center;
+}
+.assi_total_status_text_box > .assi_que_btn_box button{
+    background: #6b6b6b; color: white; border: none; width: 76px; height: 28px;
+    border-radius: 5px; line-height: 28px;
+}
+.assi_total_status_text_box > .assi_que_btn_box a{
+    color: white; text-decoration: none;
+}
+
+.assi_ch_total_status_grid1 {
+    border: 0px solid black; width: 1500px;
+}
+.assi_ch_total_status_grid2 {
+    border: 0px solid black; width: 1500px;
+}
+
+/*과제정보 테이블*/
+.assi_ch_total_status_grid1 table {
+    width: 1500px; border: 0px solid black;
+}
+
+/*thead*/
+.assi_ch_total_status_grid1 table thead tr{
+    background: #E0E3E7; text-align: center; height: 50px; font-weight: bold;
+}
+
+/*tbody*/
+.assi_ch_total_status_grid1 table tbody tr td{
+    text-align: center; height: 50px; border-bottom: 1px solid #cccccc;
+}
+.assi_ch_total_status_grid1 table tbody tr td:nth-child(1){
+    width: 10%;
+}
+.assi_ch_total_status_grid1 table tbody tr td:nth-child(2){
+    width: 26%;
+}
+.assi_ch_total_status_grid1 table tbody tr td:nth-child(3){
+    width: 18%;
+}
+.assi_ch_total_status_grid1 table tbody tr td:nth-child(4){
+    width: 18%;
+}
+.assi_ch_total_status_grid1 table tbody tr td:nth-child(5){
+    width: 18%;
+}
+.assi_ch_total_status_grid1 table tbody tr td:nth-child(6){
+    width: 18%;
+}
+.assi_ch_total_status_grid1 table tbody tr td button{
+    border: none; width: 42px; background: #6b6b6b; color: white;
+    border-radius: 5px;
+}
+.assi_ch_total_status_grid1 table tbody tr td button span{
+    font-size: 0.9rem;
+}
+
+/*학생정보 텍스트*/
+.assi_stu_info_text_box {
+    border: 0px solid black; width: 1500px; height: 50px; display: flex;
+    align-items: center; font-size: 1.1rem; justify-content: space-between;
+}
+
+/*학생정보 테이블*/
+.assi_ch_stud_info_tb {
+    width: 1500px; border: 0px solid black;
+}
+
+/*thead*/
+.assi_ch_total_status_grid2 table thead tr{
+    background: #E0E3E7; text-align: center; height: 50px; font-weight: bold;
+}
+
+/*tbody*/
+.assi_ch_total_status_grid2 table tbody tr td{
+    text-align: center; height: 50px; border-bottom: 1px solid #cccccc;
+}
+.assi_ch_total_status_grid2 table tbody tr td:nth-child(1){
+    width: 10%;
+}
+.assi_ch_total_status_grid2 table tbody tr td:nth-child(2){
+    width: 26%;
+}
+.assi_ch_total_status_grid2 table tbody tr td:nth-child(3){
+    width: 18%;
+}
+.assi_ch_total_status_grid2 table tbody tr td:nth-child(4){
+    width: 18%;
+}
+.assi_ch_total_status_grid2 table tbody tr td:nth-child(5){
+    width: 18%;
+}
+.assi_ch_total_status_grid2 table tbody tr td:nth-child(6){
+    width: 18%;
+}
+.assi_ch_total_status_grid2 table tbody tr td button{
+    border: none; width: 98px; background: #6b6b6b; color: white;
+    border-radius: 5px;
+}
+.assi_ch_total_status_grid2 table tbody tr td button span{
+    font-size: 0.9rem;
+}

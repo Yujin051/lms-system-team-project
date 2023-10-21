@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/studentDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/stud/stud_my_page.css">
+    <title>마이 페이지</title>
+
+    <th:block layout:fragment="script">
+        <script th:inline="javascript">
+            // 이미지 미리보기 기능
+            $(function () {
+                $(".select_img").on('change', function (){
+                    readURL(this);
+                });
+            });
+
+            function readURL(input) {
+                if(input.files && input.files[0]) {
+                    let reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#preView").attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+
+            $(function () {
+                $(".delete_img").click(function () {
+                    // 이미지 미리보기를 초기화 (이미지를 비움)
+                    $("#preView").attr('src', '#');
+
+                    // 파일 입력 필드를 초기화 (파일 선택 해제)
+                    $(".select_img").val('');
+
+                    // 혹은, 파일 입력 필드를 삭제하는 방법 (선택적)
+                    // $(".select_img").remove();
+                })
+            });
+
+
+        </script>
+
+
+    </th:block>
+    <style>
+        .delete_img:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content" class="mainFrame">
+    <!-- 중앙 시작   -->
+    <section class="middle_section">
+        <div class="title">
+            <p>개인정보수정</p>
+        </div>
+        <form action="/student/mypage/modify" method="post" id="actionForm" th:object="${member}" enctype="multipart/form-data">
+        <article class="information">
+
+                <input type="hidden" id="id" th:field="${member.id}">
+                <div class="box1">
+                    <div class="graph">
+                        <div class="graph_left"><span>성명</span></div>
+                        <div class="graph_right">
+                            <input  type="text" th:field="${member.userName}">
+                        </div>
+                    </div>
+                    <div class="graph">
+                        <div class="graph_left">생년월일</div>
+                        <div class="graph_right">
+                            <input type="text" th:field="${member.userBirthday}">
+                        </div>
+                    </div>
+
+                    <div class="graph">
+                        <div class="graph_left">성별</div>
+                        <div class="graph_right">
+                            <div style="text-indent: 5px; font-size: 1.1rem; margin-left: 10px; margin-top: 10px;" th:text="${member.userGender.description}"></div>
+                        </div>
+                    </div>
+                    <div class="graph">
+                        <div class="graph_left">전화번호</div>
+                        <div class="graph_right">
+                            <input type="text" th:field="${member.userPhoneNum}">
+                        </div>
+                    </div>
+                    <div class="graph">
+                        <div class="graph_left">이메일</div>
+                        <div class="graph_right">
+                            <input type="text" th:field="${member.userEmail}">
+                        </div>
+                    </div>
+                    <div class="graph">
+                        <div class="graph_left">주소</div>
+                        <div class="graph_right">
+                            <input type="text" th:field="${member.userAddr}">
+                        </div>
+                    </div>
+                </div>
+
+            <div class="box2">
+                <div class="photo">
+                    <div class="photo_left"><span>사진</span></div>
+                    <div class="photo_right">
+                       <p class="img">
+                           <img id = "preView" th:src = "${member.imgSaved}" alt="이미지가 없습니다.">
+                       </p>
+                        <input name = "file" type = "file" accept = "image/*" class = "select_img">
+                        <div class="delete_img_btn_box">
+                            <div class="delete_img">이미지 삭제</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <div class="btn_box">
+            <button type="submit" class="update">회원정보 수정</button>
+        </div>
+        </form>
+    </section>
+    <!-- 중앙 끝 -->
+</section>
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+</body>
+</html>

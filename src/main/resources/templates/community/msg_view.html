@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/communityDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <!-- footer css -->
+    <link rel="stylesheet" href="/css/footer.css">
+    <!-- msg_list css -->
+    <link rel="stylesheet" href="/css/community/msg_view.css">
+    <title>쪽지</title>
+</head>
+<body id="mainFrame" layout:fragment="content">
+
+    <section>
+        <div class="container board">
+            
+            <div class="msg_top container-fluid">
+                <div class="row">
+
+                    <!-- 좌측 상단 메뉴 -->
+                    <div class="col-md-4 msg_left">
+                        <span>쪽지</span>
+                    </div>
+
+                    <!-- 우측 상단 메뉴 -->
+                    <div class="col-md-8 msg_right">
+                        
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="msg_content container-fluid">
+                
+                <div class="row">
+                    <!-- 사이드바 메뉴 -->
+                    <div class="col-md-4 msg_side">
+                        <ul>
+                            <li><a href="/board/msg/all">전체</a></li>
+                            <li><a href="/board/msg/recv">받은쪽지</a></li>
+                            <li><a href="/board/msg/send">보낸쪽지</a></li>
+                            <li><a href="/board/msg/trash">휴지통</a></li>
+                        </ul>
+                        <div>
+                            <a href="/board/msg/write"><button class="btn btn-dark">쪽지쓰기</button></a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-8 msg_list">
+                        <div class="article_top">
+                            <!-- 통신여부 -->
+                            <div class="mt-1" th:if="${ msg.sendId == member}">발신</div>
+                            <div class="mt-1" th:if="${ msg.sendId != member}">수신</div>
+                            <!-- 제목 -->
+                            <div class="article_title mt-2" th:text="${msg.getMsgTitle()}">어른들은 숫자를 좋아한다.</div>
+                            
+                            <div>
+                                <!-- 작성자 -->
+                                <span>보낸이</span>
+                                <span class="article_writer" th:text="${msg.getSendId().getUserName()}">Denma</span>
+                                <span>|</span>
+                                <!-- 작성일 -->
+                                <span class="article_at" th:text="${#temporals.format(msg.getSendAt() , 'yy.MM.dd HH:mm')}">2023.10.01 18:32</span>
+                                <!-- 받는이 -->
+                                <span>|</span>
+                                <span>받는이</span>
+                                <span class="article_writer" th:text="${msg.getRecvId().getUserName()}">Denma</span>
+                                <th:block th:if="${msg.getRecvAt() != null}">
+                                    <span>|</span>
+                                    <!-- 읽은시간 -->
+                                    <span class="article_at" th:text="${#temporals.format(msg.getRecvAt() , 'yy.MM.dd HH:mm')}">2023.10.01 18:32</span>
+                                </th:block>
+
+                            </div>
+                        </div>
+                        
+                        <div class="article_content">
+                            <!-- 게시글 내용 출력 -->
+                            <div th:text="${#strings.replace(msg.getMsgCont() , '\n' , '<br>')}">
+                                [th:text : 게시글 내용 출력하기] <br/><br/>
+                                
+                                그들은 본질적인 것에 대해 물어보는 법이 없다.<br/>
+                                만일 그들에게 "장밋빛 벽돌로 지은 예쁜 집을 봤어요. 창에는 제라늄이 있고 <br/>
+                                지붕에는 비둘기가 있고요."라고 말하면 어른들은 그 집이 어떤 집인지를 생각해내지 못한다.<br/>
+                                다만 그들에게 "십만 프랑 짜리 집을 봤어요." 라고 말해야 한다.<br/>
+                                그러면 그들은 "야 참 멋진 집이구나!"라고 소리를 지른다.
+                            </div>
+                        </div>
+
+                        <div class="board_nav">
+                            <th:block th:if="${msg.getRecvId() == member}">
+                                <a th:href="@{'/board/msg/write?to=' + ${msg.getSendId().getUserId()} + '&id=' + ${msg.getId()}}"><button class="btn btn-dark">답장</button></a>
+                            </th:block>
+                            <button class="btn btn-dark" th:onclick="'deleteMsg(' + ${msg.getId()} + ');'">삭제</button>
+                            <button class="btn btn-dark" id="backBtn">돌아가기</button>
+                        </div>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+        <!-- msg_view js -->
+        <script src="/js/community/msg_view.js"></script>
+</body>
+</html>

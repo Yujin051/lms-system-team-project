@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profdefault}">
+<head>
+    <link rel="stylesheet" href="/css/prof/assiGrade.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</head>
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+    <div class="assi_grade_body">
+        <div class="assi_grade_lect_text_box">
+            <div class="assi_grade_lect_text">
+                <span>🔎&nbsp 강좌정보</span>
+            </div>
+        </div>
+        <div class="assi_grade_view_box">
+            <table class="assi_grade_tb_body">
+                <thead class="assi_grade_tb_thead">
+                    <tr>
+                        <td><span>강좌번호</span></td>
+                        <td><span>강좌명</span></td>
+                        <td><span>성적입력여부</span></td>
+                        <td><span>성적입력</span></td>
+                    </tr>
+                </thead>
+                <tbody class="assi_grade_tb_tbody">
+                    <tr th:each="lectInfo : ${list}">
+                        <td th:text="${lectInfo.lectId}">2023-S25</td>
+                        <td th:text="${lectInfo.lectName}">자바의 정석</td>
+                        <td>
+                            <span th:if="${lectInfo.isRecord}">Y</span>
+                            <span th:if="${not lectInfo.isRecord}">N</span>
+                        </td>
+                        <td>
+                            <a class="toDetail" th:href="@{'/prof/assiGradeWrite/' + ${lectInfo.lectId}}"  type="button" id="toDetail">
+                            작성하기
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="detail" class="detail">
+            </div>
+        </div>
+    </div>
+</div>

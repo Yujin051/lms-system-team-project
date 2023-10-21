@@ -39,9 +39,9 @@
       <p th:if="${#fields.hasErrors('userPassword')}" th:errors="*{userPassword}" class="fieldError">Incorrect data</p>
     </div>
     <div class="form-group py-2" style="width: 380px; margin:auto;">
-      <label th:for="phonenum">전화번호</label>
-      <input type="text" th:field="*{userPhoneNum}" class="textinput" placeholder="전화번호를 입력해주세요" style="margin-left:10px;">
-      <p th:if="${#fields.hasErrors('userPhoneNum')}" th:errors="*{userPhoneNum}" class="fieldError">Incorrect data</p>
+      <label th:for="phonenum">이름</label>
+      <input type="text" th:field="*{userName}" class="textinput" placeholder="이름을 입력해주세요" style="margin-left:10px;">
+      <p th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" class="fieldError">Incorrect data</p>
     </div>
     <div class="form-group py-2" style="width: 380px; margin:auto;">
       <label th:for="phonenum">이메일</label>
@@ -69,7 +69,9 @@
     <form action="/newprofessor" role="form" method="post" th:object="${professorDto}">
       <div class="form-group py-2" style="width: 380px; margin:auto;">
         <label th:for="email" style="text-align: center; margin:auto;">교수정보1</label>
-        <input type="text" th:field="*{profBank}" class="textinput" placeholder="아이디를 입력해주세요" style="margin-left:25px;">
+        <input type="text" th:field="*{profBank}" class="textinput" placeholder="은행명 입력" style="margin-left:25px;">
+        <input type="text" th:field="*{profAccount}" class="textinput" placeholder="계좌 입력" style="margin-left:25px;">
+        <input type="text" th:field="*{profAgency}" class="textinput" placeholder="업무 입력" style="margin-left:25px;">
         <p th:if="${#fields.hasErrors('profBank')}" th:errors="*{profBank}" class="fieldError">Incorrect data</p>
       </div>
 

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/studentDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/stud/courseRegisteration.css">
+    <title>Document</title>
+</head>
+<body layout:fragment="content">
+
+<form class="d-flex m-2">
+    <button type="button" class="bt btn btn-secondary">조회</button>
+</form>
+<div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
+    <div class="col">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="s1">년도/학기</span>
+            </div>
+                <div>
+                    <input class="form-control" type="search" placeholder="콘텐츠명 검색" aria-label="Search">
+                </div>
+            <!-- 학기 버튼-->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    전체
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">전체</a></li>
+                    <li><a class="dropdown-item" href="#">1학기</a></li>
+                    <li><a class="dropdown-item" href="#">2학기</a></li>
+                </ul>
+            </div>
+
+            <div class="input-group-prepend2 input-group-prepend">
+                <span class="s2">강의명</span>
+            </div>
+            <div>
+                <input class="form-control" type="search" placeholder="강의명 검색" aria-label="Search">
+            </div>
+
+
+            </div>
+    </div>
+
+
+
+</div>
+
+
+<div class="ct1 container">
+    <div class="d1">I 수강신청 대상 개설강좌</div>
+    <table id="userList" class="table table-hover">
+        <tr>
+            <th>개설강좌번호</th>
+            <th>개설강좌명</th>
+            <th>학점</th>
+            <th>교원명</th>
+            <th>신청현황</th>
+            <th>신청</th>
+        </tr>
+
+            <tr th:each="lectInfo : ${list}" >
+                <form th:action="@{/student/scr/my}" method="post" id="abra">
+                <td th:text="${lectInfo.lectId}" class="userId"></td>
+                <td th:text="${lectInfo.lectName}"></td>
+                <td th:text="${lectInfo.lectCredit}"></td>
+                <td th:text="${lectInfo.userName}"></td>
+                <td th:text="${lectInfo.lectNownum} + '/' + ${lectInfo.lectMaxnum}"></td>
+                <td>
+                    <input type="hidden" name = "lectCredit" th:value="${lectInfo.lectCredit}"/>
+                    <input type="hidden" name = "lectId" th:value="${lectInfo.lectId}"/>
+                    <button type="submit" class="btn btn-primary pull-right">신청</button>
+                </td>
+                </form>
+            </tr>
+
+    </table>
+</div>
+<!--페이징-->
+<nav aria-label="Page navigation example">
+    <ul class="pg1 pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- 2번쨰 테이블-->
+<div class="ct1 container">
+    <div class="d1">
+        <div>I 수강신청 신청강좌</div>
+        <div th:text="${student.studNowCr} + '/' + ${student.studMaxCr}"></div>
+
+
+    </div>
+    <table id="userList2" class="table table-hover">
+        <tr>
+            <th>개설강좌번호</th>
+            <th>개설강좌명</th>
+            <th>학점</th>
+            <th>교원명</th>
+            <th>신청현황</th>
+            <th>취소</th>
+        </tr>
+        <tr th:each="lectInfo : ${list1}">
+            <form th:action="@{/student/scr/myDelete}" method="post" id="abracadabra">
+            <td th:text="${lectInfo.lectId}" class="userId">1</td>
+            <td th:text="${lectInfo.lectName}"></td>
+            <td th:text="${lectInfo.lectCredit}"></td>
+            <td th:text="${lectInfo.userName}"></td>
+            <td th:text="${lectInfo.lectNownum} + '/' + ${lectInfo.lectMaxnum}"></td>
+            <td>
+                <input type="hidden" name = "lectCredit" th:value="${lectInfo.lectCredit}"/>
+                <input type="hidden" name = "lectId" th:value="${lectInfo.lectId}"/>
+                <input type="hidden" name = "applyId" th:value="${lectInfo.applyId}"/>
+                <button type="submit" class="btn btn-danger pull-right">취소</button>
+            </td>
+            </form>
+        </tr>
+    </table>
+</div>
+
+
+
+<!-- bootstrap js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- header js -->
+<script src="/js/header.js"></script>
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script src="/js/stud/courseRegisteration.js"></script>
+</body>
+</html>

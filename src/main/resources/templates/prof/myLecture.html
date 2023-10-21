@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/profDefault}">
+<head>
+    <meta charset="UTF-8">
+    <title>나의 강의실</title>
+    <link rel="stylesheet" href="/css/stud/stu_lecture.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+    <article class="mainContainer">
+        <h4 th:text="'나의 강의 현황 - ' + ${year} + '년도 ' + ${semester}" />
+        <div>
+            <div class="lectureContainer">
+                <div class="lectureName">
+                    <div th:each="lectInfo : ${lectInfoList}">
+                        <input type="hidden" id="professorId" th:value="${professorId}">
+                        <a style="display: block; text-decoration: none; color: black; width: 200px;" th:href="@{'/prof/lecture/view/' + ${lectInfo.lectId}}" th:text="${lectInfo.lectName}"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <script src="/js/stud/stu_lecture.js"></script>
+</section>
+</body>
+</html>

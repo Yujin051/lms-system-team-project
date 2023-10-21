@@ -1,0 +1,107 @@
+#mainFrame {
+    width: 100%;
+    min-height: 600px;
+    height: auto;
+}
+
+.mainContainer {
+    width: 1500px;
+    min-height: 400px;
+    height: auto;
+    margin: 100px auto;
+    /*border: 1px solid black;*/
+}
+
+h4 {
+    padding-left: 10px;
+    border-left: 2px solid black;
+}
+
+/* 검색조건 컨테이너 */
+.optContainer {
+    width: 100%;
+    height: 50px;
+    border-top: 2px solid rgb(128, 128, 128);
+    border-bottom: 2px solid rgb(128, 128, 128);
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+}
+
+.optContainer div {
+    width: 100%;
+    height: 50px;
+}
+
+.optContainer div > div {
+    font-size: 18px;
+    margin-left: 50px;
+    width: 70%;
+    line-height: 50px;
+}
+
+.selector {
+    width: 400px;
+    margin-left: 50px;
+}
+
+/* 과목 목록 css */
+.lectureContainer {
+    position: relative;
+    margin-top: 20px;
+    width: 100%;
+    height: 50px;
+    border-top: 2px solid rgb(128, 128, 128);
+    border-bottom: 2px solid rgb(128, 128, 128);
+    border-collapse: collapse;
+}
+
+.lectureName {
+    margin-left: 50px;
+    font-size: 18px;
+    line-height: 48px;
+}
+
+.lectureName i {
+    position: absolute;
+    top: 14px;
+    left: 1450px;
+}
+
+.lectureName i:nth-child(3) {
+    display: none;
+}
+
+/* 클릭할 때 나오는 내용 css */
+.lectureClick {
+    width: 100%;
+    height: 80px;
+    border-bottom: 2px solid rgb(128, 128, 128);
+    display: none;
+    text-align: center;
+}
+
+.lectureClick a {
+    display: inline-block;
+    width: 200px;
+    margin-top: 15px;
+    margin-right: 80px;
+    color: black;
+    text-decoration: none;
+}
+
+.lectureClick a:last-child {
+    margin-right: 0;
+}
+
+.lecMenu {
+    width: 200px;
+    height: 50px;
+    border: 2px solid black;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 48px;
+}
+
+

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/prof/prof_main.css">
+    <title>강사 메인페이지</title>
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+    <!-- 메인페이지 중앙 시작 -->
+    <section>
+        <article class="middle_article1">
+            <div class="article1_box">
+                <div class="profile_img">
+                    <img th:src="@{'/img/profile/' + ${profileImg}}"/>
+                </div>
+                <div class="profile_name"  th:text="${name}">
+                    이름이 표기됩니다.
+                </div>
+                <div class="profile_bottom">
+                    <p class="profile_letter">
+                        <a href="/board/msg/all" style="text-decoration: none; color: black">쪽지함</a>
+                    </p>
+                    <p class="profile_pswd">
+                      비밀번호 변경
+                    </p>
+                </div>
+            </div>
+            <div class="article1_box">
+                <div class="class_top">
+                    <p>
+                       나의수업강좌
+                    </p>
+                    <p>
+                       이모티콘
+                    </p>
+                </div>
+                <div class="class_box">
+                    암호학개론
+                </div>
+                <div class="class_box">
+                    세계사와 사회변화
+                </div>
+            </div>
+            <div class="article1_box">
+                <div class="homework_top">
+                    <p>
+                        과제출제현황
+                    </p>
+                    <p>
+                        이모티콘
+                    </p>
+                </div>
+                <div class="homework_box">
+                     전국도감 찾아오기!
+                </div>
+                <div class="homework_box">
+                     만원으로 일주일버티기!
+                </div>
+            </div>
+        </article>
+        <article class="middle_article2">
+            <div class="article2_box">
+                <div class="teacher_comu_top">
+                    <p>
+                       교원커뮤니티
+                    </p>
+                    <p>
+                       이모티콘
+                    </p>
+                </div>
+                <th:block th:each="article : ${profArticles}">
+                    <div class="teacher_comu_box" >
+                        <a th:text="${article.getArticleTitle()}" th:href="@{/board/view/{id}(id=${article.getId()})}"
+                           style="text-decoration: none; color: black">커뮤니티 오세여~</a>
+                    </div>
+                </th:block>
+<!--                <div class="teacher_comu_box">-->
+<!--                    커뮤니티 오세여~-->
+<!--                </div>-->
+<!--                <div class="teacher_comu_box">-->
+<!--                    커뮤니티 이용하세여~-->
+<!--                </div>-->
+            </div>
+            <div class="article2_box">
+                <div class="notice_top">
+                    <p>
+                       공지사항
+                    </p>
+                    <p>
+                       이모티콘
+                    </p>
+                </div>
+                <th:block th:each="article : ${noticeArticles}">
+                    <div class="teacher_comu_box" >
+                        <a th:text="${article.getArticleTitle()}" th:href="@{/board/view/{id}(id=${article.getId()})}"
+                           style="text-decoration: none; color: black">커뮤니티 오세여~</a>
+                    </div>
+                </th:block>
+<!--                <div class="notice_box">-->
+<!--                    이 공지사항은 테스트입니다.-->
+<!--                </div>-->
+<!--                <div class="notice_box">-->
+<!--                    이 공지사항은 테스트입니다.-->
+<!--                </div>-->
+            </div>
+            <div class="article2_box">
+                <div class="class_notice_top">
+                    <p>
+                       수업게시판
+                    </p>
+                    <p>
+                       이모티콘
+                    </p>
+                </div>
+                <div class="class_notice_box">
+                    교수 과제 빡치네..
+                </div>
+                <div class="class_notice_box">
+                    점수 입력좀 다시점..
+                </div>
+            </div>    
+        </article>
+    </section>
+    <!-- 메인페이지 중앙 끝-->
+</section>
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+</body>
+</html>

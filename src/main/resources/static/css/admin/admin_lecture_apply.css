@@ -1,0 +1,106 @@
+/*그리드 폰트 변경*/
+.tui-grid-container{
+    font-family: 'SUIT-Regular';
+}
+/* 전체 섹션 */
+#mainFrame {
+    border: 0;
+    width: 1670px;
+    height: 820px;
+}
+
+/* 그리드 영역 */
+.list {
+    margin-top: 20px;
+    margin-left: 85px;
+    margin-bottom: 20px;
+}
+
+#grid {
+    position: relative;
+    left: 85px;
+    width: 1500px;
+    margin-bottom: 50px;
+}
+
+#grid2 {
+    position: relative;
+    left: 85px;
+    width: 1500px;
+}
+
+.buttonGroup {
+    position: relative;
+    top: 10px;
+    left: 1534px;
+    width: 220px;
+    outline: 0;
+    height: 45px;
+    margin-bottom: 5px;
+}
+
+.buttonGroup > button{
+    background: #6b6b6b; color: white; border: none; width: 50px; height: 35px;
+    border-radius: 5px; font-size: 0.9rem; text-align: center; line-height: 35px;
+}
+.buttonGroup > button:hover {
+    opacity: 0.9;
+}
+/* 검색 박스 */
+.searchBox {
+    margin-left: 85px;
+    width: 1500px;
+    height: 70px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.searchBox > div {
+    position: relative;
+    float: left;
+    width: 748px;
+    height: 69px;
+    outline: 0;
+}
+
+.searchContainer {
+    margin-left: 100px;
+    line-height: 69px;
+}
+
+.searchContainer > select {
+    position: absolute;
+    top: 20px;
+    left: 230px;
+    width: 150px;
+    height: 30px;
+}
+
+.searchContainer > select:nth-child(3) {
+    position: absolute;
+    left: 390px;
+}
+
+/* 강좌명 검색 인풋 */
+.lName {
+    position: absolute;
+    top: 20px;
+    left: 230px;
+    width: 250px;
+    height: 30px;
+}
+
+/* 삭제버튼 */
+#deleteBtn {
+    position: relative;
+    top: 55px;
+    left: 1540px;
+    width: 45px;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 3px;
+    line-height: 27px;
+    text-align: center;
+    color: white;
+    background-color: black;
+}

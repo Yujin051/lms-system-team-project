@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/html"
+      layout:decorate="~{layouts/admin_default}">
+<head>
+    <link rel="stylesheet" href="/css/admin/admin_lecture_manage.css">
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+    <!-- 검색 조건 설정, 조회 등 버튼 위치 구역 -->
+    <article class="searchFrame">
+        <div class="buttonGroup">
+            <button id="search">조회</button>
+            <button id="create">신규</button>
+            <button id="save">저장</button>
+            <button id="delete">삭제</button>
+        </div>
+        <div class="searchBox">
+            <div>
+                <div class="searchContainer">
+                    <span>수업년도/학기</span>
+                    <select id="lectYear">
+                        <option value="">선택해주세요.</option>
+                        <option>2021년</option>
+                        <option>2022년</option>
+                        <option>2023년</option>
+                        <option>2024년</option>
+                    </select>
+                    <select id="lectSem">
+                        <option value="">선택해주세요.</option>
+                        <option>1학기</option>
+                        <option>2학기</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="searchContainer">
+                    <span>운영구분</span>
+                    <select id="lectActive">
+                        <option value="">선택해주세요.</option>
+                        <option value="true">운영중</option>
+                        <option value="false">마감됨</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="searchContainer">
+                    <span>수강학년</span>
+                    <select id="lectElem">
+                        <option value="">선택해주세요.</option>
+                        <option value="1">1학년</option>
+                        <option value="2">2학년</option>
+                        <option value="3">3학년</option>
+                        <option value="4">4학년</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <div class="searchContainer">
+                    <span>과목구분</span>
+                    <input class="lName" id="lectSubj" type="text" value="" placeholder="검색어를 입력해주세요." />
+                </div>
+            </div>
+            <div>
+                <div class="searchContainer">
+                    <span>강좌명</span>
+                    <input class="lName" type="text" placeholder="검색할 강좌 이름을 적어주세요.">
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- 강좌 목록 출력하는 구역(grid 이용). 백 작업 시 ajax나 폼 이용하여 데이터 넘겨줄 것 -->
+    <h4 class="list">개설강좌 목록</h4>
+    <div id="grid"></div>
+
+    <!-- 강좌 상세정보 출력 테이블 -->
+    <article class="table">
+        <h4>개설강좌 정보</h4>
+        <div>
+            <table class="detail">
+                <tr>
+                    <th>개설강좌 번호</th>
+                    <td><input id="lectId" class="readOnly" type="text" placeholder="강좌 관리번호" readonly/></td>
+                    <th>강좌명</th>
+                    <td><input id="lectName" type="text" placeholder="강좌 이름을 입력해주세요."/></td>
+                </tr>
+                <tr>
+                    <th>교과목</th>
+                    <td><input id="lectSubject" type="text" placeholder="과목 이름을 입력해주세요."/></td>
+                    <th>수강학년</th>
+                    <td>
+                        <select id="lectGrade">
+                            <option value="" disabled selected hidden>수강 학년 선택</option>
+                            <option value="1">1학년</option>
+                            <option value="2">2학년</option>
+                            <option value="3">3학년</option>
+                            <option value="4">4학년</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>학점</th>
+                    <td><input id="lectCredit" type="number" value="3" min="1" max="3"/></td>
+                    <th>진행상태</th>
+                    <td>
+                        <select id="isActive">
+                            <option value="" disabled selected hidden>운영 상태 선택</option>
+                            <option value="true">운영중</option>
+                            <option value="false">마감됨</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>강의 시작일</th>
+                    <td>
+                        <input type="date" id="startDateInput"
+                               name="selectedDatetime" min="2017-01-01"
+                               max="2030-12-31" value="">
+                    </td>
+                    <th>강의 종료일</th>
+                    <td><input type="date" id="endDateInput"
+                               name="selectedDatetime" min="2017-01-01"
+                               max="2030-12-31" value=""></td>
+                </tr>
+                <tr>
+                    <th>담당강사</th>
+                    <td><input id="profName" type="text" placeholder="강사 이름을 입력해주세요."/></td>
+                </tr>
+                <tr>
+                    <th>연도</th>
+                    <td>
+                        <select id="year">
+                            <option value="" disabled selected hidden>강좌 연도 선택</option>
+                            <option>2021년</option>
+                            <option>2022년</option>
+                            <option>2023년</option>
+                            <option>2024년</option>
+                        </select>
+                    </td>
+                    <th>학기</th>
+                    <td>
+                        <select id="sem">
+                            <option value="" disabled selected hidden>강좌 학기 선택</option>
+                            <option>1학기</option>
+                            <option>2학기</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>수강신청 시작일</th>
+                    <td>
+                        <input type="datetime-local" id="startEnrollDateInput"
+                               name="selectedDatetime" min="2017-01-01T00:00"
+                               max="2030-12-31T23:59" value="">
+                    </td>
+                    <th>수강신청 종료일</th>
+                    <td><input type="datetime-local" id="endEnrollDateInput"
+                               name="selectedDatetime" min="2017-01-01T00:00"
+                               max="2030-12-31T23:59" value=""></td>
+                </tr>
+                <tr>
+                    <th>현재 수강신청 인원 수</th>
+                    <td><input id="enrollNow" class="readOnly" type="text" placeholder="인원 수" readonly/></td>
+                    <th>최대 수강신청 인원 수</th>
+                    <td>
+                        <input id="enrollMax" type="number">
+                    </td>
+                </tr>
+                <tr>
+                    <th>출석 배점</th>
+                    <td><input id="check" type="number" placeholder="출석 배점을 입력해주세요."></td>
+                    <th>과제 배점</th>
+                    <td><input id="assign" type="number" placeholder="과제 배점을 입력해주세요."></td>
+                </tr>
+                <tr>
+                    <th>시험 배점</th>
+                    <td><input id="test" type="number" placeholder="시험 배점을 입력해주세요."></td>
+                </tr>
+            </table>
+        </div>
+    </article>
+
+
+</section>
+</body>
+<th:block layout:fragment="script">
+    <script src="/js/admin/admin_lecture_manage.js"></script>
+    <script>
+        // 현재 날짜와 시간을 얻기 위한 함수
+        function getCurrentDatetime() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더하고 2자리로 포맷
+            const day = now.getDate().toString().padStart(2, '0');
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+
+            return `${year}-${month}-${day}T${hours}:${minutes}`;
+        }
+
+        // 현재 날짜와 시간 값을 <input> 요소에 설정
+        document.getElementById("startDateInput").value = getCurrentDatetime();
+        document.getElementById("endDateInput").value = getCurrentDatetime();
+        document.getElementById("startEnrollDateInput").value = getCurrentDatetime();
+        document.getElementById("endEnrollDateInput").value = getCurrentDatetime();
+    </script>
+</th:block>
+</html>

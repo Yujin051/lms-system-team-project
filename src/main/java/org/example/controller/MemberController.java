@@ -18,6 +18,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Controller
@@ -43,6 +45,7 @@ public class MemberController {
         model.addAttribute("professorDto", new ProfessorDto());
         return "prof/signup";
     }
+
     @GetMapping(value = "/newstudent")
     public String memberForm(Model model) {
         model.addAttribute("memberFormDto", new MemberFormDto());
@@ -50,51 +53,44 @@ public class MemberController {
     }
 
 
-    @PostMapping(value= "newprofessor")
+    @PostMapping(value = "newprofessor")
     public String professorForm(@Validated MemberFormDto memberFormDto, @Validated ProfessorDto professorDto, BindingResult bindingResult, Model model) {
-        if(bindingResult.hasErrors()) {
-            return "prof/signup";
-        }
 
-        try {
-            Member member = Member.createProf(memberFormDto , profpasswordEncoder);
-            Professor professor = Professor.createProfessor(professorDto, member);
+        Member member = Member.createProf(memberFormDto, profpasswordEncoder);
+        Professor professor = Professor.createProfessor(professorDto, member);
 
-            memberService.saveMember(member);
-            professorService.saveProfessor(professor);
-        }
-        catch(IllegalStateException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "prof/signup";
-        }
+        memberService.updateMember(member);
+        professorService.saveProfessor(professor);
         return "prof/signupSuccess";
     }
 
-    @PostMapping(value= "newstudent")
+    @PostMapping(value = "newstudent")
     public String studentForm(@Validated MemberFormDto memberFormDto, BindingResult bindingResult, Model model) {
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "student/signup";
         }
 
         try {
-            Member member = Member.createStudent(memberFormDto , studentpasswordEncoder);
+            Member member = Member.createStudent(memberFormDto, studentpasswordEncoder);
 
-            memberService.saveMember(member);
-        }
-        catch(IllegalStateException e) {
+            memberService.updateMember(member);
+        } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "student/signup";
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
         return "student/signupSuccess";
     }
 
-    @GetMapping(value= "/student/login")
-    public String studentLogin() {
-        return "/student/login";
+    @GetMapping(value = "/member/login")
+    public String memberLogin() {
+        return "/member/login";
     }
 
-    @GetMapping(value= "/prof/login")
-    public String profLogin() {
-        return "/prof/login";
+    @GetMapping(value = "/member/login/error")
+    public String loginError(Model model) {
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해 주세요");
+        return "/member/login";
     }
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/studentDefault}">
+<head>
+    <link rel="stylesheet" href="/css/stud/onlineClass.css">
+</head>
+<section id="mainFrame" layout:fragment="content" class="mainFrame">
+    <div class="online_class_body">
+        <div class="online_class_box">
+            <div class="online_class_box_text_box">
+                <span>📃&nbsp 강의 목록</span>
+            </div>
+            <div class="div_head_box">
+                <div class="div_head">
+                    <p>강좌명</p>
+                    <p>강좌 운영기간</p>
+                    <p>진도율</p>
+                    <p>강의현황보기</p>
+                </div>
+            </div>
+            <!-- 1번 항목 예시(타임리프로 대체해야 함) -->
+            <div class="div_main_box">
+                <p>강좌1</p>
+                <p>2017.10.13. ~ 2023.1.1.</p>
+                <p>90%</p>
+                <div class="view_btn_box">
+                    <a class="view_btn"><span>보기</span></a>
+                </div>
+            </div>
+            <div class="subtr" style="display: none">
+                <div class="lecture">
+                    <div class="lecture_top_box">
+                        <div class="lecture_name_text_box">
+                            <span>강좌 이름 - n주차(차시)</span>
+                        </div>
+                        <div class="lecture_btn_box">
+                            <a href="#" class="learn_link"><span>학습하기</span></a>
+                        </div>
+                    </div>
+                    <div class="lecture_bottom_box">
+                        <div class="lecture_img_box">
+                            <img src="/img/student/header/icon_blackboard.png"/>
+                        </div>
+                        <div class="lecture_nth_name_text_box">
+                            <span>차시명</span>
+                        </div>
+                        <div class="lecture_study_time_progress_box">
+                            <div class="lecture_study_time_box">
+                                <span>학습 시간 : 00분 00초</span>
+                            </div>
+                            <div class="lecture_progress_box">
+                                <span>진도율 : 90.0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal_body" style="display:none;">
+                <div class="modal_exit">
+                    <div class="modal_exit_icon_box">
+                        <i class="fa-solid fa-xmark"></i>
+                    </div>
+                </div>
+                <div class="modal_video_box">
+                    <div id="player"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="/js/admin/youtube.js"></script>
+    <script src="/js/stud/onlineClass.js"></script>
+</section>
+</html>

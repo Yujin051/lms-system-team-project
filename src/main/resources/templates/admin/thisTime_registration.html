@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{/layouts/admin_default}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css"/>
+    <link rel="stylesheet" href="/css/admin/thisTimeRegistration.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+<div id="mainFrame" layout:fragment="content">
+    <div class="">
+        <form class="d-flex justify-content-end m-2">
+            <button type="button" id="search-button" class="btn btn-secondary">조회</button>
+        </form>
+
+        <div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
+            <div class="col">
+                <div class="input-group">
+                    <div class="input-group-prepend mt-2">
+                        <span class="s1">온라인강좌명</span>
+                    </div>
+                    <input class="form-control mt-1" type="text" id="search-input" placeholder="강좌 검색"
+                           aria-label="Search">
+                </div>
+            </div>
+            <div class="col mt-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="m-3 p-5">강의운영상태</span>
+                    </div>
+
+                    <select class="box" id="dropdown-menu">
+                        <option id="item-all" value="">(전체)</option>
+                        <option id="item-running" value="운영중">운영중</option>
+                        <option id="item-closed" value="종료">종료</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="grid">
+            <div class="d1 mt-3">온라인강의</div>
+            <div class="result2"></div>
+
+        </div>
+
+
+        <div class="table-button-container border border-0">
+
+
+            <div class="d2 border border-0">강의 차시정보</div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button id="createBtn" type="button" class="me-md-1 btn btn-secondary">신규</button>
+                <button type="button" class="me-md-1 btn btn-secondary" id="saveButton">저장</button>
+                <button type="button" class="btn btn-secondary" id="deleteBtn">삭제</button>
+            </div>
+        </div>
+
+        <div class="tbl1">
+            <div id="grid2"></div>
+        </div>
+
+
+        <input type="hidden" id="lectIdInput" th:value="${lectId}"/>
+
+
+        <table class="right-align" id="tb1">
+
+
+            <tbody class="tbl2 border border-1">
+
+            <tr>
+                <th class="border border-1 wider-th">차시관리번호</th>
+                <td class="border border-1 border-dark-subtle">
+                    <input id="contsNthIdInput" class="form-control btn btn-secondary" type="text" aria-label="Search">
+                </td>
+            </tr>
+            <tr>
+                <th class="border border-1 wider-th">온라인 강의번호</th>
+                <td class="border border-1 border-dark-subtle">
+                    <input id="contsNoInput" class="form-control btn btn-secondary" type="text" aria-label="Search">
+                </td>
+            </tr>
+            <tr>
+                <th class="border border-1 wider-th">차시 순서</th>
+                <td class="border border-1 border-dark-subtle">
+                    <input id="nthSequenceInput" class="form-control" type="text" aria-label="Search">
+                </td>
+            </tr>
+            <tr>
+                <th class="border border-1 wider-th">컨텐츠명</th>
+                <td class="border border-1 border-dark-subtle">
+                    <input id="contsNameInput" class="form-control btn btn-secondary" type="text" aria-label="Search">
+                </td>
+            </tr>
+            <tr>
+                <th class="border border-1 wider-th">차시명</th>
+                <td class="border border-1 border-dark-subtle">
+                    <input id="nthNameInput" class="form-control" type="text" aria-label="Search">
+                </td>
+            </tr>
+            <tr>
+                <th class="border border-1 wider-th">YouTube 연동번호</th>
+                <td class="border border-1 border-dark-subtle">
+                    <input id="contsYoutInput" class="form-control btn btn-secondary" type="text" aria-label="Search">
+                </td>
+            </tr>
+            <tr>
+                <th class="border border-1 wider-th">차시 학습시간(초)</th>
+                <td class="border border-1 border-dark-subtle">
+                    <input id="contsTimeInput" class="form-control" type="text" aria-label="Search">
+                </td>
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <script src="/js/admin/thisTimeRegistration.js"></script>
+
+</div>
+
+</body>
+
+</html>

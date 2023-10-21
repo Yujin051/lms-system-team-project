@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/communityDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <!-- footer css -->
+    <link rel="stylesheet" href="/css/footer.css">
+    <!-- msg_list css -->
+    <link rel="stylesheet" href="/css/community/newMsg.css">
+    <title>쪽지</title>
+</head>
+<body id="mainFrame" layout:fragment="content">
+
+    <section>
+        <div class="container board">
+            <input th:if="${msg.getOrgMsgId() != null}" type="hidden" th:value="${msg.getOrgMsgId()}" id="msgOrgId">
+            <div class="msg_top container-fluid">
+                <div class="row">
+
+                    <!-- 좌측 상단 메뉴 -->
+                    <div class="col-md-4 msg_left">
+                        <span>쪽지</span>
+                    </div>
+
+                    <!-- 우측 상단 메뉴 -->
+                    <div class="col-md-8 msg_right">
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="msg_content container-fluid">
+                
+                <div class="row">
+                    <!-- 사이드바 메뉴 -->
+                    <div class="col-md-4 msg_side">
+                        <ul>
+                            <li><a href="/board/msg/all">전체</a></li>
+                            <li><a href="/board/msg/recv">받은쪽지</a></li>
+                            <li><a href="/board/msg/send">보낸쪽지</a></li>
+                            <li><a href="/board/msg/trash">휴지통</a></li>
+                        </ul>
+<!--                        <div>-->
+<!--                            <button class="btn btn-dark">쪽지쓰기</button>-->
+<!--                        </div>-->
+                    </div>
+                    
+                    <div class="col-md-8 msg_write">
+                        <div class="msg_write_head">
+                            <span>쪽지쓰기</span>
+                        </div>
+
+                        <form class="msg_write_body">
+
+
+                            <div class="row firstRow">
+                                <div class="col-md-3">
+                                    <span>받는사람</span>
+                                </div>
+                                <div class="col-md-7">
+                                <!--th 조건 반복 처리 필요-->
+                                    <ul id="toUl">
+                                        <li th:if="${msg.getRecvId() != null}"
+                                            th:text="${msg.getRecvId().getUserName()} + '(' + ${msg.getRecvId().getUserId()} + ')'">
+                                            임승범(dlatmdqja)
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn btn-dark" id="modalOpenBtn" type="button">추가</button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span>쪽지제목</span>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="text" placeholder="쪽지 제목을 입력해주세요." id="msgTitle">
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span>내용</span>
+                                </div>
+                                <div class="col-md-9">
+                                    <textarea name="msg_text" id="msgText" placeholder="내용을 입력해주세요."></textarea>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="board_nav">
+                            <button th:if="${msg.getOrgMsgId() != null}"
+                                    class="btn btn-dark" id="reMsgBtn">전송</button>
+                            <button th:if="${msg.getOrgMsgId() == null}"
+                                    class="btn btn-dark" id="writeMsgBtn">전송</button>
+                            <button class="btn btn-dark" id="cancelBtn">취소</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div id="modalContainer">
+            <div class="row modalContent">
+                <div class="closeBox">
+                    <span id="modalCloseBtn">X</span>
+                </div>
+    
+                <div class="col-md-4 classtype">
+                    <div><span>수업</span></div>
+                    <ul class="classtype_list">
+                        <!-- 수업 목록 출력 -->
+                        <th:block th:if="${classList.size() > 0}" th:each="class : ${classList}">
+                            <li th:text="${class.getLectInfo().getLectName()}"
+                                th:onclick="'getClassMate(' + ${class.getLectInfo().getLectId()} + ');'"></li>
+                        </th:block>
+
+                        <th:block th:if="${profClassList.size() > 0}" th:each="class : ${profClassList}">
+                            <li th:text="${class.getLectName()}"
+                                th:onclick="'getClassMate(' + ${class.getLectInfo()} + ');'"></li>
+                        </th:block>
+                    </ul>
+                </div>
+    
+                <div class="col-md-4 class">
+                    <div>
+                        <div>
+                            <input type="checkbox" id="selectAll" onclick="selectAll(this)">
+                            <span>참여자</span>
+                        </div>
+                        <div>
+                            <button class="btn" id="selectBtn">추가</button>
+                        </div>
+                    </div>
+                    <ul class="classmate">
+                        <!-- 참여자 이름 출력 -->
+<!--                        <li><input type="checkbox" name="classmate">참여자 이름</li>-->
+                    </ul>
+                </div>
+    
+                <div class="col-md-4 msgToBox">
+                    <div>
+                        <span>받는사람</span>
+                        <!-- 인원수 -->
+                        <span id="toNum">0</span>
+                    </div>
+                    <ul class="msgTo">
+                        <!-- 받는사람 이름 박스 -->
+                        <!-- <li>임승범<span>X</span></li> -->
+                        <!-- <li>이름<span>X</span></li>
+                        <li>이름<span>X</span></li>
+                        <li>이름<span>X</span></li>
+                        <li>이름<span>X</span></li>
+                        <li>이름<span>X</span></li>
+                        <li>이름<span>X</span></li>
+                        <li>이름<span>X</span></li> -->
+                    </ul>
+                </div>
+    
+                <div id="modalSeletedBtn">
+                    <button class="btn btn-dark mb-3" id="modelSelBtn">선택완료</button>
+                </div>
+            </div>
+    
+        </div>
+
+    </section>
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+        <!-- newMsg js -->
+        <script src="/js/community/newMsg.js"></script>
+</body>
+</html>

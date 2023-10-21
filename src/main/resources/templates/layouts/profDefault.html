@@ -1,0 +1,46 @@
+<!--resources/templates/layouts/default.html-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>강사 메인페이지</title>
+    <!-- Favicon - 웹사이트 url에 아이콘 넣기-->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- 부트스트랩 적용 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <!-- Header css 적용 -->
+    <link rel="stylesheet" href="/css/header.css" />
+    <!-- Footer css 적용 -->
+    <link rel="stylesheet" href="/css/footer.css" />
+    <!-- 범용 css 적용(서브제목, 문자입력 등) -->
+    <link rel="stylesheet" href="/css/universal.css" />
+    <!-- JS, Popper.js, and jQuery -->
+
+    <!-- 범용 css 적용(서브제목, 문자입력 등) -->
+    <link rel="stylesheet" href="/css/universal.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/7976ea13ae.js" crossorigin="anonymous"></script>
+
+    <style>
+        .item .card:hover {border: #0D0D0D 1px solid;}
+    </style>
+
+    <!-- 각 페이지의 script가 작성될 위치 -->
+    <th:block layout:fragment="script"></th:block>
+    <!-- 각 페이지의 css가 작성될 위치 -->
+    <th:block layout:fragment="css"></th:block>
+</head>
+<body>
+<th:block th:replace="~{fragments/header_te :: header}"/>
+<div layout:fragment="content" class="content"></div>
+<th:block th:replace="~{fragments/footer :: footer}"/>
+</body>
+</html>

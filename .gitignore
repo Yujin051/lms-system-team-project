@@ -166,6 +166,9 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# img files
+*.img
+
 ### Gradle ###
 .gradle
 **/build/
@@ -194,3 +197,4 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,windows,gradle
+/src/main/java/org/example/Sample/

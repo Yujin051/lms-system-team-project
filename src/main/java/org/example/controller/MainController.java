@@ -9,10 +9,8 @@ import java.security.Principal;
 @Controller
 public class MainController {
 
-    @GetMapping(value="/")
-    public String main(Principal principal) {
-        System.out.println(principal.getName());
-
-        return "main";
+    @GetMapping(value="")
+    public String main() {
+        return "member/login";
     }
 }

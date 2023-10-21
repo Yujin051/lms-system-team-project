@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/studentDefault}">
+<head>
+    <meta charset="UTF-8">
+    <title>성적 조회</title>
+    <link rel="stylesheet" href="/css/stud/stu_gradeCheck.css">
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+    <article class="gradeTable">
+        <div>
+            <h4>현재 학기 강좌별 성적</h4>
+            <table class="subGrade1">
+                <tr>
+                    <th style="width: 15%" >강좌 번호</th>
+                    <th style="width: 40%">개설 강좌명</th>
+                    <th style="width: 15%">학점</th>
+                    <th style="width: 15%">담당 강사명</th>
+                    <th style="width: 15%">평가등급</th>
+                </tr>
+                <tr th:each="gradeInfo : ${list}" ><!-- 해당 자료만큼 반복됩니다. -->
+                    <td th:text="${gradeInfo.lectId}">번호가 옵니다.</td>
+                    <td th:text="${gradeInfo.lectName}" class="lecName">강좌명이 옵니다.</td>
+                    <td th:text="${gradeInfo.lectCredit}">학점이 옵니다.</td>
+                    <td th:text="${gradeInfo.userName}">담당 강사명이 옵니다.</td>
+                    <td th:text="${gradeInfo.grade}">총 평가 등급이 옵니다.</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <h4>학기별 성적</h4>
+            <table class="semGrade">
+                <tr>
+                    <th style="width: 10%">연도</th>
+                    <th style="width: 10%">학기</th>
+                    <th style="width: 20%">이수 학점</th>
+                    <th style="width: 15%">평균 학점</th>
+                    <th style="width: 15%">상세보기</th>
+                </tr>
+                <tr th:each="semGradeInfo : ${list2}"> <!-- 해당 자료만큼 반복됩니다. -->
+                    <td class="semYear" th:text="${semGradeInfo.semYear}" th:name="semYear" ></td>
+                    <td class="semSem" th:text="${semGradeInfo.semSem}" th:name="semSem" ></td>
+                    <td class="semCrecpl" th:text="${semGradeInfo.semCrecpl}" th:name="semCrecpl" ></td>
+                    <td class="semAvgCrecpl" th:text="${semGradeInfo.semAvgCrecpl}" th:name="semAvgCrecpl" ></td>
+                    <td>
+                        <button class="ajax_button" th:attr="data-sem-year = ${semGradeInfo.semYear}, data-sem-sem = ${semGradeInfo.semSem}" >상세</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- 자바스크립트 통해 조절. ajax 비동기로 값 전달받아서 처리? -->
+        <div class="detail" id="detail">
+            <h4 id="yearAndSem"></h4>
+            <table class="subGrade2">
+                <tr>
+                    <th style="width: 15%" >강좌 번호</th>
+                    <th style="width: 40%">개설 강좌명</th>
+                    <th style="width: 15%">학점</th>
+                    <th style="width: 15%">담당 강사명</th>
+                    <th style="width: 15%">평가등급</th>
+                </tr>
+                <tr><!-- 해당 자료만큼 반복됩니다. -->
+                    <td id="lecNum">번호가 옵니다.</td>
+                    <td id="className" class="lecName">강좌명이 옵니다.</td>
+                    <td id="classCredit">학점이 옵니다.</td>
+                    <td id="profName">담당 강사명이 옵니다.</td>
+                    <td id="semGrade">총 평가 등급이 옵니다.</td>
+                </tr>
+            </table>
+        </div>
+    </article>
+    <script src="/js/stud/stu_gradeCheck.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</section>
+</body>
+</html>

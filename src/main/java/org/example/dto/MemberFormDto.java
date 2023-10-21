@@ -1,6 +1,7 @@
 package org.example.dto;
 
 
+import jakarta.persistence.Column;
 import org.example.constant.Gender;
 import jakarta.validation.constraints.*;
 import lombok.Builder;
@@ -41,6 +42,12 @@ public class MemberFormDto {
 
     private RoleType userRole;
 
+    private String imgOriginal; // 원본 이미지 이름
+
+    private String imgSaved; // db에 저장될 이미지 이름
+
+
+
 
     // 여기서 강사-학생 구분을 받으면 하나의 테이블에서 두개의 권한을 동시에 컨트롤할 수 있을 것 같다.
     // 그런데 단점은 이제 한개의 테이블에 너무 많은 컬럼들이 들어가기 때문에 데이터의 조회가 어려울 수 있음
@@ -49,7 +56,7 @@ public class MemberFormDto {
     // 프론트단에서 두개로 나누고 DTO에선 하나의 테이블로 값을 넣는다? -- 가능한가??
     @Builder
     public MemberFormDto(String userId, String userPassword, String userName, String userPhoneNum, String userEmail
-    , String userAddr, Gender userGender, LocalDate userRegDate, LocalDate userBirthday, RoleType userRole) {
+            , String userAddr, Gender userGender, LocalDate userRegDate, LocalDate userBirthday, RoleType userRole, String imgOriginal, String imgSaved) {
         this.userId = userId;
         this.userPassword = userPassword;
         this.userName = userName;
@@ -60,5 +67,7 @@ public class MemberFormDto {
         this.userRegDate = userRegDate;
         this.userBirthday = userBirthday;
         this.userRole = userRole;
+        this.imgOriginal = imgOriginal;
+        this.imgSaved = imgSaved;
     }
 }

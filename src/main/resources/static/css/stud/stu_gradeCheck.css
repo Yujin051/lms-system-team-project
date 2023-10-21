@@ -1,0 +1,89 @@
+#mainFrame {
+    width: 100%;
+    min-height: 600px;
+    height: auto;
+}
+
+.gradeTable {
+    width: 1100px;
+    min-height: 400px;
+    height: auto;
+    margin: 100px auto auto;
+    /*border: 1px solid black;*/
+}
+
+/* 과목별 성적 테이블 */
+.subGrade1 {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    width: 1100px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.subGrade1 tr {
+    height: 45px;
+    border: 1px solid black;
+}
+
+.subGrade1 tr th {
+    background-color: rgb(235, 240, 247);
+}
+.subGrade2 {
+    margin-top: 20px;
+    margin-bottom: 100px;
+    width: 1100px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.subGrade2 tr {
+    height: 45px;
+    border: 1px solid black;
+    border-bottom: none;
+    border-collapse: collapse;
+}
+.semGrade tr th {
+    background-color: rgb(235, 240, 247);
+}
+
+.subGrade2 tr > td {
+    padding: 0;
+    border: 0px solid black;
+    border-collapse: collapse;
+}
+
+
+.subGrade2 tr > td > td{
+    padding: 0;
+    border-collapse: collapse;
+}
+
+.lecName {
+    text-align: left;
+}
+
+.semGrade {
+    margin-top: 20px;
+    width: 1100px;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.semGrade tr {
+    height: 45px;
+    border: 1px solid black;
+}
+
+.semGrade #toDetail {
+    width: 100px;
+    height: 30px;
+    background: white;
+}
+
+.detail {
+    margin-top: 100px;
+    display: none;
+}
+
+

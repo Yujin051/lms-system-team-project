@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Information</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<h1>Course Information</h1>
+
+<form id="courseForm">
+    <label for="memberId">Member ID:</label>
+    <input type="text" id="memberId" name="memberId" value="2">
+    <br>
+    <label for="year">Year:</label>
+    <input type="text" id="year" name="year" value="2023">
+    <br>
+    <label for="semester">Semester:</label>
+    <input type="text" id="semester" name="semester" value="2학기">
+    <br>
+    <input type="submit" value="Find Courses">
+</form>
+
+<div id="courseResult"></div>
+
+<script th:inline="javascript">
+    $(document).ready(function () {
+        $('#courseForm').submit(function (event) {
+            event.preventDefault();
+
+            var memberId = $('#memberId').val();
+            var year = $('#year').val();
+            var semester = $('#semester').val();
+
+            $.ajax({
+                type: 'GET',
+                url: '/courses/find',
+                data: {
+                    memberId: memberId,
+                    year: year,
+                    semester: semester
+                },
+                success: function (data) {
+                    var courseResult = $('#courseResult');
+                    courseResult.empty();
+                    $.each(data, function (index, lectinfo) {
+                        courseResult.append('<p>' + lectinfo.lectName + '</p>');
+                    });
+                },
+                error: function () {
+                    alert('Error fetching courses.');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

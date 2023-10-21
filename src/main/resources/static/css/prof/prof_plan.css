@@ -1,0 +1,153 @@
+#mainFrame {
+    width: 100%;
+    min-height: 600px;
+    height: auto;
+}
+
+.mainContainer {
+    width: 1500px;
+    min-height: 400px;
+    height: auto;
+    margin: 50px auto auto;
+    /*border: 1px solid black;*/
+}
+
+h4 {
+    padding-left: 10px;
+    border-left: 2px solid black;
+}
+
+/* 입력 상자들 담는 큰 컨테이너 */
+.subContainer {
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 100%;
+    min-height: 100px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* 입력 상자 */
+.optContainer {
+    position: relative;
+    width: 50%;
+    height: 70px;
+    display: flex;
+}
+
+.optContainer span {
+    line-height: 70px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.optContainer .con1 {
+    position: absolute;
+    top: 19px;
+    left: 110px;
+    width: 600px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-left: 20px;
+    background: #f4f4f4;
+}
+
+.optContainer .con1 > p {
+    margin-left: 10px;
+}
+
+.optContainer .con2 {
+    position: absolute;
+    top: 19px;
+    left: 110px;
+    width: 1350px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-left: 20px;
+    background: #f4f4f4;
+}
+
+.optContainer .con2 > p {
+    margin-left: 10px;
+}
+
+.input1 {
+    position: absolute;
+    top: 19px;
+    left: 110px;
+    width: 600px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid black;
+    border-radius: 3px;
+    margin-left: 20px;
+}
+
+.optContainer1 {
+    position: relative;
+    width: 50%;
+    height: 250px;
+    display: flex;
+}
+
+.optContainer1 span {
+    line-height: 250px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.optContainer1 textarea {
+    position: absolute;
+    top: 19px;
+    left: 110px;
+    width: 1350px;
+    height: 200px;
+    margin-left: 20px;
+}
+
+/* 평가방식 상자 */
+.subName {
+    width: 100%;
+    height: 50px;
+    border-bottom: 1px solid black;
+}
+
+.subName h4 {
+    border: 0;
+    line-height: 50px;
+    text-align: center;
+}
+
+.subContainer2 {
+    margin-left: 15%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+}
+
+.subContainer2 div {
+    margin-top: 20px;
+    width: 33%;
+    text-align: center;
+}
+
+.subContainer2 div > p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.saveBtn {
+    position: relative;
+    left: 650px;
+    width: 200px;
+    height: 50px;
+    background: black;
+    font-size: 20px;
+    color: white;
+}

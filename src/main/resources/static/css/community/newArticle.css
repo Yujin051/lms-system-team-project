@@ -1,0 +1,156 @@
+/* 글꼴 폰트 프리텐다드 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+/* seceion 기본 css 설정 */
+section {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard', 'sans-serif';
+    min-height: 500px;
+}
+
+section ul , section li {
+    list-style: none;
+    padding: 0;
+}
+
+section a {
+    color: black;
+    text-decoration: none;
+}
+
+section a:visited {
+    color: black;
+}
+
+
+/* 글쓰기 페이지 css 시작 */
+section {
+    /* border: 1px solid black; */
+    height: 100%;
+}
+
+.board {
+    /* border: 1px solid red; */
+    margin-top: 4rem;
+}
+
+.writeBox {
+    /* border: 1px solid black; */
+}
+
+.row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    padding-left:  0 !important;
+}
+
+.boxset {
+    border: 1px solid #ccc;
+    background-color: #edf1f6;
+    padding: 0.2rem;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+/* 제목 input 설정 */
+#title {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#title:focus {
+    outline: none;
+    border-bottom: 2px solid black;
+}
+
+.privateBox {
+    display: flex;
+    justify-content: center;
+}
+
+.inputBox {
+    background: white;
+}
+
+#fileList {
+    padding: 0;
+    margin: 0;
+}
+
+.inputBox > #fileList > li > input {
+    display: block;
+    width: 100%;
+    color: #21447d;
+    cursor: pointer;
+}
+
+.fileBtnBox > button {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/*input#file-upload-button {*/
+/*    display: none;*/
+/*    cursor: pointer;*/
+/*}*/
+
+.titletext {
+    width: 100%;
+    height: 100%;
+}
+
+.boxStart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* 하단 등록 , 취소 버튼 */
+.btnBox {
+    display: flex;
+    justify-content: center;
+}
+
+.btnBox > button {
+    width: 10%;
+    margin-left: 1rem;
+}
+
+@media screen and (max-width: 1199px){
+    .fileBtnBox > button {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+    }
+
+}
+
+
+/* 767px 이하라면 아래의 css 설정을 적용 */
+@media screen and (max-width: 767px){
+
+    .btnBox > button {
+        width: 20%;
+    }
+
+    .boxStart {
+        text-align: start;
+    }
+
+    .boxEnd {
+        text-align: end;
+    }
+
+    .fileBtnBox {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+}

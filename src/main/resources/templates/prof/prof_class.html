@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/prof/prof_class.css">
+    <title>Document</title>
+    <style>
+        .table_graph_body td {
+            text-align: center;
+            height: 50px;
+        }
+
+        .table_graph_head td {
+            text-align: center;
+            text-indent: 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('#courseForm').submit(function (event) {
+                event.preventDefault();
+
+                var professorId = $('#professorId').val();
+                var year = $('.year_select').val();
+                var semester = $('.semester_select').val();
+
+                var h4Text = year + "년도 " + semester;
+                $('#yearAndSemester').text(h4Text);
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/prof/history/find',
+                    data: {
+                        professorId: professorId,
+                        year: year,
+                        semester: semester
+                    },
+                    success: function (data) {
+                        var courseResult = $('#courseResult');
+                        var courseLectId = $('#courseLectId');
+                        var courseYear = $('#courseYear');
+                        var courseSemester = $('#courseSemester');
+                        courseResult.empty();
+                        courseLectId.empty();
+                        courseYear.empty();
+                        courseSemester.empty();
+                        $.each(data, function (index, lectinfo) {
+                            courseResult.append('<div style="height: 50px; line-height: 50px;">' + lectinfo.lectName +'</div>');
+                        });
+
+                        $.each(data, function (index, lectinfo) {
+                            courseLectId.append('<div style="height: 50px; line-height: 50px;">' + lectinfo.lectId +'</div>');
+                        });
+
+                        $.each(data, function(index, lectinfo) {
+                            courseYear.append('<div style="height: 50px; line-height: 50px;">' + lectinfo.lectYear +'</div>');
+                        })
+
+                        $.each(data, function(index, lectinfo) {
+                            courseSemester.append('<div style="height: 50px; line-height: 50px;">' + lectinfo.lectSem +'</div>');
+                        })
+
+                        var courseSubResult = $('#courseSubResult');
+                        courseSubResult.empty();
+                    },
+                    error: function () {
+                        alert('강좌 검색 중 오류가 발생했습니다.');
+                    }
+                });
+            });
+
+        });
+    </script>
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+    <!-- 중앙 시작   -->
+    <form id="courseForm">
+    <section class="middle_section">
+        <div class="title">
+            <p>강의이력</p>
+            <button>조회</button>
+        </div>
+        <div class="find">
+            <input type="hidden" id="professorId" th:value="${professorId}">
+            <p class="year">년도</p>
+            <select class="year_select"  name="years" required>
+                <option value="">년도를 선택해주세요</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+                <option>2020</option>
+            </select>
+            <p class="semester">학기</p>
+            <select class="semester_select"  name="semesters" required>
+                <option value="">학기를 선택해주세요</option>
+                <option>1학기</option>
+                <option>2학기</option>
+            </select>
+        </div>
+        <h4 id="yearAndSemester">2023년도 2학기</h4>
+        <div class="table">
+            <table class="table_graph">
+                <tr class="table_graph_head">
+                    <td>강좌번호</td>
+                    <td>년도</td>
+                    <td>학기</td>
+                    <td>강좌명</td>
+                </tr>
+                <tr class="table_graph_body">
+                    <td><span id="courseLectId">강좌번호</span></td>
+                    <td><span id="courseYear">년도</span></td>
+                    <td><span id="courseSemester">학기</span></td>
+                    <td><span id="courseResult">과목명</span></td>
+                </tr>
+            </table>
+
+        </div>
+    </section>
+    </form>
+    <!-- 중앙 끝 -->
+</section>
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+</body>
+</html>

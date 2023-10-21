@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layouts/admin_default}">
+<head>
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <link rel="stylesheet" href="/css/admin/attendanceStatus.css">
+</head>
+<body>
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+    <div class="as_body">
+        <div class="as_select_btn_box">
+            <button type="button" class="as_select_btn">조회</button>
+        </div>
+        <div class="as_search_body">
+            <div class="as_search_box">
+                <div class="as_board_id_box2">
+                    <span>강좌명</span>
+                    <input type="text" id="lectName" class="lectName" placeholder="강좌명"/>
+                </div>
+                <div class="as_is_active_box">
+                    <span>강좌진행상태</span>
+                    <select class="as_is_active" id="isActive">
+                        <option value="">(전체)</option>
+                        <option value="true">운영중</option>
+                        <option value="false">종료</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="as_lect_learn_text_box">
+            <div class="as_lect_learn_text">
+                <span>📚&nbsp 학습강좌</span>
+                <div class="result4"></div>
+            </div>
+        </div>
+        <div id="grid1"></div>
+        <!-- 하단테이블 -->
+        <div class="as_completion_status_text_box">
+            <div class="as_completion_status_text">
+                <span>📚&nbsp 전체이수현황</span>
+            </div>
+        </div>
+        <table class="as_tb">
+            <thead>
+                <tr>
+                    <td>성명</td>
+                    <td>강좌명</td>
+                    <td>강좌학점</td>
+                    <td>학번</td>
+                    <td>학년</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <script src="/js/admin/attendanceStatus.js"></script>
+</div>
+</body>
+</html>

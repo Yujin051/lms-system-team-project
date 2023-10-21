@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"/>
+
+
+
+<!-- 사용자 스크립트 추가 -->
+<head>
+    <link rel="stylesheet" href="/css/member/login.css">
+    <script src="https://kit.fontawesome.com/61500d0ee2.js" crossorigin="anonymous"></script>
+</head>
+
+<script>
+    //로그인 실패시 에러 메시지 출력
+    $(document).ready(function(){
+        var errorMessage = [[${errorMessage}]];
+        if(errorMessage != null){
+            alert(errorMessage);
+        }
+    });
+</script>
+
+<body>
+<article>
+    <div class="login_body">
+        <div class="login_img_box">
+            <img src="/img/header&footer/lmsLogo.png"/>
+        </div>
+        <form role="form" method="post" action="/member/login">
+            <div class="login_text_box">
+                <p>USER LOGIN</p>
+            </div>
+            <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}" style="font-size:18px; color: red; text-align: center; margin: auto;"></p>
+            <div class="email_box">
+                <div class="email_img_box">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="email_input_box">
+                    <input type="text" name="userId" class="textinput" placeholder="이메일을 입력해주세요"/>
+                </div>
+            </div>
+            <br>
+            <div class="password_box">
+                <div class="password_img_box">
+                    <i class="fa-solid fa-unlock"></i>
+                </div>
+                <div class="password_input_box">
+                    <input type="password" name="password" class="textinput" placeholder="비밀번호를 입력해주세요">
+                </div>
+            </div>
+            <div class="login_btn_body">
+                <button type="submit" class="login_btn">LOGIN</button>
+            </div>
+            <div class="find_btn_box">
+                <div class="find_btn_body">
+                    <div class="find_id">
+                        <a href="#">아이디 찾기</a>
+                    </div>
+                    <div class="find_pwd">
+                        <a href="#">비밀번호 찾기</a>
+                    </div>
+                    <div class="find_join">
+                        <a href="/member/signup">회원가입</a>
+                    </div>
+                </div>
+            </div>
+            <!--         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
+        </form>
+    </div>
+</article>
+</body>
+</html>

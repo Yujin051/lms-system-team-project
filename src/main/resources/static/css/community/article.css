@@ -1,0 +1,262 @@
+/* 글꼴 폰트 프리텐다드 */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-dynamic-subset.css');
+
+/* seceion 기본 css 설정 */
+section {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Pretendard', 'sans-serif';
+}
+
+section ul , section li {
+    list-style: none;
+    padding: 0;
+}
+
+section a {
+    color: black;
+    text-decoration: none;
+}
+
+section a:visited {
+    color: black;
+}
+
+/* 설정 시작 */
+section {
+    /* border: 1px solid black; */
+    height: 100%;
+    /* min-height: auto; */
+}
+
+.board {
+    margin-top: 4rem;
+    /* border: 1px solid red; */
+    margin-bottom: 5rem;
+    
+}
+
+/* 상단 버튼 box와 버튼 설정 */
+.board_nav {
+    display: flex;
+    justify-content: end;
+}
+
+/* 모든 버튼 설정 */
+.board_nav > button , .board_nav > button:hover , 
+.comment_title > div > button , .comment_title > div > button:hover ,
+.comment_content > div > div > button {
+    border-radius: 0;
+    background: black;
+    color: white;
+    margin-left: 1rem;
+}
+
+/* 게시글 헤더부분(프로필,제목,작성일) */
+.article_top {
+    /* border: 1px solid black; */
+    border-top: 2px solid black;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+    margin-top: 0.7rem;
+    text-align: center;
+}
+
+/* 프로필 사진 설정 */
+.profile {
+    /*border: 1px solid #ccc;*/
+    border-radius: 25px;
+    /*background-repeat: no-repeat;*/
+    /*background-position: center;*/
+    /*background-image: url(/img/logo_640x320.png);*/
+    /*background-size: contain;*/
+    width: 64px;
+    height: 64px;
+    text-align: center;
+    margin: auto;
+}
+
+.profile > img {
+    border: 1px solid #ccc;
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    border-radius: inherit;
+    text-align: center;
+
+}
+
+/* 제목 설정 */
+.article_title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* 게시글 내용 설정 */
+.article_content {
+    /* border: 1px solid black; */
+    border-bottom: 2px solid black;
+    padding-top: 1.5rem;
+    /* text-indent: 1rem; */
+    padding-bottom: 1rem;
+}
+
+.article_content > div:first-child {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    min-height: 200px;
+}
+
+#content > a {
+    color: #0a53be !important;
+    text-decoration: underline;
+}
+
+#content > a:visited {
+    color: #0a53be !important;
+    text-decoration: underline;
+}
+
+
+/* 첨부파일 설정 */
+.file_download {
+    margin-top: 2rem;
+    /* border: 1px solid black; */
+    text-indent: 1rem;
+    background-color: #d1d1d14d;
+    padding-bottom: 0.5rem;
+}
+
+.file_download > div {
+    /* border: 1px solid red; */
+    margin: 0px 1.5rem 0px 1.5rem;
+}
+
+.fileText {
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding-top: 1rem;
+    border-bottom: 1px solid black;
+}
+
+.file_list {
+    cursor: pointer;
+    font-size: 1.1rem;
+    border-bottom: 1px solid #d1d1d14d;
+}
+
+.file_list:hover {
+    /* background-color: #d1d1d14d; */
+    border-bottom: 1px dashed black;
+}
+
+/* 게시글 이동 nav바 */
+.article_nav {
+    margin-top: 1rem;
+    /* border: 1px solid black; */
+}
+
+.article_nav > ul > li {
+    cursor: pointer;
+    margin-top: 0.5rem;
+    /* border: 1px solid black; */
+}
+
+.article_prev:hover , .article_next:hover {
+    background-color: #ccc;
+}
+
+.article_navText {
+    font-weight: bold;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+}
+
+/* 댓글 설정 */
+.article_comment {
+    /* border: 1px solid black; */
+}
+/* 댓글 글자 */
+.comment_title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+/* 댓글 정렬 설정 */
+.comment_title > div {
+    display: flex;
+    justify-content: center;
+}
+/* 댓글 버튼 높이고정 */
+.comment_title > div > button {
+    height: 38px;
+}
+/* 댓글입력 textarea 설정 */
+#write_comment {
+    font-size: 1rem;
+    padding: 0 1rem 0 1rem;
+    width: 80%;
+    border: 1px solid #ccc;
+    background-color: #FAFBFC;
+    resize: none;
+    overflow-y: hidden;
+}
+/* 입력된 댓글들 리스트 출력 설정 */
+.comment_list {
+    margin-top: 2rem;
+    display: flex;
+}
+
+
+/* 댓글 프로필 */
+.comment_img > img {
+    border: 1px solid #ccc;
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+}
+/* 댓글 컨텍스트 */
+.comment_content {
+    /* border: 1px solid black; */
+    width: 100%;
+}
+/* 버튼 마진 제거 */
+.comment_content > div > div > button {
+    margin: 0;
+}
+/* 댓글 작성자 , 작성일시  , 버튼의 정렬 설정 */
+.comment_content > div:first-child {
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+/* 댓글 작성자 설정 */
+.comment_content > div:first-child > div:first-child > span:first-child {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+}
+/* 댓글 내용 설정 */
+.comment_text > textarea {
+    display: block;
+    width: 90%;
+    outline: none;
+    border: none;
+    resize: none;
+    overflow-y: hidden;
+    font-size: 1rem;
+    padding: 0 1rem 0 1rem;
+}
+/* 댓글 수정 클릭시 보이는 댓글 기능 버튼 */
+/* 기본 display : none 처리. */
+.comment_btnBox {
+    display: none;
+}
+.drop {
+    /*display: none;*/
+}
+/*.comment_menu {*/
+/*    z-index: 1;*/
+/*    position: relative;*/
+/*    border: 1px solid black;*/
+/*}*/

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- bootstrap cdn -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- bootstrap icon cdn -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <title>Document</title>
+</head>
+<body>
+<th:block th:fragment="header">
+    <header id="header">
+        <nav id="nav" class="container">
+            <a href="/student" target="_self" class="brand"></a>
+            
+            <div class="menu" id="menu">
+                
+                <ul class="header_menu">
+                    
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">학사정보</a>
+                    </li>
+                    
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">수업정보</a>
+                    </li>
+                    
+                    <li class="menu-item">
+                        <a href="#" class="menu-link">커뮤니티</a>
+                    </li>
+                    
+                </ul>
+
+                <div class="nav-right">
+
+                    <a href="/logout" id="logout">
+                        <i class="bi bi-box-arrow-right mx-2"></i>
+                        로그아웃
+                    </a>
+
+                </div>
+            </div>
+            <a class="header_toggle">
+                <i class="fa-solid fa-bars" style="color: #000000;"></i>
+            </a>
+        </nav>
+    </header>
+
+    <div th:fragment="sub_menu1" class="sub_menu" id="sub_menu1">
+        <div class="container">
+            <ul class="wrap_sub mt-3">
+                <li>
+                    <a href="/student/mypage" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_myinfo.png" alt="나의 정보 조회">
+                        <p>나의 정보 조회</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/student/grade" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_grade.png" alt="성적조회">
+                        <p>성적 조회</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sub_menu" id="sub_menu2">
+        <div class="container">
+            <ul class="wrap_sub mt-3">
+                <li>
+                    <a href="/student/lecture" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_blackboard.png" alt="나의강의실">
+                        <p>나의 강의실</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/student/onlineclass" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_onlineclass.png" alt="온라인강의실">
+                        <p>온라인강의실</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/student/scr" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_click.png" alt="수강신청">
+                        <p>수강신청</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="sub_menu" id="sub_menu3">
+        <div class="container">
+            <ul class="wrap_sub mt-3">
+
+                <li>
+                    <a href="/board/list/3" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_memo.png" alt="공지사항">
+                        <p>공지사항</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/board/list/1" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_school.png" alt="학생">
+                        <p>학생</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/board/list/2" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_chat.png" alt="질문/건의">
+                        <p>질문/건의</p>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/board/msg/all" class="bounce">
+                        <img class="sub_menu_icon" src="/img/header&footer/icon_envelop_2.png" alt="쪽지">
+                        <p>쪽지</p>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+</th:block>
+</body>
+</html>

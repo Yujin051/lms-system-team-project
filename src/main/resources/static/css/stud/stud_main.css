@@ -1,0 +1,275 @@
+        section {
+    height: 800px;
+}
+
+section .middle_article1 {
+    border: 0px solid red;
+    margin-top: 70px;
+    margin-left: 250px;
+    height: 450px;
+    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+}
+
+section .middle_article1 .article1_box {
+    border: 0px solid black;
+    border-radius: 30px;
+    width: 400px;
+    height: 400px;
+}
+
+section .middle_article1 .article1_box:nth-child(1) {
+    border: 3px solid rgb(220, 222, 227);
+    border-radius: 30px;
+    width: 400px;
+    height: 400px;
+}
+
+section .middle_article1 .article1_box .profile_img {
+    border: 0px solid black;
+    border-radius: 30px;
+    width: 200px;
+    height: 200px;
+    margin: 30px 100px;
+}
+
+section .middle_article1 .article1_box .profile_img img {
+   width: 200px;
+   height: 200px;
+}
+
+section .middle_article1 .article1_box .profile_name {
+    border: 0px solid black;
+    height: 30px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 30px;
+}
+
+section .middle_article1 .article1_box .profile_bottom {
+    border: 0px solid black;
+    height: 100px;
+    display: flex;
+}
+
+section .middle_article1 .article1_box .profile_bottom .profile_letter {
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100px;
+    margin-top: 20px;
+    margin-left: 90px;
+    text-align: center;
+    line-height: 63px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+section .middle_article1 .article1_box .profile_bottom .profile_pswd {
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100px;
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: center;
+    line-height: 63px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+section .middle_article1 .article1_box .profile_bottom .profile_letter:hover, .profile_pswd:hover {
+    background-color: skyblue;
+    color: white;
+}
+
+section .middle_article1 .article1_box:nth-child(2) {
+    background-color: rgb(216, 216, 227);
+}
+
+section .middle_article1 .article1_box .class_top {
+    display: flex;
+    justify-content: space-between;
+    border: 0px solid black;
+    width: 350px;
+    height: 30px;
+    margin-left: 25px;
+    margin-top: 15px;
+    font-weight: bolder;
+}
+
+section .middle_article1 .article1_box div .class_box {
+    border: 0px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 350px;
+    height: 50px;
+    margin-left: 25px;
+    background-color: white;
+    line-height: 45px;
+    text-indent: 10px;
+    font-size: 15px;
+}
+
+.class_box:hover {
+    display: block;
+    background-color: skyblue;
+    color: white;
+}
+
+section .middle_article1 .article1_box:nth-child(3) {
+    background-color: rgb(220, 223, 242);
+}
+
+section .middle_article1 .article1_box .homework_top {
+    display: flex;
+    justify-content: space-between;
+    border: 0px solid black;
+    width: 350px;
+    height: 30px;
+    margin-left: 25px;
+    margin-top: 15px;
+    font-weight: bolder;
+}
+
+section .middle_article1 .article1_box .homework_box {
+    border: 0px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 350px;
+    height: 50px;
+    margin-left: 25px;
+    background-color: white;
+    line-height: 45px;
+    text-indent: 10px;
+    font-size: 15px;
+}
+
+section .middle_article1 .article1_box .homework_box:hover {
+    background-color: skyblue;
+    color: white;
+}
+
+section .middle_article2 {
+    border: 0px solid red;
+    margin-top: 40px;
+    margin-left: 250px;
+    height: 450px;
+    width: 1400px;
+    display: flex;
+    justify-content: space-between;
+}
+
+section .middle_article2 .article2_box {
+    border: 0px solid black;
+    border-radius: 30px;
+    width: 400px;
+    height: 400px;
+}
+
+section .middle_article2 .article2_box:nth-child(1) {
+    background-color: rgb(242, 237, 220);
+}
+
+section .middle_article2 .article2_box .teacher_comu_top {
+    display: flex;
+    justify-content: space-between;
+    border: 0px solid black;
+    width: 350px;
+    height: 30px;
+    margin-left: 25px;
+    margin-top: 15px;
+    font-weight: bolder;
+}
+
+section .middle_article2 .article2_box .teacher_comu_box {
+    border: 0px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 350px;
+    height: 50px;
+    margin-left: 25px;
+    background-color: white;
+    line-height: 45px;
+    text-indent: 10px;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+section .middle_article2 .article2_box .teacher_comu_box:hover {
+    background-color: skyblue;
+    color: white;
+}
+
+section .middle_article2 .article2_box:nth-child(2) {
+    background-color: rgb(242, 220, 242);
+}
+
+section .middle_article2 .article2_box .notice_top {
+    display: flex;
+    justify-content: space-between;
+    border: 0px solid black;
+    width: 350px;
+    height: 30px;
+    margin-left: 25px;
+    margin-top: 15px;
+    font-weight: bolder;
+}
+
+section .middle_article2 .article2_box .notice_box {
+    border: 0px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 350px;
+    height: 50px;
+    margin-left: 25px;
+    background-color: white;
+    line-height: 45px;
+    text-indent: 10px;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+section .middle_article2 .article2_box .notice_box:hover {
+    background-color: skyblue;
+    color: white;
+}
+
+section .middle_article2 .article2_box:nth-child(3) {
+    background-color: rgb(230, 242, 220);
+}
+
+section .middle_article2 .article2_box .class_notice_top {
+    display: flex;
+    justify-content: space-between;
+    border: 0px solid black;
+    width: 350px;
+    height: 30px;
+    margin-left: 25px;
+    margin-top: 15px;
+    font-weight: bolder;
+}
+
+section .middle_article2 .article2_box .class_notice_box {
+    border: 0px solid black;
+    border-radius: 10px;
+    margin-top: 10px;
+    width: 350px;
+    height: 50px;
+    margin-left: 25px;
+    background-color: white;
+    line-height: 45px;
+    text-indent: 10px;
+    font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+section .middle_article2 .article2_box .class_notice_box:hover {
+    background-color: skyblue;
+    color: white;
+}

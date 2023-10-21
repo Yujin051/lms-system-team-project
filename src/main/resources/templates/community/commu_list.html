@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/communityDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <!-- footer css -->
+    <link rel="stylesheet" href="/css/footer.css">
+    <!-- community css -->
+    <link rel="stylesheet" href="/css/community/community.css">
+    <title>게시판</title>
+</head>
+<body id="mainFrame" layout:fragment="content">
+<section>
+    <section>
+        <div class="board container">
+
+            <input type="hidden" th:value="${id}" id="boardType">
+            
+            <div class="board_top">
+                <!-- 리스트 총 갯수 출력 -->
+                <div>
+                    <p>TOTAL <span th:text="${pageDto.getTotal()}">0</span></p>
+                </div>
+
+                <!-- 검색창 -->
+                <div>
+                    <select name="search_select" id="search_select">
+                        <option value="title">제목</option> 
+                        <option value="content">내용</option> 
+                        <option value="writer">작성자</option> 
+                    </select>
+                    
+                    <input id="search_input" type="text">
+
+                    <button class="btn searchBtn" id="searchBtn">
+                        검색
+                    </button>
+                </div>
+            </div>
+
+            <div class="board_list">
+                <table class="table text-center table-hover" id="board_list_article">
+                                    
+                    <thead>
+                        <!-- 리스트 컬럼 -->
+                        <tr>
+                            <th scope="col" class="px-2">게시글번호</th>
+                            <th scope="col" class="px-2">분류</th>
+                            <th scope="col" class="px-2">제목</th>
+                            <th scope="col" class="px-2">작성자</th>
+                            <th scope="col" class="px-2">조회수</th>
+                            <th scope="col" class="px-2">작성일</th>
+                        </tr>
+                    </thead>
+                    <!--/*
+                        아래는 th:each 사용하여 리스트 반복출력.
+                        제목 칸 보정해주던가 아님 td colspan 써보기
+                    */-->
+                    <tbody id="listBody">
+                        <th:block th:each="article : ${pageDto.articles}">
+                            <tr>
+                                <td>
+                                   <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getId()}"
+                                      th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getId()}"></a>
+                                </td>
+
+                                <td>
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getBoardInfo().getBoardType()}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getBoardInfo().getBoardType()}"></a>
+                                </td>
+
+                                <td class="articleTitle" >
+<!--                                    <a th:if="${article.getIsLocked() == true && article.getMemberId().getUserId() != userName}" th:text="${'비밀글입니다.'}"-->
+<!--                                       th:href="@{/board/view/{id}(id=${article.getId()})}">-->
+<!--                                    </a>-->
+
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getArticleTitle()}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}">
+                                    </a>
+                                    <!-- 비공개글 작성자와 사용자가 다를때 -->
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${'비공개 글입니다.'}"></a>
+                                </td>
+
+                                <td>
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getMemberId().getUserName()}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getMemberId().getUserName()}"></a>
+                                </td>
+
+                                <td>
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${article.getArticleView()}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${article.getArticleView()}"></a>
+                                </td>
+
+                                <td>
+                                    <a th:if="${member.id == article.getMemberId().id || article.getIsLocked() == false}" th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:mm')}"
+                                       th:href="@{/board/view/{id}(id=${article.getId()})}"></a>
+                                    <a th:if="${member.id != article.getMemberId().id && article.getIsLocked() == true}" th:text="${#temporals.format(article.getArticleAt() , 'yy.MM.dd-HH:mm')}"></a>
+                                </td>
+                            </tr>
+                        </th:block>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- 페이징에 대한 것은 공부하고 아래 건들기 -->
+            <!-- 
+                현재 페이지에는 class로 active 넣어주고 
+                한 페이지 뿐이라면 양쪽 꺽쇠는 존재하지 않도록 설정할 것.
+            -->
+
+
+            <div class="board_bottom">
+                <ul class="pageing">
+                    <li th:if="${pageDto.getNowPage != 1}">
+                        <a th:href="@{/board/list/{id}(page=${pageDto.getStartPage() -1},id=${id})}"><i class="fa-solid fa-backward" style="color: #000000;"></i></a>
+                    </li>
+
+                    <th:block th:each="page : ${#numbers.sequence(pageDto.getStartPage() , pageDto.getEndPage())}">
+                        <li th:if="${page == pageDto.getNowPage}" th:classappend="${page == pageDto.getNowPage}? 'page_active' : ''">
+                            <a th:if="${page == pageDto.getNowPage}" th:text="${page}"></a>
+                        </li>
+                        <li th:if="${page != pageDto.getNowPage && page >= pageDto.getStartPage()}">
+                            <a th:if="${page != pageDto.getNowPage}" th:href="@{/board/list/{id}(page = ${page -1} , id=${id})}" th:text="${page}"></a>
+                        </li>
+                    </th:block>
+
+                    <li th:if="${pageDto.getNowPage != pageDto.getEndPage()}">
+                        <a th:href="@{/board/list/{id}(page=${pageDto.getEndPage() -1},id=${id})}"><i class="fa-solid fa-forward" style="color: #000000;"></i></a>
+                    </li>
+                </ul>
+<!--                pageDto.getNowPage : <input type="text" th:value="${pageDto.getNowPage}"></input>-->
+<!--                <div class="board_write_article">-->
+<!--                    <button class="btn" type="button"><a th:href="@{/board/write/{id}(id=${id})}">글쓰기</a></button>-->
+<!--                </div>-->
+                <div class="board_write_article" th:if="${id == 1 || id == 2} and ${roleType.name() == 'USER'}">
+                    <button class="btn" type="button"><a th:href="@{/board/write/{id}(id=${id})}">글쓰기</a></button>
+                </div>
+                <div class="board_write_article" th:if="${id == 4} and ${roleType.name() == 'TEACHER'}">
+                    <button class="btn" type="button"><a th:href="@{/board/write/{id}(id=${id})}">글쓰기</a></button>
+                </div>
+                <div class="board_write_article" th:if="${id == 3} and ${roleType.name() == 'ADMIN'}">
+                    <button class="btn" type="button"><a th:href="@{/board/write/{id}(id=${id})}">글쓰기</a></button>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+        <!-- bootstrap js -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- header js -->
+        <script src="/js/header.js"></script>
+        <!-- commu_list js -->
+        <script src="/js/community/commu_list.js"></script>
+</body>
+</html>

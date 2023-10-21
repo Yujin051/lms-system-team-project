@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profDefault}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap icon cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+    <!-- fontawesome cdn -->
+    <script src="https://kit.fontawesome.com/fa8d81743a.js" crossorigin="anonymous"></script>
+    <!-- header css -->
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/student/myClassroom.css">
+    <title>Document</title>
+</head>
+<body>
+<section id="mainFrame" layout:fragment="content">
+<!--조회-->
+<form class="d-flex m-2">
+    <button type="button" class="bt btn btn-secondary">조회</button>
+</form>
+<!--상단 검색란-->
+
+<div id="top-table" class="row bg-body-tertiary justify-content-end p-3">
+    <div class="col">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="s1">년도</span>
+            </div>
+            <div>
+                <input class="form-control" type="search" placeholder="콘텐츠명 검색" aria-label="Search">
+            </div>
+            <div class="input-group-prepend2 input-group-prepend">
+                <span class="s2">학기</span>
+            </div>
+            <div>
+                <!-- 학기 버튼-->
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                        전체
+                    </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">전체</a></li>
+                            <li><a class="dropdown-item" href="#">1학기</a></li>
+                            <li><a class="dropdown-item" href="#">2학기</a></li>
+                        </ul>
+                </div>
+            </div>
+            <!--과목명-->
+            <div class="input-group-prepend mt-3">
+                <span class="s3">과목명</span>
+            </div>
+            <div>
+                <input class="form-control form-control-3 mt-3" type="search" placeholder="과목명 검색" aria-label="Search">
+            </div>
+
+        </div>
+    </div>
+
+
+
+</div>
+<div class="d1">I 과제정보</div>
+<div id="grid"></div>
+
+
+<div class="btt rounded fw-bold mt-3">
+    <div class="btt2 w-50 ">
+        <div class="d-flex mt-3">
+        <label for="exampleDataList" class="form-label w-25 mt-5">과제내용</label>
+        <input class="form-control mt-5" type="text" value="강사 과제 설명" aria-label="readonly input example" readonly>
+        </div>
+        <div class="mt-3 mb-3 d-flex">
+            <label for="formFileMultiple" class="form-label w-25">과제파일 </label>
+            <input class="form2 form-control" type="text" value="강사의 과제 파일첨부 (읽기 전용)" aria-label="readonly input example" readonly>
+            <a href="파일의_경로_또는_URL" download>
+                <button class="downbtn btn btn-primary">다운로드</button>
+            </a>
+        </div>
+
+        <div class="mb-3 d-flex">
+            <label for="formFileDisabled" class="form-label w-25">과제제출</label>
+            <input class="form-control" type="file" id="formFileDisabled" disabled>
+        </div>
+        <div class="mb-3 d-flex">
+            <label class="form-label w-25">과제설명</label>
+            <input class="form-control" type="search" aria-label="Search">
+        </div>
+        <div class="d-flex">
+            <label class="form-label w-25">제출일시</label>
+            <input class="form-control" type="search" aria-label="Search">
+        </div>
+    </div>
+</div>
+</section>
+
+
+<!-- bootstrap js -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+<!-- header js -->
+<script src="/js/header.js"></script>
+<script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+<script src="/js/myClassroom.js"></script>
+</body>
+</html>
