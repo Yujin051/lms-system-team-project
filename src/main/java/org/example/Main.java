@@ -163,16 +163,16 @@ public class Main implements CommandLineRunner {
 //                LocalDate.of(2023, 3, 1), true));
 //
 //        // boardInfo
-//        BoardInfo boardInfo1 = boardInfoRepository.save(new BoardInfo("학생", "학생", true));
-//        BoardInfo boardInfo2 = boardInfoRepository.save(new BoardInfo("질문건의", "질문건의", true));
-//        BoardInfo boardInfo3 = boardInfoRepository.save(new BoardInfo("공지사항", "공지사항", true));
-//        BoardInfo boardInfo4 = boardInfoRepository.save(new BoardInfo("교원", "교원", true));
-//        BoardInfo boardInfo5 = boardInfoRepository.save(new BoardInfo("게시판 이름5", "건의사항", true));
-//        BoardInfo boardInfo6 = boardInfoRepository.save(new BoardInfo("게시판 이름6", "공지사항", true));
-//        BoardInfo boardInfo7 = boardInfoRepository.save(new BoardInfo("게시판 이름7", "학생", true));
-//        BoardInfo boardInfo8 = boardInfoRepository.save(new BoardInfo("게시판 이름8", "교원", true));
-//        BoardInfo boardInfo9 = boardInfoRepository.save(new BoardInfo("게시판 이름9", "과정", true));
-//        BoardInfo boardInfo10 = boardInfoRepository.save(new BoardInfo("게시판 이름10", "수업게시판", true));
+//        BoardInfo boardInfo1 = boardInfoRepository.save(new BoardInfo("학생", "학생"));
+//        BoardInfo boardInfo2 = boardInfoRepository.save(new BoardInfo("질문건의", "질문건의"));
+//        BoardInfo boardInfo3 = boardInfoRepository.save(new BoardInfo("공지사항", "공지사항"));
+//        BoardInfo boardInfo4 = boardInfoRepository.save(new BoardInfo("교원", "교원"));
+//        BoardInfo boardInfo5 = boardInfoRepository.save(new BoardInfo("게시판 이름5", "건의사항"));
+//        BoardInfo boardInfo6 = boardInfoRepository.save(new BoardInfo("게시판 이름6", "공지사항"));
+//        BoardInfo boardInfo7 = boardInfoRepository.save(new BoardInfo("게시판 이름7", "학생"));
+//        BoardInfo boardInfo8 = boardInfoRepository.save(new BoardInfo("게시판 이름8", "교원"));
+//        BoardInfo boardInfo9 = boardInfoRepository.save(new BoardInfo("게시판 이름9", "과정"));
+//        BoardInfo boardInfo10 = boardInfoRepository.save(new BoardInfo("게시판 이름10", "수업게시판"));
 //
 //
 //        // boardArticle

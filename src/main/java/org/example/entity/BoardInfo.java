@@ -30,10 +30,10 @@ public class BoardInfo {
     @Column(name = "board_name" , nullable = false)
     private String boardName;
 
-    // 게시판 응답여부
-    @Column(name = "board_resp" , nullable = false)
-    @ColumnDefault("false")
-    private Boolean boardResp;
+//    // 게시판 응답여부
+//    @Column(name = "board_resp" , nullable = false)
+//    @ColumnDefault("false")
+//    private Boolean boardResp;
 
     // 게시판 종류
     @Column(name = "board_type" , nullable = false)
@@ -45,13 +45,8 @@ public class BoardInfo {
     @JoinColumn(name = "lect_info" , nullable = true)
     private LectInfo lectInfo;
 
-    public BoardInfo(String boardName, String boardType, Boolean boardResp){
+    public BoardInfo(String boardName, String boardType){
         this.boardName = boardName;
-        this.boardResp = boardResp;
         this.boardType = boardType;
     }
-
-
-
-
 }
