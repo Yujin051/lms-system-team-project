@@ -9,22 +9,21 @@ import org.example.constant.Gender;
 import org.example.dto.LectInfoDTO;
 import org.example.entity.LectInfo;
 import org.example.entity.Member;
-import org.example.repository.AssignmentsRepository;
-import org.example.repository.MemberRepository;
+import org.example.repository.*;
 import org.example.service.AssignmentsService;
 import org.example.service.LectureService;
 import org.example.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.CheckGradeDto;
 import org.example.dto.CheckSemGradeDto;
 import org.example.entity.*;
-import org.example.repository.GradeInfoRepository;
-import org.example.repository.LectInfoRepository;
-import org.example.repository.StudLectApplyRepository;
-import org.example.repository.StudentRepository;
 import org.example.service.MemberService;
 import org.example.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +59,13 @@ public class StudentController {
     private final StudentRepository studentRepository;
     private final LectInfoRepository lectInfoRepository;
     private final GradeInfoRepository gradeInfoRepository;
+    private final BoardPagingRepository boardPagingRepository;
 
     // 학생 메인 페이지
     @GetMapping("")
-    public String stuMain(Principal principal, Model model) {
+    public String stuMain(
+            Principal principal, Model model ,
+            @PageableDefault(page = 0 , size = 4 , sort = "Id" , direction = Sort.Direction.DESC) Pageable pageable) {
         // 학생 프로필에 이름 띄우기
         Member member = memberRepository.findByUserId(principal.getName());
         String name = (member != null) ? member.getUserName() : "Unknown";
@@ -71,6 +73,10 @@ public class StudentController {
         model.addAttribute("name", name);
         model.addAttribute("profileImg", savedProfile);
         System.out.println(savedProfile);
+        Page<BoardArticle> StudArticles = boardPagingRepository.findByBoardInfo_IdAndIsDeletedFalse(1L , pageable);
+        Page<BoardArticle> noticeArticles = boardPagingRepository.findByBoardInfo_IdAndIsDeletedFalse(3L , pageable);
+        model.addAttribute("studArticles" , StudArticles);
+        model.addAttribute("noticeArticles" , noticeArticles);
 
         return "/student/stud_main";
     }

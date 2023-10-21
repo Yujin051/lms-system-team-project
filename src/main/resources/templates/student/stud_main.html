@@ -82,12 +82,16 @@
                            이모티콘
                         </p>
                     </div>
-                    <div class="teacher_comu_box">
-                        커뮤니티 오세여~
-                    </div>
-                    <div class="teacher_comu_box">
-                        커뮤니티 이용하세여~
-                    </div>
+                    <th:block th:each="article : ${studArticles}">
+                        <div class="teacher_comu_box" >
+                            <a th:text="${article.getArticleTitle()}" th:href="@{/board/view/{id}(id=${article.getId()})}"
+                            style="text-decoration: none; color: black">커뮤니티 오세여~</a>
+                        </div>
+                    </th:block>
+
+<!--                    <div class="teacher_comu_box">-->
+<!--                        커뮤니티 이용하세여~-->
+<!--                    </div>-->
                 </div>
                 <div class="article2_box">
                     <div class="notice_top">
@@ -98,12 +102,18 @@
                            이모티콘
                         </p>
                     </div>
-                    <div class="notice_box">
-                        이 공지사항은 테스트입니다.
-                    </div>
-                    <div class="notice_box">
-                        이 공지사항은 테스트입니다.
-                    </div>
+                    <th:block th:each="article : ${noticeArticles}">
+                        <div class="teacher_comu_box" >
+                            <a th:text="${article.getArticleTitle()}" th:href="@{/board/view/{id}(id=${article.getId()})}"
+                               style="text-decoration: none; color: black">커뮤니티 오세여~</a>
+                        </div>
+                    </th:block>
+<!--                    <div class="notice_box">-->
+<!--                        이 공지사항은 테스트입니다.-->
+<!--                    </div>-->
+<!--                    <div class="notice_box">-->
+<!--                        이 공지사항은 테스트입니다.-->
+<!--                    </div>-->
                 </div>
                 <div class="article2_box">
                     <div class="class_notice_top">
