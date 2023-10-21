@@ -87,6 +87,7 @@ public class AdminController {
             log.info("userAddr : {}", dto.getUserAddr());
             log.info("studNowCr : {}", dto.getStudNowCr());
             log.info("userId : {}", dto.getUserId());
+            log.info("imgSaved : {}", dto.getImgSaved());
         }
         return ResponseEntity.ok(dtos);
     }
