@@ -310,34 +310,47 @@ public class ProfessorController {
     }
 
 
-    @PostMapping("/assiGradeWrite")
+    @PostMapping("/assiGradeWrite/save")
     public String assiGradeWriteSave(Model model,
-                                      @RequestParam("lectId") Long lectId,
-                                      @RequestParam("checkScore") Long checkScore,
-                                      @RequestParam("assignScore") Long assignScore,
-                                      @RequestParam("testScore") Long testScore,
-                                      @RequestParam("grade") String grade,
-                                      @RequestParam("gradeId") Long gradeId) {
-
+                                     @RequestParam("lectId") Long lectId,
+                                     @RequestParam("checkScore") Long checkScore,
+                                     @RequestParam("assignScore") Long assignScore,
+                                     @RequestParam("testScore") Long testScore,
+                                     @RequestParam("grade") String grade,
+                                     @RequestParam("gradeId") Long gradeId,
+                                     @RequestParam("lectCheck") Long lectCheck,
+                                     @RequestParam("lectAssign") Long lectAssign,
+                                     @RequestParam("lectTest") Long lectTest) {
+        log.info("testScore: {}",testScore);
+        log.info("lectTest: {}",lectTest);
         log.info("grade: {}",grade);
         log.info("gradeId: {}",gradeId);
         GradeInfo gradeInfo = gradeInfoRepository.findById(gradeId).orElseThrow();
-        // testScore, checkScore, assignScore 설정
+        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
+
         log.info("gradeInfo :{}" ,gradeInfo.getGrade());
 
-        gradeInfo.setTestScore(testScore);
-        gradeInfo.setCheckScore(checkScore);
-        gradeInfo.setAssignScore(assignScore);
-        gradeInfo.setGrade(grade);
+        if(testScore < lectTest && assignScore < lectAssign && checkScore < lectCheck) {
+            // testScore, checkScore, assignScore, grade 설정
+            gradeInfo.setTestScore(testScore);
+            gradeInfo.setCheckScore(checkScore);
+            gradeInfo.setAssignScore(assignScore);
+            gradeInfo.setGrade(grade);
 
-        // 변경된 정보를 저장
-        gradeInfoRepository.save(gradeInfo);
+            // 변경된 정보를 저장
+            gradeInfoRepository.save(gradeInfo);
 
-        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
-        model.addAttribute("lectInfo", lectInfo);
-        model.addAttribute("lectId", lectId);
-        model.addAttribute("gradeList", professorService.EnteringGradeCheckList(lectId));
-        return "/prof/assiGradeWrite";
+
+            model.addAttribute("lectInfo", lectInfo);
+            model.addAttribute("lectId", lectId);
+            model.addAttribute("gradeList", professorService.EnteringGradeCheckList(lectId));
+            return "/prof/assiGradeWrite";
+
+        } else {
+            model.addAttribute("message", "입력한 점수를 다시 확인해주세요.");
+            model.addAttribute("SearchUrl", "/prof/assiGrade");
+            return "Message";
+        }
     }
 
     @PostMapping("/assiGradeWrite/enter")
