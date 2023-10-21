@@ -114,4 +114,16 @@ public class Member {
         return member;
     }
 
+    public Member(String userId, String userPassword, String userName, String userPhoneNum,  String userAddr, String userEmail, LocalDate userRegDate, LocalDate userBirthday,  Gender userGender, RoleType userRole) {
+        this.userId = userId;
+        this.userPassword = userPassword;
+        this.userName = userName;
+        this.userPhoneNum = userPhoneNum;
+        this.userRegDate = userRegDate;
+        this.userAddr = userAddr;
+        this.userBirthday = userBirthday;
+        this.userEmail = userEmail;
+        this.userGender = userGender;
+        this.userRole = userRole;
+    }
 }

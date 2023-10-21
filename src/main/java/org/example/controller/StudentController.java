@@ -1,6 +1,9 @@
 package org.example.controller;
 
 import groovy.util.logging.Log4j2;
+import groovy.util.logging.Slf4j;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.*;
 import org.example.entity.LectInfo;
@@ -10,21 +13,32 @@ import org.example.repository.MemberRepository;
 import org.example.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import lombok.RequiredArgsConstructor;
+import org.example.dto.CheckGradeDto;
+import org.example.dto.CheckSemGradeDto;
 import org.example.entity.*;
 import org.example.repository.GradeInfoRepository;
 import org.example.repository.LectInfoRepository;
 import org.example.repository.StudLectApplyRepository;
 import org.example.repository.StudentRepository;
 import org.example.service.MemberService;
+import org.example.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @Log4j2
@@ -260,10 +274,12 @@ public class StudentController {
                             .build();
 
                     gradeInfoRepository.save(gradeInfo);
+
                     model.addAttribute("message", "신청되었습니다.");
                     model.addAttribute("SearchUrl", "/student/scr");
                     model.addAttribute("list", studentService.lectInfoList());
                     model.addAttribute("list1", studentService.studLectApplyCheckList(member.getId()));
+
                     return "Message";
 
                 } else {

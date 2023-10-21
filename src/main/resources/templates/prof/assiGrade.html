@@ -34,53 +34,15 @@
                             <span th:if="${not lectInfo.isRecord}">N</span>
                         </td>
                         <td>
-                            <button class="ajax_button" th:attr="data-lect-id = ${lectInfo.lectId}"  type="button" id="toDetail">
+                            <a class="toDetail" th:href="@{'/prof/assiGradeWrite/' + ${lectInfo.lectId}}"  type="button" id="toDetail">
                             작성하기
-                            </button>
+                            </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <div id="detail" class="detail" style="display: none">
-
-                <div class="assi_grade_text_box">
-                    <div class="assi_grade_text">
-                        <span>💻&nbsp 성적입력</span>
-                    </div>
-                </div>
-
-
-                <form id="gradeForm" action="/prof/assiGrade/enter" method="POST">
-                <table class="assi_grade_body_stud_tb_body">
-                    <thead>
-                        <tr>
-                            <td><span>성명</span></td>
-                            <td><span>이메일</span></td>
-                            <td id="lectCheck">출석(최대점수)</td>
-                            <td id="lectAssign">과제(최대점수)</td>
-                            <td id="lectTest">시험(최대점수)</td>
-                            <td><span>평가등급</span></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <input type="hidden" id="lectId" name="lectId" value="여기에_lectId_값_동적으로_설정">
-                            <td id="userName"></td>
-                            <td id="userEmail"></td>
-                            <td id="checkScore"></td>
-                            <td id="assignScore"></td>
-                            <td id="testScore"></td>
-                            <td id="grade"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="assi_grade_reg_btn_box">
-                    <button type="submit" id="regBtn">등록</button>
-                </div>
-                </form>
+            <div id="detail" class="detail">
             </div>
         </div>
     </div>
-    <script src="/js/prof/assiGrade.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </div>

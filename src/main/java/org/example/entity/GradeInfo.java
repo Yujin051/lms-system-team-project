@@ -62,4 +62,13 @@ public class GradeInfo {
 //        this.assignScore = assignScore;
 //        this.testScore = testScore;
 //    }
+
+
+    public GradeInfo(StudLectApply studLectApply, String grade, Long checkScore, Long assignScore, Long testScore) {
+        this.studLectApply = studLectApply;
+        this.grade = grade;
+        this.checkScore = checkScore;
+        this.assignScore = assignScore;
+        this.testScore = testScore;
+    }
 }
