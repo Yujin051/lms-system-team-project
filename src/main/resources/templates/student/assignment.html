@@ -72,13 +72,11 @@
                 </div>
             </div>
         </div>
-            <button type="submit">제출</button>
         </form>
 
             <div class="assi_total_status_text_box">
                 <span>📊&nbsp 과제정보</span>
                 <div class="assi_que_btn_box">
-                    <button type="button" class="assi_que_btn"><a th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/add'}">과제출제</a></button>
                 </div>
             </div>
             <div class="assi_ch_total_status_grid1">
@@ -108,26 +106,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="assi_stu_info_text_box">
-                <span>🙌&nbsp 학생정보</span>
-            </div>
-            <div class="assi_ch_total_status_grid2">
-                <table id="studentTable" class="assi_ch_stud_info_tb">
-                    <thead>
-                        <tr>
-                            <td><span>학번</span></td>
-                            <td><span>성명</span></td>
-                            <td><span>제출일시</span></td>
-                            <td><span>제출구분</span></td>
-                            <td><span>과제제출정보</span></td>
-                            <td><span>피드백</span></td>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                </table>
-            </div>
     </div>
     <script src="/js/prof/assignment.js"></script>
 </div>

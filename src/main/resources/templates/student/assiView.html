@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
     <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
     <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+    <script>
+        function history_back() {
+            history.back();
+        }
+    </script>
 </head>
 <div id="mainFrame" layout:fragment="content" class="mainFrame">
     <form class="assi_info_body" method="post">
@@ -15,7 +20,7 @@
                 <span>🔍&nbsp 참여자정보</span>
             </div>
             <div class="assi_info_save_btn">
-                <button type="button" class="backBtn">저장</button>
+                <button onclick="history_back()" value="history.back()" type="button" class="backBtn">돌아가기</button>
             </div>
             <!--            <div class="assi_info_back_btn">-->
             <!--                <button type="button" class="backBtn">돌아가기</button>-->
@@ -71,16 +76,6 @@
                     <div class="assi_info_assi_detail_content_box">
                         <div class="assi_info_assi_detail">
                             <div th:text="${assignments.detail}"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="assi_info_feedback_box">
-                    <div class="assi_info_feedback_text_box">
-                        <span>과제 평가물</span>
-                    </div>
-                    <div class="assi_info_feedback_content_box">
-                        <div class="assi_info_feedback">
-                            <textarea></textarea>
                         </div>
                     </div>
                 </div>
