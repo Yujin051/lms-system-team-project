@@ -138,7 +138,7 @@ public class LectInfo {
                     Long lectCredit, Long lectNownum, Long lectMaxnum,
                     LocalDateTime enrollStart, LocalDateTime enrollEnd,
                     LocalDate lectStart, LocalDate lectEnd,
-                    Boolean isActive) {
+                    Boolean isActive, Long lectAssign, Long lectCheck, Long lectTest) {
         this.professor = professor;
         this.lectName = lectName;
         this.lectSubject = lectSubject;
@@ -152,6 +152,9 @@ public class LectInfo {
         this.lectStart = lectStart;
         this.lectEnd = lectEnd;
         this.isActive = isActive;
+        this.lectAssign = lectAssign;
+        this.lectCheck = lectCheck;
+        this.lectTest = lectTest;
     }
 
 }

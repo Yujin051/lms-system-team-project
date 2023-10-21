@@ -26,7 +26,7 @@ public class MemberService implements UserDetailsService {
     private final MemberRepository memberRepository;
 
     // 테스트용 경로 설정, 후에 전환 필요
-    @Value("C:\\Users\\admin\\IdeaProjects\\lms-system-team-project2\\src\\main\\resources\\static\\img\\profile\\")
+    @Value("C:\\app\\java\\lms-system-team-project\\src\\main\\resources\\static\\img\\profile\\")
     String imgPath;
 
     public String getFullPath(String filename) {
