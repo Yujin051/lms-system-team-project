@@ -192,6 +192,9 @@ section .middle_article2 .article2_box .teacher_comu_box {
     line-height: 45px;
     text-indent: 10px;
     font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 section .middle_article2 .article2_box .teacher_comu_box:hover {
@@ -225,6 +228,9 @@ section .middle_article2 .article2_box .notice_box {
     line-height: 45px;
     text-indent: 10px;
     font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 section .middle_article2 .article2_box .notice_box:hover {
@@ -258,6 +264,9 @@ section .middle_article2 .article2_box .class_notice_box {
     line-height: 45px;
     text-indent: 10px;
     font-size: 15px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 section .middle_article2 .article2_box .class_notice_box:hover {
