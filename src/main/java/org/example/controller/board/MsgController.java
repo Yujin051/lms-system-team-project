@@ -187,8 +187,8 @@ public class MsgController {
     @GetMapping("/msg/search/{searchType}/")
     public String searchList(
             Model model ,
-            @PathVariable(name = "searchType") String searchType,
 //            @PathVariable(name = "listType") Long listType,
+            @PathVariable(name = "searchType") String searchType,
             @RequestParam(name = "searchValue") String value,
             @PageableDefault(page = 0 , size = 5 , sort = "id" , direction = Sort.Direction.DESC)Pageable pageable,
             Principal principal){
