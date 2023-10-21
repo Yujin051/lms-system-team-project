@@ -76,7 +76,7 @@ public interface LectNthRepository extends JpaRepository<LectNth, Long> {
 
     /* 강의 차시정보 신규/저장 */
     @Query("SELECT NEW org.example.dto.LmsContsDtoMin(nth.nthId, cs.contsNo, nth.nthSequence," +
-            "cs.contsName, nth.nthName, cs.contsYout, cs.contsTime) " +
+            "cs.contsName, nth.nthName, cs.contsTime,cs.contsYout) " +
             "FROM LectNth nth " +
             " join nth.lectInfo lif on lif.lectId = nth.lectInfo.lectId" +
             " join nth.lmsConts cs on nth.lmsConts.contsNo = cs.contsNo" +
