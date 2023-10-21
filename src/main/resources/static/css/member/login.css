@@ -20,21 +20,21 @@ article {
     align-items: center; height: 600px;
 }
 .login_body {
-    width: 500px; height: 650px; border: 0px solid black; border-radius: 10px;
+    width: 500px; height: 768px; border: 0px solid black; border-radius: 10px;
 }
 
 /*이미지 부분*/
 .login_body > .login_img_box {
-    border: 0px solid black; width: 500px; height: 150px;
+    border: 0px solid black; width: 500px; height: 160px;
 }
 .login_body > .login_img_box img {
-    width: 500px; height: 130px;
+    width: 500px; height: 157px;
 }
 
 /*로그인 부분*/
 /*아이디 부분*/
 form {
-    border: 0px solid white; width: 500px; height: 599px; background: black;
+    border: 0px solid white; width: 500px; height: 599px; background: #0052f4;
     border-radius: 20px;
 }
 form > .login_text_box {
@@ -97,6 +97,9 @@ form > .login_btn_body button {
     background: white; color: black; font-family: 'KBO-Dia-Gothic_bold';
     font-size: 1.6rem; cursor: pointer;
 }
+form > .login_btn_body button:hover {
+    background: black; color: white; transition: 0.2s all;
+}
 
 /*아이디 찾기, 비밀번호 찾기, 회원가입 부분*/
 form > .find_btn_box {
@@ -109,6 +112,9 @@ form > .find_btn_box > .find_btn_body {
 }
 form > .find_btn_box a {
     text-decoration: none; color: white;
+}
+form > .find_btn_box a:hover {
+    color: black; transition: 0.2s all; font-weight: bold;
 }
 form > .find_btn_box > .find_btn_body > .find_id {
     width: 33%; display: flex; justify-content: center; height: 20px;
