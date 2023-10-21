@@ -50,7 +50,7 @@ public class UpDownController {
     public List<UploadResultDto> upload(UploadFileDto uploadFileDto){
 
         log.info("Post요청 /upload >>> upload()실행됨");
-        log.info("uploadFileDto::{}",uploadFileDto);
+//        log.info("uploadFileDto::{}",uploadFileDto);
 
         if(uploadFileDto.getFiles() != null){
 

@@ -36,11 +36,11 @@ public class WebErrorController implements ErrorController {
                 return "error/404";
             }
             else{
-                return "error/404";
+                return "member/login";
             }
         }
 
-        return "error/404";
+        return "member/login";
 
     }
 }
