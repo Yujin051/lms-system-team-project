@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/profdefault}">
+<head>
+    <link rel="stylesheet" href="/css/prof/assiGradeWrite.css">
+    <link rel="stylesheet" href="https://uicdn.toast.com/tui.pagination/latest/tui-pagination.css" />
+    <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css" />
+    <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
+    <script src="https://uicdn.toast.com/grid/latest/tui-grid.js"></script>
+</head>
+<div id="mainFrame" layout:fragment="content" class="mainFrame">
+    <div class="assi_grade_body">
+        <div class="assi_grade_view_box">
+            <div id="detail" class="detail">
+
+                <div class="assi_grade_text_box">
+                    <div class="assi_grade_text">
+                        <span>💻&nbsp 성적입력</span>
+                    </div>
+                </div>
+
+                    <table class="assi_grade_body_stud_tb_body">
+                        <thead>
+                            <tr>
+                                <td><span>성명</span></td>
+                                <td><span>이메일</span></td>
+                                <td th:text="'출석(' + ${lectInfo.lectCheck} + ')'">출석(최대점수)</td>
+                                <td th:text="'과제(' + ${lectInfo.lectAssign} + ')'">과제(최대점수)</td>
+                                <td th:text="'시험(' + ${lectInfo.lectTest} + ')'">시험(최대점수)</td>
+                                <td><span>평가등급</span></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="gradeInfo : ${gradeList}">
+                                <form name="form" th:action="@{/prof/assiGradeWrite}" method="post" id="era" th:object="${gradeList}">
+                                <td th:text="${gradeInfo.userName}"></td>
+                                <td th:text="${gradeInfo.userEmail}"></td>
+                                <td>
+                                    <input type="number" name="checkScore" th:value="${gradeInfo.checkScore}">
+                                </td>
+                                <td>
+                                    <input type="number" name="assignScore" th:value="${gradeInfo.assignScore}">
+                                </td>
+                                <td>
+                                    <input type="number" name="testScore" th:value="${gradeInfo.testScore}">
+                                </td>
+                                <td>
+                                    <input type="text" name="grade" th:value="${gradeInfo.grade}">
+                                </td>
+                                <input type="hidden" name ="gradeId" th:value="${gradeInfo.gradeId}"/>
+                                <input type="hidden" name ="lectId" th:value="${lectId}">
+                                <td>
+                                    <button onclick="javascript:btn()" id="submit1" type="submit">저장</button>
+                                </td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table>
+              <form th:action="@{/prof/assiGradeWrite/enter}" method="post" id="abrsacadabra">
+                <div class="assi_grade_reg_btn_box">
+                    <input type="hidden" name ="lectId" th:value="${lectInfo.lectId}">
+                    <button type="submit" id="regBtn">등록</button>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        function btn(){
+            alert('저장되었습니다.');
+        }
+    </script>
+</div>
