@@ -39,12 +39,15 @@ public class BoardInfo {
     @Column(name = "board_type" , nullable = false)
     @JsonIgnore
     private String boardType;
+    // 강좌정보
+    @OneToOne
+    @JoinColumn(name = "lect_info" , nullable = true)
+    private LectInfo lectInfo;
 
-        
+
     @Builder
     public BoardInfo(String boardName , String boardType){
         this.boardName = boardName;
         this.boardType = boardType;
     }
-
 }
