@@ -49,10 +49,10 @@
             <div class="assi_write_assi_name_box">
                 <div class="assi_write_assi_name_text_box">
                     <span>과제명</span>
-                    <input th:field="${assignment.assignments.lectInfo}" th:value="${lectId}" type="hidden">
+                    <input th:name="assignments" th:value="${assiId}" type="hidden">
                 </div>
                 <div class="assi_write_assi_name_input">
-                    <input th:field="${assignment.assignments.name}" type="text" id="assignName" placeholder="과제명" readonly/>
+                    <div th:text="${assi.name}" type="text" id="assignName" ></div>
                 </div>
             </div>
             <div class="assi_write_assi_detail_box">
@@ -63,6 +63,7 @@
                     <textarea th:field="${assignment.content}" id="assignDetail"></textarea>
                 </div>
             </div>
+            <input th:name="member" th:value="${member.id}" type="hidden"/>
             <div class="assi_write_assi_date_box">
                 <div class="assi_write_assi_start_box">
 <!--                    <div class="assi_write_assi_start_text_box">-->

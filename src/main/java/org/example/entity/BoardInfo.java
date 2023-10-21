@@ -51,4 +51,7 @@ public class BoardInfo {
         this.boardType = boardType;
     }
 
+
+
+
 }

@@ -1,5 +1,6 @@
 package org.example.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.example.dto.board.DirectMsgDto;
@@ -32,6 +33,7 @@ public class DirectMsg {
     //이전쪽지 ID
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "msg_org_id", nullable = true)
+    @JsonIgnore
     private DirectMsg orgMsg;
 
     // 발신자 id
@@ -46,7 +48,7 @@ public class DirectMsg {
 
     // 작성일시
     @CreatedDate
-    @Column(name = "send_at" , nullable = false)
+    @Column(name = "send_at" , nullable = false , updatable = false)
     private LocalDateTime sendAt;
 
     // 수신자 읽은날짜
@@ -94,5 +96,9 @@ public class DirectMsg {
         this.recvDelYn = true;
     }
 
+    // 읽은 시간 기록
+    public void setRecvAt(LocalDateTime recvAt){
+        this.recvAt = recvAt;
+    }
 
 }

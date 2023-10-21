@@ -49,7 +49,7 @@
             <div class="assi_write_assi_name_box">
                 <div class="assi_write_assi_name_text_box">
                     <span>과제명</span>
-                    <input th:field="${assignment.lectInfo}" th:value="${lectId}" type="hidden">
+                    <input th:name="lectInfo" th:value="${lectId}" type="hidden" />
                 </div>
                 <div class="assi_write_assi_name_input">
                     <input th:field="${assignment.name}" type="text" id="assignName" placeholder="과제명"/>

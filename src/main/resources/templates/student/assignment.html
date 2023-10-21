@@ -8,33 +8,24 @@
     <script type="text/javascript" src="https://uicdn.toast.com/tui.pagination/v3.4.0/tui-pagination.js"></script>
     <script>
         $(document).ready(function() {
-            $('#searchForm').submit(function(event) {
-                event.preventDefault();
-                var lectId = $('#lectId').val();
-                var assiId = $('#assiId').val();
+            $('.assiSubmitBtn').on('click', function(event) {
+                event.preventDefault(); // 클릭 이벤트 기본 동작 중단
 
-                // Make an AJAX request to fetch student data based on lectId and assiId
+                var submitButton = $(this);
+                var buttonText = submitButton.find('.buttonText'); // 버튼 내의 텍스트 요소
+
+                // AJAX 요청을 보내고 성공하면 버튼 텍스트를 변경
                 $.ajax({
-                    type: 'GET',
-                    url: '/prof/findStudentInfo',
-                    data: { lectId: lectId, assiId: assiId },
-                    success: function(data) {
-                        // Update the table with student data
-                        var studentTable = $('#studentTable');
-                        studentTable.empty();
-                        $.each(data, function(index, student) {
-                            studentTable.append('<tr>' +
-                                '<td>' + student.member.memberId + '</td>' +
-                                '<td>' + student.member.userName + '</td>' +
-                                '<td>' + student.studGrade + '</td>' +
-                                '<td>' + student.studMaxCr + '</td>' +
-                                '<td>' + student.studNowCr + '</td>' +
-                                '<td>' + student.studCreCpl + '</td>' +
-                                '</tr>');
-                        });
+                    type: 'POST', // 또는 사용하는 메서드
+                    url: submitButton.attr('href'), // 또는 사용하는 URL
+                    success: function(response) {
+                        if (response === 'success') {
+                            // "제출" 버튼 텍스트를 "제출됨"으로 변경
+                            buttonText.text('제출됨');
+                        }
                     },
                     error: function() {
-                        alert('An error occurred while fetching student data.');
+                        alert('과제 제출 중 오류가 발생했습니다.');
                     }
                 });
             });
@@ -81,13 +72,11 @@
                 </div>
             </div>
         </div>
-            <button type="submit">제출</button>
         </form>
 
             <div class="assi_total_status_text_box">
                 <span>📊&nbsp 과제정보</span>
                 <div class="assi_que_btn_box">
-                    <button type="button" class="assi_que_btn"><a th:href="@{'/prof/lecture/view/' + ${lectId} + '/assignments/add'}">과제출제</a></button>
                 </div>
             </div>
             <div class="assi_ch_total_status_grid1">
@@ -110,33 +99,14 @@
                             <td><span th:text="${assignment.end}"></span></td>
                             <td><span th:text="${assignment.isActive ? '진행중' : '마감'}"></span></td>
                             <td>
-                                <a type="button" class="assiDeleteBtn" th:href="@{'/student/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/submit'}"><span>제출</span></a>
-                                <a type="button" class="assiUpdateBtn" th:href="@{'/student/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/modify'}"><span>수정</span></a>
+                                <a style="text-decoration: none; background: #6b6b6b; color: white; border: none; width: 76px; height: 28px; border-radius: 5px; line-height: 28px;" type="button" class="assiDeleteBtn" th:href="@{'/student/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}+ '/submit'}"><span class="buttonText">제출</span></a>
+                                <a style="text-decoration: none; background: #6b6b6b; color: white; border: none; width: 76px; height: 28px; border-radius: 5px; line-height: 28px;" type="button" class="assiUpdateBtn" th:href="@{'/student/lecture/view/' + ${lectId} + '/assignments/'+ ${assignment.getAssiId}}"><span>과제보기</span></a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="assi_stu_info_text_box">
-                <span>🙌&nbsp 학생정보</span>
-            </div>
-            <div class="assi_ch_total_status_grid2">
-                <table id="studentTable" class="assi_ch_stud_info_tb">
-                    <thead>
-                        <tr>
-                            <td><span>학번</span></td>
-                            <td><span>성명</span></td>
-                            <td><span>제출일시</span></td>
-                            <td><span>제출구분</span></td>
-                            <td><span>과제제출정보</span></td>
-                            <td><span>피드백</span></td>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                    </tbody>
-                </table>
-            </div>
     </div>
     <script src="/js/prof/assignment.js"></script>
 </div>

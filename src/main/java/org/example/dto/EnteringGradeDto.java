@@ -5,6 +5,8 @@ import lombok.Getter;
 
 @Getter
 public class EnteringGradeDto {
+    // 성적 ID
+    private Long gradeId;
     // 과제 배점
     private Long lectAssign;
     // 출석 배점
@@ -24,7 +26,8 @@ public class EnteringGradeDto {
     //시험점수
     private Long testScore;
 
-    public EnteringGradeDto(Long lectAssign, Long lectCheck, Long lectTest, String userName, String userEmail, String grade, Long checkScore, Long assignScore, Long testScore) {
+    public EnteringGradeDto(Long gradeId, Long lectAssign, Long lectCheck, Long lectTest, String userName, String userEmail, String grade, Long checkScore, Long assignScore, Long testScore) {
+        this.gradeId = gradeId;
         this.lectAssign = lectAssign;
         this.lectTest = lectTest;
         this.lectCheck = lectCheck;

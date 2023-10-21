@@ -34,7 +34,7 @@ public class CommentRestController {
     public ResponseEntity<BoardComnt> addCommentArticle(@RequestBody CommentDto commentDto , Principal principal){
 
         log.info("POST요청 /comment/write >>> addCommentArticle()실행됨.");
-        log.info("commentDto::{}",commentDto);
+//        log.info("commentDto::{}",commentDto);
         // 소속된 게시글 가져오기
         BoardArticle boardArticle =boardService.findById(commentDto.getBoardArticleId());
         // 사용자 정보 가져오기
@@ -53,10 +53,10 @@ public class CommentRestController {
     public ResponseEntity<BoardComnt> updateCommentArticle(@RequestBody CommentDto commentDto){
 
         log.info("Put요청 /comment/modify >>> updateCommentArticle()실행됨.");
-        log.info("업데이트 내용 commentDto::{}",commentDto);
+//        log.info("업데이트 내용 commentDto::{}",commentDto);
 
         BoardComnt comnt = commentService.update(commentDto);
-        log.info("comnt 업데이트 받고 온 상태::{}",comnt);
+//        log.info("comnt 업데이트 받고 온 상태::{}",comnt);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(comnt);
     }
@@ -66,7 +66,7 @@ public class CommentRestController {
     public ResponseEntity<String> deleteComment(@RequestBody CommentDto commentDto){
 
         log.info("Post요청 /comment/delete >>> deleteComment()실행됨.");
-        log.info("commentDto::{}",commentDto);
+//        log.info("commentDto::{}",commentDto);
 
         BoardComnt comnt = commentService.delete(commentDto);
 

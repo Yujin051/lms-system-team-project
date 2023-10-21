@@ -1,10 +1,7 @@
 package org.example.controller;
 
 import groovy.util.logging.Log4j2;
-import groovy.util.logging.Slf4j;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.*;
 import org.example.entity.LectInfo;
@@ -14,12 +11,15 @@ import org.example.repository.MemberRepository;
 import org.example.service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.example.dto.CheckGradeDto;
+import org.example.dto.CheckSemGradeDto;
 import org.example.entity.*;
 import org.example.repository.GradeInfoRepository;
 import org.example.repository.LectInfoRepository;
 import org.example.repository.StudLectApplyRepository;
 import org.example.repository.StudentRepository;
 import org.example.service.MemberService;
+import org.example.service.StudentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -27,8 +27,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -197,9 +195,12 @@ public class StudentController {
     }
 
     @GetMapping("/lecture/view/{lectId}/assignments/{assiId}/submit")
-    public String addAssignment2(@PathVariable("lectId") Long lectId, @PathVariable("assiId") Long assiId, Model model) {
+    public String addAssignment2(@PathVariable("lectId") Long lectId, Principal principal, @PathVariable("assiId") Long assiId, Model model) {
         LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
         Assignments assignments = assignmentsRepository.findById(assiId).orElseThrow(EntityNotFoundException::new);
+        Member member = memberRepository.findByUserId(principal.getName());
+        model.addAttribute("member", member);
+        model.addAttribute("assi",assignments);
         model.addAttribute("lectId", lectInfo.getLectId());
         model.addAttribute("assiId", assignments.getAssiId());
         model.addAttribute("lectName", lectInfo.getLectName());
@@ -211,7 +212,7 @@ public class StudentController {
     public String addAssignmentSubmit(@PathVariable("lectId")Long lectId, @PathVariable("assiId")Long assiId, @Validated AssignmentSubmitDto assignmentSubmitDto, @RequestPart MultipartFile file, Model model) throws Exception {
         try {
             AssignSubmit assignSubmit = AssignSubmit.createAssignmentSubmit(assignmentSubmitDto);
-            assignSubmitService.saveAssignSubmit(assignSubmit);
+            assignSubmitService.saveAssignmentSubmit(assignSubmit, file);
 
             model.addAttribute("message", "과제가 제출되었습니다.");
         } catch (Exception e) {
@@ -226,7 +227,6 @@ public class StudentController {
     public String courseRegisteration(Model model, Principal principal) {
         // 사용자 로그인 아이디 가져오기
         String loginId = principal.getName();
-        System.out.println(loginId);
         // 사용자 정보 가져오기(member)
         Member member = memberService.memberView(loginId);
         Student student = studentRepository.findByMember(member);
@@ -300,6 +300,8 @@ public class StudentController {
         Member member = memberService.memberView(loginId);
         Student student = studentRepository.findByMember(member);
         LectInfo lectInfo = lectInfoRepository.findById(lectId).orElseThrow();
+
+
         lectInfo.minus();
         student.setStudNowCr(student.getStudNowCr() - lectCredit);
 

@@ -32,6 +32,16 @@ public interface DirectMsgPagingRepository extends PagingAndSortingRepository<Di
     @Query("SELECT dm FROM DirectMsg dm WHERE (dm.recvId = :myMember AND dm.recvDelYn = true) OR (dm.sendId = :myMember AND dm.sendDelYn = true)")
     Page<DirectMsg> findMyTrashPage(@Param("myMember")Member member , Pageable pageable);
 
+    // 메시지 리스트 내용 검색 (전체에서)
+    @Query("SELECT dm FROM DirectMsg dm WHERE dm.msgCont LIKE %:searchValue% AND (dm.recvId = :myMember AND dm.recvDelYn = false) OR (dm.sendId = :myMember AND dm.sendDelYn = false)")
+    Page<DirectMsg> searchDirectMsgByMsgCont(@Param("searchValue") String searchValue , @Param("myMember") Member myMember , Pageable pageable);
 
+    // 메시지 리스트 제목 검색 (전체에서)
+    @Query("SELECT dm FROM DirectMsg dm WHERE dm.msgTitle LIKE %:searchValue% AND (dm.recvId = :myMember AND dm.recvDelYn = false) OR (dm.sendId = :myMember AND dm.sendDelYn = false)")
+    Page<DirectMsg> searchDirectMsgByMsgTitle(@Param("searchValue") String searchValue , @Param("myMember") Member myMember , Pageable pageable);
+
+    // 메시지 리스트 받은이 검색 (전체에서)
+    @Query("SELECT dm FROM DirectMsg dm WHERE dm.recvId.userName LIKE %:searchValue% AND (dm.sendId = :myMember AND dm.sendDelYn = false)")
+    Page<DirectMsg> searchDirectMsgByRecvId(@Param("searchValue") String searchValue , @Param("myMember") Member myMember , Pageable pageable);
 
 }

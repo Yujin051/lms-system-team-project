@@ -1,17 +1,13 @@
 package org.example.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.example.dto.AssignmentsDto;
-import org.example.dto.LectInfoDTO;
-import org.example.dto.ProfessorDto;
+import org.example.dto.*;
 import org.example.entity.*;
-import org.example.repository.AssignmentsRepository;
-import org.example.repository.LectInfoRepository;
-import org.example.repository.MemberRepository;
-import org.example.repository.ProfessorRepository;
+import org.example.repository.*;
 import org.example.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.dto.EnteringGradeDto;
 import org.example.entity.Member;
 import org.example.service.MemberService;
 import org.example.service.ProfessorService;
@@ -56,12 +51,19 @@ public class ProfessorController {
     private final AssignmentsRepository assignmentsRepository;
     private final LectureService lectureService;
 
+    private final GradeInfoRepository gradeInfoRepository;
     private final LectInfoRepository lectInfoRepository;
     private final AssignSubmitService assignSubmitService;
     private final StudentService studentService;
     private final AssignmentsService assignmentsService;
+    private final AssignSubmitRepository assignSubmitRepository;
 
 
+    @GetMapping("/test23")
+    public String testing() {
+        System.out.println("컨트롤러테스트 "+List.of(assignSubmitRepository.findAssignmentByLectIdAndAssignId(1L, 1L)));
+        return "/prof/prof_main";
+    }
 
 
     // 강사 메인페이지
@@ -199,9 +201,11 @@ public class ProfessorController {
         LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
         List<Assignments> assignmentsList = assignmentsRepository.findByLectInfoLectId(lectId);
 
+        List<AssignSubmit> assignSubmitList = assignSubmitRepository.findByAssignmentsLectInfoLectId(lectId);
 //        List<AssignSubmit> submissions = assignSubmitService.getSubmissionsByLectId(lectId);
         model.addAttribute("lectInfo", lectInfo);
         model.addAttribute("assignmentsList", assignmentsList);
+        model.addAttribute("submitList", assignSubmitList);
 //        model.addAttribute("submissions", submissions);
         return "prof/assignment"; // Thymeleaf 템플릿 경로 수정
     }
@@ -232,6 +236,14 @@ public class ProfessorController {
     public String modifyAssignment(@PathVariable("lectId") Long lectId, @PathVariable("id")Long id, Model model) {
         model.addAttribute("assignment",assignmentsService.AssignmentsView(id));
         return "prof/assimodify";
+    }
+
+    @GetMapping("/lecture/view/{id}/assignments/{assiId}/view")
+    public String assiSubmitView(@PathVariable("id")long lectId, @PathVariable("assiId")long assiId, Model model, Principal principal){
+        model.addAttribute("assignments",assignSubmitRepository.findAssignmentByLectIdAndAssignId(lectId, assiId));
+        System.out.println("컨트롤러테스트 "+List.of(assignSubmitRepository.findAssignmentByLectIdAndAssignId(lectId, assiId)));
+        System.out.println("lectId :"+ lectId + "assiId : "+ assiId);
+        return "/prof/assiView";
     }
 
     @PostMapping("/lecture/view/{lectId}/assignments/{id}/modify/modify")
@@ -268,11 +280,6 @@ public class ProfessorController {
          * @author 임휘재
          */
 
-    //강사 : 나의강의실 - 과제정보쓰기
-    @GetMapping("/assiWrite")
-    public String assiWrite(){
-        return "/prof/assiWrite";
-    }
 
     //강사 : 나의강의실 - 성적입력
     @GetMapping("/assiGrade")
@@ -286,16 +293,88 @@ public class ProfessorController {
         return "/prof/assiGrade";
     }
 
-    // 강사 : 성적입력 작성하기
-    @RequestMapping(value = "/assiGrade/write", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<?> findEnteringGrade(@RequestParam String lectId) {
-        log.info("lect아이디는?", lectId);
-        Long LongLectId = Long.valueOf(lectId);
-        List<EnteringGradeDto> enteringGradeDtoList = professorService.EnteringGradeCheckList(LongLectId);
-        log.info("디티오는?, {}", enteringGradeDtoList.toString());
-        return ResponseEntity.status(HttpStatus.OK).body(enteringGradeDtoList);
+    @GetMapping("/assiGradeWrite/{lectId}")
+    public String assiGradeWrite(Model model, @PathVariable("lectId") Long lectId) {
+        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
+        model.addAttribute("lectInfo", lectInfo);
+        model.addAttribute("lectId", lectId);
+        model.addAttribute("gradeList", professorService.EnteringGradeCheckList(lectId));
+        return "/prof/assiGradeWrite";
     }
+
+
+    @PostMapping("/assiGradeWrite")
+    public String assiGradeWriteSave(Model model,
+                                      @RequestParam("lectId") Long lectId,
+                                      @RequestParam("checkScore") Long checkScore,
+                                      @RequestParam("assignScore") Long assignScore,
+                                      @RequestParam("testScore") Long testScore,
+                                      @RequestParam("grade") String grade,
+                                      @RequestParam("gradeId") Long gradeId) {
+
+        log.info("grade: {}",grade);
+        log.info("gradeId: {}",gradeId);
+        GradeInfo gradeInfo = gradeInfoRepository.findById(gradeId).orElseThrow();
+        // testScore, checkScore, assignScore 설정
+        log.info("gradeInfo :{}" ,gradeInfo.getGrade());
+
+        gradeInfo.setTestScore(testScore);
+        gradeInfo.setCheckScore(checkScore);
+        gradeInfo.setAssignScore(assignScore);
+        gradeInfo.setGrade(grade);
+
+        // 변경된 정보를 저장
+        gradeInfoRepository.save(gradeInfo);
+
+        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
+        model.addAttribute("lectInfo", lectInfo);
+        model.addAttribute("lectId", lectId);
+        model.addAttribute("gradeList", professorService.EnteringGradeCheckList(lectId));
+        return "/prof/assiGradeWrite";
+    }
+
+    @PostMapping("/assiGradeWrite/enter")
+    public String assiGradeWriteEnter(Model model, @RequestParam("lectId") Long lectId) {
+        LectInfo lectInfo = lectInfoRepository.findByLectId(lectId);
+        lectInfo.setRecord(true);
+
+        lectInfoRepository.save(lectInfo);
+
+        model.addAttribute("message", "등록되었습니다.");
+        model.addAttribute("SearchUrl", "/prof/assiGrade");
+        return "Message";
+    }
+
+//    // 강사 : 성적입력 작성하기
+//    @RequestMapping(value = "/assiGrade/write", method = RequestMethod.POST)
+//    @ResponseBody
+//    public ResponseEntity<?> findEnteringGrade(@RequestParam String lectId) {
+//    //    log.info("lect아이디는?", lectId);
+//        Long LongLectId = Long.valueOf(lectId);
+//        List<EnteringGradeDto> enteringGradeDtoList = professorService.EnteringGradeCheckList(LongLectId);
+//    //    log.info("디티오는?, 1: {}, 2: {}", enteringGradeDtoList.get(0).toString());
+//        return ResponseEntity.status(HttpStatus.OK).body(enteringGradeDtoList);
+//    }  실패작이에여~~~~~~~~~~~~
+
+//    @PostMapping("/assiGrade/enter")
+//    public String assiGradeEnter(Model model, @RequestParam("gradeId") Long gradeId, @RequestParam("checkScore") Long checkScore, @RequestParam("assignScore") Long assignScore, @RequestParam("testScore") Long testScore){
+//        log.info("아무거나떠라?", gradeId);
+//        log.info("아무거나떠라?", assignScore);
+//        log.info("아무거나떠라?", checkScore);
+//        log.info("아무거나떠라?", testScore);
+//        GradeInfo gradeInfoEnter = gradeInfoRepository.findById(gradeId).orElseThrow(EntityNotFoundException::new);
+//        gradeInfoEnter.setAssignScore(assignScore);
+//        gradeInfoEnter.setCheckScore(checkScore);
+//        gradeInfoEnter.setTestScore(testScore);
+//        model.addAttribute("message", "등록되었습니다.");
+//        model.addAttribute("SearchUrl", "/prof/assiGrade");
+//        return "Message";
+//    }
+
+//    @GetMapping("/assiGradeWrite")
+//    public String assiGradeWrite() {
+//       return "/prof/assiGradeWrite";
+//    } 실패작이에여~~~~~~~~~~~~~~
 
     @GetMapping("/onlineclass")
     public String test2() {

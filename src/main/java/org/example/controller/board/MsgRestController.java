@@ -50,7 +50,7 @@ public class MsgRestController {
     @PostMapping("/msg/write")
     public ResponseEntity<?> sendMsg(@RequestBody DirectMsgDto directMsgDto , Principal principal){
         log.info("Post요청 /board/msg/article_write >>> sendMsg()실행됨.");
-        log.info("directMsgDto::{}" , directMsgDto);
+//        log.info("directMsgDto::{}" , directMsgDto);
         // 받는사람의 숫자가 1보다 많다면
         if(directMsgDto.getToSome().size() > 1){
             List<DirectMsg> msgs = directMsgService.saveAll(directMsgDto , principal);
@@ -60,7 +60,7 @@ public class MsgRestController {
         // 받는 사람이 한명인 경우
         else{
             DirectMsg msg = directMsgService.save(directMsgDto , principal);
-            log.info("msg::{}",msg);
+//            log.info("msg::{}",msg);
             return ResponseEntity.status(HttpStatus.CREATED).body(msg);
         }
     }

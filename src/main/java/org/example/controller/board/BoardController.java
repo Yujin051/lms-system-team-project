@@ -1,31 +1,33 @@
 package org.example.controller.board;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.constraints.Null;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.constant.RoleType;
 import org.example.dto.board.ArticleDto;
-import org.example.dto.board.DirectMsgDto;
 import org.example.dto.board.PageDto;
 import org.example.entity.BoardArticle;
 import org.example.entity.BoardComnt;
 import org.example.entity.FileInfo;
 import org.example.entity.Member;
-import org.example.service.*;
+import org.example.service.BoardService;
+import org.example.service.CommentService;
+import org.example.service.FileInfoService;
+import org.example.service.MemberService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author 임승범
@@ -147,12 +149,12 @@ public class BoardController {
 
         if(id == null){
             model.addAttribute("article" ,articleDto);
-            log.info("in null로 실행됨.");
+//            log.info("in null로 실행됨.");
         }
         else{
             // 게시글 정보 가져오기
             BoardArticle boardArticle = boardService.findById(id);
-            log.info("boardArticle::{}",boardArticle);
+//            log.info("boardArticle::{}",boardArticle);
             // 게시글 id 넣어주기
             articleDto.setId(id);
             // 게시글 제목 넣어주기
@@ -177,7 +179,7 @@ public class BoardController {
             @PageableDefault(page = 0 , size = 10 , sort = "Id" , direction = Sort.Direction.DESC)Pageable pageable,
             Principal principal){
 
-        log.info("Get요청 /board/search/{" + searchType + "}/{" + id + "} >>> searchList() 실행됨.");
+        log.info("Get요청 /board/search/{" + searchType + "}/{" + id + "}?" + value + " >>> searchList() 실행됨.");
 
         Page<BoardArticle> articles = null;
 
@@ -188,13 +190,13 @@ public class BoardController {
             articles = boardService.searchByContent(value , id , pageable);
         }
         else if(searchType.equals("writer")){
-            log.info("<< writer 검색 >>");
+//            log.info("<< writer 검색 >>");
             articles = boardService.searchByWriter(value , id , pageable);
         }
 
         if(articles != null){
             PageDto pageDto = new PageDto(articles);
-            log.info("pageDto::{}" , pageDto);
+//            log.info("pageDto::{}" , pageDto);
 
             // principal로 사용자 권한 가져오기
             Member member = memberService.memberView(principal.getName());
