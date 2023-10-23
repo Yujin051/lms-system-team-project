@@ -31,3 +31,32 @@
   <img src="https://img.shields.io/badge/mariadb-003545?style=for-the-badge&logo=mariadb&logoColor=white">
   <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
 </div>
+
+<div align=left><h2>맴버 구성 및 역할 분담</h2></div>
+
+**😺팀장 권혁인** : 강사관리, 강좌 관리, 수강신청 조회, 유튜브 등록
+
+**😺팀원 임휘재** : 온라인강의조회, 강의차시정보조회, 차시 상세정보 CRUD
+
+**😺팀원 신동은** : 
+
+**😺팀원 이현석** : 
+
+**😺팀원 신민기** : 
+
+**😺팀원 임승범** : 
+
+<div align=left><h2>💻 화면 구성</h2></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
