@@ -62,7 +62,7 @@
 </div>
 
 <div align=center>
-    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/105468233/9f7f7477-8dfc-490a-899b-2ad6b62825a2.png"/>
+    
 </div>
 
 <div align=left><h1>💡 주요 기능</h1></div>
