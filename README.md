@@ -83,11 +83,13 @@
 <div align=center>
     <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/586c2b69-7184-4188-96e1-2586c7376d52.png"/>
   <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/262b6632-aa68-453c-b8c7-78194e39d7c8.png"/>
+  <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381874/0cf8145f-52e3-4204-8102-6ddbf38c6b57.png"/>
 </div>
 
 
 <div align=center>
-    
+  
+ 
 </div>
 
 <div align=center>
