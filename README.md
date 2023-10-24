@@ -45,7 +45,7 @@
 
 **😺팀원 신민기** : AJAX를 사용한 온라인강의 조회, AJAX를 사용한 강의 차시정보 조회, AJAX를 사용한 강의 차시 상세정보 CRUD
 
-**😺팀원 임승범** : 
+**😺팀원 임승범** : 게시글/댓글/쪽지 CRUD , 파일 업로드 및 다운로드
 
 <div align=left><h1>💻 화면 구성</h1></div>
 
@@ -68,9 +68,15 @@
 </div>
 
 <div align=center>
-    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/931aee46-e790-4b1c-9038-c2243a41dc45.png/>
+    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/28c83290-72ef-432b-a139-6ba8a950f210.png"/>
+    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/6bee0e8f-b6d5-4bab-ac3d-7970767e9f23.png"/>
+    <img width="30%" src=""/>
+</div>
+
+<div align=center>
+    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/5e98ec97-179c-4102-a477-ebb84a6fb0eb.png"/>
     <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/e8898450-61b2-40ed-942a-31c95407a9f2.png"/>
-    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/adde1539-d424-401a-9daf-57428349397e.png"/>
+    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/ae04d367-e871-4e41-b4f8-b1c744350dca.png"/>
 </div>
 
 
