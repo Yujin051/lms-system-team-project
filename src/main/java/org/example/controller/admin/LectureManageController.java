@@ -47,8 +47,9 @@ public class LectureManageController {
                                         @RequestParam("subject") String subject, @RequestParam("name") String name) {
 
         // 받아온 변수값 검색을 위해 변형
-        boolean isActive = Boolean.parseBoolean(active);
+            boolean isActive = Boolean.parseBoolean(active);
         int elementary = Integer.parseInt(elem);
+
 
         // 로그 찍어보기
 //        logger.info("Received request with year={}, sem={}, isActive={}, elementary={}, subject={}, name={}",

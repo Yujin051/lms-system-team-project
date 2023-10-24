@@ -20,57 +20,184 @@
                     <p>강의현황보기</p>
                 </div>
             </div>
+            <input type="hidden" value="1" class="magId">
             <!-- 1번 항목 예시(타임리프로 대체해야 함) -->
             <div class="div_main_box">
-                <p>강좌1</p>
-                <p>2017.10.13. ~ 2023.1.1.</p>
-                <p>90%</p>
+                <p>sql을 배우자</p>
+                <p>2023.02.01. ~ 2023.03.01.</p>
+                <p>0.0%</p>
                 <div class="view_btn_box">
                     <a class="view_btn"><span>보기</span></a>
                 </div>
             </div>
-            <div class="subtr" style="display: none">
-                <div class="lecture">
-                    <div class="lecture_top_box">
-                        <div class="lecture_name_text_box">
-                            <span>강좌 이름 - n주차(차시)</span>
-                        </div>
-                        <div class="lecture_btn_box">
-                            <a href="#" class="learn_link"><span>학습하기</span></a>
-                        </div>
-                    </div>
-                    <div class="lecture_bottom_box">
-                        <div class="lecture_img_box">
-                            <img src="/img/student/header/icon_blackboard.png"/>
-                        </div>
-                        <div class="lecture_nth_name_text_box">
-                            <span>차시명</span>
-                        </div>
-                        <div class="lecture_study_time_progress_box">
-                            <div class="lecture_study_time_box">
-                                <span>학습 시간 : 00분 00초</span>
-                            </div>
-                            <div class="lecture_progress_box">
-                                <span>진도율 : 90.0%</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="div_main_box">
+                <p>스프링을 배우자</p>
+                <p>2023.02.01. ~ 2023.03.01.</p>
+                <p>0.0%</p>
+                <div class="view_btn_box">
+                    <a class="view_btn"><span>보기</span></a>
                 </div>
             </div>
-            <div class="modal_body" style="display:none;">
-                <div class="modal_exit">
-                    <div class="modal_exit_icon_box">
-                        <i class="fa-solid fa-xmark"></i>
-                    </div>
-                </div>
-                <div class="modal_video_box">
-                    <div id="player"></div>
+            <div class="div_main_box">
+                <p>자바를 배우자</p>
+                <p>2023.02.01. ~ 2023.03.01.</p>
+                <p th:text="${tProgress}+'%'">0.0%</p>
+                <div class="view_btn_box">
+                    <a class="view_btn"><span>보기</span></a>
                 </div>
             </div>
-        </div>
-    </div>
-    <script src="https://www.youtube.com/iframe_api"></script>
-    <script src="/js/admin/youtube.js"></script>
-    <script src="/js/stud/onlineClass.js"></script>
+            <div id="subwrap" style="display: none">
+                <div class="subtr">
+                    <div class="lecture">
+                        <div class="lecture_top_box">
+                            <div class="lecture_name_text_box">
+                                <span>자바를 배우자 - 1주차(차시)</span>
+                            </div>
+                            <div class="lecture_btn_box">
+                                <a href="#" class="learn_link"><span>학습하기</span></a>
+                            </div>
+                        </div>
+                        <div class="lecture_bottom_box">
+                            <div class="lecture_img_box">
+                                <img style="width: 100%" src="/img/thumbnaildeafult.png"/>
+                            </div>
+                            <div class="lecture_nth_name_text_box">
+                                <span>1차시입니다.</span>
+                            </div>
+                            <div class="lecture_study_time_progress_box">
+                                <div class="lecture_study_time_box">
+                                    <span>학습 시간 : 00분 33초</span>
+                                </div>
+                                <div class="lecture_progress_box">
+                                    <span th:text="'진도율 : ' + ${progress} + '%'"></span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal_body" style="display:none;">
+                            <div class="modal_exit">
+                                <div class="modal_exit_icon_box">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div class="modal_video_box">
+                                <div id="player"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lecture">
+                        <div class="lecture_top_box">
+                            <div class="lecture_name_text_box">
+                                <span>자바를 배우자 - 2주차(차시)</span>
+                            </div>
+                            <div class="lecture_btn_box">
+                                <a href="#" class="learn_link"><span>학습하기</span></a>
+                            </div>
+                        </div>
+                        <div class="lecture_bottom_box">
+                            <div class="lecture_img_box">
+                                <img style="width: 100%" src="/img/thumbnaildeafult.png"/>
+                            </div>
+                            <div class="lecture_nth_name_text_box">
+                                <span>2차시입니다.</span>
+                            </div>
+                            <div class="lecture_study_time_progress_box">
+                                <div class="lecture_study_time_box">
+                                    <span>학습 시간 : 0분 06초</span>
+                                </div>
+                                <div class="lecture_progress_box">
+                                    <span>진도율 : 0.0%</span>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal_body" style="display:none;">
+                            <div class="modal_exit">
+                                <div class="modal_exit_icon_box">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div class="modal_video_box">
+                                <div id="player3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lecture">
+                        <div class="lecture_top_box">
+                            <div class="lecture_name_text_box">
+                                <span>자바를 배우자 - 3주차(차시)</span>
+                            </div>
+                            <div class="lecture_btn_box">
+                                <a href="#" class="learn_link"><span>학습하기</span></a>
+                            </div>
+                        </div>
+                        <div class="lecture_bottom_box">
+                            <div class="lecture_img_box">
+                                <img style="width: 100%" src="/img/thumbnaildeafult.png"/>
+                            </div>
+                            <div class="lecture_nth_name_text_box">
+                                <span>3차시입니다.</span>
+                            </div>
+                            <div class="lecture_study_time_progress_box">
+                                <div class="lecture_study_time_box">
+                                    <span>학습 시간 : 00분 23초</span>
+                                </div>
+                                <div class="lecture_progress_box">
+                                    <span>진도율 : 0.0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal_body" style="display:none;">
+                            <div class="modal_exit">
+                                <div class="modal_exit_icon_box">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div class="modal_video_box">
+                                <div id="player4"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lecture">
+                        <div class="lecture_top_box">
+                            <div class="lecture_name_text_box">
+                                <span>자바를 배우자 - 4주차(차시)</span>
+                            </div>
+                            <div class="lecture_btn_box">
+                                <a href="#" class="learn_link"><span>학습하기</span></a>
+                            </div>
+                        </div>
+                        <div class="lecture_bottom_box">
+                            <div class="lecture_img_box">
+                                <img style="width: 100%" src="/img/thumbnaildeafult.png"/>
+                            </div>
+                            <div class="lecture_nth_name_text_box">
+                                <span>1차시입니다.</span>
+                            </div>
+                            <div class="lecture_study_time_progress_box">
+                                <div class="lecture_study_time_box">
+                                    <span>학습 시간 : 00분 18초</span>
+                                </div>
+                                <div class="lecture_progress_box">
+                                    <span>진도율 : 0.0%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal_body" style="display:none;">
+                            <div class="modal_exit">
+                                <div class="modal_exit_icon_box">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </div>
+                            <div class="modal_video_box">
+                                <div id="player2"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <script src="https://www.youtube.com/iframe_api"></script>
+                <script src="/js/admin/youtube.js"></script>
+                <script src="/js/stud/onlineClass.js"></script>
 </section>
 </html>

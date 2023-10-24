@@ -60,4 +60,6 @@ public interface StudLectApplyRepository extends JpaRepository<StudLectApply, Lo
 
 
     boolean existsByStudentAndLectInfo(Student student, LectInfo lectInfo);
+
+
 }
