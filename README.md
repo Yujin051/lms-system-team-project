@@ -62,7 +62,13 @@
 </div>
 
 <div align=center>
-    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/f28b76c9-f565-43f7-a45b-013a3a8c9a30.png"/>
+    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/f8d1d4e6-6224-4d0e-a5c0-e43773a8ac8a.png"/>
+    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/81bbe5d0-2094-4272-afac-6f3e00b55f0b.png"/>
+    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/c4338b93-9cde-47e1-9cde-f0784b43a2ce.png"/>
+</div>
+
+<div align=center>
+    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/931aee46-e790-4b1c-9038-c2243a41dc45.png/>
     <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/e8898450-61b2-40ed-942a-31c95407a9f2.png"/>
     <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/adde1539-d424-401a-9daf-57428349397e.png"/>
 </div>
