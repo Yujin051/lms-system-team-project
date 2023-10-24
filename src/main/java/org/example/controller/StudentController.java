@@ -4,13 +4,16 @@ import groovy.util.logging.Log4j2;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.*;
+import org.example.dto.admin.StudLectProgDto;
 import org.example.entity.LectInfo;
 import org.example.entity.Member;
 import org.example.repository.*;
+import org.example.repository.admin.AdminStudLectProgRepository;
 import org.example.service.AssignmentsService;
 import org.example.service.LectureService;
 import org.example.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -55,6 +58,8 @@ public class StudentController {
     private final GradeInfoRepository gradeInfoRepository;
     private final BoardPagingRepository boardPagingRepository;
     private final AssignSubmitService assignSubmitService;
+    private final AdminStudLectProgRepository studLectProgRepository;
+    private final LmsContsRepository lmsContsRepository;
 
     // 학생 메인 페이지
     @GetMapping("")
@@ -187,7 +192,12 @@ public class StudentController {
     }
 
     @GetMapping("/onlineclass")
-    public String test2() {
+    public String test2(Model model) {
+        StudLectProg studLectProg = studLectProgRepository.findByMagId(1L);
+        double progress = studLectProg.getProgress();
+        double totalProgress = Math.round(progress/400 * 100 * 100) / 100.0;
+        model.addAttribute("progress", progress);
+        model.addAttribute("tProgress", totalProgress);
         return "/student/onlineclass";
     }
 

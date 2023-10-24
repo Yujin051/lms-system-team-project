@@ -32,8 +32,8 @@ section a:visited {
 section {
     /* border: 1px solid black; */
     height: 100%;
-     min-height: 500px;
-    
+    min-height: 500px;
+
 }
 
 .board {
@@ -41,8 +41,8 @@ section {
     margin-top: 4rem;
     /* border: 1px solid red; */
     margin-bottom: 5rem;
-    
-    
+
+
 }
 
 /* 상단 쪽지 , 총 갯수 , 검색창 box */
@@ -72,6 +72,23 @@ section {
     /* border: 1px solid blue; */
     font-weight: bold;
     font-size: 1rem;
+}
+
+/*검색창부분*/
+.searchBox {
+    display: flex; justify-content: center; align-items: center;
+}
+.searchBox select {
+    height: 30px; border-radius: 5px; border: 1px solid black; outline: none;
+    cursor: pointer; width: 65px;
+}
+.searchBox input {
+    height: 30px; margin-left: 3px; border-radius: 5px; border: 1px solid black;
+    outline: none;
+}
+.searchBox button {
+    height: 30px; line-height: 18px; margin-left: 3px; border-radius: 5px;
+    background: black; color: white;
 }
 
 /* 메세지 전체 wrap 박스 */
@@ -117,7 +134,7 @@ section {
     text-align: start;
     font-size: 1.5rem;
     /* font-weight: bold; */
-    
+
 }
 
 .msg_side > ul  li:hover {
@@ -128,7 +145,7 @@ section {
 .msg_side > ul  li > a {
     display: block;
     /* border: 1px solid black; */
-    
+
 }
 
 .msg_side > ul  li > a:hover {
@@ -161,7 +178,7 @@ section {
 .msg_list > div > a > div:first-child {
     width: 10%;
     text-align: center;
-    
+
 }
 
 .msg_list > div > a > div:first-child > p {

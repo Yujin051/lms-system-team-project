@@ -18,7 +18,7 @@ public interface AdminRepository extends JpaRepository<Member, Long> {
     // 관리자 : 학생관리 : 학생정보
     @Query("SELECT NEW org.example.dto.admin.MemberDto" +
             "(m.userPhoneNum, m.userName, m.userBirthday, m.userGender, m.userEmail," +
-            "m.userId, m.userAddr, s.studId, s.studNowCr) " +
+            "m.userId, m.userAddr, s.studId, s.studNowCr, m.imgSaved) " +
             "FROM Student s JOIN s.member m ON s.member.id = m.id")
     List<MemberDto> findMembersWithDto();
 

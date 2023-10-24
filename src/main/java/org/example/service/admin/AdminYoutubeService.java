@@ -48,7 +48,7 @@ public class AdminYoutubeService {
     private static final String REDIRECT_URI = "http://localhost/youtubeAuthToken"; // 등록한 리디렉션 URI
     private static final List<String> SCOPES = Arrays.asList("https://www.googleapis.com/auth/youtube",
             "https://www.googleapis.com/auth/youtube.upload"); // 필요한 스코프, 유튜브 계정과 업로드 권한
-    private static final String FILE_DIRECTORY = "C:\\Users\\shins\\OneDrive\\바탕 화면\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\AccessToken";
+    private static final String FILE_DIRECTORY = "C:\\project\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\AccessToken";
     private static final GsonFactory GSON_FACTORY = new GsonFactory();
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
 

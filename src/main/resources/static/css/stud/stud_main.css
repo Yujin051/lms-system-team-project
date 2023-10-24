@@ -108,12 +108,7 @@ section .middle_article1 .article1_box div .class_box {
     line-height: 45px;
     text-indent: 10px;
     font-size: 15px;
-}
-
-.class_box:hover {
-    display: block;
-    background-color: skyblue;
-    color: white;
+    color: black;
 }
 
 section .middle_article1 .article1_box:nth-child(3) {
@@ -142,11 +137,11 @@ section .middle_article1 .article1_box .homework_box {
     line-height: 45px;
     text-indent: 10px;
     font-size: 15px;
+    cursor: pointer;
 }
 
 section .middle_article1 .article1_box .homework_box:hover {
     background-color: skyblue;
-    color: white;
 }
 
 section .middle_article2 {

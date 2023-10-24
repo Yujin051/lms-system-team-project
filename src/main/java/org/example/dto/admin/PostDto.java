@@ -10,6 +10,7 @@ import org.example.entity.BoardInfo;
 import org.example.entity.Member;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
@@ -33,7 +34,7 @@ public class PostDto {
     //board_article
     private Long articleId; //게시글번호
     private String articleTitle; //제목
-    private LocalDate articleAt; //작성일자
+    private LocalDateTime articleAt; //작성일자
     private Long articleView; //조회수
     private Boolean isLocked; //공개여부
     private Boolean isDeleted; //삭제여부
@@ -48,7 +49,7 @@ public class PostDto {
     //게시글 목록
     public PostDto(String userName, String userId, LocalDate userBirthday,
                    Gender userGender, String userEmail, Long articleId,
-                   String articleTitle, LocalDate articleAt, Long articleView,
+                   String articleTitle, LocalDateTime articleAt, Long articleView,
                    Boolean isLocked, Boolean isDeleted, String articleContent,
                    String boardType, Long boardId) {
         this.userName = userName;
@@ -69,7 +70,7 @@ public class PostDto {
 
     //게시글 내용
     public PostDto(String userName, Long articleId, String articleTitle,
-                   LocalDate articleAt, Long articleView, Boolean isLocked,
+                   LocalDateTime articleAt, Long articleView, Boolean isLocked,
                    Boolean isDeleted, String articleContent, String boardType,
                    Long boardId) {
         this.userName = userName;

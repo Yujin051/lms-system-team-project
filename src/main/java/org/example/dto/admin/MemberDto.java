@@ -29,6 +29,7 @@ public class MemberDto {
     private String userId;
     private Long id;
     private RoleType userRole;
+    private String imgSaved;
 
     //sem_grade
     private String semRating; //등급
@@ -56,7 +57,7 @@ public class MemberDto {
     //학생정보 : 기본정보
     public MemberDto(String userPhoneNum, String userName, LocalDate userBirthday,
                      Gender userGender, String userEmail, String userId,
-                     String userAddr, Long studId, Long studNowCr) {
+                     String userAddr, Long studId, Long studNowCr, String imgSaved) {
         this.userPhoneNum = userPhoneNum;
         this.userName = userName;
         this.userBirthday = userBirthday;
@@ -66,6 +67,7 @@ public class MemberDto {
         this.userAddr = userAddr;
         this.studId = studId;
         this.studNowCr = studNowCr;
+        this.imgSaved = imgSaved;
     }
 
     // 관리자 학점 평균
@@ -89,7 +91,6 @@ public class MemberDto {
         this.id = id;
     }
 
-    // 관리자 - 전체성적관리 : 학생정보조회
     public MemberDto(Long studGrade, String userName, LocalDate userBirthday,
                      Gender userGender, String userEmail, String userId, Long id,
                      Long studId) {
@@ -101,6 +102,21 @@ public class MemberDto {
         this.userId = userId;
         this.id = id;
         this.studId = studId;
+    }
+
+    // 관리자 - 전체성적관리 : 학생정보조회
+    public MemberDto(Long studGrade, String userName, LocalDate userBirthday,
+                     Gender userGender, String userEmail, String userId, Long id,
+                     Long studId, String imgSaved) {
+        this.studGrade = studGrade;
+        this.userName = userName;
+        this.userBirthday = userBirthday;
+        this.userGender = userGender;
+        this.userEmail = userEmail;
+        this.userId = userId;
+        this.id = id;
+        this.studId = studId;
+        this.imgSaved = imgSaved;
     }
 
     // 관리자 - 전체성적관리 : 전체 학기성적 및 전체 현황

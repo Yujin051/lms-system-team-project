@@ -25,13 +25,14 @@ public interface LectureRepository extends JpaRepository<LectInfo, Long> {
 
     // 검색 조건을 포함하여 리스트 출력하는 쿼리
     @Query("SELECT new org.example.dto.admin.LectureListDto(l.isActive, l.lectName, l.lectElem, " +
-            "l.lectCredit, l.lectSubject, l.lectId, l.lectStart, l.lectEnd, p.member.userName) from LectInfo l" +
-            " JOIN Professor p ON l.professor.id = p.id WHERE " +
-            "l.lectYear LIKE %:year% AND " +
-            "l.lectSem LIKE %:sem% AND " +
-            "l.isActive = :active AND " +
-            "l.lectSubject LIKE %:subject% AND " +
-            "l.lectName LIKE %:name% AND l.lectElem = :elem")
+            "l.lectCredit, l.lectSubject, l.lectId, l.lectStart, l.lectEnd, p.member.userName) " +
+            "FROM LectInfo l JOIN Professor p ON l.professor.id = p.id " +
+            "WHERE (:year IS NULL OR l.lectYear LIKE %:year%) AND " +
+            "(:sem IS NULL OR l.lectSem LIKE %:sem%) AND " +
+            "(:active IS NULL OR l.isActive = :active) AND " +
+            "(:subject IS NULL OR l.lectSubject LIKE %:subject%) AND " +
+            "(:name IS NULL OR l.lectName LIKE %:name%) AND " +
+            "l.lectElem = :elem")
     List<LectureListDto> findLectList(@Param("year") String year, @Param("sem") String sem,
                                          @Param("active") boolean active, @Param("subject") String subject,
                                          @Param("name") String name, @Param("elem") int elem);

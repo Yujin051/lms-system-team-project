@@ -3,7 +3,7 @@ window.onload = function () {
 
     viewButtons.forEach(function (button) {
         button.addEventListener('click', function () {
-            const subtr = this.parentElement.parentElement.nextElementSibling;
+            const subtr = document.querySelector("#subwrap");
 
             if (subtr.style.display === 'none' || subtr.style.display === '') {
                 subtr.style.display = 'flex';
