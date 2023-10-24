@@ -32,9 +32,8 @@
                 <div>
                     <p>TOTAL <span th:text="${pageDto.getTotal()}">0</span></p>
                 </div>
-
                 <!-- 검색창 -->
-                <div>
+                <div class="board_search_box">
                     <select name="search_select" id="search_select">
                         <option value="title">제목</option> 
                         <option value="content">내용</option> 
@@ -44,7 +43,7 @@
                     <input id="search_input" type="text">
 
                     <button class="btn searchBtn" id="searchBtn">
-                        검색
+                        <span>검색</span>
                     </button>
                 </div>
             </div>

@@ -48,7 +48,7 @@
                            이모티콘
                         </p>
                     </div>
-                    <div style="width: 350px; height: 50px;" th:each="lectInfo, iterStat : ${lectInfo}" th:if="${iterStat.index} < 5">
+                    <div style="width: 350px; height: 50px;" th:each="lectInfo, iterStat : ${lectInfo}" th:if="${iterStat.index} < 5" class="class_box_body">
                         <a style="text-decoration: none; margin-top: 10px; width: 350px; height: 50px; margin-left: 25px;background-color: white; line-height: 45px;
                            text-indent: 10px; display: block;
                            font-size: 12px;" th:href="@{'/student/lecture/view/' + ${lectInfo.lectId}}" th:text="${lectInfo.lectName}" class="class_box">test</a>

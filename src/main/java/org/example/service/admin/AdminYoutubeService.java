@@ -332,7 +332,7 @@ public class AdminYoutubeService {
     @PostConstruct
     public void setDefault() {
         // 사용할 clientSecret 탐색하기
-        String clientSecretUrl = "C:\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\client_secrets.json";
+        String clientSecretUrl = "C:\\project\\lms-system-team-project\\src\\main\\resources\\OAuthClientSecret\\client_secrets.json";
 
         // 경로에 파일이 없다면 에러메세지 출력?
         Objects.requireNonNull(clientSecretUrl, "classpath:OAuthClientSecret/client_secrets.json 파일이 없습니다.");
