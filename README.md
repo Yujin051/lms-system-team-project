@@ -81,7 +81,6 @@
 </div>
 
 <div align=center>
-    <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/5e98ec97-179c-4102-a477-ebb84a6fb0eb.png"/>
     <img width="30%" src="https://github.com/Yujin051/lms-system-team-project/assets/142381899/586c2b69-7184-4188-96e1-2586c7376d52.png"/>
 </div>
 
