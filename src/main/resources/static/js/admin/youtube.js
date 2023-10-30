@@ -195,7 +195,7 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault(); // 페이지 스크롤 방지
         rewindVideo(); // 비디오 되감기 함수 호출
     } else if (event.code === 'ArrowRight' && event.target === document.body) {
-        event.preventDefault(); // 페이지 스크롤 방지
+        event.preventDefault();
         fastForwardVideo(); // 비디오 빨리감기 함수 호출
     }
 });
