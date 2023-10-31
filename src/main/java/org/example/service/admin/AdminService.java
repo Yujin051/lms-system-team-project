@@ -155,15 +155,13 @@ public class AdminService {
 
     //관리자 - 게시글 작성(담당용) : 등록기능
     @Transactional
-    public BoardArticle createArticle(PostDto postDto, RoleType userRole) {
+    public BoardArticle createArticle(PostDto postDto) {
 
         BoardInfo boardInfo = adminBoardInfoRepository.findById(postDto.getBoardId())
-                .orElseThrow(() -> new IllegalArgumentException("게시판 정보를 찾을 수 없습니다"));
-
-
+                .orElseThrow(() -> new IllegalArgumentException
+                        ("게시판 정보를 찾을 수 없습니다"));
         Member member = adminRepository.findById(1L)
                 .orElseThrow(() -> new IllegalArgumentException("memberId오류"));
-
         postDto.setMember(member);
         postDto.setBoardInfo(boardInfo);
 
@@ -181,7 +179,6 @@ public class AdminService {
                 .orElseThrow(() -> new IllegalArgumentException("게시판 정보를 찾을 수 없습니다"));
         log.info(postDto.getBoardType());
         log.info("보드id :{}", (postDto.getBoardId()));
-
 
         // 2. 수정할 필드를 업데이트합니다.
         existingArticle.setArticleTitle(postDto.getArticleTitle());

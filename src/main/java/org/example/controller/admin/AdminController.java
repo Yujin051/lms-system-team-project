@@ -420,10 +420,9 @@ public class AdminController {
      */
     @PutMapping("/api/postWrite/save")
     @ResponseBody
-    public ResponseEntity<?> createArticle(@RequestBody PostDto postDto,
-                                           RoleType ADMIN) {
+    public ResponseEntity<?> createArticle(@RequestBody PostDto postDto) {
         if(postDto.getArticleId() == null) {
-            adminService.createArticle(postDto, ADMIN);
+            adminService.createArticle(postDto);
             log.info("saveArticleId : " + postDto.getArticleId());
         }else {
             adminService.updateArticle(postDto);

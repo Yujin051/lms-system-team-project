@@ -30,7 +30,7 @@
     display: flex; justify-content: center;
 }
 .online_class_body > .online_class_box > .div_head_box > .div_head p{
-    width: 375px; border: 0px solid black; height: 50px; display: flex;
+    width: 500px; border: 0px solid black; height: 50px; display: flex;
     justify-content: center; align-items: center;
 }
 
@@ -40,11 +40,11 @@
     border-bottom: 1px solid #cccccc; border-top: 1px solid #cccccc;
 }
 .online_class_body > .online_class_box > .div_main_box > p{
-    display: flex; justify-content: center; width: 375px; line-height: 50px;
+    display: flex; justify-content: center; width: 500px; line-height: 50px;
 }
 .online_class_body > .online_class_box > .div_main_box > .view_btn_box {
     border: 0px solid black; display: flex; justify-content: center;
-    align-items: center; width: 375px;
+    align-items: center; width: 500px;
 }
 .online_class_body > .online_class_box > .div_main_box > .view_btn_box a{
     width: 60px; height: 28px; border: 0px solid black; display: flex;
